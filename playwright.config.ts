@@ -1,46 +1,33 @@
-import { defineConfig, devices } from '@playwright/test';
+import { devices, type PlaywrightTestConfig } from '@playwright/test';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-/**
- * Configuración de Playwright para tests E2E
- * @see https://playwright.dev/docs/test-configuration
- */
-export default defineConfig({
-  testDir: './e2e',
-  /* Ejecutar tests en paralelo */
-  fullyParallel: true,
-  /* Fallar build si tests están marcados como test.only en CI */
-  forbidOnly: !!process.env.CI,
-  /* Reintentos en CI solamente */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out de parallel tests en CI */
-  workers: process.env.CI ? 1 : undefined,
-  /* Configuración de reportes */
-  reporter: 'html',
-  /* Configuración compartida para todos los tests */
-  use: {
-    /* URL base */
-    baseURL: process.env.E2E_BASE_URL || 'http://localhost:8080',
-    /* Recopilar trace en retry */
-    trace: 'on-first-retry',
-    /* Screenshot en fallo */
-    screenshot: 'only-on-failure',
-    /* Video en fallo */
-    video: 'retain-on-failure',
+// See https://playwright.dev/docs/test-configuration.
+const config: PlaywrightTestConfig = {
+  testDir: './e2e/specs',
+  timeout: 3 * 60 * 1000,
+  expect: {
+    timeout: 40 * 1000,
   },
-
-  /* Configurar proyectos para browsers principales */
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: 0,
+  reporter: process.env.CI ? [['junit', { outputFile: 'results.xml' }], ['html']] : [['html']],
+  globalSetup: require.resolve('./e2e/core/global-setup'),
+  use: {
+    baseURL: `${process.env.E2E_BASE_URL}/spa/`,
+    storageState: 'e2e/storageState.json',
+    video: 'retain-on-failure',
+    trace: 'retain-on-failure',
+  },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+      },
     },
   ],
+};
 
-  /* Ejecutar servidor dev local antes de iniciar tests */
-  webServer: {
-    command: 'yarn start',
-    url: 'http://localhost:8080',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
-  },
-});
+export default config;

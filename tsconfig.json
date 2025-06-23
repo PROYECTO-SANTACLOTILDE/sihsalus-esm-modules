@@ -1,42 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["DOM", "DOM.Iterable", "ES6"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "ESNext",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es2015.promise",
+      "es2015",
+      "es2016.array.include",
+      "es2018",
+      "es2020",
+      "es2021",
+      "es2022",
+      "es5",
+      "scripthost",
+    ],
+    "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": ".",
     "paths": {
-      "@sihsalus/esm-sihsalus-library": ["./packages/esm-sihsalus-library/src"],
-      "@openmrs/esm-framework": ["node_modules/@openmrs/esm-framework/src/index"]
+      "@openmrs/*": ["./node_modules/@openmrs/*"],
+      "__mocks__": ["./__mocks__"],
+      "tools": ["./tools"],
     },
-    "types": ["jest", "node", "webpack-env"]
-  },
-  "include": [
-    "packages/*/src/**/*",
-    "packages/*/types/**/*",
-    "__mocks__/**/*",
-    "tools/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "coverage",
-    "**/*.test.*",
-    "**/__mocks__/**"
-  ]
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "esnext",
+  }
 }
