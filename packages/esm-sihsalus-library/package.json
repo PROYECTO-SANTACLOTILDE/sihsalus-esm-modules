@@ -50,7 +50,7 @@
         "README.md"
     ],
     "peerDependencies": {
-        "@openmrs/esm-framework": "next",
+        "@openmrs/esm-framework": "*",
         "dayjs": "1.x",
         "react": "18.x",
         "react-i18next": "15.x",

@@ -25,9 +25,8 @@
     },
     "browserslist": [],
     "author": "SIH SALUS Team",
-    "license": "MPL-2.0",
     "peerDependencies": {
-        "@openmrs/esm-framework": "next",
+        "@openmrs/esm-framework": "*",
         "react": "^18.0.0",
         "react-dom": "^18.0.0"
     },

@@ -56,13 +56,13 @@
         "README.md"
     ],
     "dependencies": {
-        "@sihsalus/esm-sihsalus-library": "workspace:*",
         "@carbon/react": "^1.76.0",
+        "@sihsalus/esm-sihsalus-library": "workspace:*",
         "classnames": "^2.5.1",
         "lodash-es": "^4.17.21"
     },
     "peerDependencies": {
-        "@openmrs/esm-framework": "next",
+        "@openmrs/esm-framework": "*",
         "dayjs": "1.x",
         "react": "18.x",
         "react-i18next": "15.x",
