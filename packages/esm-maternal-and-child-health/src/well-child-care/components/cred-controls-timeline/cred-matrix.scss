@@ -1,0 +1,55 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+@import '~@openmrs/esm-styleguide/src/vars';
+
+.widgetCard {
+  border: 1px solid $ui-03;
+  border-bottom: none;
+  width: 100%;
+}
+
+.clinicalDataHeaderActionItems {
+  display: flex;
+  justify-content: flex-end;
+  padding: layout.$spacing-03;
+}
+
+.sublabel {
+  @include type.type-style('body-compact-01');
+  color: colors.$gray-50;
+  margin-top: layout.$spacing-02;
+}
+
+.cellContent {
+  padding: layout.$spacing-03;
+}
+
+.ageGroups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: layout.$spacing-03;
+}
+
+.ageTile {
+  @include type.type-style('body-compact-01');
+  text-align: center;
+  padding: layout.$spacing-03;
+  border: 1px solid colors.$gray-30;
+  cursor: pointer;
+  flex: 1 1 120px;
+
+  &.active {
+    border-color: colors.$blue-60;
+    background-color: colors.$blue-10;
+  }
+
+  &.current {
+    background-color: colors.$gray-10;
+  }
+}
+
+.labelUser {
+  @include type.type-style('caption-01');
+  color: colors.$gray-50;
+}
