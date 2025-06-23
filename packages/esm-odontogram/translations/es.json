@@ -1,0 +1,16 @@
+{
+    "odontogram": "Odontograma",
+    "odontogramDescription": "Sistema de odontograma para registros dentales",
+    "comingSoon": "Próximamente - Funcionalidad en desarrollo",
+    "tooth": "Diente",
+    "surface": "Superficie",
+    "condition": "Condición",
+    "treatment": "Tratamiento",
+    "notes": "Notas",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "dentalChart": "Carta Dental",
+    "patientDentalHistory": "Historia Dental del Paciente"
+}
