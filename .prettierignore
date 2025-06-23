@@ -1,2 +1,5 @@
-*.{ts,tsx}
-*.{css,scss,ts,tsx}
+dist/
+node_modules/
+**/*.md
+**/*.json
+**/*.yml
