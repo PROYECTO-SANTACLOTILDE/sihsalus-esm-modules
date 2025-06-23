@@ -1,0 +1,44 @@
+{
+    "name": "@sihsalus/esm-patient-search-app",
+    "version": "1.0.0",
+    "description": "Gestión avanzada de búsqueda de pacientes para SIH SALUS",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "webpack --mode=production",
+        "dev": "webpack serve --mode=development",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "coverage": "jest --coverage",
+        "lint": "eslint src --ext .ts,.tsx",
+        "lint:fix": "eslint src --ext .ts,.tsx --fix",
+        "typescript": "tsc --noEmit",
+        "extract-translations": "i18next-parser",
+        "clean": "rimraf dist"
+    },
+    "keywords": [
+        "openmrs",
+        "microfrontend",
+        "patient-search",
+        "patient-management",
+        "peru"
+    ],
+    "author": "SIH SALUS Team",
+    "license": "MPL-2.0",
+    "peerDependencies": {
+        "@openmrs/esm-framework": "next",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.0",
+        "@types/react-dom": "^18.0.0",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@sihsalus/esm-sihsalus-library": "workspace:*"
+    },
+    "files": [
+        "dist"
+    ]
+}

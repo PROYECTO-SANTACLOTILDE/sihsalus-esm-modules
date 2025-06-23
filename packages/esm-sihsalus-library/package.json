@@ -1,0 +1,48 @@
+{
+    "name": "@sihsalus/esm-sihsalus-library",
+    "version": "1.0.0",
+    "description": "Componentes y servicios compartidos para los módulos SIH SALUS",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "coverage": "jest --coverage",
+        "lint": "eslint src --ext .ts,.tsx",
+        "lint:fix": "eslint src --ext .ts,.tsx --fix",
+        "typescript": "tsc --noEmit",
+        "extract-translations": "i18next-parser",
+        "clean": "rimraf dist"
+    },
+    "keywords": [
+        "openmrs",
+        "shared-library",
+        "components",
+        "utilities",
+        "peru",
+        "sih-salus"
+    ],
+    "author": "SIH SALUS Team",
+    "license": "MPL-2.0",
+    "peerDependencies": {
+        "@openmrs/esm-framework": "next",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.0.0",
+        "@types/react-dom": "^18.0.0",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "lodash-es": "^4.17.21",
+        "@carbon/react": "^1.76.0",
+        "dayjs": "^1.11.13"
+    },
+    "files": [
+        "dist",
+        "src"
+    ]
+}
