@@ -50,12 +50,12 @@
         "zod": "^3.24.3"
     },
     "peerDependencies": {
-        "@openmrs/esm-framework": "*",
+        "@openmrs/esm-framework": "6.x",
         "dayjs": "1.x",
         "react": "18.x",
         "react-i18next": "11.x",
         "react-router-dom": "6.x",
-        "rxjs": "6.x"
+        "swr": "2.x"
     },
     "devDependencies": {
         "webpack": "^5.99.9"
