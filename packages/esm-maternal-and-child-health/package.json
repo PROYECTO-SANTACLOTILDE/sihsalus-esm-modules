@@ -45,7 +45,6 @@
         "@hookform/resolvers": "^5.0.1",
         "@openmrs/esm-patient-common-lib": "^10.2.1-pre.8063",
         "classnames": "^2.5.1",
-        "i18next": "^25.2.1",
         "lodash-es": "^4.17.21",
         "react-hook-form": "^7.56.1",
         "react-is": "^19.1.0",
@@ -63,7 +62,6 @@
         "swr": "2.x"
     },
     "devDependencies": {
-        "@types/react-is": "^19",
         "webpack": "^5.99.9"
     }
 }
