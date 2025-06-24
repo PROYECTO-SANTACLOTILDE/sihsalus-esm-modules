@@ -1,6 +1,6 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/tools/setup-tests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/../../tools/setup-tests.ts'],
   moduleNameMapping: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@sihsalus/esm-sihsalus-library$': '<rootDir>/packages/esm-sihsalus-library/src',
