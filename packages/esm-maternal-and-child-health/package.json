@@ -43,9 +43,14 @@
         "@carbon/react": "^1.76.0",
         "@carbon/styles": "^1.81.0",
         "@hookform/resolvers": "^5.0.1",
+        "@openmrs/esm-patient-common-lib": "^10.2.1-pre.8063",
         "classnames": "^2.5.1",
+        "i18next": "^25.2.1",
         "lodash-es": "^4.17.21",
         "react-hook-form": "^7.56.1",
+        "react-is": "^19.1.0",
+        "rxjs": "^7.0.0",
+        "single-spa": "^6.0.0",
         "xlsx": "^0.18.5",
         "zod": "^3.24.3"
     },
@@ -58,6 +63,7 @@
         "swr": "2.x"
     },
     "devDependencies": {
+        "@types/react-is": "^19",
         "webpack": "^5.99.9"
     }
 }

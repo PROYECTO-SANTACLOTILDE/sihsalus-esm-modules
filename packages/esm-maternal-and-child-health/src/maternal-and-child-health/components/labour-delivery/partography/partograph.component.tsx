@@ -15,14 +15,8 @@ import {
   Button,
 } from '@carbon/react';
 import { Add, ChartLineSmooth } from '@carbon/react/icons';
-import {
-  EmptyDataIllustration,
-  ErrorState,
-  CardHeader,
-  launchPatientWorkspace,
-  EmptyState,
-} from '@openmrs/esm-patient-common-lib';
-import { formatDate, isDesktop, parseDate, useLayoutType } from '@openmrs/esm-framework';
+import { EmptyDataIllustration, ErrorState, CardHeader, EmptyState } from '@openmrs/esm-patient-common-lib';
+import { formatDate, isDesktop, parseDate, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
 import styles from './labour-delivery.scss';
 import { usePartograph } from '../../../../hooks/usePartograph';
 import dayjs from 'dayjs';
@@ -106,7 +100,7 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
       };
     }) ?? [];
   const handleAddHistory = () => {
-    launchPatientWorkspace('patient-form-entry-workspace', {
+    launchWorkspace('patient-form-entry-workspace', {
       workspaceTitle: headerTitle,
       mutateForm: () => {
         mutate();
@@ -179,8 +173,7 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
                   <Button
                     kind="ghost"
                     renderIcon={(props) => <Add {...props} size={16} />}
-                    iconDescription="Add vitals"
-                  >
+                    iconDescription="Add vitals">
                     {t('add', 'Add')}
                   </Button>
                 </div>
@@ -204,8 +197,7 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
                                   {...getHeaderProps({
                                     header,
                                     isSortable: header.isSortable,
-                                  })}
-                                >
+                                  })}>
                                   {header.header?.content ?? header.header}
                                 </TableHeader>
                               ))}

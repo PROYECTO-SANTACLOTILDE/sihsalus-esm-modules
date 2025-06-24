@@ -1,12 +1,8 @@
 import { Button, ButtonSet, Column, Form, InlineNotification, TextInput, Tooltip } from '@carbon/react';
 import { Information as InformationIcon } from '@carbon/react/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { age, ResponsiveWrapper, useConfig, useLayoutType, usePatient } from '@openmrs/esm-framework';
-import {
-  type DefaultPatientWorkspaceProps,
-  launchPatientWorkspace,
-  useVisitOrOfflineVisit,
-} from '@openmrs/esm-patient-common-lib';
+import { age, ResponsiveWrapper, useConfig, useLayoutType, usePatient, launchWorkspace } from '@openmrs/esm-framework';
+import { type DefaultPatientWorkspaceProps, useVisitOrOfflineVisit } from '@openmrs/esm-patient-common-lib';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -104,7 +100,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
 
     closeWorkspace({
       onWorkspaceClose: () =>
-        launchPatientWorkspace('forms-selector-workspace', {
+        launchWorkspace('forms-selector-workspace', {
           availableForms: allAvailableForms,
           patientAge: formattedAge,
           controlNumber: credControlNumber,
@@ -212,8 +208,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
                   <li>{t('escolar', 'Escolar: 5-11 años')}</li>
                 </ul>
               </div>
-            }
-          >
+            }>
             <button className={styles.tooltipButton} type="button">
               <InformationIcon className={styles.icon} size={20} />
             </button>
@@ -243,8 +238,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
           kind="primary"
           onClick={handleStartControl}
           disabled={!currentVisit || isSubmitting}
-          type="button"
-        >
+          type="button">
           {t('startControl', 'Empezar Control')}
         </Button>
       </ButtonSet>

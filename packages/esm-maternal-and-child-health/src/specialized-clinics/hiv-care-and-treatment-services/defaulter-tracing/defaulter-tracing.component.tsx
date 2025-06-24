@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { formatDate, parseDate, useConfig } from '@openmrs/esm-framework';
+import { formatDate, parseDate, useConfig, launchWorkspace } from '@openmrs/esm-framework';
 import {
   Contacted_UUID,
   MissedAppointmentDate_UUID,
@@ -8,8 +8,9 @@ import {
   TracingOutcome_UUID,
   TracingType_UUID,
 } from '../../../utils/constants';
+//TODO CHANGE THIS
 import { getObsFromEncounter } from '../../../ui/encounter-list/encounter-list-utils';
-import { CardHeader, EmptyState, ErrorState, launchPatientWorkspace } from '@openmrs/esm-patient-common-lib';
+import { CardHeader, EmptyState, ErrorState } from '@openmrs/esm-patient-common-lib';
 import {
   Button,
   DataTable,
@@ -42,7 +43,7 @@ const DefaulterTracing: React.FC<PatientTracingProps> = ({ patientUuid }) => {
     defaulterTracingEncounterUuid,
   );
   const handleOpenOrEditDefaulterTracingForm = (encounterUUID = '') => {
-    launchPatientWorkspace('patient-form-entry-workspace', {
+    launchWorkspace('patient-form-entry-workspace', {
       workspaceTitle: 'Defaulter Tracing',
       mutateForm: () => mutate(),
       formInfo: {
@@ -120,8 +121,7 @@ const DefaulterTracing: React.FC<PatientTracingProps> = ({ patientUuid }) => {
           kind="ghost"
           onClick={() => handleOpenOrEditDefaulterTracingForm()}
           renderIcon={(props) => <Add size={24} {...props} />}
-          iconDescription="Add"
-        >
+          iconDescription="Add">
           {t('add', 'Add')}
         </Button>
       </CardHeader>
@@ -140,8 +140,7 @@ const DefaulterTracing: React.FC<PatientTracingProps> = ({ patientUuid }) => {
                       key={i}
                       {...getHeaderProps({
                         header,
-                      })}
-                    >
+                      })}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -154,8 +153,7 @@ const DefaulterTracing: React.FC<PatientTracingProps> = ({ patientUuid }) => {
                     key={row.id}
                     {...getRowProps({
                       row,
-                    })}
-                  >
+                    })}>
                     {row.cells.map((cell) => (
                       <TableCell key={cell.id}>{cell.value}</TableCell>
                     ))}

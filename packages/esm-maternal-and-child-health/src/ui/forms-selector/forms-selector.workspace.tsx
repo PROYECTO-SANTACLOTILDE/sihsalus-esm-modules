@@ -1,6 +1,6 @@
 import { Button, ButtonSet, Form } from '@carbon/react';
-import { ArrowLeftIcon, useLayoutType } from '@openmrs/esm-framework';
-import { type DefaultPatientWorkspaceProps, launchPatientWorkspace } from '@openmrs/esm-patient-common-lib';
+import { ArrowLeftIcon, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
+import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
 import React, { type ComponentProps, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormsList from './forms-list.component';
@@ -41,7 +41,7 @@ export default function FormsSelectorWorkspace({
 
   const backToPreviousWorkspace = useCallback(() => {
     closeWorkspace({
-      onWorkspaceClose: () => launchPatientWorkspace(backWorkspace),
+      onWorkspaceClose: () => launchWorkspace(backWorkspace),
       closeWorkspaceGroup: false,
     });
   }, [closeWorkspace, backWorkspace]);
@@ -78,8 +78,7 @@ export default function FormsSelectorWorkspace({
               kind="ghost"
               onClick={backToPreviousWorkspace}
               renderIcon={(props: ComponentProps<typeof ArrowLeftIcon>) => <ArrowLeftIcon size={24} {...props} />}
-              size="sm"
-            >
+              size="sm">
               <span>{t('backToPrevious', 'Volver')}</span>
             </Button>
           </div>

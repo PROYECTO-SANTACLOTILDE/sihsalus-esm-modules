@@ -16,8 +16,8 @@ import {
   TableRow,
   Tile,
 } from '@carbon/react';
-import { AddIcon, formatDate, parseDate, useLayoutType } from '@openmrs/esm-framework';
-import { CardHeader, EmptyState, ErrorState, launchPatientWorkspace } from '@openmrs/esm-patient-common-lib';
+import { AddIcon, formatDate, parseDate, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
+import { CardHeader, EmptyState, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { ConditionsActionMenu } from './conditions-action-menu.component';
 import { useConditions, type ConditionTableHeader, useConditionsSorting } from './conditions.resource';
 import styles from './conditions-detailed-summary.scss';
@@ -91,7 +91,7 @@ function ConditionsDetailedSummary({ patient }) {
 
   const launchConditionsForm = useCallback(
     () =>
-      launchPatientWorkspace('conditions-form-workspace', {
+      launchWorkspace('conditions-form-workspace', {
         formContext: 'creating',
       }),
     [],
@@ -124,8 +124,7 @@ function ConditionsDetailedSummary({ patient }) {
               kind="ghost"
               renderIcon={(props: ComponentProps<typeof AddIcon>) => <AddIcon size={16} {...props} />}
               iconDescription="Add conditions"
-              onClick={launchConditionsForm}
-            >
+              onClick={launchConditionsForm}>
               {t('add', 'Add')}
             </Button>
           </div>
@@ -137,8 +136,7 @@ function ConditionsDetailedSummary({ patient }) {
           isSortable
           size={isTablet ? 'lg' : 'sm'}
           useZebraStyles
-          overflowMenuOnHover={isDesktop}
-        >
+          overflowMenuOnHover={isDesktop}>
           {({ rows, headers, getHeaderProps, getTableProps, getRowProps }) => (
             <>
               <TableContainer>
@@ -151,8 +149,7 @@ function ConditionsDetailedSummary({ patient }) {
                           {...getHeaderProps({
                             header,
                             isSortable: header.isSortable,
-                          })}
-                        >
+                          })}>
                           {header.header?.content ?? header.header}
                         </TableHeader>
                       ))}

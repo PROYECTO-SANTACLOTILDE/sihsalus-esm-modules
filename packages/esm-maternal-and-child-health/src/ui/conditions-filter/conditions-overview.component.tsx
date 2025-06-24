@@ -21,14 +21,9 @@ import {
   useConfig,
   useLayoutType,
   usePagination,
+  launchWorkspace,
 } from '@openmrs/esm-framework';
-import {
-  CardHeader,
-  EmptyState,
-  ErrorState,
-  PatientChartPagination,
-  launchPatientWorkspace,
-} from '@openmrs/esm-patient-common-lib';
+import { CardHeader, EmptyState, ErrorState, PatientChartPagination } from '@openmrs/esm-patient-common-lib';
 import classNames from 'classnames';
 import React, { type ComponentProps, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -67,6 +62,7 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
   const isTablet = !isDesktop;
 
   const conceptSetUuid = 'c33ef45d-aa69-4d9a-9214-1dbb52609601'; // UUID del ConceptSet de Antecedentes Patológicos
+  //TODO USE CONFIG TO GET CONCEPT SET UUID
   const { conditions, error, isLoading, isValidating } = useConditionsFromConceptSet(patientUuid, conceptSetUuid);
   const [filter, setFilter] = useState<'All' | 'Active' | 'Inactive'>('Active');
 
@@ -79,10 +75,10 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
     ],
     [t],
   );
-
+  //TODO UPDATE THIS TO ASK FOR A VISIT FIRST
   const launchConditionsForm = useCallback(
     () =>
-      launchPatientWorkspace('conditions-filter-form-workspace', {
+      launchWorkspace('conditions-filter-form-workspace', {
         formContext: 'creating',
       }),
     [],
@@ -179,8 +175,7 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
               kind="ghost"
               renderIcon={(props: ComponentProps<typeof AddIcon>) => <AddIcon size={16} {...props} />}
               iconDescription="Add conditions"
-              onClick={launchConditionsForm}
-            >
+              onClick={launchConditionsForm}>
               {t('add', 'Add')}
             </Button>
           </div>
@@ -193,8 +188,7 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
           size={isTablet ? 'lg' : 'sm'}
           useZebraStyles
           overflowMenuOnHover={isDesktop}
-          sortRow={sortRow}
-        >
+          sortRow={sortRow}>
           {({ rows, headers, getHeaderProps, getTableProps }) => (
             <>
               <TableContainer className={styles.tableContainer}>
@@ -207,8 +201,7 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
                           {...getHeaderProps({
                             header,
                             isSortable: header.isSortable,
-                          })}
-                        >
+                          })}>
                           {header.header?.content ?? header.header}
                         </TableHeader>
                       ))}

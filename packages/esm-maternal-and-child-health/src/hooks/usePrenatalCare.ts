@@ -7,7 +7,6 @@ import includes from 'lodash-es/includes';
 import map from 'lodash-es/map';
 import { useMemo } from 'react';
 import useSWRImmutable from 'swr/immutable';
-import { Console } from '@carbon/pictograms-react';
 
 export const customRepresentation = `custom:(uuid,display,program,dateEnrolled,dateCompleted,location:(uuid,display),states:(startDate,endDate,voided,state:(uuid,concept:(display))))`;
 

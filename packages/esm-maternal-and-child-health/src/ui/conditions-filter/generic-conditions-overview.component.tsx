@@ -21,14 +21,9 @@ import {
   useConfig,
   useLayoutType,
   usePagination,
+  launchWorkspace,
 } from '@openmrs/esm-framework';
-import {
-  CardHeader,
-  EmptyState,
-  ErrorState,
-  PatientChartPagination,
-  launchPatientWorkspace,
-} from '@openmrs/esm-patient-common-lib';
+import { CardHeader, EmptyState, ErrorState, PatientChartPagination } from '@openmrs/esm-patient-common-lib';
 import classNames from 'classnames';
 import React, { type ComponentProps, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -83,7 +78,7 @@ const GenericConditionsOverview: React.FC<GenericConditionsOverviewProps> = ({
 
   const launchConditionsForm = useCallback(
     () =>
-      launchPatientWorkspace(workspaceFormId, {
+      launchWorkspace(workspaceFormId, {
         formContext: 'creating',
         conceptSetUuid,
         title,
@@ -178,8 +173,7 @@ const GenericConditionsOverview: React.FC<GenericConditionsOverviewProps> = ({
                   kind="ghost"
                   renderIcon={(props: ComponentProps<typeof AddIcon>) => <AddIcon size={16} {...props} />}
                   iconDescription="Add conditions"
-                  onClick={launchConditionsForm}
-                >
+                  onClick={launchConditionsForm}>
                   {t('add', 'Add')}
                 </Button>
               </>
@@ -194,8 +188,7 @@ const GenericConditionsOverview: React.FC<GenericConditionsOverviewProps> = ({
           size={isTablet ? 'lg' : 'sm'}
           useZebraStyles
           overflowMenuOnHover={isDesktop}
-          sortRow={sortRow}
-        >
+          sortRow={sortRow}>
           {({ rows, headers, getHeaderProps, getTableProps }) => (
             <>
               <TableContainer className={styles.tableContainer}>
@@ -208,8 +201,7 @@ const GenericConditionsOverview: React.FC<GenericConditionsOverviewProps> = ({
                           {...getHeaderProps({
                             header,
                             isSortable: header.isSortable,
-                          })}
-                        >
+                          })}>
                           {header.header?.content ?? header.header}
                         </TableHeader>
                       ))}
