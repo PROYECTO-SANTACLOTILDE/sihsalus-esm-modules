@@ -75,7 +75,7 @@
         "webpack-dev-server": "^5.2.2"
     },
     "lint-staged": {
-        "*.{ts,tsx}": "eslint --cache --fix --max-warnings 0",
+        "*.{ts,tsx}": "eslint --cache --fix --quiet",
         "*.{css,scss,ts,tsx}": "prettier --cache --write --list-different"
     },
     "packageManager": "yarn@4.9.1",
