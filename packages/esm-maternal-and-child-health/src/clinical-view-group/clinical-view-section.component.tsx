@@ -4,7 +4,7 @@ import styles from './clinical-view-section.scss';
 import { Information as InformationIcon } from '@carbon/react/icons';
 import { Tooltip } from '@carbon/react';
 import { ExtensionSlot } from '@openmrs/esm-framework';
-import { registerNavGroup } from '@openmrs/esm-patient-common-lib';
+import { registerNavGroup } from './nav-group';
 
 interface ClinicalViewSectionProps {
   basePath: string;
@@ -29,8 +29,7 @@ export const ClinicalViewSection: React.FC<ClinicalViewSectionProps> = ({ basePa
           label={t(
             'customViews',
             "In this section, you'll find custom clinical views tailored to patients' conditions and enrolled care programs.",
-          )}
-        >
+          )}>
           <button className={styles.tooltipButton} type="button">
             <InformationIcon className={styles.icon} size={20} />
           </button>
