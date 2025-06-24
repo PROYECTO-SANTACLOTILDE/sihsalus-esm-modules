@@ -51,7 +51,7 @@
         "react-is": "^19.1.0",
         "single-spa": "^6.0.0",
         "xlsx": "^0.18.5",
-        "zod": "^3.24.3"
+        "zod": "3.24.1"
     },
     "peerDependencies": {
         "@openmrs/esm-framework": "6.x",
