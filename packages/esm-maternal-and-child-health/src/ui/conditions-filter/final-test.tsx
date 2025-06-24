@@ -27,8 +27,7 @@ const FinalTest: React.FC = () => {
         boxShadow: '0 6px 12px rgba(0,0,0,0.3)',
         zIndex: 10000,
         fontSize: '14px',
-      }}
-    >
+      }}>
       <h3 style={{ margin: '0 0 15px 0', color: '#28a745' }}>Test Final - ConceptSet Correcto</h3>
 
       <div style={{ marginBottom: '15px' }}>
@@ -54,8 +53,7 @@ const FinalTest: React.FC = () => {
           backgroundColor: '#f8f9fa',
           padding: '10px',
           borderRadius: '5px',
-        }}
-      >
+        }}>
         <div>
           <strong>ConceptSet UUID:</strong> {conceptSetUuid}
         </div>
@@ -96,8 +94,7 @@ const FinalTest: React.FC = () => {
           backgroundColor: searchResults.length > 0 ? '#d4edda' : '#fff3cd',
           padding: '10px',
           borderRadius: '5px',
-        }}
-      >
+        }}>
         <h4 style={{ margin: '0 0 10px 0' }}>Resultados de búsqueda ({searchResults.length}):</h4>
         {searchResults.length > 0 ? (
           <ul style={{ margin: '0', paddingLeft: '20px' }}>
@@ -124,8 +121,7 @@ const FinalTest: React.FC = () => {
           color: '#666',
           borderTop: '1px solid #dee2e6',
           paddingTop: '10px',
-        }}
-      >
+        }}>
         <strong>URL de prueba:</strong>
         <br />
         /openmrs/ws/rest/v1/concept/{conceptSetUuid}?v=custom:(setMembers:(uuid,name))

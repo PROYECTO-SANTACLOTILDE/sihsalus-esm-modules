@@ -72,8 +72,7 @@ const GrowthChartOverview: React.FC<GrowthChartProps> = ({ patient, patientUuid 
               onChange={handleViewChange}
               size={isTablet ? 'md' : 'sm'}
               aria-label={t('viewSelector', 'Select chart type')}
-              selectedIndex={isPercentiles ? 0 : 1}
-            >
+              selectedIndex={isPercentiles ? 0 : 1}>
               <IconSwitch name="percentileView" text={t('percentileView', 'Percentiles')}>
                 <Analytics size={16} />
               </IconSwitch>

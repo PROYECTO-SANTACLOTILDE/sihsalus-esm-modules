@@ -86,8 +86,7 @@ const DyakuPatientsSync: React.FC<DyakuPatientsSyncProps> = ({ onSyncComplete })
         onSecondarySubmit={handleCloseModal}
         primaryButtonDisabled={isSyncing || !isEnabled}
         secondaryButtonDisabled={isSyncing}
-        size="md"
-      >
+        size="md">
         <div className={styles.syncContent}>
           {!isEnabled && (
             <InlineNotification

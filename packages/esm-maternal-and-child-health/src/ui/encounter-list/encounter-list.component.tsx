@@ -150,8 +150,7 @@ export const EncounterList: React.FC<EncounterListProps> = ({
                   } else {
                     column.link?.getUrl && navigate({ to: column.link.getUrl() });
                   }
-                }}
-              >
+                }}>
                 {val}
               </Link>
             );

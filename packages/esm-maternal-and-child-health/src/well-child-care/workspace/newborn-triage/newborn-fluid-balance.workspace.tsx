@@ -253,8 +253,7 @@ const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
           kind="primary"
           onClick={handleSubmit(saveFluidBalance, onError)}
           disabled={isSubmitting}
-          type="submit"
-        >
+          type="submit">
           {t('submit', 'Guardar y Cerrar')}
         </Button>
       </ButtonSet>

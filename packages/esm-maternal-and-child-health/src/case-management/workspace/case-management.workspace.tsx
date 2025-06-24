@@ -169,8 +169,7 @@ const CaseManagementForm: React.FC<CaseManagementProp> = ({ closeWorkspace }) =>
               <DatePicker
                 datePickerType="single"
                 onChange={(e) => field.onChange(e[0])}
-                className={styles.formDatePicker}
-              >
+                className={styles.formDatePicker}>
                 <DatePickerInput
                   placeholder="dd/mm//aaaa"
                   labelText="Start Date"

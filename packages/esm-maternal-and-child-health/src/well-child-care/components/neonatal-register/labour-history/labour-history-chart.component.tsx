@@ -74,8 +74,7 @@ const LabourHistoryChart: React.FC<LabourHistoryChartProps> = ({ patientHistory 
               <Tab
                 className={classNames(styles.tab, { [styles.selectedTab]: selectedMetric.title === title })}
                 key={value}
-                onClick={() => setSelectedMetric({ title, value })}
-              >
+                onClick={() => setSelectedMetric({ title, value })}>
                 {title}
               </Tab>
             ))}

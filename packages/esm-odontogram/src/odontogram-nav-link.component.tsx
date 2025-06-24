@@ -5,9 +5,5 @@ import { useTranslation } from 'react-i18next';
 export default function OdontogramNavLink() {
   const { t } = useTranslation();
 
-  return (
-    <ConfigurableLink to={`${window.spaBase}/odontogram`}>
-      {t('odontogram', 'Odontograma')}
-    </ConfigurableLink>
-  );
+  return <ConfigurableLink to={`${window.spaBase}/odontogram`}>{t('odontogram', 'Odontograma')}</ConfigurableLink>;
 }

@@ -3,7 +3,6 @@
 @use '@carbon/colors';
 @use '@carbon/layout';
 
-
 @use '@openmrs/esm-styleguide/src/vars' as *;
 @use '../root.scss' as *;
 
@@ -36,8 +35,6 @@
   overflow-x: auto;
   max-width: 100%;
 }
-
-
 
 .header {
   @include type.type-style('body-compact-02');
@@ -106,8 +103,6 @@ svg.iconOverrides {
   height: 72px;
   fill: var(--brand-03);
 }
-
-
 
 .header {
   @include type.type-style('body-compact-02');

@@ -151,8 +151,7 @@ const VaccinationSchedule: React.FC<VaccinationScheduleProps> = ({ patientUuid }
               type={getTagType(vaccineData.status)}
               size="sm"
               title={getStatusLabel(vaccineData.status, t)}
-              className={styles.vaccineStatusTag}
-            >
+              className={styles.vaccineStatusTag}>
               {vaccineData.date || '--'}
             </Tag>
           ) : (
@@ -198,8 +197,7 @@ const VaccinationSchedule: React.FC<VaccinationScheduleProps> = ({ patientUuid }
           kind="ghost"
           renderIcon={(props) => <Add size={16} {...props} />}
           onClick={handleAddVaccination}
-          aria-label={t('updateVaccinations', 'Actualizar vacunas')}
-        >
+          aria-label={t('updateVaccinations', 'Actualizar vacunas')}>
           {t('update', 'Actualizar')}
         </Button>
       </CardHeader>

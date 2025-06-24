@@ -135,8 +135,7 @@ const PartographChart: React.FC<PartographChartProps> = ({ partograpyComponents 
                       title: title,
                       value: value,
                     })
-                  }
-                >
+                  }>
                   {title}-
                 </Tab>
               );

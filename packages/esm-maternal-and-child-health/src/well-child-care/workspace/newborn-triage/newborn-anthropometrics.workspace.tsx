@@ -278,8 +278,7 @@ const NewbornAnthropometricsForm: React.FC<DefaultPatientWorkspaceProps> = ({
           kind="primary"
           onClick={handleSubmit(saveAnthropometrics, onError)}
           disabled={isSubmitting}
-          type="submit"
-        >
+          type="submit">
           {t('submit', 'Guardar y Cerrar')}
         </Button>
       </ButtonSet>

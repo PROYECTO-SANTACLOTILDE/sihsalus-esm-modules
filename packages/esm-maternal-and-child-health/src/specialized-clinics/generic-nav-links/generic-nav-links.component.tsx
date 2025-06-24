@@ -30,8 +30,7 @@ const GenericLink: React.FC<{ title: string; path: string }> = (props) => {
     <ConfigurableLink
       style={{ paddingLeft: '2rem' }}
       className={`cds--side-nav__link`}
-      to={`${basePath}${patientUuid}/chart/${encodeURIComponent('special-clinics-dashboard')}?clinic=${props.path}`}
-    >
+      to={`${basePath}${patientUuid}/chart/${encodeURIComponent('special-clinics-dashboard')}?clinic=${props.path}`}>
       {props.title}
     </ConfigurableLink>
   );

@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useConfig } from '@openmrs/esm-framework';
+import { useConfig, formatDatetime, parseDate } from '@openmrs/esm-framework';
 import { useVitalsAndBiometrics, useVitalsConceptMetadata, withUnit } from '../../../common';
 import ClinicalDataOverview from '../../../../ui/data-table/clinical-data-overview.component'; // Ajusta la ruta según tu estructura
-import { formatDatetime, parseDate } from '@openmrs/esm-framework';
 
 interface BiometricsBaseProps {
   patientUuid: string;

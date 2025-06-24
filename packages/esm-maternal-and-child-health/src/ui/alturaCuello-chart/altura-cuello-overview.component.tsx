@@ -96,8 +96,7 @@ const AlturaCuelloOverview: React.FC<AlturaCuelloOverviewProps> = ({ patient, pa
               kind="ghost"
               renderIcon={(props) => <Add size={16} {...props} />}
               onClick={launchForm}
-              aria-label={t('addMeasurement', 'Agregar medición')}
-            >
+              aria-label={t('addMeasurement', 'Agregar medición')}>
               {t('add', 'Agregar')}
             </Button>
           )}

@@ -55,7 +55,9 @@
         border-radius: 6px;
         padding: spacing.$spacing-04;
         text-align: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
 
         &:hover {
           transform: translateY(-2px);
@@ -243,9 +245,15 @@
 
 // Animaciones para feedback visual
 @keyframes pulseSuccess {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes slideInUp {

@@ -99,8 +99,7 @@ export const OtherRelationships: React.FC<OtherRelationshipsProps> = ({ patientU
         name: (
           <ConfigurableLink
             style={{ textDecoration: 'none' }}
-            to={window.getOpenmrsSpaBase() + `patient/${relation.relativeUuid}/chart/Patient Summary`}
-          >
+            to={window.getOpenmrsSpaBase() + `patient/${relation.relativeUuid}/chart/Patient Summary`}>
             {relation.name}
           </ConfigurableLink>
         ),
@@ -192,8 +191,7 @@ export const OtherRelationships: React.FC<OtherRelationshipsProps> = ({ patientU
                       {...getHeaderProps({
                         header,
                         isSortable: header.isSortable,
-                      })}
-                    >
+                      })}>
                       {header.header?.content ?? header.header}
                     </TableHeader>
                   ))}

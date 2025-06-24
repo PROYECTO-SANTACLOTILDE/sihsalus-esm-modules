@@ -201,8 +201,7 @@ const ObstetricHistoryChart: React.FC<ObstetricHistoryChartProps> = ({
                       value: value,
                       groupName: id,
                     })
-                  }
-                >
+                  }>
                   {title}
                 </Tab>
               ))}

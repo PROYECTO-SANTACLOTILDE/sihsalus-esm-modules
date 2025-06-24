@@ -1,9 +1,8 @@
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import { formatDate, parseDate } from '@openmrs/esm-framework';
-import type { AppointmentSummary, Appointment } from '../types';
+import type { AppointmentSummary, Appointment, ObsReferenceRanges, ObservationInterpretation } from '../types';
 import { configSchema } from '../config-schema';
-import type { ObsReferenceRanges, ObservationInterpretation } from '../types';
 
 export const getHighestAppointmentServiceLoad = (appointmentSummary: Array<any> = []) => {
   const groupedAppointments = appointmentSummary?.map(({ countMap, serviceName }) => ({

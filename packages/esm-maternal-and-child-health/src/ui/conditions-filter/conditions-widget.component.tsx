@@ -327,8 +327,7 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
                 onChange={onChange}
                 orientation="vertical"
                 valueSelected={value.toLowerCase()}
-                aria-labelledby={errors?.clinicalStatus ? 'clinicalStatusError' : undefined}
-              >
+                aria-labelledby={errors?.clinicalStatus ? 'clinicalStatusError' : undefined}>
                 <RadioButton id="active" labelText={t('active', 'Active')} value="active" />
                 <RadioButton id="inactive" labelText={t('inactive', 'Inactive')} value="inactive" />
               </RadioButtonGroup>
@@ -404,8 +403,7 @@ function SearchResults({
             className={styles.condition}
             key={searchResult?.uuid}
             onClick={() => onConditionChange(searchResult)}
-            role="menuitem"
-          >
+            role="menuitem">
             {searchResult.display}
           </li>
         ))}

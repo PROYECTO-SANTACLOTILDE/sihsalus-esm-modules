@@ -140,8 +140,7 @@ const OutPatientMedicalHistory: React.FC<OutPatientMedicalHistoryProps> = ({
           kind="ghost"
           onClick={() => handleOpenOrEditClinicalEncounterForm()}
           renderIcon={(props) => <Add size={24} {...props} />}
-          iconDescription="Add"
-        >
+          iconDescription="Add">
           {t('add', 'Add')}
         </Button>
       </CardHeader>
@@ -159,8 +158,7 @@ const OutPatientMedicalHistory: React.FC<OutPatientMedicalHistoryProps> = ({
                       key={i}
                       {...getHeaderProps({
                         header,
-                      })}
-                    >
+                      })}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -172,8 +170,7 @@ const OutPatientMedicalHistory: React.FC<OutPatientMedicalHistoryProps> = ({
                     key={row.id}
                     {...getRowProps({
                       row,
-                    })}
-                  >
+                    })}>
                     {row.cells.map((cell) => (
                       <TableCell key={cell.id}>{cell.value}</TableCell>
                     ))}

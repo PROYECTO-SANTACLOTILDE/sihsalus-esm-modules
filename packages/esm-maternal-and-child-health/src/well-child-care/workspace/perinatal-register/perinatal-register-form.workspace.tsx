@@ -348,8 +348,7 @@ const PerinatalRegisterForm: React.FC<DefaultPatientWorkspaceProps> = ({
           kind="primary"
           onClick={handleSubmit(savePerinatalData, onError)}
           disabled={isSubmitting}
-          type="submit"
-        >
+          type="submit">
           {t('submit', 'Save and Close')}
         </Button>
       </ButtonSet>

@@ -61,9 +61,9 @@ export function mapToFhirPatient(patient: SearchedPatient) {
         text: patient.person.personName.display,
         extension: [
           {
-            url: "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
-            valueString: patient.person.personName.familyName2
-          }
+            url: 'http://hl7.org/fhir/StructureDefinition/humanname-mothers-family',
+            valueString: patient.person.personName.familyName2,
+          },
         ],
       },
     ],

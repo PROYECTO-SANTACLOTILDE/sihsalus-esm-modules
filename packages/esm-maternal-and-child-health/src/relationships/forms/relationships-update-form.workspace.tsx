@@ -116,8 +116,7 @@ const RelationshipUpdateForm: React.FC<RelationshipUpdateFormProps> = ({ closeWo
                 id="startDate"
                 datePickerType="single"
                 invalid={form.formState.errors[field.name]?.message}
-                invalidText={form.formState.errors[field.name]?.message}
-              >
+                invalidText={form.formState.errors[field.name]?.message}>
                 <DatePickerInput
                   invalid={form.formState.errors[field.name]?.message}
                   invalidText={form.formState.errors[field.name]?.message}
@@ -141,8 +140,7 @@ const RelationshipUpdateForm: React.FC<RelationshipUpdateFormProps> = ({ closeWo
                 id="endDate"
                 datePickerType="single"
                 invalid={form.formState.errors[field.name]?.message}
-                invalidText={form.formState.errors[field.name]?.message}
-              >
+                invalidText={form.formState.errors[field.name]?.message}>
                 <DatePickerInput
                   invalid={form.formState.errors[field.name]?.message}
                   invalidText={form.formState.errors[field.name]?.message}

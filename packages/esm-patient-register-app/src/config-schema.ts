@@ -421,12 +421,14 @@ export const esmPatientRegistrationSchema = {
         required: { _type: Type.Boolean, _default: false },
         matches: {
           _type: Type.String,
-          _default: "^(\\+51\\s?)?(1\\d{7}|[2-8]\\d{6,7})$",
-          _description: 'RegEx para teléfonos fijos peruanos: con o sin +51, 7 u 8 dígitos, Lima (1xxxxxxx) o provincias ([2-8]xxxxxxx).',
+          _default: '^(\\+51\\s?)?(1\\d{7}|[2-8]\\d{6,7})$',
+          _description:
+            'RegEx para teléfonos fijos peruanos: con o sin +51, 7 u 8 dígitos, Lima (1xxxxxxx) o provincias ([2-8]xxxxxxx).',
         },
         invalidText: {
           _type: Type.String,
-          _default: "Ingrese un número de teléfono válido. Para Lima: 8 dígitos comenzando con 1. Para provincias: 7-8 dígitos comenzando con 2-8. Puede incluir +51.",
+          _default:
+            'Ingrese un número de teléfono válido. Para Lima: 8 dígitos comenzando con 1. Para provincias: 7-8 dígitos comenzando con 2-8. Puede incluir +51.',
           _description: 'Mensaje personalizado cuando la validación del teléfono falla.',
         },
       },
@@ -441,12 +443,12 @@ export const esmPatientRegistrationSchema = {
         required: { _type: Type.Boolean, _default: false },
         matches: {
           _type: Type.String,
-          _default: "^(\\+51\\s?)?9\\d{8}$",
+          _default: '^(\\+51\\s?)?9\\d{8}$',
           _description: 'RegEx para celulares peruanos: con o sin +51, empieza con 9 y tiene 9 dígitos.',
         },
         invalidText: {
           _type: Type.String,
-          _default: "Ingrese un número de celular válido. Debe comenzar con 9 y tener 9 dígitos. Puede incluir +51.",
+          _default: 'Ingrese un número de celular válido. Debe comenzar con 9 y tener 9 dígitos. Puede incluir +51.',
           _description: 'Mensaje personalizado cuando la validación del celular falla.',
         },
       },
@@ -466,7 +468,7 @@ export const esmPatientRegistrationSchema = {
         },
         invalidText: {
           _type: Type.String,
-          _default: "Ingrese una dirección de correo electrónico válida. Ejemplo: usuario@dominio.com",
+          _default: 'Ingrese una dirección de correo electrónico válida. Ejemplo: usuario@dominio.com',
           _description: 'Mensaje personalizado cuando la validación del email falla.',
         },
       },
@@ -527,7 +529,8 @@ export const esmPatientRegistrationSchema = {
           '8d91a210-c2cc-11de-8d13-0010c6dffd0f', // Padre/Hijo
           '057de23f-3d9c-4314-9391-4452970739c6', // Tutor/Menor de Edad
         ],
-        _description: 'List of relationship type UUIDs to allow in the relationship dropdown list. If empty, all relationships are shown.',
+        _description:
+          'List of relationship type UUIDs to allow in the relationship dropdown list. If empty, all relationships are shown.',
       },
     },
   },

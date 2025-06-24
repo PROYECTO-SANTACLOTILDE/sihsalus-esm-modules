@@ -95,8 +95,7 @@ const LabourHistoryOverview: React.FC<LabourHistoryOverviewProps> = ({ patientUu
               kind="ghost"
               renderIcon={(props) => <Add size={16} {...props} />}
               iconDescription="Add labour details"
-              onClick={launchLabourForm}
-            >
+              onClick={launchLabourForm}>
               {t('add', 'Add')}
             </Button>
           </div>

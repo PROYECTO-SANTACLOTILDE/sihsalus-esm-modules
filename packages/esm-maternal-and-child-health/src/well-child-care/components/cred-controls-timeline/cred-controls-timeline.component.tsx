@@ -74,8 +74,7 @@ const CredAgeGroups: React.FC<CredAgeGroupsProps> = ({ patientUuid }) => {
             className={`${styles.ageTile} ${selectedAgeGroup?.label === group.label ? styles.active : ''} ${
               currentAgeGroup?.label === group.label ? styles.current : ''
             }`}
-            onClick={() => handleAgeGroupClick(group)}
-          >
+            onClick={() => handleAgeGroupClick(group)}>
             <strong>{group.label}</strong>
             {group.sublabel && <div>{group.sublabel}</div>}
           </Tile>

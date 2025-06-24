@@ -119,8 +119,7 @@ const ObstetricHistoryBase: React.FC<ObstetricHistoryBaseProps> = ({ patientUuid
                 kind="ghost"
                 renderIcon={(props) => <AddIcon size={16} {...props} />}
                 iconDescription={t('addObstetricData', 'Agregar datos obstétricos')}
-                onClick={launchObstetricForm}
-              >
+                onClick={launchObstetricForm}>
                 {t('update', 'Actualizar')}
               </Button>
             </>

@@ -121,8 +121,7 @@ const FamilyRelationshipForm: React.FC<RelationshipFormProps> = ({ closeWorkspac
             subtitle: t('formInvalidFields', 'Por favor revise los siguientes campos:') + ` ${fieldsWithError}`,
             kind: 'error',
           });
-        }}
-      >
+        }}>
         <Stack gap={5} className={styles.grid}>
           <PatientSearchCreate />
 

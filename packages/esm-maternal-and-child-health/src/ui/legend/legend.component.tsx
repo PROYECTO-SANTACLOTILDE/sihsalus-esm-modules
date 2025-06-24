@@ -64,8 +64,7 @@ const LegendTile: React.FC<LegendTileProps> = ({ conceptSetUUID }) => {
                   size="sm"
                   aria-label={t(item.display, item.label)}
                   title={t(item.display, item.label)}
-                  className={styles.legendTag}
-                >
+                  className={styles.legendTag}>
                   {t(item.display, item.label)}
                 </Tag>
               </div>

@@ -1,6 +1,5 @@
 import useSWR, { type KeyedMutator } from 'swr';
-import { useConfig, restBaseUrl, openmrsFetch, type FetchResponse } from '@openmrs/esm-framework';
-import type { Encounter } from '@openmrs/esm-framework';
+import { useConfig, restBaseUrl, openmrsFetch, type FetchResponse, type Encounter } from '@openmrs/esm-framework';
 import type { ConfigObject } from '../config-schema';
 
 interface UseEncountersResponse {

@@ -121,8 +121,7 @@ export const AdverseReactionForm: React.FC<AdverseReactionFormProps> = ({ patien
             labelText={t('vaccine', 'Vacuna')}
             value={formData.vaccineName}
             onChange={(e) => handleInputChange('vaccineName', e.target.value)}
-            className={styles.formField}
-          >
+            className={styles.formField}>
             <SelectItem text={t('selectVaccine', 'Seleccione una vacuna')} value="" />
             {VACCINE_OPTIONS.map((vaccine) => (
               <SelectItem key={vaccine} text={vaccine} value={vaccine} />
@@ -144,8 +143,7 @@ export const AdverseReactionForm: React.FC<AdverseReactionFormProps> = ({ patien
             labelText={t('severity', 'Severidad')}
             value={formData.severity}
             onChange={(e) => handleInputChange('severity', e.target.value)}
-            className={styles.formField}
-          >
+            className={styles.formField}>
             <SelectItem text={t('selectSeverity', 'Seleccione severidad')} value="" />
             <SelectItem text={t('mild', 'Leve')} value="mild" />
             <SelectItem text={t('moderate', 'Moderada')} value="moderate" />
@@ -157,8 +155,7 @@ export const AdverseReactionForm: React.FC<AdverseReactionFormProps> = ({ patien
             dateFormat="m/d/Y"
             value={formData.occurrenceDate}
             onChange={(dates: Date[]) => handleInputChange('occurrenceDate', dates[0]?.toISOString() || '')}
-            className={styles.formField}
-          >
+            className={styles.formField}>
             <DatePickerInput
               id="occurrence-date"
               labelText={t('occurrenceDate', 'Fecha de ocurrencia')}

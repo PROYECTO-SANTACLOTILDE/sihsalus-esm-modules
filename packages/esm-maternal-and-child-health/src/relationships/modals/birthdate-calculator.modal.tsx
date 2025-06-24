@@ -68,8 +68,7 @@ const BirthDateCalculator: React.FC<BirthDateCalculatorProps> = ({ onClose, prop
               <DatePicker
                 datePickerType="single"
                 value={formState.fromDate}
-                onChange={([date]) => setFormState({ ...formState, fromDate: date })}
-              >
+                onChange={([date]) => setFormState({ ...formState, fromDate: date })}>
                 <DatePickerInput placeholder="mm/dd/yyyy" labelText={t('onDate', 'On Date')} size="xl" />
               </DatePicker>
             </Layer>
@@ -82,8 +81,7 @@ const BirthDateCalculator: React.FC<BirthDateCalculatorProps> = ({ onClose, prop
             className={styles.button}
             kind="primary"
             onClick={handleSubmit}
-            disabled={!formState.age || !formState.fromDate}
-          >
+            disabled={!formState.age || !formState.fromDate}>
             Submit
           </Button>
           <Button className={styles.button} kind="secondary" onClick={onClose}>

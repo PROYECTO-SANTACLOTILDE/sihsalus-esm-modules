@@ -1,5 +1,6 @@
 import { defineConfigSchema, getAsyncLifecycle, getSyncLifecycle } from '@openmrs/esm-framework';
 import { configSchema } from './config-schema';
+import DyakuNavLink from './dyaku-nav-link.component';
 
 const moduleName = '@sihsalus/esm-dyaku-integration';
 
@@ -17,7 +18,4 @@ export function startupApp() {
 export const root = getAsyncLifecycle(() => import('./root.component'), options);
 
 // Dashboard links and extensions
-export const dyakuIntegrationDashboardLink = getSyncLifecycle(
-  () => import('./dyaku-nav-link.component'),
-  options,
-);
+export const dyakuIntegrationDashboardLink = getSyncLifecycle(DyakuNavLink, options);

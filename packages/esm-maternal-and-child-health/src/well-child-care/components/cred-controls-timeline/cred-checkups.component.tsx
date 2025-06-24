@@ -61,8 +61,7 @@ const CredCheckups: React.FC<CredCheckupsProps> = ({ patientUuid }) => {
                 size="sm"
                 renderIcon={AddIcon}
                 iconDescription={t('addData', 'Agregar control')}
-                onClick={() => handleAddCredControl(appt)}
-              >
+                onClick={() => handleAddCredControl(appt)}>
                 {t('add', 'Agregar')}
               </Button>
             </div>

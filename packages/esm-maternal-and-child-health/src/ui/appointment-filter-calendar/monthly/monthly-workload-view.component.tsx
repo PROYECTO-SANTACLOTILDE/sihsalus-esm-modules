@@ -32,8 +32,7 @@ const MonthlyWorkloadView: React.FC<MonthlyWorkloadViewProps> = ({ dateTime, eve
       className={classNames(
         styles[isSameMonth(dateTime, dayjs(selectedDate)) ? 'monthly-cell' : 'monthly-cell-disabled'],
         styles.largeDesktop,
-      )}
-    >
+      )}>
       {isSameMonth(dateTime, dayjs(selectedDate)) && (
         <div>
           <span className={classNames(styles.totals)}>
@@ -48,8 +47,7 @@ const MonthlyWorkloadView: React.FC<MonthlyWorkloadViewProps> = ({ dateTime, eve
                   e.stopPropagation();
                   handleAppoiment(currentData.appointmentId);
                 }}
-                className={styles.serviceArea}
-              >
+                className={styles.serviceArea}>
                 <span>Atender Cita</span>
               </div>
             </div>

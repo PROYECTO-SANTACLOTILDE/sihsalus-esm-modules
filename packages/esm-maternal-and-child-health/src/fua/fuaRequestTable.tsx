@@ -86,8 +86,7 @@ const FuaRequestTable: React.FC = () => {
                     <TableHeader
                       key={header.key}
                       {...getHeaderProps({ header })}
-                      className={`${styles.productiveHeading01} ${styles.text02}`}
-                    >
+                      className={`${styles.productiveHeading01} ${styles.text02}`}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -99,8 +98,7 @@ const FuaRequestTable: React.FC = () => {
                     <TableExpandRow
                       {...getRowProps({ row })}
                       onExpand={() => toggleExpand(index)}
-                      isExpanded={expandedRowIndex === index}
-                    >
+                      isExpanded={expandedRowIndex === index}>
                       {row.cells.map((cell) => {
                         if (cell.info.header === 'payload') {
                           return (
@@ -110,8 +108,7 @@ const FuaRequestTable: React.FC = () => {
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   toggleExpand(index);
-                                }}
-                              >
+                                }}>
                                 {expandedRowIndex === index ? 'Ocultar payload' : 'Ver payload'}
                               </button>
                             </TableCell>

@@ -76,8 +76,7 @@ const FormsTable = ({ tableHeaders, tableRows, isTablet, handleSearch, handleFor
                             handleFormOpen(tableRows[i].form, '');
                           }}
                           role="presentation"
-                          className={styles.formName}
-                        >
+                          className={styles.formName}>
                           {tableRows[i]?.formName}
                         </Link>
                       </TableCell>

@@ -101,8 +101,7 @@ const PrenatalAntecedents: React.FC<NeonatalSummaryProps> = ({ patientUuid }) =>
             { key: 'value', header: t('value', 'Valor') },
           ]}
           size="sm"
-          useZebraStyles
-        >
+          useZebraStyles>
           {({ rows, headers, getHeaderProps, getTableProps }) => (
             <TableContainer>
               <Table {...getTableProps()}>

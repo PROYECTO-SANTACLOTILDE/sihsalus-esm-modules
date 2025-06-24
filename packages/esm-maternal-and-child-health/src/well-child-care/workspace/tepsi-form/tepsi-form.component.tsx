@@ -431,8 +431,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                   if (dates[0]) {
                     setValue('evaluationDate', dates[0].toISOString().split('T')[0]);
                   }
-                }}
-              >
+                }}>
                 <DatePickerInput
                   placeholder="yyyy-mm-dd"
                   labelText={t('evaluationDate', 'Fecha de evaluación')}

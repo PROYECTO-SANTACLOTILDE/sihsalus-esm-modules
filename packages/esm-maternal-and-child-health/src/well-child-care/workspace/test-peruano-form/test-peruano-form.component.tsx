@@ -609,8 +609,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     id="cultural-context"
                     labelText={t('culturalContext', 'Contexto Cultural')}
                     value={culturalContext}
-                    onChange={(e) => setValue('culturalContext', e.target.value as any)}
-                  >
+                    onChange={(e) => setValue('culturalContext', e.target.value as any)}>
                     <SelectItem value="urbano" text={t('urban', 'Urbano')} />
                     <SelectItem value="rural" text={t('rural', 'Rural/Andino')} />
                     <SelectItem value="urbano_marginal" text={t('urbanMarginal', 'Urbano Marginal')} />
@@ -621,8 +620,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     id="primary-language"
                     labelText={t('primaryLanguage', 'Idioma Primario')}
                     value={primaryLanguage}
-                    onChange={(e) => setValue('primaryLanguage', e.target.value as any)}
-                  >
+                    onChange={(e) => setValue('primaryLanguage', e.target.value as any)}>
                     <SelectItem value="español" text={t('spanish', 'Español')} />
                     <SelectItem value="quechua" text={t('quechua', 'Quechua')} />
                     <SelectItem value="bilingue" text={t('bilingual', 'Bilingüe (Español/Quechua)')} />
@@ -636,8 +634,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                   if (dates[0]) {
                     setValue('evaluationDate', dates[0].toISOString().split('T')[0]);
                   }
-                }}
-              >
+                }}>
                 <DatePickerInput
                   placeholder="yyyy-mm-dd"
                   labelText={t('evaluationDate', 'Fecha de evaluación')}
