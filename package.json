@@ -78,8 +78,5 @@
         "*.{ts,tsx}": "eslint --cache --fix --quiet",
         "*.{css,scss,ts,tsx}": "prettier --cache --write --list-different"
     },
-    "packageManager": "yarn@4.9.1",
-    "dependencies": {
-        "semver": "^7.7.2"
-    }
+    "packageManager": "yarn@4.9.1"
 }
