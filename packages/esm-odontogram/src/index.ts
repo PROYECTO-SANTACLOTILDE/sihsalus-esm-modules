@@ -17,4 +17,4 @@ export function startupApp() {
 export const root = getAsyncLifecycle(() => import('./root.component'), options);
 
 // Dashboard links and extensions
-export const odontogramDashboardLink = getSyncLifecycle(() => import('./odontogram-nav-link.component'), options);
+export const odontogramDashboardLink = getAsyncLifecycle(() => import('./odontogram-nav-link.component'), options);
