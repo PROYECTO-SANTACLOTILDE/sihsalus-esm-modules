@@ -3,7 +3,6 @@
 @use '../../root.scss';
 
 .widgetContainer {
-  background-color: $ui-background;
   margin-bottom: 1rem;
   padding: 1rem 0.625rem;
 }
@@ -28,10 +27,6 @@
   text-align: right;
 }
 
-.newServiceEnrolmentBtn > button {
-  background-color: $ui-background;
-}
-
 .widgetContainer :global(.cds--data-table) thead th button span {
   height: unset !important;
 }
@@ -46,7 +41,6 @@
 
 .content {
   @extend .productiveHeading01;
-  color: $text-02;
   margin-top: spacing.$spacing-05;
   margin-bottom: spacing.$spacing-03;
 }
