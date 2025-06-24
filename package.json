@@ -8,21 +8,11 @@
     ],
     "scripts": {
         "start": "openmrs develop",
-        "build": "turbo run build",
-        "test": "turbo run test",
-        "test:watch": "turbo run test:watch",
-        "test:e2e": "playwright test",
-        "lint": "turbo run lint",
-        "lint:fix": "turbo run lint:fix",
-        "typescript": "turbo run typescript",
+        "ci:publish": "yarn workspaces foreach --all --topological --exclude @openmrs/esm-patient-management npm publish --access public --tag latest",
+        "ci:prepublish": "yarn workspaces foreach --all --topological --exclude @openmrs/esm-patient-management npm publish --access public --tag next",
+        "release": "yarn workspaces foreach --all --topological version",
         "verify": "turbo run lint typescript test --concurrency=1",
-        "coverage": "turbo run coverage",
-        "extract-translations": "turbo run extract-translations",
-        "ci:publish": "yarn workspaces foreach --all npm publish --access public --tag latest",
-        "ci:prepublish": "yarn workspaces foreach --all npm publish --access public --tag next",
-        "release": "yarn workspaces foreach --all version",
-        "clean": "turbo run clean",
-        "dev": "turbo run dev",
+        "test-e2e": "playwright test",
         "postinstall": "husky install"
     },
     "devDependencies": {
@@ -87,31 +77,8 @@
         "*.{ts,tsx}": "eslint --cache --fix --max-warnings 0",
         "*.{css,scss,ts,tsx}": "prettier --cache --write --list-different"
     },
-    "packageManager": "yarn@4.5.1",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/tu-org/sihsalus-esm-modules.git"
-    },
-    "author": "SIH SALUS Team",
-    "license": "MPL-2.0",
-    "keywords": [
-        "openmrs",
-        "microfrontends",
-        "react",
-        "typescript",
-        "fhir",
-        "peru",
-        "salud",
-        "sih-salus"
-    ],
-    "engines": {
-        "node": ">=18.0.0",
-        "yarn": ">=4.0.0"
-    },
+    "packageManager": "yarn@4.9.1",
     "dependencies": {
-        "browserslist-config-openmrs": "^1.0.1",
-        "express": "^5.1.0",
-        "http-proxy-middleware": "^3.0.5",
         "semver": "^7.7.2"
     }
 }

@@ -1,11 +1,12 @@
 {
-    "name": "@pucp-gidis-hiisc/esm-sihsalus-app",
+    "name": "@pucp-gidis-hiisc/esm-maternal-and-child-health",
     "version": "8.0.2",
-    "license": "MPL-2.0",
     "description": "Main openmrs O3 peruhce microfrontend",
     "browser": "dist/pucp-gidis-hiisc-esm-sihsalus-app.js",
     "main": "src/index.ts",
     "source": true,
+    "license": "MPL-2.0",
+    "homepage": "https://github.com/PROYECTO-SANTACLOTILDE/esm-sihsalus-app#readme",
     "scripts": {
         "start": "openmrs develop",
         "serve": "webpack serve --mode=development",
@@ -13,40 +14,23 @@
         "build": "webpack --mode production",
         "analyze": "webpack --mode=production --env analyze=true",
         "lint": "eslint src --ext ts,tsx",
-        "prettier": "prettier --write \"src/**/*.{ts,tsx}\" --list-different",
-        "typescript": "tsc",
-        "extract-translations": "i18next 'src/**/*.*.tsx' --config ./tools/i18next-parser.config.js",
         "test": "jest --config jest.config.js --passWithNoTests",
         "coverage": "yarn test --coverage",
-        "verify": "turbo lint typescript coverage",
-        "prepare": "husky install",
-        "test-e2e": "playwright test",
-        "pre-commit": "lint-staged",
-        "pre-push": "yarn verify",
-        "ci:publish": "npm publish --access public --tag latest",
-        "ci:prepublish": "npm publish --access public --tag next"
+        "typescript": "tsc",
+        "extract-translations": "i18next 'src/**/*.*.tsx' --config ./tools/i18next-parser.config.js"
     },
-    "files": [
-        "dist",
-        "src",
-        "translations",
-        "package.json",
-        "README.md"
-    ],
     "browserslist": [
         "extends browserslist-config-openmrs"
     ],
     "keywords": [
-        "openmrs",
-        "microfrontends"
+        "openmrs"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/PROYECTO-SANTACLOTILDE/esm-sihsalus-app.git"
-    },
-    "homepage": "https://github.com/PROYECTO-SANTACLOTILDE/esm-sihsalus-app#readme",
-    "publishConfig": {
-        "access": "public"
     },
     "bugs": {
         "url": "https://github.com/PROYECTO-SANTACLOTILDE/esm-sihsalus-app/issues"
@@ -125,10 +109,5 @@
         "webpack": "^5.88.1",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.2.1"
-    },
-    "lint-staged": {
-        "src/**/*.{ts,tsx}": "eslint --cache --fix --max-warnings 0",
-        "*.{css,scss,ts,tsx}": "prettier --write --list-different"
-    },
-    "packageManager": "yarn@4.3.1"
+    }
 }
