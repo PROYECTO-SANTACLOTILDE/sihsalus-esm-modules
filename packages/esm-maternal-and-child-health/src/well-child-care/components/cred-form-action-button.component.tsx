@@ -21,7 +21,7 @@ const CREDFormActionButton: React.FC = () => {
   const isFormOpen = formEntryWorkspaces?.length >= 1;
   const isHtmlFormOpen = htmlFormEntryWorkspaces?.length >= 1;
 
-  const launchPatientWorkspaceCb = () => {
+  const launchWorkspaceCb = () => {
     if (isFormOpen) {
       launchWorkspace(formEntryWorkspace, {
         workspaceTitle: recentlyOpenedForm?.additionalProps?.['workspaceTitle'],
@@ -42,7 +42,7 @@ const CREDFormActionButton: React.FC = () => {
       getIcon={(props: ComponentProps<typeof DocumentIcon>) => <DocumentIcon {...props} />}
       label={t('credForms', 'Formularios CRED')}
       iconDescription={t('credForms', 'Formularios CRED')}
-      handler={launchPatientWorkspaceCb}
+      handler={launchWorkspaceCb}
       type={'cred-form'}
     />
   );

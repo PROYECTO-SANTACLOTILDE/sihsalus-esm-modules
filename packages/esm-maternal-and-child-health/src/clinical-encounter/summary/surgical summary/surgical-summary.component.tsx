@@ -14,7 +14,6 @@ import type { KeyedMutator } from 'swr';
 interface SurgicalSummaryProps {
   patientUuid: string;
   formEntrySub?: any;
-  launchPatientWorkspace?: Function;
   encounters: OpenmrsEncounter[];
   isLoading: boolean;
   error: Error;
