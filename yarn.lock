@@ -3700,7 +3700,7 @@ __metadata:
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
     react-is: "npm:^19.1.0"
-    rxjs: "npm:^7.0.0"
+    rxjs: "npm:^7.8.2"
     single-spa: "npm:^6.0.0"
     webpack: "npm:^5.99.9"
     xlsx: "npm:^0.18.5"
@@ -18775,7 +18775,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.0.0, rxjs@npm:^7.4.0":
+"rxjs@npm:^7.4.0, rxjs@npm:^7.8.2":
   version: 7.8.2
   resolution: "rxjs@npm:7.8.2"
   dependencies:
