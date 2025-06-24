@@ -1,33 +1,46 @@
+/**
+ * @returns {Promise<import('jest').Config>}
+ */
+
+const path = require('path');
+
 module.exports = {
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/../../tools/setup-tests.ts'],
-  moduleNameMapping: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '^@sihsalus/esm-sihsalus-library$': '<rootDir>/packages/esm-sihsalus-library/src',
-    '^@openmrs/esm-framework$': '@openmrs/esm-framework',
-  },
+  clearMocks: true,
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': ['@swc/jest'],
+    '^.+\\.m?[jt]sx?$': ['@swc/jest'],
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!((@openmrs|@carbon|@babel|dayjs)/.*|lodash-es|d3|internmap|delaunator|robust-predicates))',
-  ],
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
+  transformIgnorePatterns: ['/node_modules/(?!@openmrs|.+\\.pnp\\.[^\\/]+$)'],
+  moduleDirectories: ['node_modules', '__mocks__', 'tools', __dirname],
+  moduleNameMapper: {
+    '\\.(s?css)$': 'identity-obj-proxy',
+    '@openmrs/esm-framework': '@openmrs/esm-framework/mock',
+    '^dexie$': require.resolve('dexie'),
+    '^lodash-es/(.*)$': 'lodash/$1',
+    'lodash-es': 'lodash',
+    '^react-i18next$': path.resolve(__dirname, '__mocks__', 'react-i18next.js'),
+    '^uuid$': path.resolve(__dirname, 'node_modules', 'uuid', 'dist', 'index.js'),
+  },
   collectCoverageFrom: [
-    'packages/*/src/**/*.{js,jsx,ts,tsx}',
-    '!packages/*/src/**/*.d.ts',
-    '!packages/*/src/**/index.ts',
-    '!packages/*/src/**/*.stories.{js,jsx,ts,tsx}',
-    '!packages/*/src/**/*.test.{js,jsx,ts,tsx}',
+    '**/src/**/*.component.tsx',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+    '!**/src/**/*.test.*',
+    '!**/src/declarations.d.ts',
+    '!**/e2e/**',
   ],
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov', 'html'],
-  testMatch: [
-    '<rootDir>/packages/*/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
-    '<rootDir>/packages/*/src/**/*.{test,spec}.{js,jsx,ts,tsx}',
-  ],
-  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/coverage/'],
-  globals: {
-    System: {},
+  coverageThreshold: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+    },
   },
+  setupFilesAfterEnv: [path.resolve(__dirname, 'tools', 'setup-tests.ts')],
+  testPathIgnorePatterns: [path.resolve(__dirname, 'e2e')],
+  testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    url: 'http://localhost/',
+  },
+  testTimeout: 25000,
 };
