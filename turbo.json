@@ -4,14 +4,7 @@
         "build": {
             "outputs": [
                 "dist/**"
-            ],
-            "dependsOn": [
-                "^build"
             ]
-        },
-        "dev": {
-            "cache": false,
-            "persistent": true
         },
         "coverage": {
             "outputs": [
@@ -21,19 +14,10 @@
                 "test"
             ]
         },
-        "extract-translations": {
-            "outputs": [
-                "translations/**"
-            ]
-        },
+        "extract-translations": {},
         "lint": {
             "dependsOn": [
                 "^lint"
-            ]
-        },
-        "lint:fix": {
-            "dependsOn": [
-                "^lint:fix"
             ]
         },
         "typescript": {
@@ -52,15 +36,6 @@
             ],
             "cache": false,
             "persistent": true
-        },
-        "clean": {
-            "cache": false
         }
-    },
-    "globalDependencies": [
-        "package.json",
-        "tsconfig.json",
-        ".eslintrc.js",
-        "prettier.config.js"
-    ]
+    }
 }
