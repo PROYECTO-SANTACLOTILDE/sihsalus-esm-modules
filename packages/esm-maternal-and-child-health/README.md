@@ -15,12 +15,12 @@ Colección de módulos microfrontend para SIH SALUS, una distribución especiali
 
 ## 📦 Packages Incluidos
 
-- `@sihsalus/esm-dyaku-integration` - Integración con DYAKU FHIR y Padrón Nacional
-- `@sihsalus/esm-fua-his-integration` - Manejo de FUA e integración HIS
-- `@sihsalus/esm-maternal-child-health` - Atención materno-infantil
-- `@sihsalus/esm-patient-management-peru` - Gestión avanzada de pacientes
-- `@sihsalus/esm-reports-minsa` - Reportes oficiales MINSA
-- `@sihsalus/esm-shared-library` - Componentes y servicios compartidos
+- `@pucp-gidis-hiisc/esm-dyaku-integration` - Integración con DYAKU FHIR y Padrón Nacional
+- `@pucp-gidis-hiisc/esm-fua-his-integration` - Manejo de FUA e integración HIS
+- `@pucp-gidis-hiisc/esm-maternal-child-health` - Atención materno-infantil
+- `@pucp-gidis-hiisc/esm-patient-management-peru` - Gestión avanzada de pacientes
+- `@pucp-gidis-hiisc/esm-reports-minsa` - Reportes oficiales MINSA
+- `@pucp-gidis-hiisc/esm-shared-library` - Componentes y servicios compartidos
 
 ## 🚀 Tecnologías
 

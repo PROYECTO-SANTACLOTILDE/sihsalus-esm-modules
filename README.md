@@ -32,8 +32,8 @@ Colección de módulos microfrontend para SIH SALUS, una distribución especiali
 ## 📦 Packages Incluidos
 
 - `@pucp-gidis-hiisc/esm-maternal-and-child-health` - Atención materno-infantil (CRED, Madre Gestante y Afines)
-- `@sihsalus/esm-patient-search-app` - Gestión avanzada de búsqueda de pacientes
-- `@sihsalus/esm-patient-register-app` - Gestión avanzada de registro de pacientes
+- `@pucp-gidis-hiisc/esm-patient-search-app` - Gestión avanzada de búsqueda de pacientes
+- `@pucp-gidis-hiisc/esm-patient-register-app` - Gestión avanzada de registro de pacientes
 
 ## 🚀 Tecnologías
 
@@ -147,7 +147,7 @@ yarn turbo test
 yarn turbo test --filter=@pucp-gidis-hiisc/esm-maternal-and-child-health
 
 # Tests con patrón
-yarn turbo test --filter=@sihsalus/esm-patient-*
+yarn turbo test --filter=@pucp-gidis-hiisc/esm-patient-*
 
 # Tests sin cache
 yarn turbo test --force
@@ -165,7 +165,7 @@ yarn turbo lint -- --fix
 yarn turbo typescript
 
 # Paquete específico
-yarn turbo typescript --filter=@sihsalus/esm-patient-search-app
+yarn turbo typescript --filter=@pucp-gidis-hiisc/esm-patient-search-app
 ```
 
 #### Build
@@ -286,7 +286,7 @@ yarn turbo typescript
 #### Linting
 ```bash
 # Lint de paquete específico
-yarn turbo lint --filter=@sihsalus/esm-patient-search-app
+yarn turbo lint --filter=@pucp-gidis-hiisc/esm-patient-search-app
 
 # Lint completo
 yarn turbo lint
@@ -1210,7 +1210,7 @@ yarn analyze
 yarn start --sources 'packages/esm-patient-search-app' --sources 'packages/esm-patient-register-app'
 
 # Tests específicos
-yarn turbo test --filter=@sihsalus/esm-patient-*
+yarn turbo test --filter=@pucp-gidis-hiisc/esm-patient-*
 ```
 
 ### Comandos de Diagnóstico
