@@ -392,12 +392,6 @@ export const schedulingAdminPageCardLink = getAsyncLifecycle(
   options,
 );
 
-export const dyakuPatientsLink = getAsyncLifecycle(
-  () => import('./dyaku-patients/dyaku-patients-link.component'),
-  options,
-);
-
-export const dyakuPatientsPage = getAsyncLifecycle(() => import('./dyaku-patients/dyaku.main.component'), options);
 export const wellchildControlsworkspace = getAsyncLifecycle(
   () => import('./well-child-care/workspace/well-child-control/well-child-controls-form.workspace'),
   options,

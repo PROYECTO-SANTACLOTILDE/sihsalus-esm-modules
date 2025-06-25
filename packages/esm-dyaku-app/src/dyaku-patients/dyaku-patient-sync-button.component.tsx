@@ -3,11 +3,7 @@ import { CheckmarkOutline, CloudUpload } from '@carbon/react/icons';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './dyaku-patient-sync-button.scss';
-import {
-  useDyakuSync,
-  type DyakuPatient,
-  type SyncResult,
-} from '../../../esm-maternal-and-child-health/src/dyaku-patients/dyaku-patients.resource';
+import { useDyakuSync, type DyakuPatient, type SyncResult } from './dyaku-patients.resource';
 
 interface DyakuPatientSyncButtonProps {
   patient: DyakuPatient;

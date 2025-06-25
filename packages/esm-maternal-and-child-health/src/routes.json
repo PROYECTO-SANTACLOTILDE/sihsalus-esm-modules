@@ -10,12 +10,6 @@
       "route": "vaccine-scheduling-builder",
       "online": true,
       "offline": true
-    },
-    {
-      "component": "dyakuPatientsPage",
-      "route": "dyaku-patients",
-      "online": true,
-      "offline": true
     }
   ],
   "extensions": [
@@ -36,13 +30,6 @@
       "name": "system-administration-scheduling-card-link",
       "slot": "system-admin-page-card-link-slot",
       "component": "schedulingAdminPageCardLink",
-      "online": true,
-      "offline": true
-    },
-    {
-      "name": "system-administration-dyaku-patients",
-      "slot": "system-admin-page-card-link-slot",
-      "component": "dyakuPatientsLink",
       "online": true,
       "offline": true
     },
