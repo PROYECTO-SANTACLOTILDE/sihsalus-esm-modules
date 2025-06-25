@@ -15,6 +15,14 @@
         "test-e2e": "playwright test",
         "postinstall": "husky install"
     },
+    "homepage": "https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules.git"
+    },
+    "bugs": {
+        "url": "https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules/issues"
+    },
     "devDependencies": {
         "@babel/core": "^7.11.6",
         "@carbon/react": "^1.83.0",
