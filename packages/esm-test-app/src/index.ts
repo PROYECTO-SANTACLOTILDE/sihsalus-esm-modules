@@ -82,7 +82,6 @@ import HivTestingEncountersList from './specialized-clinics/hiv-care-and-treatme
 import { ObstetricHistoryBase } from './ui/obstetric-history-widget';
 
 //Change this to a custom component, add an interface to reuse it!
-import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.component';
 
 // ================================================================================
 // SOCIAL HISTORY DOMAIN
@@ -98,7 +97,7 @@ import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.comp
 // ================================================================================
 export const importTranslation = require.context('../translations', false, /.json$/, 'lazy');
 
-const moduleName = '@pucp-gidis-hiisc/esm-sihsalus-app';
+const moduleName = '@pucp-gidis-hiisc/esm-sihsalus-aditionals-app';
 const options = {
   featureName: 'patient-clinical-view-app',
   moduleName,
