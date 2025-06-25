@@ -16,3 +16,10 @@ const options = {
 export function startupApp(): void {
   defineConfigSchema(moduleName, configSchema);
 }
+
+export const dyakuPatientsLink = getAsyncLifecycle(
+  () => import('./dyaku-patients/dyaku-patients-link.component'),
+  options,
+);
+
+export const dyakuPatientsPage = getAsyncLifecycle(() => import('./dyaku-patients/dyaku.main.component'), options);
