@@ -3,7 +3,7 @@ import { formatDatetime, ResponsiveWrapper, useLayoutType } from '@openmrs/esm-f
 import { debounce } from 'lodash-es';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { CompletedFormInfo, Form } from '../../well-child-care/workspace/well-child-control/types';
+import type { CompletedFormInfo, Form } from './types';
 import styles from './forms-list.scss';
 import FormsTable from './forms-table.component';
 
