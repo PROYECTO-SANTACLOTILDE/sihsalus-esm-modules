@@ -2,7 +2,7 @@ import { useConfig } from '@openmrs/esm-framework';
 import { useLaunchWorkspaceRequiringVisit } from '@openmrs/esm-patient-common-lib';
 import { useCallback } from 'react';
 import { type ConfigObject } from '../config-schema';
-import { type Form } from '../well-child-care/workspace/well-child-control/types';
+import { type Form } from '../types';
 
 /**
  * Custom hook for launching CRED forms with workspace functionality

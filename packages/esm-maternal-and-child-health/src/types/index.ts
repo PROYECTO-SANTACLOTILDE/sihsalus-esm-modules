@@ -1,5 +1,59 @@
 import type { OpenmrsResource, FetchResponse, FHIRResource } from '@openmrs/esm-framework';
 import type { amPm } from '../utils';
+/**
+ * My interfaces
+ */
+export interface Form {
+  uuid: string;
+  encounterType?: EncounterType;
+  name: string;
+  display?: string;
+  version: string;
+  published: boolean;
+  retired: boolean;
+  resources: Array<FormEncounterResource>;
+  formCategory?: string;
+}
+
+/**
+ * The resource part of a form encounter.
+ */
+export interface FormEncounterResource {
+  uuid: string;
+  name: string;
+  dataType: string;
+  valueReference: string;
+}
+
+/**
+ * An encounter which references the form which created the encounter (by being filled out).
+ */
+export interface EncounterWithFormRef {
+  uuid: string;
+  encounterType?: EncounterType;
+  encounterDatetime: string;
+  form?: Form;
+}
+
+export interface Privilege {
+  uuid: string;
+  name: string;
+  display?: string;
+  description?: string;
+}
+
+export interface EncounterType {
+  uuid: string;
+  name: string;
+  viewPrivilege: Privilege | null;
+  editPrivilege: Privilege | null;
+}
+
+export interface CompletedFormInfo {
+  form: Form;
+  associatedEncounters: Array<EncounterWithFormRef>;
+  lastCompletedDate?: Date;
+}
 
 export interface OpenmrsEncounter extends OpenmrsResource {
   encounterDatetime: string;
