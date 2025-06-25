@@ -77,7 +77,6 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
 
   const formattedAge = useMemo(() => (patient?.birthDate ? age(patient.birthDate) : ''), [patient?.birthDate]);
 
-  // Formularios disponibles según grupo etario
   const allAvailableForms = useCREDFormsForAgeGroup(config, patient?.birthDate);
 
   const handleStartControl = useCallback(() => {
@@ -186,13 +185,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
               value={ageGroup ? ageGroup.label : t('unknownAgeGroup', 'No determinado')}
               readOnly
               disabled
-              helperText={
-                ageGroup
-                  ? t('Formularios disponibles: {{count}}', {
-                      count: allAvailableForms.length,
-                    })
-                  : t('ageGroupHelper', '* Grupo etario basado en la edad del paciente')
-              }
+              helperText={t('ageGroupHelper', '* Grupo etario basado en la edad del paciente')}
             />
           </Column>
           <Tooltip
