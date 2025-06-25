@@ -1,10 +1,14 @@
 import useSWRImmutable, { mutate } from 'swr';
 import { useCallback, useMemo } from 'react';
 import { openmrsFetch } from '@openmrs/esm-framework';
-import { encounterRepresentation } from '../maternal-and-child-health/common/concepts/mch-concepts';
 import type { OpenmrsEncounter } from '../types';
 import isNull from 'lodash-es/isNull';
 
+export const encounterRepresentation =
+  'custom:(uuid,encounterDatetime,encounterType,location:(uuid,name),' +
+  'patient:(uuid,display),encounterProviders:(uuid,provider:(uuid,name)),' +
+  'obs:(uuid,obsDatetime,voided,groupMembers,concept:(uuid,name:(uuid,name)),value:(uuid,name:(uuid,name),' +
+  'names:(uuid,conceptNameType,name))),form:(uuid,name))';
 export interface OpenmrsResource {
   uuid: string;
   display?: string;

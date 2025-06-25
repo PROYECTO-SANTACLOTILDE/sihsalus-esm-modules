@@ -3875,6 +3875,37 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@pucp-gidis-hiisc/esm-test-app@workspace:packages/esm-test-app":
+  version: 0.0.0-use.local
+  resolution: "@pucp-gidis-hiisc/esm-test-app@workspace:packages/esm-test-app"
+  dependencies:
+    "@carbon/charts": "npm:^1.23.7"
+    "@carbon/charts-react": "npm:^1.23.7"
+    "@carbon/colors": "npm:^11.34.0"
+    "@carbon/layout": "npm:^11.35.0"
+    "@carbon/react": "npm:^1.76.0"
+    "@carbon/styles": "npm:^1.81.0"
+    "@hookform/resolvers": "npm:^3.3.0"
+    "@openmrs/esm-patient-common-lib": "npm:^10.2.1-pre.8063"
+    classnames: "npm:^2.5.1"
+    lodash-es: "npm:^4.17.21"
+    react-hook-form: "npm:^7.56.1"
+    react-is: "npm:^19.1.0"
+    single-spa: "npm:^6.0.0"
+    webpack: "npm:^5.99.9"
+    xlsx: "npm:^0.18.5"
+    zod: "npm:^3.22.0"
+  peerDependencies:
+    "@openmrs/esm-framework": 6.x
+    dayjs: 1.x
+    react: 18.x
+    react-i18next: 11.x
+    react-router-dom: 6.x
+    rxjs: 6.x
+    swr: 2.x
+  languageName: unknown
+  linkType: soft
+
 "@react-aria/autocomplete@npm:3.0.0-beta.5":
   version: 3.0.0-beta.5
   resolution: "@react-aria/autocomplete@npm:3.0.0-beta.5"

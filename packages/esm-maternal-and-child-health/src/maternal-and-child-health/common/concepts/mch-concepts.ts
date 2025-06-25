@@ -69,10 +69,5 @@ export const prenatalVisitType = '164181AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const mchVisitType = '140084BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB';
 export const mchVisitsTypes = ['Prenatal', 'Labor and Delivery', 'Mother Postnatal'];
 
-export const encounterRepresentation =
-  'custom:(uuid,encounterDatetime,encounterType,location:(uuid,name),' +
-  'patient:(uuid,display),encounterProviders:(uuid,provider:(uuid,name)),' +
-  'obs:(uuid,obsDatetime,voided,groupMembers,concept:(uuid,name:(uuid,name)),value:(uuid,name:(uuid,name),' +
-  'names:(uuid,conceptNameType,name))),form:(uuid,name))';
 export const partoGraphRepresentation =
   'custom:(patient:(uuid),obs:(obsDatetime,groupMembers:(display,concept:(uuid,display),value),value:(uuid,name:(uuid,name),names:(uuid,conceptNameType,name))))';
