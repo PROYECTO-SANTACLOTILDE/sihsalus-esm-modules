@@ -6,4 +6,4 @@ Colección de módulos microfrontend para SIH SALUS, una distribución especiali
 
 ## 🏥 Características Principales
 
-- **SIH SALUS Library**: Componentes UI y servicios comunes optimizados para el flujo de trabajo peruano
+- **Integración DYAKU**: Sincronización de pacientes vía FHIR R4 con el Padrón Nacional
