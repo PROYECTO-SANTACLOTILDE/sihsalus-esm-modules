@@ -1343,7 +1343,7 @@ Cuando encuentres un problema, sigue este checklist:
 ### Documentación Específica SIH SALUS
 
 - **DYAKU Integration**: Documentación de integración con Padrón Nacional
-- **FUA Module**: Formato Único de Atención - workflows y validaciones
+- **FUA Module**: Formato Único de Atención y HIS MINSA - workflows y validaciones
 - **MINSA Reports**: Reportes automatizados según directrices MINSA
 - **Maternal Health**: Flujos específicos de atención materno-infantil
 

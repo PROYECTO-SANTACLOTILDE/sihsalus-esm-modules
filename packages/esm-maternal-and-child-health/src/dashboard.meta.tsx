@@ -77,15 +77,6 @@ export const caseEncounterDashboardMeta = {
   config: {},
 };
 
-export const FuaRequestDashboardMeta = {
-  name: 'fua-request',
-  slot: 'fua-request-dashboard-slot',
-  title: 'Imprimir FUAs',
-  path: 'fua-request',
-  columns: 1,
-  config: {},
-};
-
 export const socialHistoryDashboardMeta = {
   icon: 'omrs-icon-sticky-note-add',
   slot: 'patient-chart-social-history-dashboard-slot',

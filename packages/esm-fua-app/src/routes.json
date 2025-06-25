@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.openmrs.org/routes.schema.json",
+  "backendDependencies": {
+    "fhir2": ">=1.2",
+    "webservices.rest": "^2.24.0"
+  },
+  "extensions": [
+    {
+      "name": "fua-request-dashboard-link",
+      "component": "fuaRequestDashboardLink",
+      "slot": "homepage-dashboard-slot",
+      "meta": {
+        "name": "fua-request",
+        "title": "Manejo de FUA",
+        "slot": "fua-request-dashboard-slot",
+        "path": "/fua-request"
+      }
+    },
+    {
+      "name": "fua-request-table",
+      "slot": "fua-request-dashboard-slot",
+      "component": "fuaRequestTable",
+      "order": 0,
+      "online": true,
+      "offline": false
+    }
+  ]
+}

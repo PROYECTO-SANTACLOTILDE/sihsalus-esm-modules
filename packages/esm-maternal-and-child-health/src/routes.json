@@ -94,25 +94,6 @@
       "offline": false
     },
     {
-      "name": "fua-request-dashboard-link",
-      "component": "fuaRequestDashboardLink",
-      "slot": "homepage-dashboard-slot",
-      "meta": {
-        "name": "fua-request",
-        "title": "Manejo de FUA",
-        "slot": "fua-request-dashboard-slot",
-        "path": "/fua-request"
-      }
-    },
-    {
-      "name": "fua-request-table",
-      "slot": "fua-request-dashboard-slot",
-      "component": "fuaRequestTable",
-      "order": 0,
-      "online": true,
-      "offline": false
-    },
-    {
       "name": "labour-and-delivery-dashboard",
       "slot": "patient-chart-labour-and-delivery-dashboard-slot",
       "component": "labourAndDelivery"

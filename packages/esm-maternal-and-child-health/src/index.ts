@@ -15,7 +15,6 @@ import {
   caseManagementDashboardMeta,
   contactListDashboardMeta,
   familyHistoryDashboardMeta,
-  FuaRequestDashboardMeta,
   otherRelationshipsDashboardMeta,
   relationshipsDashboardMeta,
   socialHistoryDashboardMeta,
@@ -46,11 +45,6 @@ import ContactListForm from './contact-list/contact-list.workspace';
 // ================================================================================
 import FamilyHistory from './family-partner-history/family-history.component';
 import FamilyRelationshipForm from './family-partner-history/family-relationship.workspace';
-
-// ================================================================================
-// FUA REQUEST DOMAIN
-// ================================================================================
-import FuaRequestTable from './fua/fuaRequestTable';
 
 // ================================================================================
 // MATERNAL AND CHILD HEALTH DOMAIN
@@ -220,12 +214,6 @@ export const familyHistoryLink = getSyncLifecycle(
   options,
 );
 export const familyRelationshipForm = getSyncLifecycle(FamilyRelationshipForm, options);
-
-// ================================================================================
-// FUA REQUEST EXPORTS
-// ================================================================================
-export const fuaRequestDashboardLink = getSyncLifecycle(createLeftPanelLink(FuaRequestDashboardMeta), options);
-export const fuaRequestTable = getSyncLifecycle(FuaRequestTable, options);
 
 // ================================================================================
 // MATERNAL AND CHILD HEALTH EXPORTS
