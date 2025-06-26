@@ -3741,9 +3741,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pucp-gidis-hiisc/esm-maternal-and-child-health@workspace:packages/esm-maternal-and-child-health":
+"@pucp-gidis-hiisc/esm-maternal-and-child-health-app@workspace:packages/esm-maternal-and-child-health":
   version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-maternal-and-child-health@workspace:packages/esm-maternal-and-child-health"
+  resolution: "@pucp-gidis-hiisc/esm-maternal-and-child-health-app@workspace:packages/esm-maternal-and-child-health"
   dependencies:
     "@carbon/charts": "npm:^1.23.7"
     "@carbon/charts-react": "npm:^1.23.7"
@@ -3772,9 +3772,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pucp-gidis-hiisc/esm-patient-registration-app@workspace:packages/esm-patient-register-app":
+"@pucp-gidis-hiisc/esm-patient-register-app@workspace:packages/esm-patient-register-app":
   version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-patient-registration-app@workspace:packages/esm-patient-register-app"
+  resolution: "@pucp-gidis-hiisc/esm-patient-register-app@workspace:packages/esm-patient-register-app"
   dependencies:
     "@carbon/react": "npm:^1.83.0"
     classnames: "npm:^2.3.2"

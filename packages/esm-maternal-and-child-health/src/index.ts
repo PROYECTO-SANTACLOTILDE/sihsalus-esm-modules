@@ -89,20 +89,9 @@ import { AdverseReactionForm } from './well-child-care/workspace/adverse-reactio
 import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.component';
 
 // ================================================================================
-// SOCIAL HISTORY DOMAIN
-// ================================================================================
-
-// TEPSI FORM
-
-// ODONTOGRAM
-// import Odontogram from './ui/workspace/odontogram/odontogram.component';
-
-// ================================================================================
-// EXPORTS SETUP
-// ================================================================================
 export const importTranslation = require.context('../translations', false, /.json$/, 'lazy');
 
-const moduleName = '@pucp-gidis-hiisc/esm-sihsalus-app';
+const moduleName = '@pucp-gidis-hiisc/esm-maternal-and-child-health-app';
 const options = {
   featureName: 'patient-clinical-view-app',
   moduleName,

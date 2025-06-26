@@ -3,7 +3,7 @@ export const prenatalDashboardMeta = {
   slot: 'patient-chart-prenatal-dashboard-slot',
   title: 'Cuidados Prenatales',
   path: 'prenatal-care-dashboard',
-  moduleName: '@pucp-gidis-hiisc/esm-sihsalus-app',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
 };
 
@@ -12,7 +12,7 @@ export const labourAndDeliveryDashboardMeta = {
   slot: 'patient-chart-labour-and-delivery-dashboard-slot',
   title: 'Atención del Parto',
   path: 'labour-and-delivery-dashboard',
-  moduleName: '@pucp-gidis-hiisc/esm-sihsalus-app',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
 };
 
@@ -21,7 +21,7 @@ export const postnatalDashboardMeta = {
   slot: 'patient-chart-postnatal-dashboard-slot',
   title: 'Puerperio',
   path: 'postnatal-care-dashboard',
-  moduleName: '@pucp-gidis-hiisc/esm-sihsalus-app',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
 };
 

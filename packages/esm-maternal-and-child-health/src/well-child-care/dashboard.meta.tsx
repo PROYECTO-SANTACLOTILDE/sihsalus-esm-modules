@@ -3,7 +3,7 @@ export const neonatalCareDashboardMeta = {
   slot: 'patient-chart-neonatal-care-slot',
   title: 'Curso de Vida del Niño',
   path: 'neonatal-care-dashboard',
-  moduleName: '@pucp-gidis-hiisc/esm-sihsalus-app',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
 };
 
@@ -12,7 +12,7 @@ export const wellChildControlDashboardMeta = {
   slot: 'patient-chart-well-child-care-slot',
   title: 'Control de Niño Sano',
   path: 'well-child-care-dashboard',
-  moduleName: '@pucp-gidis-hiisc/esm-sihsalus-app',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
 };
 
@@ -21,7 +21,7 @@ export const childImmunizationScheduleDashboardMeta = {
   slot: 'patient-chart-child-immunization-schedule-slot',
   title: 'Esquema de Vacunación Infantil',
   path: 'child-immunization-schedule-dashboard',
-  moduleName: '@pucp-gidis-hiisc/esm-sihsalus-app',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
 };
 
