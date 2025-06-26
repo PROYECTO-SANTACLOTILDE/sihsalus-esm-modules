@@ -41,15 +41,6 @@ export const contactListDashboardMeta = {
   config: {},
 };
 
-export const otherRelationshipsDashboardMeta = {
-  icon: 'other-relationships',
-  slot: 'patient-chart-relationships-slot',
-  columns: 1,
-  title: 'Other Relationships',
-  path: 'other-relationships',
-  config: {},
-};
-
 export const relationshipsDashboardMeta = {
   icon: 'omrs-icon-pedestrian-family',
   slot: 'patient-chart-relationships-slot',

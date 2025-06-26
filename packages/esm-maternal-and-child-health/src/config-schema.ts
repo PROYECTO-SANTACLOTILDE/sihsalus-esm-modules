@@ -161,52 +161,6 @@ export const configSchema = {
     },
   },
 
-  // 3. CASE MANAGEMENT
-  caseManagementForms: {
-    _type: Type.Array,
-    _description: 'List of form and encounter UUIDs',
-    _default: [
-      {
-        id: 'high-iit-intervention',
-        title: 'High IIT Intervention Form',
-        formUuid: '6817d322-f938-4f38-8ccf-caa6fa7a499f',
-        encounterTypeUuid: '7a8b9c0d-7234-5678-9101-abcdefghij27',
-      },
-      {
-        id: 'home-visit-checklist',
-        title: 'Home Visit Checklist Form',
-        formUuid: 'ac3152de-1728-4786-828a-7fb4db0fc384',
-        encounterTypeUuid: '5o6p7q8r-5234-5678-9101-abcdefghij15',
-      },
-    ],
-  },
-
-  // 4. SPECIAL CLINICS
-  specialClinics: {
-    _type: Type.Array,
-    _description: 'List of special clinics',
-    _default: [
-      {
-        id: 'dental-clinic',
-        title: 'Atención de Odontología',
-        formUuid: '4x5y6z7a-4234-5678-9101-abcdefghij24',
-        encounterTypeUuid: '4x5y6z7a-4234-5678-9101-abcdefghij24',
-      },
-      {
-        id: 'psicologia-clinic',
-        title: 'Psicologia',
-        formUuid: '32e43fc9-6de3-48e3-aafe-3b92f167753d',
-        encounterTypeUuid: '9i0j1k2l-9234-5678-9101-abcdefghij09',
-      },
-      {
-        id: 'physiotherapy-clinic',
-        title: 'Terapia Fisica',
-        formUuid: 'fdada8da-75fe-44c6-93e1-782d41e5565b',
-        encounterTypeUuid: '465a92f2-baf8-42e9-9612-53064be868e8',
-      },
-    ],
-  },
-
   // 5. VITALS CONFIGURATION
   vitals: {
     useFormEngine: {
@@ -680,47 +634,6 @@ export const configSchema = {
     },
   },
 
-  // 11. RELATIONSHIPS CONFIGURATION
-  familyRelationshipsTypeList: {
-    _type: Type.Array,
-    _description: 'Lista de relaciones familiares (used to list contacts)',
-    _default: [
-      { uuid: '8d91a210-c2cc-11de-8d13-0010c6dffdff', display: 'Madre' },
-      { uuid: '8d91a210-c2cc-11de-8d13-0010c6dffd0f', display: 'Padre' },
-      { uuid: '8d91a01c-c2cc-11de-8d13-0010c6dffd0f', display: 'Hermano' },
-      { uuid: '5c2f978d-3b7d-493c-9e8f-cb3d1c0b6a55', display: 'Abuelo' },
-      { uuid: '8d91a3dc-c2cc-11de-8d13-0010c6dffd0f', display: 'Tío' },
-      { uuid: '8d91a3dc-c2cc-11de-8d13-0010c6dffd00', display: 'Sobrino' },
-    ],
-  },
-
-  pnsRelationships: {
-    _type: Type.Array,
-    _description: 'List of Partner relationships (PNS - Partner Notification Service)',
-    _default: [
-      { uuid: '6b1c5e8f-32f7-41b3-bc2a-8b3e97a6d937', display: 'Esposo', sexual: true },
-      { uuid: '1e3f4a5b-6789-4cde-9101-abcdef123457', display: 'Pareja', sexual: true },
-      { uuid: 'a2b5c9f8-0d2a-4bdf-8d9b-6f3b2d1e5a2f', display: 'Otro' }, //change for otro tipo de contacto sexual
-    ],
-  },
-
-  otherRelationships: {
-    _type: Type.Array,
-    _description: 'List of other relationships',
-    _default: [
-      { uuid: '', display: 'Tutor' },
-      { uuid: '057de23f-3d9c-4314-9391-4452970739c6', display: 'Apoderado' },
-      { uuid: 'a2b5c9f8-0d2a-4bdf-8d9b-6f3b2d1e5a2f', display: 'Otro' },
-    ],
-  },
-
-  // 12. SYSTEM IDENTIFIERS
-  defaulterTracingEncounterUuid: {
-    _type: Type.String,
-    _description: 'Encounter UUID for defaulter tracing',
-    _default: '1495edf8-2df2-11e9-b210-d663bd873d93',
-  },
-
   clinicalEncounterUuid: {
     _type: Type.String,
     _description: 'Clinical Encounter UUID',
@@ -1025,12 +938,6 @@ export interface ConfigObject {
   biometrics: BiometricsConfigObject;
   madreGestante: Record<string, string>;
   CRED: Record<string, string>;
-  caseManagementForms: Array<{
-    id: string;
-    title: string;
-    formUuid: string;
-    encounterTypeUuid: string;
-  }>;
   formsList: {
     prenatal: string;
     postnatal: string;
@@ -1085,15 +992,8 @@ export interface ConfigObject {
     puerperiumDischarge: string;
     clinicalHistory: string;
   };
-  defaulterTracingEncounterUuid: string;
   clinicalEncounterUuid: string;
   concepts: Record<string, string>;
-  specialClinics: Array<{
-    id: string;
-    formUuid: string;
-    encounterTypeUuid: string;
-    title: string;
-  }>;
   registrationEncounterUuid: string;
   registrationObs: {
     encounterTypeUuid: string | null;
@@ -1114,19 +1014,6 @@ export interface ConfigObject {
     livingWithContact: string;
     contactipvOutcome: string;
   };
-  familyRelationshipsTypeList: Array<{
-    uuid: string;
-    display: string;
-  }>;
   CREDFormsByAgeGroup;
-  pnsRelationships: Array<{
-    uuid: string;
-    display: string;
-    sexual: boolean;
-  }>;
-  otherRelationships: Array<{
-    uuid: string;
-    display: string;
-  }>;
   ageGroupsCRED: AgeRange[];
 }

@@ -9,7 +9,6 @@ import { createDashboardGroup } from './clinical-view-group/createDashboardGroup
 
 // Configuration and Schema
 import { configSchema } from './config-schema';
-import { otherRelationshipsDashboardMeta, socialHistoryDashboardMeta } from './dashboard.meta';
 
 // ================================================================================
 // CLINICAL ENCOUNTERS DOMAIN
@@ -167,14 +166,6 @@ export const maternalHistoryTable = getSyncLifecycle(MaternalHistoryTable, optio
 export const prenatalCareChart = getSyncLifecycle(PrenatalCareChart, options);
 
 // ================================================================================
-// OTHER RELATIONSHIPS EXPORTS
-// ================================================================================
-export const otherRelationshipsLink = getSyncLifecycle(
-  createDashboardLink({ ...otherRelationshipsDashboardMeta, moduleName }),
-  options,
-);
-
-// ================================================================================
 // WELL CHILD CARE EXPORTS
 // ================================================================================
 export const wellChildCareSideNavGroup = getSyncLifecycle(createDashboardGroup(wellChildCareNavGroup), options);
@@ -273,15 +264,6 @@ export const conditionFilterDeleteConfirmationDialog = getAsyncLifecycle(
 // ================================================================================
 export const genericConditionsOverview = getAsyncLifecycle(
   () => import('./ui/conditions-filter/generic-conditions-overview.component'),
-  options,
-);
-
-// ================================================================================
-// SOCIAL HISTORY EXPORTS
-// ================================================================================
-
-export const socialHistoryDashboardLink = getSyncLifecycle(
-  createDashboardLink({ ...socialHistoryDashboardMeta, moduleName }),
   options,
 );
 
