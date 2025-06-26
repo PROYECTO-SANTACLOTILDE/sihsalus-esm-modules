@@ -3772,9 +3772,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pucp-gidis-hiisc/esm-patient-register-app@workspace:packages/esm-patient-register-app":
+"@pucp-gidis-hiisc/esm-patient-registration-app@workspace:packages/esm-patient-registration-app":
   version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-patient-register-app@workspace:packages/esm-patient-register-app"
+  resolution: "@pucp-gidis-hiisc/esm-patient-registration-app@workspace:packages/esm-patient-registration-app"
   dependencies:
     "@carbon/react": "npm:^1.83.0"
     classnames: "npm:^2.3.2"
