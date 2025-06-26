@@ -4,14 +4,7 @@
     "fhir2": ">=1.2",
     "webservices.rest": "^2.24.0"
   },
-  "pages": [
-    {
-      "component": "schedulingBuilder",
-      "route": "vaccine-scheduling-builder",
-      "online": true,
-      "offline": true
-    }
-  ],
+  "pages": [],
   "extensions": [
     {
       "name": "clinical-view-section",
@@ -34,61 +27,9 @@
       "offline": true
     },
     {
-      "name": "case-encounter-link",
-      "component": "caseEncounterDashboardLink",
-      "slot": "patient-chart-dashboard-slot",
-      "order": 14,
-      "meta": {
-        "columns": 1,
-        "columnSpan": 1,
-        "slot": "patient-chart-case-encounter-slot",
-        "path": "case-management-encounters",
-        "layoutMode": "anchored"
-      }
-    },
-    {
-      "name": "case-encounter-table",
-      "slot": "patient-chart-case-encounter-slot",
-      "component": "caseEncounterTable",
-      "order": 0,
-      "online": true,
-      "offline": false
-    },
-    {
-      "name": "case-management-dashboard-link",
-      "component": "caseManagementDashboardLink",
-      "slot": "homepage-dashboard-slot",
-      "meta": {
-        "name": "case-management",
-        "title": "Seguimiento de Pacientes",
-        "slot": "case-management-dashboard-slot",
-        "path": "/case-management"
-      }
-    },
-    {
-      "name": "wrap-component-view",
-      "slot": "case-management-dashboard-slot",
-      "component": "wrapComponent",
-      "order": 2,
-      "online": true,
-      "offline": false
-    },
-    {
       "name": "clinical-encounter",
       "slot": "patient-chart-clinical-encounter-slot",
       "component": "inPatientClinicalEncounter",
-      "order": 0,
-      "online": true,
-      "offline": false
-    },
-    {
-      "name": "contact-list-form",
-      "component": "contactListForm"
-    },
-    {
-      "name": "family-history",
-      "slot": "patient-chart-family-history-slot",
-      "component": "familyHistory",
       "order": 0,
       "online": true,
       "offline": false
@@ -159,14 +100,6 @@
       "meta": {
         "fullWidth": true
       }
-    },
-    {
-      "name": "other-relationships",
-      "slot": "patient-chart-family-history-slot",
-      "component": "otherRelationships",
-      "order": 0,
-      "online": true,
-      "offline": false
     },
     {
       "name": "postnatal-care-dashboard",
@@ -246,94 +179,6 @@
       "meta": {
         "fullWidth": true
       }
-    },
-    {
-      "name": "relationships",
-      "slot": "patient-chart-relationships-slot",
-      "component": "relationships",
-      "order": 0,
-      "online": true,
-      "offline": false
-    },
-    {
-      "name": "relationships-link",
-      "component": "relationshipsLink",
-      "slot": "patient-chart-dashboard-slot",
-      "order": 15,
-      "meta": {
-        "columns": 1,
-        "columnSpan": 1,
-        "slot": "patient-chart-relationships-slot",
-        "path": "relationships",
-        "layoutMode": "anchored"
-      }
-    },
-    {
-      "name": "defaulter-tracing-dashboard",
-      "slot": "patient-chart-defaulter-tracing-dashboard-slot",
-      "component": "defaulterTracing",
-      "order": 3,
-      "online": true,
-      "offline": false
-    },
-    {
-      "name": "defaulter-tracing-dashboard-link",
-      "component": "defaulterTracingLink",
-      "slot": "hiv-care-and-treatment-slot",
-      "meta": {
-        "columns": 1,
-        "columnSpan": 1,
-        "slot": "patient-chart-defaulter-tracing-dashboard-slot",
-        "path": "defaulter-tracing-dashboard",
-        "layoutMode": "anchored"
-      }
-    },
-    {
-      "name": "genericNavLinks",
-      "slot": "special-clinics-slot",
-      "component": "genericNavLinks",
-      "meta": {
-        "columns": 1,
-        "columnSpan": 1,
-        "slot": "patient-chart-special-clinic-dashboard-slot",
-        "path": "special-clinics-dashboard",
-        "layoutMode": "anchored"
-      }
-    },
-    {
-      "name": "hiv-care-and-treatment-dashboard-group-link",
-      "slot": "special-clinics-slot",
-      "component": "hivCareAndTreatMentSideNavGroup"
-    },
-    {
-      "name": "hts-clinical-view",
-      "slot": "patient-chart-hts-dashboard-slot",
-      "component": "htsClinicalView",
-      "order": 2,
-      "online": true,
-      "offline": false
-    },
-    {
-      "name": "hts-dashboard-link",
-      "component": "htsDashboardLink",
-      "slot": "hiv-care-and-treatment-slot",
-      "meta": {
-        "columns": 1,
-        "columnSpan": 1,
-        "slot": "patient-chart-hts-dashboard-slot",
-        "path": "hts-dashboard",
-        "layoutMode": "anchored"
-      }
-    },
-    {
-      "name": "patient-chart-special-clinic-dashboard-slot",
-      "slot": "patient-chart-special-clinic-dashboard-slot",
-      "component": "genericDashboard"
-    },
-    {
-      "name": "special-clinics-dashboard-group-link",
-      "component": "specialClinicsSideNavGroup",
-      "slot": "clinical-view-section"
     },
     {
       "name": "child-immunization-schedule",
@@ -435,14 +280,6 @@
     {
       "name": "prenatal-antecedents-history",
       "component": "childMedicalHistory",
-      "slot": "neonatal-perinatal-slot",
-      "meta": {
-        "fullWidth": true
-      }
-    },
-    {
-      "name": "prenatal-family-history",
-      "component": "familyHistory",
       "slot": "neonatal-perinatal-slot",
       "meta": {
         "fullWidth": true
@@ -564,39 +401,8 @@
       }
     }
   ],
-  "modals": [
-    {
-      "name": "birth-date-calculator",
-      "component": "birthDateCalculator"
-    },
-    {
-      "name": "end-relationship-dialog",
-      "component": "endRelationshipModal"
-    },
-    {
-      "name": "relationship-delete-confirm-dialog",
-      "component": "relationshipDeleteConfirmialog"
-    }
-  ],
+  "modals": [],
   "workspaces": [
-    {
-      "name": "case-management-form",
-      "component": "caseManagementForm",
-      "title": "Formulario de Seguimiento de Pacientes",
-      "type": "form"
-    },
-    {
-      "name": "end-relationship-form",
-      "component": "endRelationshipWorkspace",
-      "title": "Discontinue relationship form",
-      "type": "form"
-    },
-    {
-      "name": "family-relationship-form",
-      "component": "familyRelationshipForm",
-      "title": "Family Relationship Form",
-      "type": "form"
-    },
     {
       "name": "newborn-anthropometric-form",
       "component": "newbornAnthropometricsworkspace",
@@ -610,21 +416,9 @@
       "type": "form"
     },
     {
-      "name": "other-relationship-form",
-      "component": "otherRelationshipsForm",
-      "title": "Other Relationships Form",
-      "type": "form"
-    },
-    {
       "name": "perinatal-register-form",
       "component": "perinatalRegisterworkspace",
       "title": "Carnet Materno Perinatal",
-      "type": "form"
-    },
-    {
-      "name": "relationship-update-form",
-      "component": "relationshipUpdateForm",
-      "title": "Relationship Update Form",
       "type": "form"
     },
     {
