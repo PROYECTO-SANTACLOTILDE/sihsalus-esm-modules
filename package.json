@@ -1,6 +1,6 @@
 {
     "name": "@pucp-gidis-hiisc/esm-sihsalus-modules",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "private": true,
     "description": "SIH SALUS ESM Modules - Microfrontends especializados para el contexto de salud peruano basados en OpenMRS 3.x",
     "workspaces": [
