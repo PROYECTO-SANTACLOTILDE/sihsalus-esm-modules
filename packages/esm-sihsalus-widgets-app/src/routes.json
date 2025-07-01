@@ -11,14 +11,6 @@
       "slot": "patient-chart-dashboard-slot"
     },
     {
-      "name": "growth-chart-overview-widget",
-      "component": "growthChart",
-      "slot": "patient-chart-summary-dashboard-slot",
-      "meta": {
-        "fullWidth": false
-      }
-    },
-    {
       "name": "case-encounter-link",
       "component": "caseEncounterDashboardLink",
       "slot": "patient-chart-dashboard-slot",
@@ -79,30 +71,12 @@
       "offline": false
     },
     {
-      "name": "obstetric-history-chart",
-      "component": "obstetricHistoryChart",
-      "slot": "prenatal-maternal-history-slot",
-      "order": 2,
-      "meta": {
-        "fullWidth": true
-      }
-    },
-    {
       "name": "other-relationships",
       "slot": "patient-chart-family-history-slot",
       "component": "otherRelationships",
       "order": 0,
       "online": true,
       "offline": false
-    },
-    {
-      "name": "alturaUterina-chart",
-      "component": "alturaUterinaChart",
-      "slot": "prenatal-current-pregnancy-slot",
-      "order": 4,
-      "meta": {
-        "fullWidth": true
-      }
     },
     {
       "name": "relationships",
@@ -196,15 +170,6 @@
       "name": "prenatal-family-history",
       "component": "familyHistory",
       "slot": "neonatal-perinatal-slot",
-      "meta": {
-        "fullWidth": true
-      }
-    },
-    {
-      "name": "grow-chart",
-      "component": "growthChart",
-      "slot": "neonatal-vitals-slot",
-      "order": 4,
       "meta": {
         "fullWidth": true
       }
