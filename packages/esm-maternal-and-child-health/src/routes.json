@@ -7,11 +7,6 @@
   "pages": [],
   "extensions": [
     {
-      "name": "clinical-view-section",
-      "component": "clinicalViewPatientDashboard",
-      "slot": "patient-chart-dashboard-slot"
-    },
-    {
       "name": "growth-chart-overview-widget",
       "component": "growthChart",
       "slot": "patient-chart-summary-dashboard-slot",
@@ -25,14 +20,6 @@
       "component": "schedulingAdminPageCardLink",
       "online": true,
       "offline": true
-    },
-    {
-      "name": "clinical-encounter",
-      "slot": "patient-chart-clinical-encounter-slot",
-      "component": "inPatientClinicalEncounter",
-      "order": 0,
-      "online": true,
-      "offline": false
     },
     {
       "name": "labour-and-delivery-dashboard",
@@ -378,27 +365,6 @@
       "meta": {
         "fullWidth": true
       }
-    },
-    {
-      "name": "social-history-dashboard",
-      "slot": "patient-chart-social-history-dashboard-slot",
-      "component": "inPatientClinicalEncounter",
-      "order": 0,
-      "online": true,
-      "offline": false
-    },
-    {
-      "name": "social-history-dashboard-link",
-      "component": "socialHistoryDashboardLink",
-      "slot": "patient-chart-dashboard-slot",
-      "order": 16,
-      "meta": {
-        "columns": 1,
-        "columnSpan": 1,
-        "slot": "patient-chart-social-history-dashboard-slot",
-        "path": "social-history-dashboard",
-        "layoutMode": "anchored"
-      }
     }
   ],
   "modals": [],
@@ -428,21 +394,9 @@
       "type": "form"
     },
     {
-      "name": "conditions-filter-form-workspace",
-      "component": "conditionsFilterWorkspace",
-      "title": "TEST",
-      "type": "form"
-    },
-    {
       "name": "antecedentes-patologicos-form-workspace",
       "component": "antecedentesPatologicosFormWorkspace",
       "title": "Antecedentes Patológicos del Menor",
-      "type": "form"
-    },
-    {
-      "name": "forms-selector-workspace",
-      "component": "formsSelectorWorkspace",
-      "title": "Selección de Formularios",
       "type": "form"
     }
   ]
