@@ -38,15 +38,8 @@ export const AlternativeAddressField = () => {
     if (addressesMatch) {
       return null;
     }
-
-    // Renderizar el componente de dirección alternativa cuando no coinciden
-    return (
-      <div style={{ marginTop: '1rem' }}>
-        <h5 className={styles.productiveHeading02Light}>{t('alternativeAddressHeader', 'Dirección Alternativa')}</h5>
-        <AddressComponent fieldPrefix="alternativeAddress" />
-      </div>
-    );
-  }, [addressesMatch, t]);
+    return <AddressComponent fieldPrefix="alternativeAddress" />;
+  }, [addressesMatch]);
 
   return (
     <div>
