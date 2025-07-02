@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
 import { PersonAttributeField } from '../person-attributes/person-attribute-field.component';
 import { useConfig } from '@openmrs/esm-framework';
+import { useTranslation } from 'react-i18next';
 import { type RegistrationConfig } from '../../../config-schema';
 
 export function ReligiousAffiliationField() {
   const config = useConfig<RegistrationConfig>();
+  const { t } = useTranslation();
 
   const fieldDefinition = useMemo(
     () => ({
@@ -14,9 +16,9 @@ export function ReligiousAffiliationField() {
       answerConceptSetUuid: config.fieldConfigurations.religiousAffiliation.answerConceptSetUuid,
       validation: config.fieldConfigurations.religiousAffiliation.validation,
       showHeading: false,
-      label: 'Religious Affiliation',
+      label: t('religiousAffiliation', 'Religious Affiliation'),
     }),
-    [config.fieldConfigurations.religiousAffiliation],
+    [config.fieldConfigurations.religiousAffiliation, t],
   );
 
   return <PersonAttributeField fieldDefinition={fieldDefinition} useComboBox={true} />;

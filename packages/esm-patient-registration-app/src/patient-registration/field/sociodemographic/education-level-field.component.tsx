@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
 import { PersonAttributeField } from '../person-attributes/person-attribute-field.component';
 import { useConfig } from '@openmrs/esm-framework';
+import { useTranslation } from 'react-i18next';
 import { type RegistrationConfig } from '../../../config-schema';
 
 export function EducationLevelField() {
   const config = useConfig<RegistrationConfig>();
+  const { t } = useTranslation();
 
   const fieldDefinition = useMemo(
     () => ({
@@ -14,9 +16,9 @@ export function EducationLevelField() {
       answerConceptSetUuid: config.fieldConfigurations.educationLevel.answerConceptSetUuid,
       validation: config.fieldConfigurations.educationLevel.validation,
       showHeading: false,
-      label: 'Education Level',
+      label: t('educationLevel', 'Education Level'),
     }),
-    [config.fieldConfigurations.educationLevel],
+    [config.fieldConfigurations.educationLevel, t],
   );
 
   return <PersonAttributeField fieldDefinition={fieldDefinition} useComboBox={true} />;

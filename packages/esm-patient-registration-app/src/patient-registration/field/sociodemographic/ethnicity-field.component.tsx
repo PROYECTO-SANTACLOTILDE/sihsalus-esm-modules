@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
 import { PersonAttributeField } from '../person-attributes/person-attribute-field.component';
 import { useConfig } from '@openmrs/esm-framework';
+import { useTranslation } from 'react-i18next';
 import { type RegistrationConfig } from '../../../config-schema';
 
 export function EthnicityField() {
   const config = useConfig<RegistrationConfig>();
+  const { t } = useTranslation();
 
   const fieldDefinition = useMemo(
     () => ({
@@ -14,9 +16,9 @@ export function EthnicityField() {
       answerConceptSetUuid: config.fieldConfigurations.ethnicity.answerConceptSetUuid,
       validation: config.fieldConfigurations.ethnicity.validation,
       showHeading: false,
-      label: 'Ethnicity',
+      label: t('ethnicity', 'Ethnicity'),
     }),
-    [config.fieldConfigurations.ethnicity],
+    [config.fieldConfigurations.ethnicity, t],
   );
 
   return <PersonAttributeField fieldDefinition={fieldDefinition} useComboBox={true} />;

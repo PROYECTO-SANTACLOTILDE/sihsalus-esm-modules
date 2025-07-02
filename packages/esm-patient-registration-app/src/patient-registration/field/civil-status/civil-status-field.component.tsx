@@ -94,7 +94,7 @@ export function CivilStatusField() {
             marginTop: '0.25rem',
             fontStyle: 'italic',
           }}>
-          {t('autoSelectCivilStatus', 'Automáticamente configurado como "soltero" para menores de edad.')}
+          {t('autoSelectCivilStatus', 'Soltero asignado automáticamente a menores.')}
         </p>
       )}
     </div>

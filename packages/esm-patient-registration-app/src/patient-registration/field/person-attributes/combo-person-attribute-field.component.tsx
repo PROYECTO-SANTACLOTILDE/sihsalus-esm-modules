@@ -91,7 +91,7 @@ export function CodedComboPersonAttributeField({
   }
 
   return (
-    <div className={classNames(styles.customField, styles.halfWidthInDesktopView)}>
+    <div className={classNames(styles.customField, styles.halfWidthInDesktopView)} style={{ marginTop: '1rem' }}>
       <Layer>
         <Field name={fieldName}>
           {({ field, form: { setFieldValue, touched, errors } }) => {
@@ -116,6 +116,23 @@ export function CodedComboPersonAttributeField({
                   }}
                   size="md"
                 />
+
+                {selectedItem && (
+                  <IconButton
+                    kind="ghost"
+                    label={t('clearSelection', 'Clear selection')}
+                    onClick={() => setFieldValue(fieldName, '')}
+                    style={{
+                      position: 'absolute',
+                      top: '32px',
+                      right: '48px',
+                      zIndex: 1,
+                      minHeight: '32px',
+                      width: '32px',
+                    }}>
+                    <Close size={16} />
+                  </IconButton>
+                )}
               </div>
             );
           }}
