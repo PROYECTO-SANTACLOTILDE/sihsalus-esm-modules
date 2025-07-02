@@ -26,7 +26,7 @@ export function CodedComboPersonAttributeField({
   customConceptAnswers,
   required,
 }: CodedComboPersonAttributeFieldProps) {
-  const { data: conceptAnswers, isLoading } = useConceptAnswers(
+  const { data: conceptAnswers, isLoading: isLoadingConceptAnswers } = useConceptAnswers(
     customConceptAnswers.length ? '' : answerConceptSetUuid,
   );
 
@@ -48,7 +48,7 @@ export function CodedComboPersonAttributeField({
   }, [answerConceptSetUuid, customConceptAnswers, id, t]);
 
   useEffect(() => {
-    if (!isLoading && !customConceptAnswers.length) {
+    if (!isLoadingConceptAnswers && !customConceptAnswers.length) {
       if (!conceptAnswers) {
         reportError(
           t(
@@ -62,82 +62,53 @@ export function CodedComboPersonAttributeField({
         setError(true);
       }
     }
-  }, [isLoading, conceptAnswers, customConceptAnswers, t, id, answerConceptSetUuid]);
+  }, [isLoadingConceptAnswers, conceptAnswers, customConceptAnswers, t, id, answerConceptSetUuid]);
 
   const items = useMemo(() => {
     if (error) return [];
 
-    const src =
-      customConceptAnswers.length > 0
-        ? customConceptAnswers.map((a) => ({ id: a.uuid, text: a.label || 'Unknown' }))
-        : (conceptAnswers ?? []).map((a) => ({ id: a.uuid, text: a.display || 'Unknown' }));
-    return src.sort((a, b) => a.text.localeCompare(b.text));
+    return customConceptAnswers.length > 0
+      ? customConceptAnswers.map((a) => ({ id: a.uuid, text: a.label || 'Unknown' }))
+      : (conceptAnswers ?? []).map((a) => ({ id: a.uuid, text: a.display || 'Unknown' }));
   }, [customConceptAnswers, conceptAnswers, error]);
 
   if (error) {
-    return (
-      <div className={classNames(styles.customField, styles.halfWidthInDesktopView)}>
-        <div style={{ color: 'red', padding: '8px' }}>
-          Error: Invalid configuration for {id}. Check console for details.
-        </div>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className={classNames(styles.customField, styles.halfWidthInDesktopView)}>{t('loading', 'Loading…')}</div>
-    );
+    return null;
   }
 
   return (
     <div className={classNames(styles.customField, styles.halfWidthInDesktopView)} style={{ marginTop: '1rem' }}>
-      <Layer>
-        <Field name={fieldName}>
-          {({ field, form: { setFieldValue, touched, errors } }) => {
-            const selectedId = field.value ?? null;
-            const selectedItem = items.find((i) => i.id === selectedId) ?? null;
+      {!isLoadingConceptAnswers ? (
+        <Layer>
+          <Field name={fieldName}>
+            {({ field, form: { setFieldValue, touched, errors } }) => {
+              const selectedId = field.value ?? null;
+              const selectedItem = items.find((i) => i.id === selectedId) ?? null;
 
-            return (
-              <div style={{ position: 'relative' }}>
-                <ComboBox
-                  id={id}
-                  items={items}
-                  selectedItem={selectedItem}
-                  itemToString={(item) => (item ? item.text : '')}
-                  placeholder={t('selectAnOption', 'Select an option')}
-                  titleText={label ?? personAttributeType.display}
-                  invalid={Boolean(errors[fieldName] && touched[fieldName])}
-                  invalidText={errors[fieldName] as string}
-                  onChange={({ selectedItem }) => setFieldValue(fieldName, selectedItem ? selectedItem.id : '')}
-                  shouldFilterItem={({ item, inputValue = '' }) => {
-                    if (!item?.text || !inputValue) return true;
-                    return item.text.toLowerCase().includes(inputValue.toLowerCase());
-                  }}
-                  size="md"
-                />
-
-                {selectedItem && (
-                  <IconButton
-                    kind="ghost"
-                    label={t('clearSelection', 'Clear selection')}
-                    onClick={() => setFieldValue(fieldName, '')}
-                    style={{
-                      position: 'absolute',
-                      top: '32px',
-                      right: '48px',
-                      zIndex: 1,
-                      minHeight: '32px',
-                      width: '32px',
-                    }}>
-                    <Close size={16} />
-                  </IconButton>
-                )}
-              </div>
-            );
-          }}
-        </Field>
-      </Layer>
+              return (
+                <>
+                  <ComboBox
+                    id={id}
+                    items={items}
+                    selectedItem={selectedItem}
+                    itemToString={(item) => (item ? item.text : '')}
+                    placeholder={t('selectAnOption', 'Select an option')}
+                    titleText={label ?? personAttributeType.display}
+                    invalid={Boolean(errors[fieldName] && touched[fieldName])}
+                    invalidText={errors[fieldName] as string}
+                    onChange={({ selectedItem }) => setFieldValue(fieldName, selectedItem ? selectedItem.id : '')}
+                    shouldFilterItem={({ item, inputValue = '' }) => {
+                      if (!item?.text || !inputValue) return true;
+                      return item.text.toLowerCase().includes(inputValue.toLowerCase());
+                    }}
+                    size="md"
+                  />
+                </>
+              );
+            }}
+          </Field>
+        </Layer>
+      ) : null}
     </div>
   );
 }
