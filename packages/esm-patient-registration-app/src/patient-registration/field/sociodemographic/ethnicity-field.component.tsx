@@ -19,5 +19,5 @@ export function EthnicityField() {
     [config.fieldConfigurations.ethnicity],
   );
 
-  return <PersonAttributeField fieldDefinition={fieldDefinition} />;
+  return <PersonAttributeField fieldDefinition={fieldDefinition} useComboBox={true} />;
 }

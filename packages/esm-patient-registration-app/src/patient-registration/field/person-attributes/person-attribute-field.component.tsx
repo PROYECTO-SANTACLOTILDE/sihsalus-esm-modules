@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { InlineNotification, TextInputSkeleton } from '@carbon/react';
 import { type FieldDefinition } from '../../../config-schema';
 import { CodedPersonAttributeField } from './coded-person-attribute-field.component';
+import { CodedComboPersonAttributeField } from './combo-person-attribute-field.component';
 import { usePersonAttributeType } from './person-attributes.resource';
 import { TextPersonAttributeField } from './text-person-attribute-field.component';
 import { useTranslation } from 'react-i18next';
@@ -10,9 +11,10 @@ import { LocationPersonAttributeField } from './location-person-attribute-field.
 
 export interface PersonAttributeFieldProps {
   fieldDefinition: FieldDefinition;
+  useComboBox?: boolean; // Nueva prop para alternar entre componentes
 }
 
-export function PersonAttributeField({ fieldDefinition }: PersonAttributeFieldProps) {
+export function PersonAttributeField({ fieldDefinition, useComboBox = false }: PersonAttributeFieldProps) {
   const { data: personAttributeType, isLoading, error } = usePersonAttributeType(fieldDefinition.uuid);
   const { t } = useTranslation();
 
@@ -33,7 +35,16 @@ export function PersonAttributeField({ fieldDefinition }: PersonAttributeFieldPr
           />
         );
       case 'org.openmrs.Concept':
-        return (
+        return useComboBox ? (
+          <CodedComboPersonAttributeField
+            personAttributeType={personAttributeType}
+            answerConceptSetUuid={fieldDefinition.answerConceptSetUuid}
+            label={fieldDefinition.label}
+            id={fieldDefinition?.id}
+            customConceptAnswers={fieldDefinition.customConceptAnswers ?? []}
+            required={fieldDefinition.validation?.required ?? false}
+          />
+        ) : (
           <CodedPersonAttributeField
             personAttributeType={personAttributeType}
             answerConceptSetUuid={fieldDefinition.answerConceptSetUuid}
@@ -66,7 +77,7 @@ export function PersonAttributeField({ fieldDefinition }: PersonAttributeFieldPr
           </InlineNotification>
         );
     }
-  }, [personAttributeType, fieldDefinition, t]);
+  }, [personAttributeType, fieldDefinition, t, useComboBox]);
 
   if (isLoading) {
     return (

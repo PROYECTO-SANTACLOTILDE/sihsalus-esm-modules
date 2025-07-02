@@ -19,5 +19,5 @@ export function EducationLevelField() {
     [config.fieldConfigurations.educationLevel],
   );
 
-  return <PersonAttributeField fieldDefinition={fieldDefinition} />;
+  return <PersonAttributeField fieldDefinition={fieldDefinition} useComboBox={true} />;
 }

@@ -19,5 +19,5 @@ export function ReligiousAffiliationField() {
     [config.fieldConfigurations.religiousAffiliation],
   );
 
-  return <PersonAttributeField fieldDefinition={fieldDefinition} />;
+  return <PersonAttributeField fieldDefinition={fieldDefinition} useComboBox={true} />;
 }
