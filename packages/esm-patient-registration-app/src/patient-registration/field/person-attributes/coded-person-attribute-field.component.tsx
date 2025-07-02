@@ -100,7 +100,11 @@ export function CodedPersonAttributeField({
                   <Select
                     id={id}
                     name={`person-attribute-${personAttributeType.uuid}`}
-                    labelText={label ?? personAttributeType?.display}
+                    labelText={
+                      required
+                        ? (label ?? personAttributeType?.display)
+                        : `${label ?? personAttributeType?.display} (${t('optional', 'opcional')})`
+                    }
                     invalid={errors[fieldName] && touched[fieldName]}
                     required={required}
                     {...field}>

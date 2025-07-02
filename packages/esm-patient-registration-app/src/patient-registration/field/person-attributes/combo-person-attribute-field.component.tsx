@@ -93,7 +93,11 @@ export function CodedComboPersonAttributeField({
                     selectedItem={selectedItem}
                     itemToString={(item) => (item ? item.text : '')}
                     placeholder={t('selectAnOption', 'Select an option')}
-                    titleText={label ?? personAttributeType.display}
+                    titleText={
+                      required
+                        ? (label ?? personAttributeType.display)
+                        : `${label ?? personAttributeType.display} (${t('optional', 'opcional')})`
+                    }
                     invalid={Boolean(errors[fieldName] && touched[fieldName])}
                     invalidText={errors[fieldName] as string}
                     onChange={({ selectedItem }) => setFieldValue(fieldName, selectedItem ? selectedItem.id : '')}
