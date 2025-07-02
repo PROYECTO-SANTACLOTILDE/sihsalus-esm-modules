@@ -9,7 +9,7 @@ import { useConceptAnswers } from '../field.resource';
 import styles from './../field.scss';
 import type { PersonAttributeTypeResponse } from '../../patient-registration.types';
 
-export interface CodedPersonAttributeFieldProps {
+export interface CodedComboPersonAttributeFieldProps {
   id: string;
   personAttributeType: PersonAttributeTypeResponse;
   answerConceptSetUuid: string;
@@ -18,14 +18,14 @@ export interface CodedPersonAttributeFieldProps {
   required: boolean;
 }
 
-export function CodedPersonAttributeField({
+export function CodedComboPersonAttributeField({
   id,
   personAttributeType,
   answerConceptSetUuid,
   label,
   customConceptAnswers,
   required,
-}: CodedPersonAttributeFieldProps) {
+}: CodedComboPersonAttributeFieldProps) {
   const { data: conceptAnswers, isLoading } = useConceptAnswers(
     customConceptAnswers.length ? '' : answerConceptSetUuid,
   );
@@ -34,7 +34,6 @@ export function CodedPersonAttributeField({
   const fieldName = `attributes.${personAttributeType.uuid}`;
   const [error, setError] = useState(false);
 
-  /* --- validaciones de configuración --- */
   useEffect(() => {
     if (!answerConceptSetUuid && !customConceptAnswers.length) {
       reportError(
@@ -65,7 +64,6 @@ export function CodedPersonAttributeField({
     }
   }, [isLoading, conceptAnswers, customConceptAnswers, t, id, answerConceptSetUuid]);
 
-  /* --- opciones --- */
   const items = useMemo(() => {
     if (error) return [];
 
@@ -97,9 +95,7 @@ export function CodedPersonAttributeField({
       <Layer>
         <Field name={fieldName}>
           {({ field, form: { setFieldValue, touched, errors } }) => {
-            /* id actual almacenado en Formik */
             const selectedId = field.value ?? null;
-            /* objeto que Carbon necesita */
             const selectedItem = items.find((i) => i.id === selectedId) ?? null;
 
             return (
