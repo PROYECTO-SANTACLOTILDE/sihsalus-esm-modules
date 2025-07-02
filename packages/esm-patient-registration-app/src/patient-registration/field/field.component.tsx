@@ -18,6 +18,8 @@ import { SocialSecurityField } from './social-security/social-security-field.com
 import { EthnicityField } from './sociodemographic/ethnicity-field.component';
 import { ReligiousAffiliationField } from './sociodemographic/religious-affiliation-field.component';
 import { EducationLevelField } from './sociodemographic/education-level-field.component';
+import { BloodTypeField } from './sociodemographic/blood-type-field.component';
+import { OccupationField } from './sociodemographic/occupation-field.component';
 
 export interface FieldProps {
   name: string;
@@ -71,6 +73,10 @@ export function Field({ name }: FieldProps) {
       return <ReligiousAffiliationField />;
     case 'educationLevel':
       return <EducationLevelField />;
+    case 'bloodType':
+      return <BloodTypeField />;
+    case 'occupation':
+      return <OccupationField />;
     default:
       return <CustomField name={name} />;
   }

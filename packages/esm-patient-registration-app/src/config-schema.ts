@@ -138,6 +138,21 @@ export interface RegistrationConfig {
         matches?: string;
       };
     };
+    bloodType: {
+      personAttributeUuid: string;
+      answerConceptSetUuid: string;
+      validation?: {
+        required: boolean;
+      };
+    };
+    occupation: {
+      personAttributeUuid: string;
+      validation?: {
+        required: boolean;
+        matches?: string;
+        invalidText?: string;
+      };
+    };
   };
   links: {
     submitButton: string;
@@ -158,7 +173,18 @@ export const builtInSections: Array<SectionDefinition> = [
   {
     id: 'demographics',
     name: 'Basic Info',
-    fields: ['id', 'name', 'gender', 'dob', 'civilStatus', 'educationLevel', 'ethnicity', 'religiousAffiliation'],
+    fields: [
+      'id',
+      'name',
+      'gender',
+      'dob',
+      'civilStatus',
+      'educationLevel',
+      'ethnicity',
+      'religiousAffiliation',
+      'bloodType',
+      'occupation',
+    ],
   },
   { id: 'contact', name: 'Contact Details', fields: ['phone', 'mobile', 'email'] },
   { id: 'insurance', name: 'Detalles del Financiador', fields: ['socialSecurity'] },
@@ -185,6 +211,8 @@ export const builtInFields = [
   'ethnicity',
   'religiousAffiliation',
   'educationLevel',
+  'bloodType',
+  'occupation',
 ] as const;
 
 export const esmPatientRegistrationSchema = {
@@ -405,7 +433,7 @@ export const esmPatientRegistrationSchema = {
           _type: Type.Boolean,
           _description:
             "Whether to fill the addresses by levels, i.e. County => subCounty, the current field is dependent on it's previous field.",
-          _default: false,
+          _default: true,
         },
         useAddressHierarchyLabel: {
           _type: Type.Object,
@@ -617,6 +645,41 @@ export const esmPatientRegistrationSchema = {
           _type: Type.String,
           _default: '',
           _description: 'Optional RegEx for testing the validity of the input.',
+        },
+      },
+    },
+    bloodType: {
+      personAttributeUuid: {
+        _type: Type.UUID,
+        _default: 'b4c7d8e9-f0a1-4b2c-8d3e-5f6789abcdef',
+        _description: 'The UUID of the blood type person attribute type',
+      },
+      answerConceptSetUuid: {
+        _type: Type.ConceptUuid,
+        _default: '3f6056ed-17e9-4b3b-98a7-18dc431a7e99',
+        _description: 'The concept set UUID for blood type options',
+      },
+      validation: {
+        required: { _type: Type.Boolean, _default: false },
+      },
+    },
+    occupation: {
+      personAttributeUuid: {
+        _type: Type.UUID,
+        _default: '8d871afc-c2cc-11de-8d13-0010c6dffd0f',
+        _description: 'The UUID of the occupation person attribute type',
+      },
+      validation: {
+        required: { _type: Type.Boolean, _default: false },
+        matches: {
+          _type: Type.String,
+          _default: '',
+          _description: 'Optional RegEx for testing the validity of the input.',
+        },
+        invalidText: {
+          _type: Type.String,
+          _default: 'Ingrese una ocupación válida.',
+          _description: 'Mensaje personalizado cuando la validación de ocupación falla.',
         },
       },
     },
