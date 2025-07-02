@@ -116,23 +116,6 @@ export function CodedComboPersonAttributeField({
                   }}
                   size="md"
                 />
-
-                {selectedItem && (
-                  <IconButton
-                    kind="ghost"
-                    label={t('clearSelection', 'Clear selection')}
-                    onClick={() => setFieldValue(fieldName, '')}
-                    style={{
-                      position: 'absolute',
-                      top: '32px',
-                      right: '48px',
-                      zIndex: 1,
-                      minHeight: '32px',
-                      width: '32px',
-                    }}>
-                    <Close size={16} />
-                  </IconButton>
-                )}
               </div>
             );
           }}
