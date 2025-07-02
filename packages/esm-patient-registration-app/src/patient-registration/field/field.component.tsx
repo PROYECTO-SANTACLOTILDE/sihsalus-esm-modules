@@ -15,6 +15,9 @@ import { PhoneField } from './phone/phone-field.component';
 import { MobileField } from './phone/mobile-field.component';
 import { EmailField } from './email/email-field.component';
 import { SocialSecurityField } from './social-security/social-security-field.component';
+import { EthnicityField } from './sociodemographic/ethnicity-field.component';
+import { ReligiousAffiliationField } from './sociodemographic/religious-affiliation-field.component';
+import { EducationLevelField } from './sociodemographic/education-level-field.component';
 
 export interface FieldProps {
   name: string;
@@ -62,6 +65,12 @@ export function Field({ name }: FieldProps) {
       return <SocialSecurityField />;
     case 'civilStatus':
       return <CivilStatusField />;
+    case 'ethnicity':
+      return <EthnicityField />;
+    case 'religiousAffiliation':
+      return <ReligiousAffiliationField />;
+    case 'educationLevel':
+      return <EducationLevelField />;
     default:
       return <CustomField name={name} />;
   }

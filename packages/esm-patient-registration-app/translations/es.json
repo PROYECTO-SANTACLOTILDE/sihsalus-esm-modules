@@ -123,5 +123,14 @@
   "updatePatientSuccessSnackbarSubtitle": "La información del paciente ha sido actualizada exitosamente",
   "updatePatientSuccessSnackbarTitle": "Detalles del Paciente Actualizados",
   "yearsEstimateRequired": "Los años estimados son obligatorios",
-  "yes": "Sí"
+  "yes": "Sí",
+  "clearSelection": "Limpiar selección",
+  "compactRegistrationTitle": "Registro Rápido de Paciente",
+  "compactRegistrationDescription": "Complete solo los campos esenciales para un registro rápido",
+  "compactPatientCreatedTitle": "Paciente Creado",
+  "compactPatientCreatedSubtitle": "Paciente registrado exitosamente",
+  "responsiblePersonSection": "Persona Responsable",
+  "responsiblePersonRequired": "La persona responsable es obligatoria para menores de edad",
+  "addressBarrio": "Barrio",
+  "addressDireccion": "Dirección Específica"
 }

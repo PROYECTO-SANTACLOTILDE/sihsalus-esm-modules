@@ -94,8 +94,7 @@ export function CivilStatusField() {
             marginTop: '0.25rem',
             fontStyle: 'italic',
           }}>
-          Automáticamente configurado como "soltero" para menores de{' '}
-          {config.fieldConfigurations.civilStatus.marriageableAge} años
+          {t('autoSelectCivilStatus', 'Automáticamente configurado como "soltero" para menores de edad.')}
         </p>
       )}
     </div>

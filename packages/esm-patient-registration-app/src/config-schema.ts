@@ -114,6 +114,30 @@ export interface RegistrationConfig {
     relationships: {
       allowedRelationshipTypes: Array<string>;
     };
+    ethnicity: {
+      personAttributeUuid: string;
+      answerConceptSetUuid: string;
+      validation?: {
+        required: boolean;
+        matches?: string;
+      };
+    };
+    religiousAffiliation: {
+      personAttributeUuid: string;
+      answerConceptSetUuid: string;
+      validation?: {
+        required: boolean;
+        matches?: string;
+      };
+    };
+    educationLevel: {
+      personAttributeUuid: string;
+      answerConceptSetUuid: string;
+      validation?: {
+        required: boolean;
+        matches?: string;
+      };
+    };
   };
   links: {
     submitButton: string;
@@ -134,12 +158,12 @@ export const builtInSections: Array<SectionDefinition> = [
   {
     id: 'demographics',
     name: 'Basic Info',
-    fields: ['id', 'name', 'gender', 'dob', 'civilStatus'],
+    fields: ['id', 'name', 'gender', 'dob', 'civilStatus', 'educationLevel', 'ethnicity', 'religiousAffiliation'],
   },
   { id: 'contact', name: 'Contact Details', fields: ['phone', 'mobile', 'email'] },
   { id: 'insurance', name: 'Detalles del Financiador', fields: ['socialSecurity'] },
   { id: 'death', name: 'Death Info', fields: ['dateAndTimeOfDeath', 'causeOfDeath'] },
-  { id: 'relationships', name: 'Relationships', fields: [] },
+  { id: 'relationships', name: 'Persona Responsable', fields: [] },
   { id: 'address', name: 'Información de Domicilio', fields: ['address', 'alternativeAddress'] },
 ];
 
@@ -158,6 +182,9 @@ export const builtInFields = [
   'civilStatus',
   'causeOfDeath',
   'dateAndTimeOfDeath',
+  'ethnicity',
+  'religiousAffiliation',
+  'educationLevel',
 ] as const;
 
 export const esmPatientRegistrationSchema = {
@@ -531,6 +558,66 @@ export const esmPatientRegistrationSchema = {
         ],
         _description:
           'List of relationship type UUIDs to allow in the relationship dropdown list. If empty, all relationships are shown.',
+      },
+    },
+    ethnicity: {
+      personAttributeUuid: {
+        _type: Type.UUID,
+        _default: '8d871386-c2cc-11de-8d13-0010c6dffd0f',
+        _description: 'The UUID of the ethnicity person attribute type',
+      },
+      answerConceptSetUuid: {
+        _type: Type.ConceptUuid,
+        _default: '70482c1e-181e-416d-a0c4-a93919f9f2ef',
+        _description: 'The concept set UUID for ethnicity options',
+      },
+      validation: {
+        required: { _type: Type.Boolean, _default: false },
+        matches: {
+          _type: Type.String,
+          _default: '',
+          _description: 'Optional RegEx for testing the validity of the input.',
+        },
+      },
+    },
+    religiousAffiliation: {
+      personAttributeUuid: {
+        _type: Type.UUID,
+        _default: '77bbb234-2312-4644-99d0-fa894d438817',
+        _description: 'The UUID of the religious affiliation person attribute type',
+      },
+      answerConceptSetUuid: {
+        _type: Type.ConceptUuid,
+        _default: '6de6d87e-5af8-41d9-98d2-b660fabf25d9',
+        _description: 'The concept set UUID for religious affiliation options',
+      },
+      validation: {
+        required: { _type: Type.Boolean, _default: false },
+        matches: {
+          _type: Type.String,
+          _default: '',
+          _description: 'Optional RegEx for testing the validity of the input.',
+        },
+      },
+    },
+    educationLevel: {
+      personAttributeUuid: {
+        _type: Type.UUID,
+        _default: '8d87236c-c2cc-11de-8d13-0010c6dffd0f',
+        _description: 'The UUID of the education level person attribute type',
+      },
+      answerConceptSetUuid: {
+        _type: Type.ConceptUuid,
+        _default: '2d790984-f088-4d68-984d-efab9db8c889',
+        _description: 'The concept set UUID for education level options',
+      },
+      validation: {
+        required: { _type: Type.Boolean, _default: false },
+        matches: {
+          _type: Type.String,
+          _default: '',
+          _description: 'Optional RegEx for testing the validity of the input.',
+        },
       },
     },
   },
