@@ -14,7 +14,7 @@ export function OccupationField() {
     uuid: config.fieldConfigurations.occupation.personAttributeUuid,
     validation: config.fieldConfigurations.occupation.validation,
     showHeading: false,
-    label: t('bloodType', 'Ocupación'),
+    label: t('occupation', 'Ocupación'),
   };
 
   return <PersonAttributeField fieldDefinition={fieldDefinition} />;

@@ -90,7 +90,7 @@ export function CodedPersonAttributeField({
   }
 
   return (
-    <div className={classNames(styles.customField, styles.halfWidthInDesktopView)}>
+    <div className={classNames(styles.customField, styles.halfWidthInDesktopView)} style={{ marginTop: '1rem' }}>
       {!isLoadingConceptAnswers ? (
         <Layer>
           <Field name={fieldName}>

@@ -86,8 +86,6 @@
   "nonsensicalYears": "Los años estimados no pueden ser mayores a 140",
   "numberInNameDubious": "El número en el nombre es dudoso",
   "obsFieldUnknownDatatype": "El concepto para el campo de observación '{{fieldDefinitionId}}' tiene un tipo de dato desconocido '{{datatypeName}}'",
-  "occupation": "Occupation",
-  "occupationPlaceholder": "e.g., Agricultor, Comerciante, Ama de Casa",
   "optional": "opcional",
   "optionalIdentifierLabel": "{{identifierName}} (opcional)",
   "other": "Otro",

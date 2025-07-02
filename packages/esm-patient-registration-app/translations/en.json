@@ -86,8 +86,6 @@
   "nonsensicalYears": "Estimated years cannot be more than 140",
   "numberInNameDubious": "",
   "obsFieldUnknownDatatype": "Concept for obs field '{{fieldDefinitionId}}' has unknown datatype '{{datatypeName}}'",
-  "occupation": "Occupation",
-  "occupationPlaceholder": "e.g., Agricultor, Comerciante, Ama de Casa",
   "optional": "optional",
   "optionalIdentifierLabel": "",
   "other": "Other",
