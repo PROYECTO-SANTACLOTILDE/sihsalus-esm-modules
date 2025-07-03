@@ -75,7 +75,11 @@ export function CivilStatusField() {
         <Select
           id="civilStatus"
           name={`person-attribute-${config.fieldConfigurations.civilStatus.personAttributeUuid}`}
-          labelText="Estado Civil"
+          labelText={
+            (config.fieldConfigurations.civilStatus.validation?.required ?? false)
+              ? 'Estado Civil'
+              : `Estado Civil (${t('optional', 'opcional')})`
+          }
           invalid={!!(civilStatusMeta.touched && civilStatusMeta.error)}
           required={config.fieldConfigurations.civilStatus.validation?.required ?? false}
           disabled={isUnderMarriageableAge}
