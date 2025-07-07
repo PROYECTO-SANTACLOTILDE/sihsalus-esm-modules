@@ -3816,6 +3816,7 @@ __metadata:
     zod: "npm:^3.22.4"
   peerDependencies:
     "@openmrs/esm-framework": 6.x
+    "@openmrs/esm-patient-common-lib": 10.x
     dayjs: 1.x
     react: 18.x
     react-i18next: 11.x
@@ -3836,7 +3837,6 @@ __metadata:
     "@carbon/react": "npm:^1.76.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.0"
-    "@openmrs/esm-patient-common-lib": "npm:^10.2.0"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
@@ -3847,6 +3847,7 @@ __metadata:
     zod: "npm:^3.22.0"
   peerDependencies:
     "@openmrs/esm-framework": 6.x
+    "@openmrs/esm-patient-common-lib": 10.x
     dayjs: 1.x
     react: 18.x
     react-i18next: 11.x
@@ -3867,7 +3868,6 @@ __metadata:
     "@carbon/react": "npm:^1.76.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.0"
-    "@openmrs/esm-patient-common-lib": "npm:^10.2.0"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
@@ -3878,6 +3878,7 @@ __metadata:
     zod: "npm:^3.22.0"
   peerDependencies:
     "@openmrs/esm-framework": 6.x
+    "@openmrs/esm-patient-common-lib": 10.x
     dayjs: 1.x
     react: 18.x
     react-i18next: 11.x
@@ -3898,7 +3899,6 @@ __metadata:
     "@carbon/react": "npm:1.76.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.0"
-    "@openmrs/esm-patient-common-lib": "npm:^10.2.0"
     classnames: "npm:^2.3.2"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
@@ -3909,6 +3909,7 @@ __metadata:
     zod: "npm:^3.24.1"
   peerDependencies:
     "@openmrs/esm-framework": 6.x
+    "@openmrs/esm-patient-common-lib": 10.x
     dayjs: 1.x
     react: 18.x
     react-i18next: 11.x
