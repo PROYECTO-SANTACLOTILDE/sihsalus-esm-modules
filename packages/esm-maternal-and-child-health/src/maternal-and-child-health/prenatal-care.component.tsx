@@ -32,11 +32,15 @@ export const PrenatalCare: React.FC<PrenatalCareProps> = ({ patient, patientUuid
     [],
   );
 
+  //Show 404
   if (!patient || !patientUuid) {
     console.log('❌ PrenatalCare: Missing patient data, returning null');
-    return <div style={{padding: '20px', background: 'yellow', border: '2px red solid'}}>
-      DEBUG: PrenatalCare - Missing patient data (patient: {!!patient ? 'exists' : 'missing'}, patientUuid: {patientUuid || 'missing'})
-    </div>;
+    return (
+      <div style={{ padding: '20px', background: 'yellow', border: '2px red solid' }}>
+        DEBUG: PrenatalCare - Missing patient data (patient: {!!patient ? 'exists' : 'missing'}, patientUuid:{' '}
+        {patientUuid || 'missing'})
+      </div>
+    );
   }
 
   return (
