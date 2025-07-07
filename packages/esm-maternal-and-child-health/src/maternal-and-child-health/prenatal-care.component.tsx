@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { UserFollow, Task, ChartLineData } from '@carbon/react/icons';
 import TabbedDashboard from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 import type { TabConfig } from '../ui/tabbed-dashboard/tabbed-dashboard.component';
@@ -10,40 +9,43 @@ export interface PrenatalCareProps {
 }
 
 export const PrenatalCare: React.FC<PrenatalCareProps> = ({ patient, patientUuid }) => {
-  const { t } = useTranslation();
+  console.log('🏥 PrenatalCare Debug:', { patient: !!patient, patientUuid, patientId: patient?.id });
 
   const tabs: TabConfig[] = useMemo(
     () => [
       {
-        labelKey: t('maternalHistory', 'Historia Materna'),
+        labelKey: 'maternalHistory',
         icon: UserFollow,
         slotName: 'prenatal-maternal-history-slot',
       },
       {
-        labelKey: t('currentPregnancy', 'Embarazo Actual'),
+        labelKey: 'currentPregnancy',
         icon: Task,
         slotName: 'prenatal-current-pregnancy-slot',
       },
       {
-        labelKey: t('prenatalCareChart', 'Control Prenatal'),
+        labelKey: 'prenatalCareChart',
         icon: ChartLineData,
         slotName: 'prenatal-care-chart-slot',
       },
     ],
-    [t],
+    [],
   );
 
   if (!patient || !patientUuid) {
-    return null;
+    console.log('❌ PrenatalCare: Missing patient data, returning null');
+    return <div style={{padding: '20px', background: 'yellow', border: '2px red solid'}}>
+      DEBUG: PrenatalCare - Missing patient data (patient: {!!patient ? 'exists' : 'missing'}, patientUuid: {patientUuid || 'missing'})
+    </div>;
   }
 
   return (
     <TabbedDashboard
       patient={patient}
       patientUuid={patientUuid}
-      titleKey={t('prenatalCare', 'Control Prenatal')}
+      titleKey="prenatalCare"
       tabs={tabs}
-      ariaLabelKey={t('prenatalCareTabs', 'Pestañas de Control Prenatal')}
+      ariaLabelKey="prenatalCareTabs"
     />
   );
 };

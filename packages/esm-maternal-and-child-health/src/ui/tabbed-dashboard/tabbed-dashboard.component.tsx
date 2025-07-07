@@ -2,8 +2,8 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { Extension, ExtensionSlot } from '@openmrs/esm-framework';
-import { Layer, Tab, TabList, TabPanel, TabPanels, Tabs, Tile } from '@carbon/react';
+import { ExtensionSlot } from '@openmrs/esm-framework';
+import { Layer, Tile } from '@carbon/react';
 import styles from './tabbed-dashboard.scss';
 
 export interface TabConfig {
@@ -34,11 +34,25 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
   state = {},
 }) => {
   const { t } = useTranslation();
+  const [activeTab, setActiveTab] = React.useState(0);
 
   const translatedTabs = useMemo(() => tabs.map((tab) => ({ ...tab, label: t(tab.labelKey) })), [tabs, t]);
 
+  console.log('🐛 TabbedDashboard Debug:', {
+    patient: !!patient,
+    patientUuid,
+    titleKey,
+    tabsCount: tabs.length,
+    translatedTabs: translatedTabs.map(tab => ({ labelKey: tab.labelKey, label: tab.label, slotName: tab.slotName })),
+    title: t(titleKey),
+    activeTab,
+  });
+
   return (
     <div className={classNames(styles.widgetCard, className)}>
+      <div style={{padding: '10px', background: 'lightgreen', border: '2px solid green', marginBottom: '10px'}}>
+        🐛 DEBUG: TabbedDashboard is rendering! Title: {t(titleKey)} | Tabs: {tabs.length}
+      </div>
       <Layer>
         <Tile>
           <div className={styles.desktopHeading}>
@@ -47,39 +61,49 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
         </Tile>
       </Layer>
       <Layer>
-        <Tabs>
-          <TabList className={styles.tabList} aria-label={t(ariaLabelKey)}>
-            {translatedTabs.map((tab, index) => (
-              <Tab className={styles.tab} key={index} renderIcon={tab.icon}>
-                {tab.label}
-              </Tab>
-            ))}
-          </TabList>
-          <TabPanels>
-            {translatedTabs.map((tab, index) => (
-              <TabPanel key={index} className={styles.dashboardContainer}>
-                <div className={styles.dashboardContainer}>
-                  <ExtensionSlot key={tab.slotName} name={tab.slotName} className={styles.dashboard}>
-                    {(extension) => (
-                      <div className={styles.extension}>
-                        <Extension
-                          state={{
-                            patient,
-                            patientUuid,
-                            pageSize,
-                            extensionId: extension.id,
-                            ...state, // Merge custom state
-                          }}
-                          className={styles.extensionWrapper}
-                        />
-                      </div>
-                    )}
-                  </ExtensionSlot>
-                </div>
-              </TabPanel>
-            ))}
-          </TabPanels>
-        </Tabs>
+        <div style={{padding: '10px', background: 'lightblue', border: '2px solid blue', marginBottom: '10px'}}>
+          🔍 DEBUG: About to render {translatedTabs.length} tabs: {translatedTabs.map(t => t.label).join(', ')}
+        </div>
+        
+        {/* Custom Tab Implementation */}
+        <div style={{borderBottom: '1px solid #ccc'}}>
+          {translatedTabs.map((tab, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveTab(index)}
+              style={{
+                padding: '12px 16px',
+                marginRight: '4px',
+                border: 'none',
+                borderBottom: activeTab === index ? '3px solid #0066cc' : '3px solid transparent',
+                background: activeTab === index ? '#f4f4f4' : 'transparent',
+                cursor: 'pointer',
+                fontWeight: activeTab === index ? 'bold' : 'normal',
+              }}
+            >
+              🏷️ {tab.label}
+            </button>
+          ))}
+        </div>
+        
+        {/* Tab Content */}
+        <div style={{padding: '20px'}}>
+          <div style={{padding: '10px', background: 'lightyellow', marginBottom: '10px'}}>
+            📋 Active Tab: {activeTab} - {translatedTabs[activeTab]?.label} - Slot: {translatedTabs[activeTab]?.slotName}
+          </div>
+          
+          <ExtensionSlot 
+            key={translatedTabs[activeTab]?.slotName} 
+            name={translatedTabs[activeTab]?.slotName} 
+            className={styles.dashboard}
+            state={{
+              patient,
+              patientUuid,
+              pageSize,
+              ...state,
+            }}
+          />
+        </div>
       </Layer>
     </div>
   );

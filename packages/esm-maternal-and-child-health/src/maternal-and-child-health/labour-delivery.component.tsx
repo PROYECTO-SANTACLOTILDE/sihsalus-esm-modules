@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Report, ChartMultitype } from '@carbon/react/icons';
 import { BabyIcon } from '@openmrs/esm-framework';
 import TabbedDashboard from '../ui/tabbed-dashboard/tabbed-dashboard.component';
@@ -11,27 +10,25 @@ export interface LabourDeliveryProps {
 }
 
 export const LabourDelivery: React.FC<LabourDeliveryProps> = ({ patient, patientUuid }) => {
-  const { t } = useTranslation();
-
   const tabs: TabConfig[] = useMemo(
     () => [
       {
-        labelKey: t('summaryOfLaborAndPostpartum', 'Resumen del Parto y Puerperio'),
+        labelKey: 'summaryOfLaborAndPostpartum',
         icon: Report,
         slotName: 'labour-delivery-summary-slot',
       },
       {
-        labelKey: t('deliveryOrAbortion', 'Partos y Abortos'),
+        labelKey: 'deliveryOrAbortion',
         icon: BabyIcon,
         slotName: 'labour-delivery-delivery-abortion-slot',
       },
       {
-        labelKey: t('partograph', 'Partograma'),
+        labelKey: 'partograph',
         icon: ChartMultitype,
         slotName: 'labour-delivery-partograph-slot',
       },
     ],
-    [t],
+    [],
   );
 
   if (!patient || !patientUuid) {
@@ -42,9 +39,9 @@ export const LabourDelivery: React.FC<LabourDeliveryProps> = ({ patient, patient
     <TabbedDashboard
       patient={patient}
       patientUuid={patientUuid}
-      titleKey={t('labourAndDelivery', 'Parto y Puerperio')}
+      titleKey="labourAndDelivery"
       tabs={tabs}
-      ariaLabelKey={t('labourAndDeliveryTabs', 'Pestañas de Parto y Puerperio')}
+      ariaLabelKey="labourAndDeliveryTabs"
     />
   );
 };
