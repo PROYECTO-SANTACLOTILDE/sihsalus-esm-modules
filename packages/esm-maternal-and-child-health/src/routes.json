@@ -40,7 +40,7 @@
     },
     {
       "name": "deliveryOrAbortion-chart",
-      "component": "deliberyOrAbortionTable",
+      "component": "deliveryOrAbortionTable",
       "slot": "labour-delivery-delivery-abortion-slot",
       "order": 1,
       "meta": {

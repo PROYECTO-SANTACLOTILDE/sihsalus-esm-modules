@@ -15,7 +15,7 @@ import {
 import { LabourDelivery } from './maternal-and-child-health/labour-delivery.component';
 import { PostnatalCare } from './maternal-and-child-health/postnatal-care.component';
 import { PrenatalCare } from './maternal-and-child-health/prenatal-care.component';
-import DeliberyOrAbortionTable from './maternal-and-child-health/components/labour-delivery/deliveryOrAbortion.component';
+import DeliveryOrAbortionTable from './maternal-and-child-health/components/labour-delivery/deliveryOrAbortion.component';
 import SummaryOfLaborAndPostpartumTable from './maternal-and-child-health/components/labour-delivery/summaryOfLaborAndPostpartum.component';
 import ImmediatePostpartumTable from './maternal-and-child-health/components/postnatal-care/immediatePostpartum.component';
 import PostpartumControlTable from './maternal-and-child-health/components/postnatal-care/postpartumControl.component';
@@ -95,7 +95,7 @@ export const postnatalCare = getSyncLifecycle(PostnatalCare, options);
 export const prenatalCare = getSyncLifecycle(PrenatalCare, options);
 
 // Labour & Delivery Components
-export const deliberyOrAbortionTable = getSyncLifecycle(DeliberyOrAbortionTable, options);
+export const deliveryOrAbortionTable = getSyncLifecycle(DeliveryOrAbortionTable, options);
 export const partograph = getSyncLifecycle(PartographChart, options);
 export const summaryOfLaborAndPostpartumTable = getSyncLifecycle(SummaryOfLaborAndPostpartumTable, options);
 
