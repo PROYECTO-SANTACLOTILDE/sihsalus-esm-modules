@@ -3301,18 +3301,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openmrs/esm-patient-common-lib@npm:^10.2.1-pre.8063":
-  version: 10.2.1-pre.8065
-  resolution: "@openmrs/esm-patient-common-lib@npm:10.2.1-pre.8065"
+"@openmrs/esm-patient-common-lib@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "@openmrs/esm-patient-common-lib@npm:10.2.0"
   dependencies:
-    "@carbon/react": "npm:^1.83.0"
+    "@carbon/react": "npm:^1.76.0"
     lodash-es: "npm:^4.17.21"
     uuid: "npm:^8.3.2"
   peerDependencies:
     "@openmrs/esm-framework": 6.x
     react: 18.x
     single-spa: 6.x
-  checksum: 10/3179e5450c96569aa94064bea16865129869ff472d5f3a76ccc014bc8d2f9248857a95c00d92736bb1591e84fdd90c610646ef2ba00f35a025b6522f78c63a6d
+  checksum: 10/0fdd34be65d8fc0a3658c820b8baed740ff9e9b871fa18706e019176bac9cbc9a1f49307cde64184cc035a998cb7ca03811fac02f673d0ba6cc8963a29afac30
   languageName: node
   linkType: hard
 
@@ -3714,7 +3714,7 @@ __metadata:
     "@carbon/react": "npm:^1.76.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.0"
-    "@openmrs/esm-patient-common-lib": "npm:^10.2.1-pre.8063"
+    "@openmrs/esm-patient-common-lib": "npm:^10.2.0"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
@@ -3745,7 +3745,7 @@ __metadata:
     "@carbon/react": "npm:^1.76.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.0"
-    "@openmrs/esm-patient-common-lib": "npm:^10.2.1-pre.8063"
+    "@openmrs/esm-patient-common-lib": "npm:^10.2.0"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
@@ -3776,7 +3776,7 @@ __metadata:
     "@carbon/react": "npm:^1.76.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.0"
-    "@openmrs/esm-patient-common-lib": "npm:^10.2.1-pre.8063"
+    "@openmrs/esm-patient-common-lib": "npm:^10.2.0"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
@@ -3910,7 +3910,7 @@ __metadata:
     "@carbon/react": "npm:^1.76.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.0"
-    "@openmrs/esm-patient-common-lib": "npm:^10.2.1-pre.8063"
+    "@openmrs/esm-patient-common-lib": "npm:^10.2.0"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
