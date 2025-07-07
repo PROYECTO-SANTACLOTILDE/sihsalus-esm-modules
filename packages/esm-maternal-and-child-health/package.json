@@ -44,7 +44,6 @@
         "@carbon/react": "1.76.0",
         "@carbon/styles": "^1.81.0",
         "@hookform/resolvers": "^3.3.0",
-        "@openmrs/esm-patient-common-lib": "^10.2.0",
         "classnames": "^2.3.2",
         "lodash-es": "^4.17.21",
         "react-hook-form": "^7.56.1",
@@ -55,6 +54,7 @@
     },
     "peerDependencies": {
         "@openmrs/esm-framework": "6.x",
+        "@openmrs/esm-patient-common-lib": "10.x",
         "dayjs": "1.x",
         "react": "18.x",
         "react-i18next": "11.x",
