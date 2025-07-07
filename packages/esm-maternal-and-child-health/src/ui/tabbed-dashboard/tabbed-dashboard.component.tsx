@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { ExtensionSlot } from '@openmrs/esm-framework';
-import { Layer, Tile } from '@carbon/react';
+import { Layer, Tab, TabList, TabPanel, TabPanels, Tabs, Tile } from '@carbon/react';
 import styles from './tabbed-dashboard.scss';
 
 export interface TabConfig {
@@ -33,7 +33,6 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
   state = {},
 }) => {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = React.useState(0);
 
   const translatedTabs = useMemo(() => tabs.map((tab) => ({ ...tab, label: t(tab.labelKey) })), [tabs, t]);
 
@@ -47,38 +46,34 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
         </Tile>
       </Layer>
       <Layer>
-        <div style={{ borderBottom: '1px solid #ccc' }}>
-          {translatedTabs.map((tab, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveTab(index)}
-              style={{
-                padding: '12px 16px',
-                marginRight: '4px',
-                border: 'none',
-                borderBottom: activeTab === index ? '3px solid #0066cc' : '3px solid transparent',
-                background: activeTab === index ? '#f4f4f4' : 'transparent',
-                cursor: 'pointer',
-                fontWeight: activeTab === index ? 'bold' : 'normal',
-              }}>
-              🏷️ {tab.label}
-            </button>
-          ))}
-        </div>
-
-        <div style={{ padding: '20px' }}>
-          <ExtensionSlot
-            key={translatedTabs[activeTab]?.slotName}
-            name={translatedTabs[activeTab]?.slotName}
-            className={styles.dashboard}
-            state={{
-              patient,
-              patientUuid,
-              pageSize,
-              ...state,
-            }}
-          />
-        </div>
+        <Tabs>
+          <TabList className={styles.tabList}>
+            {translatedTabs.map((tab, index) => (
+              <Tab className={styles.tab} key={index} renderIcon={tab.icon}>
+                {tab.label}
+              </Tab>
+            ))}
+          </TabList>
+          <TabPanels>
+            {translatedTabs.map((tab, index) => (
+              <TabPanel key={index} className={styles.dashboardContainer}>
+                <div className={styles.dashboardContainer}>
+                  <ExtensionSlot
+                    key={tab.slotName}
+                    name={tab.slotName}
+                    className={styles.dashboard}
+                    state={{
+                      patient,
+                      patientUuid,
+                      pageSize,
+                      ...state,
+                    }}
+                  />
+                </div>
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </Tabs>
       </Layer>
     </div>
   );
