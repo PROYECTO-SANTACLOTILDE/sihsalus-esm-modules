@@ -4,7 +4,6 @@ import { createDashboardLink } from '@openmrs/esm-patient-common-lib';
 import { createDashboardGroup } from './clinical-view-group/createDashboardGroup';
 import { configSchema } from './config-schema';
 
-
 // Maternal and Child Health Components
 import {
   labourAndDeliveryDashboardMeta,
