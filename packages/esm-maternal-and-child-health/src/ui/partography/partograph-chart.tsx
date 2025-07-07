@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Tab, Tabs, TabList } from '@carbon/react';
 import styles from './partograph-chart.scss';
 import { LineChart } from '@carbon/charts-react';
-import type { PartograpyComponents } from '../../../../config-schema';
+import type { PartograpyComponents } from '../../config-schema';
 
 enum ScaleTypes {
   TIME = 'time',
@@ -19,7 +19,7 @@ interface PartographyChartData {
   title: string;
   value: string;
 }
-const PartographChart: React.FC<PartographChartProps> = ({ partograpyComponents }) => {
+const PartographChart: React.FC<PartographChartProps> = ({ partograpyComponents = [] }) => {
   const { t } = useTranslation();
   const convertedData = partograpyComponents.map((item) => {
     const [numerator, denominator] = item.descentOfHead.split('/').map(Number);
@@ -27,7 +27,7 @@ const PartographChart: React.FC<PartographChartProps> = ({ partograpyComponents 
     return { ...item, descentOfHead: result };
   });
   const [selectedPartographSign, setSelectedPartographSign] = React.useState<PartographyChartData>({
-    title: `Fetal Heart Rate (${convertedData[0]?.fetalHeartRate})`,
+    title: `Fetal Heart Rate (${convertedData[0]?.fetalHeartRate ?? '-'})`,
     value: 'fetalHeartRate',
   });
   const partographSigns = [
@@ -57,6 +57,9 @@ const PartographChart: React.FC<PartographChartProps> = ({ partograpyComponents 
     }
   }
   const chartData = useMemo(() => {
+    if (!partograpyComponents || partograpyComponents.length === 0) {
+      return [];
+    }
     return partograpyComponents
       .filter((partography) => partography[selectedPartographSign.value])
       .splice(0, 10)
