@@ -31,7 +31,7 @@ import { PrenatalCare } from './maternal-and-child-health/prenatal-care.componen
 
 // Labour & Delivery Components
 import DeliberyOrAbortionTable from './maternal-and-child-health/components/labour-delivery/deliveryOrAbortion.component';
-import Partograph from './maternal-and-child-health/components/labour-delivery/partography/partograph.component';
+import PartographChart from './ui/partography/partograph-chart';
 import SummaryOfLaborAndPostpartumTable from './maternal-and-child-health/components/labour-delivery/summaryOfLaborAndPostpartum.component';
 
 // Postnatal Care Components
@@ -139,7 +139,7 @@ export const prenatalCare = getSyncLifecycle(PrenatalCare, options);
 
 // Labour & Delivery Components (alphabetical)
 export const deliberyOrAbortionTable = getSyncLifecycle(DeliberyOrAbortionTable, options);
-export const partograph = getSyncLifecycle(Partograph, options);
+export const partograph = getSyncLifecycle(PartographChart, options);
 export const summaryOfLaborAndPostpartumTable = getSyncLifecycle(SummaryOfLaborAndPostpartumTable, options);
 
 // Obstetric History
