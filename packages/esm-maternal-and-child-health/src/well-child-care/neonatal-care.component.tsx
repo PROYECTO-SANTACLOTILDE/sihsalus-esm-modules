@@ -7,7 +7,6 @@ import {
   WatsonHealthCobbAngle,
 } from '@carbon/react/icons';
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import type { TabConfig } from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 import TabbedDashboard from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 
@@ -17,42 +16,40 @@ export interface NeonatalCareProps {
 }
 
 export const NeonatalCare: React.FC<NeonatalCareProps> = ({ patient, patientUuid }) => {
-  const { t } = useTranslation();
-
   const tabs: TabConfig[] = useMemo(
     () => [
       {
-        labelKey: t('newbornVitals', 'Signos Vitales del Recién Nacido'),
+        labelKey: 'newbornVitals',
         icon: Activity,
         slotName: 'neonatal-vitals-slot',
       },
       {
-        labelKey: t('perinatalRecord', 'Antecedentes Perinatales'),
+        labelKey: 'perinatalRecord',
         icon: UserFollow,
         slotName: 'neonatal-perinatal-slot',
       },
       {
-        labelKey: t('immediateAttention', 'Atención Inmediata'),
+        labelKey: 'immediateAttention',
         icon: CloudMonitoring,
         slotName: 'neonatal-attention-slot',
       },
       {
-        labelKey: t('cephalocaudalEvaluation', 'Evaluación Cefalocaudal'),
+        labelKey: 'cephalocaudalEvaluation',
         icon: Stethoscope,
         slotName: 'neonatal-evaluation-slot',
       },
       {
-        labelKey: t('alojamientoConjunto', 'Alojamiento Conjunto'),
+        labelKey: 'alojamientoConjunto',
         icon: HospitalBed,
         slotName: 'neonatal-alojamiento-conjunto-slot',
       },
       {
-        labelKey: t('breastfeedingCounseling', 'Consejeria de Lactancia Materna'),
+        labelKey: 'breastfeedingCounseling',
         icon: WatsonHealthCobbAngle,
         slotName: 'neonatal-counseling-slot',
       },
     ],
-    [t],
+    [],
   );
 
   if (!patient || !patientUuid) {
@@ -63,9 +60,9 @@ export const NeonatalCare: React.FC<NeonatalCareProps> = ({ patient, patientUuid
     <TabbedDashboard
       patient={patient}
       patientUuid={patientUuid}
-      titleKey={t('neonatalCare', 'Historia Neonatal')}
+      titleKey="neonatalCare"
       tabs={tabs}
-      ariaLabelKey={t('neonatalCareTabs', 'Pestañas de Atención Neonatal')}
+      ariaLabelKey="neonatalCareTabs"
     />
   );
 };

@@ -169,10 +169,7 @@
     {
       "name": "prenatal-family-history",
       "component": "familyHistory",
-      "slot": "neonatal-perinatal-slot",
-      "meta": {
-        "fullWidth": true
-      }
+      "slot": "neonatal-perinatal-slot"
     },
     {
       "name": "social-history-dashboard",

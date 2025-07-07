@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { Extension, ExtensionSlot } from '@openmrs/esm-framework';
+import { ExtensionSlot } from '@openmrs/esm-framework';
 import { Layer, Tab, TabList, TabPanel, TabPanels, Tabs, Tile } from '@carbon/react';
 import styles from './tabbed-dashboard.scss';
 
@@ -28,7 +28,6 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
   patientUuid,
   titleKey,
   tabs,
-  ariaLabelKey,
   pageSize = 5,
   className,
   state = {},
@@ -48,7 +47,7 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
       </Layer>
       <Layer>
         <Tabs>
-          <TabList className={styles.tabList} aria-label={t(ariaLabelKey)}>
+          <TabList className={styles.tabList}>
             {translatedTabs.map((tab, index) => (
               <Tab className={styles.tab} key={index} renderIcon={tab.icon}>
                 {tab.label}
@@ -59,22 +58,17 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
             {translatedTabs.map((tab, index) => (
               <TabPanel key={index} className={styles.dashboardContainer}>
                 <div className={styles.dashboardContainer}>
-                  <ExtensionSlot key={tab.slotName} name={tab.slotName} className={styles.dashboard}>
-                    {(extension) => (
-                      <div className={styles.extension}>
-                        <Extension
-                          state={{
-                            patient,
-                            patientUuid,
-                            pageSize,
-                            extensionId: extension.id,
-                            ...state, // Merge custom state
-                          }}
-                          className={styles.extensionWrapper}
-                        />
-                      </div>
-                    )}
-                  </ExtensionSlot>
+                  <ExtensionSlot
+                    key={tab.slotName}
+                    name={tab.slotName}
+                    className={styles.dashboard}
+                    state={{
+                      patient,
+                      patientUuid,
+                      pageSize,
+                      ...state,
+                    }}
+                  />
                 </div>
               </TabPanel>
             ))}
