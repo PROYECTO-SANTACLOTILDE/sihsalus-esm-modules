@@ -1,5 +1,5 @@
 import type { OpenmrsResource, FetchResponse, FHIRResource } from '@openmrs/esm-framework';
-import type { amPm } from '../utils';
+import type { amPm } from '@openmrs/esm-patient-common-lib';
 /**
  * My interfaces
  */
