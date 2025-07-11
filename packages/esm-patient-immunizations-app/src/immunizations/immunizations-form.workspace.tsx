@@ -7,7 +7,7 @@ import { z } from 'zod';
 import {
   Button,
   ButtonSet,
-  Dropdown,
+  ComboBox,
   Form,
   InlineLoading,
   SelectItem,
@@ -80,7 +80,7 @@ const ImmunizationsForm: React.FC<DefaultPatientWorkspaceProps> = ({
         .transform((value) => (value < 1 ? null : value)),
       expirationDate: z.date().nullable(),
       lotNumber: z.string().nullable(),
-      manufacturer: z.string().nullable(),
+      manufacturer: z.string().optional(),
     });
   }, [patient.birthDate, t]);
 
@@ -253,8 +253,7 @@ const ImmunizationsForm: React.FC<DefaultPatientWorkspaceProps> = ({
                         onChange={(event) => onChange(event.target.value as amPm)}
                         pattern="^(1[0-2]|0?[1-9]):([0-5]?[0-9])$"
                         value={value}
-                        onBlur={onBlur}
-                      >
+                        onBlur={onBlur}>
                         <Controller
                           name="timeFormat"
                           control={control}
@@ -263,8 +262,7 @@ const ImmunizationsForm: React.FC<DefaultPatientWorkspaceProps> = ({
                               id="timeFormatSelect"
                               onChange={(event) => onChange(event.target.value as amPm)}
                               value={value}
-                              aria-label={t('timeFormat ', 'Time Format')}
-                            >
+                              aria-label={t('timeFormat ', 'Time Format')}>
                               <SelectItem value="AM" text={t('AM', 'AM')} />
                               <SelectItem value="PM" text={t('PM', 'PM')} />
                             </TimePickerSelect>
@@ -284,19 +282,35 @@ const ImmunizationsForm: React.FC<DefaultPatientWorkspaceProps> = ({
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <div className={styles.row}>
-                    <Dropdown
+                    <ComboBox
                       id="immunization"
-                      label={t('selectImmunization', 'Select immunization')}
+                      placeholder={t('selectImmunization', 'Select immunization')}
                       titleText={t('immunization', 'Immunization')}
-                      items={immunizationsConceptSet?.answers?.map((item) => item.uuid) || []}
-                      itemToString={(item) =>
-                        immunizationsConceptSet?.answers.find((candidate) => candidate.uuid == item)?.display
+                      items={
+                        immunizationsConceptSet?.answers?.map((item) => ({
+                          id: item.uuid,
+                          text: item.display,
+                        })) || []
                       }
-                      onChange={(val) => onChange(val.selectedItem)}
-                      selectedItem={value}
+                      itemToString={(item) => (item ? item.text : '')}
+                      onChange={({ selectedItem }) => onChange(selectedItem ? selectedItem.id : '')}
+                      selectedItem={
+                        value
+                          ? {
+                              id: value,
+                              text: immunizationsConceptSet?.answers?.find((candidate) => candidate.uuid === value)
+                                ?.display,
+                            }
+                          : null
+                      }
                       invalid={!!errors?.vaccineUuid}
                       invalidText={errors?.vaccineUuid?.message}
                       disabled={!!immunizationToEditMeta}
+                      shouldFilterItem={({ item, inputValue = '' }) => {
+                        if (!item?.text || !inputValue) return true;
+                        return item.text.toLowerCase().includes(inputValue.toLowerCase());
+                      }}
+                      size="md"
                     />
                   </div>
                 )}
@@ -318,14 +332,14 @@ const ImmunizationsForm: React.FC<DefaultPatientWorkspaceProps> = ({
           <section>
             <ResponsiveWrapper>
               <Controller
-                name="manufacturer"
+                name="lotNumber"
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <div className={styles.row}>
                     <TextInput
                       type="text"
-                      id="manufacturer"
-                      labelText={t('manufacturer', 'Manufacturer')}
+                      id="lotNumber"
+                      labelText={t('lotNumber', 'Lot Number')}
                       value={value}
                       onChange={(evt) => onChange(evt.target.value)}
                     />
@@ -337,16 +351,16 @@ const ImmunizationsForm: React.FC<DefaultPatientWorkspaceProps> = ({
           <section>
             <ResponsiveWrapper>
               <Controller
-                name="lotNumber"
+                name="manufacturer"
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <div className={styles.row}>
                     <TextInput
                       type="text"
-                      id="lotNumber"
-                      labelText={t('lotNumber', 'Lot Number')}
-                      value={value}
-                      onChange={(evt) => onChange(evt.target.value)}
+                      id="manufacturer"
+                      labelText={t('manufacturer', 'Manufacturer')}
+                      value={value || ''}
+                      onChange={(evt) => onChange(evt.target.value || undefined)}
                     />
                   </div>
                 )}
