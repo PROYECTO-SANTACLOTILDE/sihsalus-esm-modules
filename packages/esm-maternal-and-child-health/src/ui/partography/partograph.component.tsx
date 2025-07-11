@@ -18,7 +18,7 @@ import { Add, ChartLineSmooth } from '@carbon/react/icons';
 import { EmptyDataIllustration, ErrorState, CardHeader, EmptyState } from '@openmrs/esm-patient-common-lib';
 import { formatDate, isDesktop, parseDate, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
 import styles from './labour-delivery.scss';
-import { usePartograph } from '../../../../hooks/usePartograph';
+import { usePartograph } from '../../hooks/usePartograph';
 import dayjs from 'dayjs';
 import {
   CervicalDilation,
@@ -27,7 +27,7 @@ import {
   PartographEncounterFormUuid,
   SurgicalProcedure,
   descentOfHeadObj,
-} from '../../../../utils/constants';
+} from '../../utils';
 import PartographChart from './partograph-chart';
 
 interface PartographyProps {
