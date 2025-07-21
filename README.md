@@ -107,6 +107,7 @@ yarn start
 
 # Módulo específico
 yarn start --sources 'packages/esm-maternal-and-child-health'
+yarn start --sources 'packages/esm-fua-app' --backend <URL>
 
 # Múltiples módulos específicos
 yarn start --sources 'packages/esm-patient-search-app' --sources 'packages/esm-patient-register-app'
