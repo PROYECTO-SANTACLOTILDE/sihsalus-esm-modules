@@ -5,7 +5,7 @@ import { dashboardMeta } from './dashboard.meta';
 import immunizationsOverviewComponent from './immunizations/immunizations-overview.component';
 import immunizationsDetailedSummaryComponent from './immunizations/immunizations-detailed-summary.component';
 
-const moduleName = '@pucp-gidis-hiisc/esm-patient-immunizations-app';
+const moduleName = '@openmrs/esm-patient-immunizations-app';
 
 const options = {
   featureName: 'patient-immunizations',
@@ -35,5 +35,10 @@ export const immunizationsDashboardLink =
 // t('immunizationWorkspaceTitle', 'Immunization Form')
 export const immunizationFormWorkspace = getAsyncLifecycle(
   () => import('./immunizations/immunizations-form.workspace'),
+  options,
+);
+
+export const deleteImmunizationConfirmationModal = getAsyncLifecycle(
+  () => import('./immunizations/delete-immunization.modal'),
   options,
 );
