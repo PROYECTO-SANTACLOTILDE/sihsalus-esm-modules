@@ -59,12 +59,6 @@ export function mapToFhirPatient(patient: SearchedPatient) {
         given: [patient.person.personName.givenName, patient.person.personName.middleName],
         family: patient.person.personName.familyName,
         text: patient.person.personName.display,
-        extension: [
-          {
-            url: 'http://hl7.org/fhir/StructureDefinition/humanname-mothers-family',
-            valueString: patient.person.personName.familyName2,
-          },
-        ],
       },
     ],
     telecom:
