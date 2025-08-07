@@ -35,53 +35,13 @@ Colección de módulos microfrontend para SIH SALUS, una distribución especiali
 - `@pucp-gidis-hiisc/esm-patient-search-app` - Gestión avanzada de búsqueda de pacientes
 - `@pucp-gidis-hiisc/esm-patient-register-app` - Gestión avanzada de registro de pacientes
 
-## 🚀 Tecnologías
-
-- **OpenMRS 3.x Framework**: Plataforma base de microfrontends
-- **React 18+ con TypeScript 5.x**: Framework de interfaz con tipado estático
-- **Module Federation**: Arquitectura de microfrontends
-- **FHIR R4**: Estándar de interoperabilidad en salud
-- **Yarn 4.x**: Gestor de paquetes con workspaces
-- **Turbo**: Herramienta de build sistema monorepo
-- **Jest**: Framework de testing
-- **ESLint + Prettier**: Linting y formateo de código
-
 ## ⚙️ Configuración Inicial
 
-### 1. Clonar e Instalar
-
-```bash
-# Clonar el repositorio
-git clone <repository-url>
-cd sihsalus-esm-modules
+### 1. Instalar
 
 # Instalar dependencias
 yarn install
 
-# Configurar variables de entorno (opcional)
-cp example.env .env
-```
-
-### 2. Variables de Entorno
-
-Crear `.env` basado en `example.env`:
-
-```bash
-# OpenMRS Configuration
-OPENMRS_ESM_API_URL=http://localhost:8080/openmrs
-OPENMRS_ESM_LOGIN_URL=http://localhost:8080/openmrs/spa/login
-OPENMRS_ESM_API_TIMEOUT=60000
-
-# SIH SALUS Specific
-SIHSALUS_DYAKU_URL=https://api.dyaku.gob.pe/fhir/R4
-SIHSALUS_HIS_URL=https://his.minsa.gob.pe/api/v1
-SIHSALUS_MINSA_REPORTS_URL=https://reportes.minsa.gob.pe/api
-
-# Feature Flags
-ENABLE_DYAKU_INTEGRATION=true
-ENABLE_FUA_MODULE=true
-ENABLE_MATERNAL_TRACKING=true
-```
 
 ## 🛠️ Scripts de Desarrollo
 
@@ -1241,34 +1201,6 @@ yarn tsc --showConfig
 cat turbo.json
 ```
 
-### Logs y Debugging
-
-#### Habilitar Logs Detallados
-```bash
-# Desarrollo con logs
-DEBUG=sihsalus:* yarn start
-
-# Tests con logs verbose
-yarn turbo test --verbose
-
-# Build con timing
-time yarn turbo build
-```
-
-#### VS Code Debugging
-Si usas VS Code, puedes usar la configuración de debug incluida:
-
-```json
-// .vscode/launch.json (ya incluido)
-{
-  "name": "Debug Jest Tests",
-  "type": "node",
-  "request": "launch",
-  "program": "${workspaceFolder}/node_modules/.bin/jest",
-  "args": ["--runInBand", "--no-cache"]
-}
-```
-
 ### CI/CD Troubleshooting
 
 #### Simular CI Localmente
@@ -1294,40 +1226,6 @@ CI=true yarn test-e2e
 # Dry run de release
 yarn release --dry-run
 ```
-
-### Checklist de Debugging
-
-Cuando encuentres un problema, sigue este checklist:
-
-1. **¿Es un problema de cache?**
-   ```bash
-   yarn turbo clean
-   ```
-
-2. **¿Son las dependencias?**
-   ```bash
-   rm -rf node_modules yarn.lock && yarn install
-   ```
-
-3. **¿Es configuración de TypeScript?**
-   ```bash
-   yarn turbo typescript --verbose
-   ```
-
-4. **¿Es configuración de Jest?**
-   ```bash
-   yarn jest --clearCache && yarn turbo test --force
-   ```
-
-5. **¿Es un problema de red/API?**
-   - Verificar variables de entorno
-   - Verificar conectividad a APIs externas
-
-6. **¿Es un problema de versiones?**
-   ```bash
-   yarn why @openmrs/esm-framework
-   ```
-
 ## �📚 Recursos y Contribución
 
 ### Recursos Adicionales
@@ -1348,17 +1246,6 @@ Cuando encuentres un problema, sigue este checklist:
 - **MINSA Reports**: Reportes automatizados según directrices MINSA
 - **Maternal Health**: Flujos específicos de atención materno-infantil
 
-### Contribución
-
-#### Proceso de Contribución
-
-1. **Fork del proyecto**
-2. **Crear rama de feature** (`git checkout -b feature/AmazingFeature`)
-3. **Desarrollo con tests**
-4. **Commit con conventional commits** (`git commit -m 'feat: Add some AmazingFeature'`)
-5. **Push a la rama** (`git push origin feature/AmazingFeature`)
-6. **Abrir Pull Request**
-
 #### Estándares de Código
 
 - **TypeScript**: Tipado estricto obligatorio
@@ -1368,82 +1255,6 @@ Cuando encuentres un problema, sigue este checklist:
 - **Tests**: Cobertura mínima recomendada del 80%
 - **Documentación**: Componentes y hooks deben estar documentados
 
-#### Checklist Pre-PR
-
-- [ ] `yarn verify` pasa sin errores
-- [ ] Tests tienen cobertura adecuada (mínimo 80%)
-- [ ] Código está documentado apropiadamente
-- [ ] No hay console.logs o comentarios TODO
-- [ ] Translations están actualizadas si hay cambios de UI
-- [ ] Screenshots incluidos si hay cambios visuales
-- [ ] Descripción de PR es clara y completa
-
-#### Review Guidelines
-
-- **Code Review**: Al menos 1 reviewer aprobado
-- **QA Review**: Tests E2E pasan en environment de staging
-- **Security Review**: Para cambios que afecten autenticación/autorización
-- **Performance Review**: Para cambios que afecten carga de datos o rendering
-
-### CI/CD Pipeline
-
-#### GitHub Actions Workflow
-
-```yaml
-# .github/workflows/ci.yml
-name: CI/CD Pipeline
-
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'yarn'
-      
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      
-      - name: Run verification
-        run: yarn verify
-      
-      - name: Run E2E tests
-        run: yarn test-e2e
-
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build packages
-        run: yarn turbo build
-      
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: packages/*/dist
-```
-
-#### Deployment Strategy
-
-- **Development**: Automatic deployment on `develop` branch
-- **Staging**: Automatic deployment on PRs to `main`
-- **Production**: Manual deployment after merge to `main`
-
-#### Versioning Strategy
-
-- **Semantic Versioning**: MAJOR.MINOR.PATCH
-- **Conventional Commits**: Para automatic versioning
-- **Changesets**: Para managing releases en monorepo
-
 ### Contacto y Soporte
 
 Para preguntas, issues o contribuciones:
@@ -1451,33 +1262,3 @@ Para preguntas, issues o contribuciones:
 - **Issues**: Usar GitHub Issues con templates apropiados
 - **Discussions**: Para preguntas generales de desarrollo
 - **Security**: Para vulnerabilidades de seguridad, contactar directamente al equipo
-
-### Scripts de Utilidad
-
-#### Scripts Personalizados Recomendados
-
-```bash
-# Agregar a .bashrc o .zshrc
-alias salus-start="yarn start"
-alias salus-test="yarn turbo test"
-alias salus-verify="yarn verify"
-alias salus-build="yarn turbo build"
-alias salus-clean="yarn turbo clean && rm -rf node_modules yarn.lock && yarn install"
-
-# Scripts específicos por módulo
-alias maternal-dev="yarn start --sources 'packages/esm-maternal-and-child-health'"
-alias patient-dev="yarn start --sources 'packages/esm-patient-search-app' --sources 'packages/esm-patient-register-app'"
-```
-
-#### VS Code Configuration
-
-Se incluyen configuraciones optimizadas para VS Code:
-
-- **`.vscode/settings.json`**: Configuración del editor
-- **`.vscode/extensions.json`**: Extensiones recomendadas
-- **`.vscode/tasks.json`**: Tareas predefinidas
-- **`.vscode/launch.json`**: Configuración de debugging
-
----
-
-Este README.md es el punto único de referencia para todo el desarrollo en el monorepo SIH SALUS ESM Modules. Se actualiza regularmente conforme el proyecto evoluciona.
