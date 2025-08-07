@@ -56,6 +56,8 @@ type CreatePayload = {
     reference: string;
   };
   abatementDateTime?: string;
+  category?: Array<{ text?: string }>;
+  note?: Array<{ text?: string }>;
 };
 
 type EditPayload = CreatePayload & {
@@ -70,6 +72,8 @@ export type FormFields = {
   onsetDateTime: string;
   patientId: string;
   userId: string;
+  category?: string;
+  note?: string;
 };
 
 // Tipos para ConceptSet
@@ -264,6 +268,8 @@ export async function createCondition(payload: FormFields) {
     subject: {
       reference: `Patient/${payload.patientId}`,
     },
+    category: payload.category ? [{ text: payload.category }] : undefined,
+    note: payload.note ? [{ text: payload.note }] : undefined,
   };
 
   const res = await openmrsFetch(url, {
@@ -310,6 +316,8 @@ export async function updateCondition(conditionId, payload: FormFields) {
     subject: {
       reference: `Patient/${payload.patientId}`,
     },
+    category: payload.category ? [{ text: payload.category }] : undefined,
+    note: payload.note ? [{ text: payload.note }] : undefined,
   };
 
   const res = await openmrsFetch(url, {

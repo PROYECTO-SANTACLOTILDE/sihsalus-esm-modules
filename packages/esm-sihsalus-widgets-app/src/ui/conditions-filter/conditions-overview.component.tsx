@@ -53,8 +53,8 @@ interface ConditionsOverviewProps {
 const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) => {
   const { conditionPageSize } = useConfig<ConfigObject>();
   const { t } = useTranslation();
-  const displayText = t('antecedentesPatologicos', 'Antecedentes Patológicos del Menor');
-  const headerTitle = t('antecedentesPatologicos', 'Antecedentes Patológicos del Menor');
+  const displayText = t('conditions', 'Condiciones y Antecedentes');
+  const headerTitle = t('conditions', 'Condiciones y Antecedentes');
   const urlLabel = t('seeAll', 'See all');
   const pageUrl = `\${openmrsSpaBase}/patient/${patientUuid}/chart/Conditions`;
   const layout = useLayoutType();
