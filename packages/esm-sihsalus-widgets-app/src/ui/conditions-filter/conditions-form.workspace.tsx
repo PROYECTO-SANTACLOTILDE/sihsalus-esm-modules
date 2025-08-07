@@ -101,14 +101,34 @@ const ConditionsForm: React.FC<ConditionFormProps> = ({
 
   const schema = createSchema(formContext, t);
 
+  const editedCategory = (():
+    | 'patologicos'
+    | 'diagnosticos'
+    | 'quirurgicos'
+    | 'hospitalizaciones'
+    | 'otros'
+    | undefined => {
+    const value = matchingCondition?.categoryText?.toLowerCase();
+    if (!value) return undefined;
+    if (
+      value === 'patologicos' ||
+      value === 'diagnosticos' ||
+      value === 'quirurgicos' ||
+      value === 'hospitalizaciones' ||
+      value === 'otros'
+    )
+      return value;
+    return undefined;
+  })();
+
   const defaultValues: Partial<ConditionsFormSchema> = {
     abatementDateTime: isEditing && matchingCondition?.abatementDateTime ? new Date(matchingCondition?.abatementDateTime) : null,
     conditionName: '',
     clinicalStatus: isEditing ? (matchingCondition?.clinicalStatus?.toLowerCase() ?? '') : '',
     onsetDateTime: isEditing && matchingCondition?.onsetDateTime ? new Date(matchingCondition?.onsetDateTime) : null,
     antecedentScope: 'personal',
-    personalCategory: undefined,
-    freeText: '',
+    personalCategory: isEditing ? editedCategory : undefined,
+    freeText: isEditing && editedCategory === 'otros' ? matchingCondition?.noteText ?? '' : '',
   };
 
   const methods = useForm<ConditionsFormSchema>({
@@ -173,7 +193,7 @@ const ConditionsForm: React.FC<ConditionFormProps> = ({
             name="antecedentScope"
             control={methods.control}
             render={({ field: { onChange, value } }) => (
-              <RadioButtonGroup name="antecedentScope" orientation="horizontal" onChange={onChange} valueSelected={value}>
+              <RadioButtonGroup className={`${styles.radioGroup} ${styles.scopeRow}`} name="antecedentScope" orientation="horizontal" onChange={onChange} valueSelected={value}>
                 <RadioButton id="scope-personal" labelText={t('personal', 'Personal')} value="personal" />
                 <RadioButton id="scope-family" labelText={t('family', 'Familia')} value="family" />
                 <RadioButton id="scope-social" labelText={t('social', 'Social')} value="social" />
@@ -188,7 +208,12 @@ const ConditionsForm: React.FC<ConditionFormProps> = ({
               name="personalCategory"
               control={methods.control}
               render={({ field: { onChange, value } }) => (
-                <RadioButtonGroup name="personalCategory" orientation="horizontal" onChange={onChange} valueSelected={value}>
+                <RadioButtonGroup
+                  className={`${styles.radioGroup} ${!isTablet ? styles.categoryGrid : ''}`}
+                  name="personalCategory"
+                  orientation={isTablet ? 'vertical' : 'horizontal'}
+                  onChange={onChange}
+                  valueSelected={value}>
                   <RadioButton id="cat-patologicos" labelText={t('pathological', 'Patológicos')} value="patologicos" />
                   <RadioButton id="cat-diagnosticos" labelText={t('definitiveDiagnoses', 'Diagnósticos definitivos')} value="diagnosticos" />
                   <RadioButton id="cat-quirurgicos" labelText={t('surgical', 'Quirúrgicos')} value="quirurgicos" />

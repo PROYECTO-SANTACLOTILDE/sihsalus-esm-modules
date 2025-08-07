@@ -11,6 +11,8 @@ export type Condition = {
   recordedDate: string;
   id: string;
   abatementDateTime?: string;
+  categoryText?: string;
+  noteText?: string;
 };
 
 export interface ConditionDataTableRow {
@@ -226,6 +228,8 @@ export function useConditionsSearch(conditionToLookup: string) {
 
 function mapConditionProperties(condition: FHIRCondition): Condition {
   const status = condition?.clinicalStatus?.coding[0]?.code;
+  const categoryText = condition?.category?.[0]?.text ?? undefined;
+  const noteText = condition?.note?.[0]?.text ?? undefined;
   return {
     clinicalStatus: status ? status.charAt(0).toUpperCase() + status.slice(1).toLowerCase() : '',
     conceptId: condition?.code?.coding[0]?.code,
@@ -234,6 +238,8 @@ function mapConditionProperties(condition: FHIRCondition): Condition {
     onsetDateTime: condition?.onsetDateTime,
     recordedDate: condition?.recordedDate,
     id: condition?.id,
+    categoryText,
+    noteText,
   };
 }
 
