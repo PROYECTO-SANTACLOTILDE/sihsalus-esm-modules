@@ -91,6 +91,8 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
   const session = useSession();
   const searchInputRef = useRef(null);
   const clinicalStatus = watch('clinicalStatus');
+  const personalCategory = watch('personalCategory');
+  const freeText = watch('freeText');
   const matchingCondition = conditions?.find((condition) => condition?.id === conditionToEdit?.id);
 
   const getFieldValue = (
@@ -123,18 +125,27 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
   }, []);
 
   const handleCreate = useCallback(async () => {
-    if (!selectedCondition) {
+    // If category is 'otros', build a pseudo condition from freeText
+    const selected = selectedCondition || (personalCategory === 'otros' && freeText
+      ? { uuid: config?.conditionFreeTextFallbackConceptUuid, display: freeText }
+      : null);
+
+    if (!selected) {
       return;
     }
 
-    const payload: FormFields = {
+    type ExtendedFormFields = FormFields & { category?: string; note?: string };
+
+    const payload: ExtendedFormFields = {
       clinicalStatus: getValues('clinicalStatus'),
-      conceptId: selectedCondition?.uuid,
-      display: selectedCondition?.display,
+      conceptId: selected?.uuid,
+      display: selected?.display,
       abatementDateTime: getValues('abatementDateTime') ? dayjs(getValues('abatementDateTime')).format() : null,
       onsetDateTime: getValues('onsetDateTime') ? dayjs(getValues('onsetDateTime')).format() : null,
       patientId: patientUuid,
       userId: session?.user?.uuid,
+      category: personalCategory,
+      note: personalCategory === 'otros' ? freeText : undefined,
     };
 
     try {
@@ -162,10 +173,15 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
     setErrorCreating,
     setIsSubmittingForm,
     t,
+    personalCategory,
+    freeText,
+    config?.conditionFreeTextFallbackConceptUuid,
   ]);
 
   const handleUpdate = useCallback(async () => {
-    const payload: FormFields = {
+    type ExtendedFormFields = FormFields & { category?: string; note?: string };
+
+    const payload: ExtendedFormFields = {
       clinicalStatus: isEditing ? getValues('clinicalStatus') : editableClinicalStatus,
       conceptId: matchingCondition?.conceptId,
       display: displayName,
@@ -177,6 +193,8 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
       onsetDateTime: getValues('onsetDateTime') ? dayjs(getValues('onsetDateTime')).format() : null,
       patientId: patientUuid,
       userId: session?.user?.uuid,
+      category: personalCategory,
+      note: personalCategory === 'otros' ? freeText : undefined,
     };
 
     try {
@@ -209,6 +227,8 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
     setIsSubmittingForm,
     t,
     editableAbatementDateTime,
+    personalCategory,
+    freeText,
   ]);
 
   const focusOnSearchInput = () => {

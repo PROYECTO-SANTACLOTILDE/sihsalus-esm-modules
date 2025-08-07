@@ -11,6 +11,8 @@ export type Condition = {
   recordedDate: string;
   id: string;
   abatementDateTime?: string;
+  categoryText?: string;
+  noteText?: string;
 };
 
 export interface ConditionDataTableRow {
@@ -56,6 +58,8 @@ type CreatePayload = {
     reference: string;
   };
   abatementDateTime?: string;
+  category?: Array<{ text?: string }>;
+  note?: Array<{ text?: string }>;
 };
 
 type EditPayload = CreatePayload & {
@@ -70,6 +74,8 @@ export type FormFields = {
   onsetDateTime: string;
   patientId: string;
   userId: string;
+  category?: string;
+  note?: string;
 };
 
 // Tipos para ConceptSet
@@ -222,6 +228,8 @@ export function useConditionsSearch(conditionToLookup: string) {
 
 function mapConditionProperties(condition: FHIRCondition): Condition {
   const status = condition?.clinicalStatus?.coding[0]?.code;
+  const categoryText = condition?.category?.[0]?.text ?? undefined;
+  const noteText = condition?.note?.[0]?.text ?? undefined;
   return {
     clinicalStatus: status ? status.charAt(0).toUpperCase() + status.slice(1).toLowerCase() : '',
     conceptId: condition?.code?.coding[0]?.code,
@@ -230,6 +238,8 @@ function mapConditionProperties(condition: FHIRCondition): Condition {
     onsetDateTime: condition?.onsetDateTime,
     recordedDate: condition?.recordedDate,
     id: condition?.id,
+    categoryText,
+    noteText,
   };
 }
 
@@ -264,6 +274,8 @@ export async function createCondition(payload: FormFields) {
     subject: {
       reference: `Patient/${payload.patientId}`,
     },
+    category: payload.category ? [{ text: payload.category }] : undefined,
+    note: payload.note ? [{ text: payload.note }] : undefined,
   };
 
   const res = await openmrsFetch(url, {
@@ -310,6 +322,8 @@ export async function updateCondition(conditionId, payload: FormFields) {
     subject: {
       reference: `Patient/${payload.patientId}`,
     },
+    category: payload.category ? [{ text: payload.category }] : undefined,
+    note: payload.note ? [{ text: payload.note }] : undefined,
   };
 
   const res = await openmrsFetch(url, {

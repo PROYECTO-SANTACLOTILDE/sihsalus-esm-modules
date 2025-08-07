@@ -237,7 +237,7 @@
     {
       "name": "conditions-filter-form-workspace",
       "component": "conditionsFilterWorkspace",
-      "title": "TEST",
+      "title": "Antecedentes",
       "type": "form"
     },
     {

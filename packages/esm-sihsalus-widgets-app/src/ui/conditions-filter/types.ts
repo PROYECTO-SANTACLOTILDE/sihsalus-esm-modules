@@ -38,6 +38,15 @@ export interface FHIRCondition {
     status: string;
   };
   abatementDateTime?: string;
+  category?: Array<{
+    text?: string;
+    coding?: Array<CodingData>;
+  }>;
+  note?: Array<{
+    text?: string;
+    time?: string;
+    authorString?: string;
+  }>;
 }
 
 export interface CodingData {

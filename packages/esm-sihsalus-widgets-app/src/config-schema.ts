@@ -27,6 +27,13 @@ export const configSchema = {
       },
     },
   },
+  // Fallback concept for free-text antecedents
+  conditionFreeTextFallbackConceptUuid: {
+    _type: Type.ConceptUuid,
+    _description:
+      'Concept UUID used when saving free-text antecedents (Otros). This should be a generic "Antecedente" concept.',
+    _default: '162169AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+  },
   // 1. ENCOUNTER TYPES
   encounterTypes: {
     _type: Type.Object,
@@ -975,6 +982,7 @@ export interface ConfigObject {
       description: string;
     };
   };
+  conditionFreeTextFallbackConceptUuid: string;
   encounterTypes: {
     alojamientoConjunto: string;
     specializedConsultation: string;
