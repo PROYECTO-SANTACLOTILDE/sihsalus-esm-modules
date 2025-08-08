@@ -23,12 +23,13 @@
   "lastDoseOn": "Last dose on",
   "lotNumber": "Lot number",
   "manufacturer": "Fabricante",
+  "noImmunizationsFound": "No se encontraron inmunizaciones",
   "note": "Note",
   "pleaseSelect": "Por favor, seleccione",
   "recentVaccination": "Vacunación reciente",
   "saving": "Saving",
+  "searchImmunizations": "Buscar inmunizaciones...",
   "seeAll": "Ver todo",
-  "selectImmunization": "Select immunization",
   "sequence": "Secuencia",
   "unknownVaccine": "Unknown vaccine",
   "vaccinationDate": "Fecha de vacunación",
@@ -36,6 +37,6 @@
   "vaccinationDateCannotBeInTheFuture": "Vaccination date cannot be in the future",
   "vaccinationSaved": "Vacunación guardada exitosamente",
   "vaccine": "Vacuna",
-  "vaccineBatchInformation": "Vaccine Batch Information",
-  "vaccineRequired": "Vaccine is required"
+  "vaccineBatchInformation": "Información del Lote de Vacuna",
+  "vaccineRequired": "La vacuna es requerida"
 }

@@ -1,0 +1,80 @@
+.autocompleteContainer {
+  position: relative;
+  width: 100%;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--cds-icon-secondary);
+  z-index: 1;
+}
+
+.dropdownContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--cds-background);
+  border: 1px solid var(--cds-border-subtle);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.optionsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.option {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: var(--cds-text-primary);
+  border-bottom: 1px solid var(--cds-border-subtle-01);
+  transition: background-color 0.15s ease;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover,
+  &.highlighted {
+    background-color: var(--cds-layer-hover);
+  }
+  
+  &.selected {
+    background-color: var(--cds-layer-selected);
+    color: var(--cds-text-primary);
+    font-weight: 500;
+  }
+  
+  &:focus {
+    outline: 2px solid var(--cds-focus);
+    outline-offset: -2px;
+  }
+}
+
+.noResults {
+  padding: 0.75rem 1rem;
+  color: var(--cds-text-secondary);
+  font-style: italic;
+  text-align: center;
+}
+
+// Override Carbon TextInput to accommodate the search icon
+:global(.cds--text-input) {
+  padding-right: 2.5rem;
+}

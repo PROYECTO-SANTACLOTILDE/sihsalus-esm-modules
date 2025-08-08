@@ -19,6 +19,7 @@ import {
 } from '@openmrs/esm-framework';
 import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
 import { DoseInput } from './components/dose-input.component';
+import ImmunizationAutocomplete from './components/immunization-autocomplete.component';
 import { immunizationFormSub } from './utils';
 import { mapToFHIRImmunizationResource } from './immunization-mapper';
 import { savePatientImmunization } from './immunizations.resource';
@@ -209,18 +210,14 @@ const ImmunizationsForm: React.FC<DefaultPatientWorkspaceProps> = ({
               name="vaccineUuid"
               control={control}
               render={({ field: { onChange, value } }) => (
-                <Dropdown
+                <ImmunizationAutocomplete
+                  immunizationsConceptSet={immunizationsConceptSet}
+                  value={value}
+                  onChange={onChange}
                   disabled={!!immunizationToEditMeta}
-                  id="immunization"
                   invalid={!!errors?.vaccineUuid}
                   invalidText={errors?.vaccineUuid?.message}
-                  itemToString={(item) =>
-                    immunizationsConceptSet?.answers.find((candidate) => candidate.uuid == item)?.display
-                  }
-                  items={immunizationsConceptSet?.answers?.map((item) => item.uuid) || []}
-                  label={t('selectImmunization', 'Select immunization')}
-                  onChange={(val) => onChange(val.selectedItem)}
-                  selectedItem={value}
+                  placeholder={t('searchImmunizations', 'Search immunizations...')}
                   titleText={t('immunization', 'Immunization')}
                 />
               )}
