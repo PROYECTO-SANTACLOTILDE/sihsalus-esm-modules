@@ -47,17 +47,17 @@ const FuaRequestTable: React.FC = () => {
     );
   };
 
-  if (isLoading) return <div>Cargando datos...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <div>{t('loading', 'Cargando datos...')}</div>;
+  if (error) return <div>{t('error', 'Error')}: {error.message}</div>;
 
   const headers = [
-    { key: 'name', header: 'Nombre del FUA' },
-    { key: 'estado', header: 'Estado' },
-    { key: 'uuid', header: 'UUID del FUA' },
-    { key: 'visitUuid', header: 'UUID de la Visita' },
-    { key: 'fechaCreacion', header: 'Fecha de Creación' },
-    { key: 'fechaActualizacion', header: 'Fecha de Actualización' },
-    { key: 'payload', header: 'Payload' },
+    { key: 'name', header: t('fuaRequestName', 'Nombre del FUA') },
+    { key: 'estado', header: t('fuaState', 'Estado') },
+    { key: 'uuid', header: t('fuaUuid', 'UUID del FUA') },
+    { key: 'visitUuid', header: t('visitUuid', 'UUID de la Visita') },
+    { key: 'fechaCreacion', header: t('creationDate', 'Fecha de Creación') },
+    { key: 'fechaActualizacion', header: t('updateDate', 'Fecha de Actualización') },
+    { key: 'payload', header: t('payload', 'Payload') },
   ];
 
   const rows =
@@ -109,7 +109,7 @@ const FuaRequestTable: React.FC = () => {
                                   e.stopPropagation();
                                   toggleExpand(index);
                                 }}>
-                                {expandedRowIndex === index ? 'Ocultar payload' : 'Ver payload'}
+                                {expandedRowIndex === index ? t('hidePayload', 'Ocultar payload') : t('showPayload', 'Ver payload')}
                               </button>
                             </TableCell>
                           );
@@ -122,12 +122,12 @@ const FuaRequestTable: React.FC = () => {
                         <div className={styles.payloadExpandedContent}>
                           {(() => {
                             const payload = data?.[index]?.payload;
-                            if (!payload) return <div>No hay datos de payload</div>;
+                            if (!payload) return <div>{t('noPayloadData', 'No hay datos de payload')}</div>;
                             try {
                               const parsed = typeof payload === 'string' ? JSON.parse(payload) : payload;
                               return renderJsonAsTable(parsed);
                             } catch (err) {
-                              return <div>Payload inválido o no es JSON</div>;
+                              return <div>{t('invalidPayload', 'Payload inválido o no es JSON')}</div>;
                             }
                           })()}
                         </div>

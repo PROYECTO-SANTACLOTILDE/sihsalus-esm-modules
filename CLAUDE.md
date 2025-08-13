@@ -45,6 +45,10 @@ yarn test-e2e               # End-to-end con Playwright
 
 # Verificación completa (lint + test + typescript)
 yarn verify
+
+# Extracción de traducciones
+yarn turbo extract-translations    # Extrae strings de traducción de todos los módulos
+yarn turbo extract-translations --filter="@pucp-gidis-hiisc/esm-[module-name]-app"  # Extrae de un módulo específico
 ```
 
 ### Gestión de Versiones
@@ -132,11 +136,48 @@ export const MaternalHealthComponent: React.FC = () => {
 
 ## Convenciones del Proyecto
 
+## Convenciones del Proyecto
+
 ### Naming Conventions
 - **Paquetes**: `esm-[feature-name]-app` 
 - **Componentes**: PascalCase con `.component.tsx`
 - **Tests**: `[component-name].test.tsx`
 - **Traducciones**: `en.json`, `es.json`
+
+### Internacionalización (i18n)
+- **Idiomas soportados**: Español (es), Inglés (en)
+- **Ubicación**: `packages/[module-name]/translations/`
+- **Configuración**: `tools/i18next-parser.config.js`
+- **Extracción automática**: 
+  ```bash
+  # Extraer todas las traducciones faltantes
+  yarn turbo extract-translations
+  
+  # Extraer traducciones de un módulo específico
+  yarn turbo extract-translations --filter="@pucp-gidis-hiisc/esm-maternal-and-child-health-app"
+  ```
+- **Uso en componentes**: 
+  ```typescript
+  import { useTranslation } from 'react-i18next';
+  const { t } = useTranslation();
+  // En JSX: {t('translationKey', 'Default text')}
+  ```
+- **Patrones de extracción**: El parser busca en archivos:
+  - `*.component.tsx`
+  - `*.extension.tsx` 
+  - `*.modal.tsx`
+  - `*.workspace.tsx`
+  - `*.hook.tsx` (en algunos módulos)
+  - `src/index.ts`
+- **Estado de traducciones**:
+  - ✅ **esm-maternal-and-child-health**: Completo (es/en)
+  - ✅ **esm-dyaku-app**: Completo (es/en)
+  - ✅ **esm-fua-app**: Completo (es/en) - Actualizado
+  - ✅ **esm-billing-app**: Completo (es/en) - Actualizado
+  - ✅ **esm-patient-search-app**: Completo (es/en)
+  - ✅ **esm-patient-registration-app**: Completo (es/en) - Actualizado
+  - ✅ **esm-patient-immunizations-app**: Completo (es/en) - Actualizado
+  - ✅ **esm-sihsalus-widgets-app**: Completo (es/en)
 
 ### Estructura de Archivos Estándar
 ```
@@ -178,6 +219,32 @@ yarn test --testNamePattern="ComponentName" --verbose
 # Actualizar snapshots
 yarn test --updateSnapshot
 ```
+
+### Problema: Traducciones faltantes o desactualizadas
+**Soluciones:**
+1. **Extraer traducciones automáticamente**:
+   ```bash
+   # Extraer todas las traducciones nuevas
+   yarn turbo extract-translations
+   
+   # Solo para un módulo específico
+   yarn turbo extract-translations --filter="@pucp-gidis-hiisc/esm-fua-app"
+   ```
+2. **Verificar configuración i18next**:
+   - Archivo de configuración: `tools/i18next-parser.config.js`
+   - Locales soportados: `['en', 'es']`
+   - Formato de salida: `translations/$LOCALE.json`
+3. **Flujo de trabajo de traducciones**:
+   ```bash
+   # 1. Desarrollar componente con claves de traducción
+   {t('newFeature', 'Nueva funcionalidad')}
+   
+   # 2. Extraer las nuevas claves
+   yarn turbo extract-translations --filter="@pucp-gidis-hiisc/esm-[module]-app"
+   
+   # 3. Verificar archivos generados en translations/
+   # 4. Completar traducciones faltantes manualmente
+   ```
 
 ## Desarrollo con Contexto SIHSALUS
 
