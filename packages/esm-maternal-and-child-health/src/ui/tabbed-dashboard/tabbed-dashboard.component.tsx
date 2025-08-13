@@ -34,6 +34,16 @@ const TabbedDashboard: React.FC<TabbedDashboardProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  /* These are used as dynamic titleKey props in various components
+  
+    t('neonatalCare', 'Neonatal Care');
+    t('labourAndDelivery', 'Labour and Delivery');
+    t('postnatalCare', 'Postnatal Care');
+    t('neonatalCareTabs', 'Neonatal Care Tabs');
+    t('labourAndDeliveryTabs', 'Labour and Delivery Tabs');
+    t('postnatalCareTabs', 'Postnatal Care Tabs');
+  }
+  */
   const translatedTabs = useMemo(() => tabs.map((tab) => ({ ...tab, label: t(tab.labelKey) })), [tabs, t]);
 
   return (

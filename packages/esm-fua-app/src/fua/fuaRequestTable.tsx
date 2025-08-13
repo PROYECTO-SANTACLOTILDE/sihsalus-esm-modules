@@ -48,7 +48,12 @@ const FuaRequestTable: React.FC = () => {
   };
 
   if (isLoading) return <div>{t('loading', 'Cargando datos...')}</div>;
-  if (error) return <div>{t('error', 'Error')}: {error.message}</div>;
+  if (error)
+    return (
+      <div>
+        {t('error', 'Error')}: {error.message}
+      </div>
+    );
 
   const headers = [
     { key: 'name', header: t('fuaRequestName', 'Nombre del FUA') },
@@ -109,7 +114,9 @@ const FuaRequestTable: React.FC = () => {
                                   e.stopPropagation();
                                   toggleExpand(index);
                                 }}>
-                                {expandedRowIndex === index ? t('hidePayload', 'Ocultar payload') : t('showPayload', 'Ver payload')}
+                                {expandedRowIndex === index
+                                  ? t('hidePayload', 'Ocultar payload')
+                                  : t('showPayload', 'Ver payload')}
                               </button>
                             </TableCell>
                           );
