@@ -1,0 +1,53 @@
+{
+  "allowedTools": [
+    "Bash",
+    "Read",
+    "Edit",
+    "MultiEdit",
+    "Write",
+    "LS",
+    "Glob",
+    "Grep",
+    "NotebookEdit",
+    "WebFetch",
+    "WebSearch",
+    "TodoWrite",
+    "ExitPlanMode",
+    "Task"
+  ],
+  "ignorePatterns": [
+    "node_modules/**",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    ".next/**",
+    "coverage/**",
+    "*.log",
+    ".env.local",
+    ".env.production"
+  ],
+  "permissions": {
+    "allow": [
+      "mcp__puppeteer__puppeteer_navigate",
+      "mcp__puppeteer__puppeteer_click",
+      "mcp__puppeteer__puppeteer_fill",
+      "mcp__puppeteer__puppeteer_screenshot",
+      "mcp__github__*",
+      "mcp__filesystem__*",
+      "Bash(claude mcp:*)",
+      "Bash(claude config list)",
+      "Bash(/permissions)"
+    ],
+    "deny": []
+  },
+  "mcpServers": {
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "env": {}
+    }
+  }
+}

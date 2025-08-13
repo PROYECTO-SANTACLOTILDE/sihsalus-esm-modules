@@ -1,416 +1,222 @@
-# CLAUDE.md - SIH SALUS ESM Modules
+# SIHSALUS ESM Modules - Guía para Claude/GitHub Copilot
 
-## 📋 Overview
+## Descripción del Proyecto
+Monorepo de módulos ESM (ECMAScript Modules) para OpenMRS 3.x específicamente diseñado para el sistema SIHSALUS del ecosistema de salud peruano. Contiene microfrontends especializados en integración DYAKU, FUA/HIS, y salud materno-infantil según directrices MINSA.
 
-This document serves as the comprehensive guide for working with the **SIH SALUS ESM Modules** - a specialized collection of OpenMRS 3.x microfrontends adapted for the Peruvian healthcare ecosystem and MINSA guidelines.
+## Comandos Esenciales
 
-## 🏗️ Project Architecture
-
-### Core Technologies
-- **OpenMRS 3.x Framework**: Base microfrontend platform
-- **React 18+ with TypeScript 5.x**: UI framework with static typing
-- **Module Federation**: Microfrontend architecture
-- **FHIR R4**: Healthcare interoperability standard
-- **Yarn 4.x with Workspaces**: Package management
-- **Turbo**: Monorepo build system
-- **Jest + Playwright**: Testing framework
-- **ESLint + Prettier**: Code quality tools
-
-### Project Structure
-```
-sihsalus-esm-modules/
-├── packages/                    # ESM modules
-│   ├── esm-billing-app/        # Billing and payment management
-│   ├── esm-dyaku-app/          # DYAKU integration (FHIR R4)
-│   ├── esm-fua-app/            # FUA and HIS management
-│   ├── esm-maternal-and-child-health/  # Maternal and child care
-│   ├── esm-patient-immunizations-app/  # Immunization tracking
-│   ├── esm-patient-registration-app/   # Patient registration
-│   ├── esm-patient-search-app/         # Advanced patient search
-│   └── esm-sihsalus-widgets-app/       # Shared UI components
-├── tools/                      # Build and development tools
-├── __mocks__/                  # Test mocks
-└── translations/               # i18n resources
-```
-
-## 🚀 Development Workflow
-
-### 1. Initial Setup
+### Desarrollo
 ```bash
-# Clone and install
-git clone <repository-url>
-cd sihsalus-esm-modules
+# Instalar dependencias
 yarn install
 
-# Configure environment
+# Configurar entorno
 cp example.env .env
-```
 
-### 2. Development Commands
-
-#### Start Development Server
-```bash
-# All modules (resource intensive)
+# Levantar TODOS los módulos (resource intensive - usar solo cuando sea necesario)
 yarn start
 
-# Specific module
-yarn start --sources 'packages/esm-maternal-and-child-health'
+#Usar backend http://hii1sc-qlty.inf.pucp.edu.pe
 
-# Multiple specific modules
+# Módulo específico (RECOMENDADO para desarrollo diario)
+yarn start --sources 'packages/esm-maternal-and-child-health'
+yarn start --sources 'packages/esm-patient-search-app'
+yarn start --sources 'packages/esm-patient-registration-app'
+yarn start --sources 'packages/esm-dyaku-app'
+yarn start --sources 'packages/esm-fua-app'
+yarn start --sources 'packages/esm-billing-app'
+
+# Múltiples módulos relacionados
 yarn start --sources 'packages/esm-patient-search-app' --sources 'packages/esm-patient-registration-app'
 ```
 
-#### Testing
+### Build y Testing
 ```bash
-# Unit tests
-yarn turbo test
+# Build completo con Turborepo
+yarn turbo build
 
-# E2E tests
-yarn test-e2e
+# Build específico
+yarn turbo build --filter=esm-maternal-and-child-health
 
-# Specific package tests
-yarn turbo test --filter=@pucp-gidis-hiisc/esm-maternal-and-child-health
-```
+# Testing
+yarn test                    # Unit tests con Jest
+yarn test:watch             # Tests en modo watch
+yarn test-e2e               # End-to-end con Playwright
 
-#### Code Quality
-```bash
-# Full verification (lint + typescript + test)
+# Verificación completa (lint + test + typescript)
 yarn verify
-
-# Linting
-yarn turbo lint
-
-# Type checking
-yarn turbo typescript
 ```
 
-### 3. Package-Specific Development
+### Gestión de Versiones
 ```bash
-# Navigate to specific package
-cd packages/esm-maternal-and-child-health
+# Releases automáticos
+yarn release:patch         # v1.0.0 -> v1.0.1
+yarn release:minor         # v1.0.0 -> v1.1.0  
+yarn release:major         # v1.0.0 -> v2.0.0
 
-# Development with OpenMRS CLI
-yarn start
-
-# Standalone webpack dev server
-yarn serve
-
-# Tests in watch mode
-yarn test:watch
+# Publishing
+yarn ci:prepublish         # Publish to @next tag
+yarn ci:publish            # Publish to @latest tag
 ```
 
-## 📦 Module Descriptions
+## Arquitectura del Proyecto
 
-### Core Healthcare Modules
+### Stack Tecnológico Principal
+- **Frontend**: React 18+ con TypeScript
+- **Build**: Webpack 5 + Module Federation
+- **Package Manager**: Yarn 3 con workspaces
+- **Monorepo**: Turborepo para builds optimizados
+- **Testing**: Jest + React Testing Library + Playwright
+- **UI Library**: Carbon Design System (@carbon/react)
+- **OpenMRS**: Framework ESM next
 
-#### `esm-maternal-and-child-health`
-- **Purpose**: Maternal and child care (CRED, Pregnant Mother, etc.)
-- **Key Features**:
-  - Growth charts and development tracking
-  - Immunization planning
-  - Obstetric history management
-  - Well-child care workflows
-- **Key Files**:
-  - `src/maternal-and-child-health/` - Main components
-  - `src/ui/growth-chart/` - Growth visualization
-  - `src/immunization-plan/` - Immunization management
-
-#### `esm-patient-search-app`
-- **Purpose**: Advanced patient search and management
-- **Key Features**:
-  - Compact search interface
-  - Advanced filtering
-  - Patient overlay management
-- **Key Files**:
-  - `src/compact-patient-search/` - Search components
-  - `src/patient-search-page/` - Full search page
-
-#### `esm-patient-registration-app`
-- **Purpose**: Patient registration and management
-- **Key Features**:
-  - Patient creation workflows
-  - Registration forms
-  - Patient linking
-- **Key Files**:
-  - `src/patient-registration/` - Registration components
-  - `src/widgets/` - Registration widgets
-
-### Integration Modules
-
-#### `esm-dyaku-app`
-- **Purpose**: DYAKU integration via FHIR R4
-- **Key Features**:
-  - Patient synchronization with National Registry
-  - FHIR R4 compliance
-  - Data validation
-- **Key Files**:
-  - `src/dyaku-patients/` - Patient sync components
-
-#### `esm-fua-app`
-- **Purpose**: FUA (Formato Único de Atención) and HIS management
-- **Key Features**:
-  - Case management
-  - HIS reporting
-  - Request tracking
-- **Key Files**:
-  - `src/fua/` - FUA components
-  - `src/hooks/useFuaRequests.ts` - Data management
-
-### Support Modules
-
-#### `esm-billing-app`
-- **Purpose**: Billing and payment management
-- **Key Features**:
-  - Bill creation and management
-  - Payment processing
-  - Invoice generation
-- **Key Files**:
-  - `src/billing-form/` - Billing forms
-  - `src/invoice/` - Invoice components
-
-#### `esm-sihsalus-widgets-app`
-- **Purpose**: Shared UI components and utilities
-- **Key Features**:
-  - Reusable components
-  - Common hooks
-  - Utility functions
-- **Key Files**:
-  - `src/ui/` - UI components
-  - `src/hooks/` - Shared hooks
-
-## 🧪 Testing Strategy
-
-### Unit Testing
-- **Framework**: Jest with React Testing Library
-- **Location**: `__tests__/` directories in each package
-- **Coverage**: Aim for >80% coverage
-- **Mocking**: Comprehensive mocks in `__mocks__/`
-
-### E2E Testing
-- **Framework**: Playwright
-- **Configuration**: `playwright.config.ts`
-- **Tests**: `tests/` directory
-- **Coverage**: Critical user workflows
-
-### Testing Commands
-```bash
-# Unit tests
-yarn turbo test
-
-# E2E tests
-yarn test-e2e
-
-# Coverage report
-yarn turbo test --coverage
-
-# Watch mode
-yarn turbo test --watch
+### Estructura de Módulos ESM
+```
+packages/
+├── esm-maternal-and-child-health/    # Salud materno-infantil (módulo principal)
+├── esm-dyaku-app/                   # Integración DYAKU FHIR R4
+├── esm-fua-app/                     # Formato Único de Atención
+├── esm-billing-app/                 # Facturación y reportes HIS
+├── esm-patient-search-app/          # Búsqueda de pacientes (fork mejorado)
+├── esm-patient-registration-app/    # Registro de pacientes (fork mejorado)
+├── esm-patient-immunizations-app/   # Inmunizaciones
+└── esm-sihsalus-widgets-app/       # Widgets comunes SIHSALUS
 ```
 
-## 🌐 Internationalization (i18n)
+## Patrones de Desarrollo ESM
 
-### Translation Structure
-- **Framework**: i18next with react-i18next
-- **Location**: `translations/` in each package
-- **Languages**: Spanish (es), English (en), Arabic (ar), Amharic (am)
-- **Extraction**: `yarn extract-translations`
-
-### Translation Workflow
-```bash
-# Extract new translations
-yarn extract-translations
-
-# Add new language
-# 1. Create new file: translations/xx.json
-# 2. Add to i18next configuration
-# 3. Update language selector
-```
-
-## 🔧 Configuration Management
-
-### Environment Variables
-```bash
-# OpenMRS Configuration
-OPENMRS_ESM_API_URL=http://localhost:8080/openmrs
-OPENMRS_ESM_LOGIN_URL=http://localhost:8080/openmrs/spa/login
-OPENMRS_ESM_API_TIMEOUT=60000
-
-# SIH SALUS Specific
-SIHSALUS_DYAKU_URL=https://api.dyaku.gob.pe/fhir/R4
-SIHSALUS_HIS_URL=https://his.minsa.gob.pe/api/v1
-SIHSALUS_MINSA_REPORTS_URL=https://reportes.minsa.gob.pe/api
-
-# Feature Flags
-ENABLE_DYAKU_INTEGRATION=true
-ENABLE_FUA_MODULE=true
-ENABLE_MATERNAL_TRACKING=true
-```
-
-### Module Configuration
-Each module has a `config-schema.ts` file defining:
-- Required configuration parameters
-- Default values
-- Validation rules
-- Feature flags
-
-## 📚 Key Development Patterns
-
-### 1. Component Architecture
+### Estructura Estándar de un Módulo
 ```typescript
-// Standard component structure
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useConfig } from '@openmrs/esm-framework';
+// src/index.ts - Entry point del módulo ESM
+export const importTranslation = () => import("./translations");
 
-interface ComponentProps {
-  // Props interface
+export function startupApp() {
+  defineConfigSchema(moduleName, configSchema);
 }
 
-export const Component: React.FC<ComponentProps> = ({ ...props }) => {
-  const { t } = useTranslation();
+export const routes = [
+  {
+    name: "maternal-health",
+    component: () => import("./maternal-health/maternal-health.component"),
+    route: /^\/patient\/.+\/maternal-health/,
+  },
+];
+```
+
+### Configuración de Módulo (config-schema.ts)
+```typescript
+export const configSchema = {
+  sections: {
+    _type: Type.Object,
+    _default: {
+      "antenatal-care": {
+        displayText: "Atención Prenatal",
+        headerTitle: "Atención Prenatal",
+      },
+    },
+  },
+};
+```
+
+### Componente Típico con Carbon + OpenMRS
+```typescript
+import { Button, DataTable } from "@carbon/react";
+import { useConfig, openmrsFetch } from "@openmrs/esm-framework";
+
+export const MaternalHealthComponent: React.FC = () => {
   const config = useConfig();
-  
-  // Component logic
-  
-  return (
-    // JSX
-  );
+  // Usar openmrsFetch para APIs
+  // Implementar según patrones Carbon Design System
 };
 ```
 
-### 2. Hook Patterns
+## Convenciones del Proyecto
+
+### Naming Conventions
+- **Paquetes**: `esm-[feature-name]-app` 
+- **Componentes**: PascalCase con `.component.tsx`
+- **Tests**: `[component-name].test.tsx`
+- **Traducciones**: `en.json`, `es.json`
+
+### Estructura de Archivos Estándar
+```
+src/
+├── components/           # Componentes reutilizables
+├── [feature-folders]/    # Funcionalidades específicas
+├── hooks/               # React hooks personalizados
+├── types/               # Definiciones TypeScript
+├── config-schema.ts     # Configuración del módulo
+├── constants.ts         # Constantes del módulo
+├── index.ts            # Entry point ESM
+└── root.component.tsx   # Componente raíz
+```
+
+## Troubleshooting Común
+
+### Problema: `yarn start` no levanta todos los módulos
+**Soluciones:**
+1. Usar desarrollo por módulo específico (recomendado): `yarn start --sources 'packages/esm-[module]'`
+2. Verificar recursos del sistema (RAM/CPU)
+3. Limpiar cache: `yarn turbo clean && rm -rf node_modules && yarn install`
+4. Verificar configuración OpenMRS CLI: `openmrs --version`
+
+### Problema: Errores de build en módulos específicos
+```bash
+# Verificar errores específicos
+yarn turbo build --filter=esm-[module-name] --verbose
+
+# Limpiar y rebuild
+yarn turbo clean --filter=esm-[module-name]
+yarn turbo build --filter=esm-[module-name]
+```
+
+### Problema: Tests fallando
+```bash
+# Test específico con logs detallados
+yarn test --testNamePattern="ComponentName" --verbose
+
+# Actualizar snapshots
+yarn test --updateSnapshot
+```
+
+## Desarrollo con Contexto SIHSALUS
+
+### Integración DYAKU (Padrón Nacional)
+- Usar endpoints FHIR R4 para sincronización
+- Validar datos según estándares MINSA
+- Implementar retry logic para APIs externas
+
+### Reportes FUA/HIS
+- Seguir formatos oficiales MINSA
+- Implementar validaciones específicas peruanas
+- Usar componentes de formularios estandarizados
+
+### Salud Materno-Infantil
+- Módulo principal del proyecto
+- Implementar según protocolo materno-infantil MINSA
+- Integrar con widgets de seguimiento
+
+## Datos de Prueba y Mocks
 ```typescript
-// Custom hooks for data management
-export const usePatientData = (patientId: string) => {
-  const { data, error, mutate } = useSWR(
-    patientId ? `/ws/rest/v1/patient/${patientId}` : null,
-    openmrsFetch
-  );
-  
-  return {
-    patient: data?.data,
-    isLoading: !data && !error,
-    error,
-    mutate
-  };
-};
+// Usar mocks centralizados desde __mocks__/
+import { mockPatient } from "../__mocks__/patient.mock";
+import { mockVisit } from "../__mocks__/visits.mock";
 ```
 
-### 3. Resource Management
-```typescript
-// API resource patterns
-export const patientResource = {
-  get: (uuid: string) => openmrsFetch(`/ws/rest/v1/patient/${uuid}`),
-  create: (patient: Patient) => openmrsFetch('/ws/rest/v1/patient', {
-    method: 'POST',
-    body: patient
-  }),
-  update: (uuid: string, patient: Patient) => openmrsFetch(`/ws/rest/v1/patient/${uuid}`, {
-    method: 'POST',
-    body: patient
-  })
-};
-```
-
-## 🚨 Common Issues and Solutions
-
-### 1. Module Federation Issues
+## Variables de Entorno Críticas
 ```bash
-# Clear module cache
-rm -rf node_modules/.cache
-yarn start --clear-cache
-
-# Rebuild all modules
-yarn turbo build --force
+# Copiar desde example.env
+OPENMRS_API_URL=          # URL del backend OpenMRS
+DYAKU_API_URL=            # URL API DYAKU MINSA  
+FUA_SERVICE_URL=          # URL servicio FUA
 ```
 
-### 2. TypeScript Errors
-```bash
-# Clear TypeScript cache
-rm -rf node_modules/.cache/typescript
-yarn turbo typescript --force
-```
-
-### 3. Translation Issues
-```bash
-# Regenerate translation files
-yarn extract-translations
-yarn build
-```
-
-### 4. Build Issues
-```bash
-# Clean build
-rm -rf packages/*/dist
-yarn turbo build --force
-```
-
-## 📖 Best Practices
-
-### 1. Code Organization
-- Keep components small and focused
-- Use TypeScript interfaces for all props
-- Implement proper error boundaries
-- Follow OpenMRS naming conventions
-
-### 2. Performance
-- Use React.memo for expensive components
-- Implement proper loading states
-- Optimize bundle size with code splitting
-- Use SWR for data fetching and caching
-
-### 3. Testing
-- Write tests for all new features
-- Mock external dependencies
-- Test error scenarios
-- Maintain high test coverage
-
-### 4. Accessibility
-- Use semantic HTML elements
-- Implement proper ARIA labels
-- Ensure keyboard navigation
-- Test with screen readers
-
-## 🔄 Release Process
-
-### Version Management
-```bash
-# Patch release
-yarn release:patch
-
-# Minor release
-yarn release:minor
-
-# Major release
-yarn release:major
-```
-
-### Publishing
-```bash
-# Publish to production
-yarn ci:publish
-
-# Publish to next channel
-yarn ci:prepublish
-```
-
-## 📞 Support and Resources
-
-### Documentation
-- [OpenMRS 3.x Documentation](https://openmrs.github.io/openmrs-esm-core/)
-- [React Documentation](https://react.dev/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-
-### Community
-- [OpenMRS Talk](https://talk.openmrs.org/)
-- [GitHub Issues](https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules/issues)
-
-### Development Tools
-- **IDE**: VS Code with OpenMRS extensions
-- **Debugging**: React DevTools, Redux DevTools
-- **API Testing**: Postman, Insomnia
-- **Performance**: Lighthouse, Bundle Analyzer
+## Enlaces Importantes
+- [OpenMRS 3.x Microfrontends](https://o3-dev.docs.openmrs.org/)
+- [Carbon Design System](https://carbondesignsystem.com/developing/frameworks/react/)
+- [Repositorio GitHub](https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules)
+- [Documentación MINSA](https://www.minsa.gob.pe/)
 
 ---
-
-**Remember**: This is a healthcare application. Always prioritize data accuracy, security, and user safety in your development work. 
+*Actualización: Agosto 13, 2025*
+*Proyecto: SIH SALUS PUCP-GIDIS-HIISC*
