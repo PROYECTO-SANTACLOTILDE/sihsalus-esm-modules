@@ -1,18 +1,17 @@
-import { Button, ButtonSet, Form, InlineLoading, InlineNotification } from '@carbon/react';
+import { Button, ButtonSet, Form, FormGroup, InlineLoading, InlineNotification, RadioButton, RadioButtonGroup, TextArea } from '@carbon/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLayoutType } from '@openmrs/esm-framework';
+import { launchWorkspace, useConfig, useLayoutType } from '@openmrs/esm-framework';
 import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { FormProvider, type SubmitHandler, useForm, Controller } from 'react-hook-form';
-import { type TFunction, useTranslation } from 'react-i18next';
+import { Controller, FormProvider, type SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import { z } from 'zod';
+import type { ConfigObject } from '../../config-schema';
 import styles from './conditions-form.scss';
 import ConditionsWidget from './conditions-widget.component';
 import { type ConditionDataTableRow, useConditions } from './conditions.resource';
-import { FormGroup, RadioButtonGroup, RadioButton, TextArea } from '@carbon/react';
-import { launchWorkspace, useConfig } from '@openmrs/esm-framework';
-import type { ConfigObject } from '../../config-schema';
 
 interface ConditionFormProps extends DefaultPatientWorkspaceProps {
   condition?: ConditionDataTableRow;

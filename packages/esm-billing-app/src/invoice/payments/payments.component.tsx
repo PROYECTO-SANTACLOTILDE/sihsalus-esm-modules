@@ -55,7 +55,7 @@ const Payments: React.FC<PaymentProps> = ({ bill, mutate, selectedLineItems }) =
   });
 
   const selectedLineItemsTotal = selectedLineItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  const totalAmountTendered = formValues?.reduce((curr: number, prev) => curr + Number(prev.amount) ?? 0, 0) ?? 0;
+  const totalAmountTendered = formValues?.reduce((curr: number, prev) => curr + (Number(prev.amount) ?? 0), 0) ?? 0;
   const amountDue = bill ? bill.totalAmount - selectedLineItemsTotal : 0;
   const clientBalance = bill ? bill.totalAmount - (bill.tenderedAmount + totalAmountTendered) : 0;
 
