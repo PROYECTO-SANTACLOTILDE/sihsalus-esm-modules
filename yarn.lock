@@ -3845,7 +3845,7 @@ __metadata:
     single-spa: "npm:^6.0.0"
     webpack: "npm:^5.99.9"
     xlsx: "npm:^0.18.5"
-    zod: "npm:^3.22.0"
+    zod: "npm:^3.24.1"
   peerDependencies:
     "@openmrs/esm-framework": 8.x
     "@openmrs/esm-patient-common-lib": 11.x
@@ -3876,7 +3876,7 @@ __metadata:
     single-spa: "npm:^6.0.0"
     webpack: "npm:^5.99.9"
     xlsx: "npm:^0.18.5"
-    zod: "npm:^3.22.0"
+    zod: "npm:^3.24.1"
   peerDependencies:
     "@openmrs/esm-framework": 8.x
     "@openmrs/esm-patient-common-lib": 11.x
@@ -3900,7 +3900,7 @@ __metadata:
     "@carbon/react": "npm:^1.83.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.1"
-    classnames: "npm:^2.3.2"
+    classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
     react-is: "npm:^19.1.0"
@@ -3927,9 +3927,9 @@ __metadata:
     "@carbon/react": "npm:^1.83.0"
     "@hookform/resolvers": "npm:^3.3.1"
     lodash-es: "npm:^4.17.21"
-    react-hook-form: "npm:^7.46.2"
+    react-hook-form: "npm:^7.56.1"
     webpack: "npm:^5.99.9"
-    zod: "npm:^3.23.8"
+    zod: "npm:^3.24.1"
   peerDependencies:
     "@openmrs/esm-framework": 8.x
     "@openmrs/esm-patient-common-lib": 11.x
@@ -3947,7 +3947,7 @@ __metadata:
   resolution: "@pucp-gidis-hiisc/esm-patient-registration-app@workspace:packages/esm-patient-registration-app"
   dependencies:
     "@carbon/react": "npm:^1.83.0"
-    classnames: "npm:^2.3.2"
+    classnames: "npm:^2.5.1"
     formik: "npm:^2.1.5"
     lodash-es: "npm:^4.17.15"
     uuid: "npm:^8.3.2"
@@ -3968,9 +3968,9 @@ __metadata:
   resolution: "@pucp-gidis-hiisc/esm-patient-search-app@workspace:packages/esm-patient-search-app"
   dependencies:
     "@carbon/react": "npm:^1.83.0"
-    classnames: "npm:^2.3.2"
+    classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.15"
-    react-hook-form: "npm:^7.54.0"
+    react-hook-form: "npm:^7.56.1"
     webpack: "npm:^5.99.9"
   peerDependencies:
     "@openmrs/esm-framework": 8.x
@@ -4063,7 +4063,7 @@ __metadata:
     single-spa: "npm:^6.0.0"
     webpack: "npm:^5.99.9"
     xlsx: "npm:^0.18.5"
-    zod: "npm:^3.22.0"
+    zod: "npm:^3.24.1"
   peerDependencies:
     "@openmrs/esm-framework": 8.x
     "@openmrs/esm-patient-common-lib": 11.x
@@ -9132,7 +9132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.5.1, classnames@npm:^2.3.2, classnames@npm:^2.5.1":
+"classnames@npm:2.5.1, classnames@npm:^2.5.1":
   version: 2.5.1
   resolution: "classnames@npm:2.5.1"
   checksum: 10/58eb394e8817021b153bb6e7d782cfb667e4ab390cb2e9dac2fc7c6b979d1cc2b2a733093955fc5c94aa79ef5c8c89f11ab77780894509be6afbb91dddd79d15
@@ -17395,7 +17395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.46.2, react-hook-form@npm:^7.54.0, react-hook-form@npm:^7.56.1":
+"react-hook-form@npm:^7.56.1":
   version: 7.66.1
   resolution: "react-hook-form@npm:7.66.1"
   peerDependencies:
@@ -21509,7 +21509,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.22.0, zod@npm:^3.23.8, zod@npm:^3.24.1":
+"zod@npm:^3.24.1":
   version: 3.25.76
   resolution: "zod@npm:3.25.76"
   checksum: 10/f0c963ec40cd96858451d1690404d603d36507c1fc9682f2dae59ab38b578687d542708a7fdbf645f77926f78c9ed558f57c3d3aa226c285f798df0c4da16995
