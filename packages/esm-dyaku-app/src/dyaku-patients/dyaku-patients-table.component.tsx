@@ -8,8 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from '@carbon/react';
-import { useLayoutType, usePagination } from '@openmrs/esm-framework';
 import { PatientChartPagination } from '@openmrs/esm-patient-common-lib';
+import { useLayoutType, usePagination } from '@openmrs/esm-framework';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import DyakuPatientSyncButton from './dyaku-patient-sync-button.component';
