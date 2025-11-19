@@ -3,7 +3,7 @@ export const ClinicalDashboardGroup = {
   title: 'Otros Servicios',
   slotName: 'patient-clinical-view-slot',
   isExpanded: false,
-};
+} as const;
 
 export const defaulterTracingDashboardMeta = {
   icon: 'defaulter-tracing',
@@ -12,7 +12,7 @@ export const defaulterTracingDashboardMeta = {
   title: 'Defaulter Tracing',
   path: 'defaulter-tracing-dashboard',
   config: {},
-};
+} as const;
 
 export const htsDashboardMeta = {
   icon: 'hts',
@@ -21,7 +21,7 @@ export const htsDashboardMeta = {
   title: 'HTS',
   path: 'hts-dashboard',
   config: {},
-};
+} as const;
 
 export const familyHistoryDashboardMeta = {
   icon: 'family-history',
@@ -30,7 +30,7 @@ export const familyHistoryDashboardMeta = {
   title: 'Family History',
   path: 'family-history',
   config: {},
-};
+} as const;
 
 export const contactListDashboardMeta = {
   icon: 'contact-list',
@@ -39,7 +39,7 @@ export const contactListDashboardMeta = {
   title: 'Contact List',
   path: 'contact-list',
   config: {},
-};
+} as const;
 
 export const otherRelationshipsDashboardMeta = {
   icon: 'other-relationships',
@@ -48,7 +48,7 @@ export const otherRelationshipsDashboardMeta = {
   title: 'Other Relationships',
   path: 'other-relationships',
   config: {},
-};
+} as const;
 
 export const relationshipsDashboardMeta = {
   icon: 'omrs-icon-pedestrian-family',
@@ -57,7 +57,7 @@ export const relationshipsDashboardMeta = {
   title: 'Relaciones',
   path: 'relationships',
   config: {},
-};
+} as const;
 
 export const caseManagementDashboardMeta = {
   name: 'case-management',
@@ -66,7 +66,7 @@ export const caseManagementDashboardMeta = {
   path: 'case-management',
   columns: 1,
   config: {},
-};
+} as const;
 
 export const caseEncounterDashboardMeta = {
   icon: 'omrs-icon-user-follow',
@@ -75,7 +75,7 @@ export const caseEncounterDashboardMeta = {
   title: 'Seguimiento del Paciente',
   path: 'case-management-encounters',
   config: {},
-};
+} as const;
 
 export const socialHistoryDashboardMeta = {
   icon: 'omrs-icon-sticky-note-add',
@@ -84,4 +84,4 @@ export const socialHistoryDashboardMeta = {
   title: 'Historia Social',
   path: 'social-history-dashboard',
   config: {},
-};
+} as const;

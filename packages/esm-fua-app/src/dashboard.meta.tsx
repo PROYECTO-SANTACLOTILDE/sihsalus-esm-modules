@@ -5,4 +5,4 @@ export const FuaRequestDashboardMeta = {
   path: 'fua-request',
   columns: 1,
   config: {},
-};
+} as const;
