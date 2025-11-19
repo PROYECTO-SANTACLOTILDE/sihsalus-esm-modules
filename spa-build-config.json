@@ -1,0 +1,6 @@
+{
+  "apiUrl": "https://hii1sc-dev.inf.pucp.edu.pe",
+  "spaPath": "/openmrs/spa",
+  "env": "development",
+  "offline": false
+}
