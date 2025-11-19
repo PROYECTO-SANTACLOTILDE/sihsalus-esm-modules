@@ -6,7 +6,7 @@ import {
   EmptyState,
   ErrorState,
   launchStartVisitPrompt,
-  useVisitOrOfflineVisit,
+  usePatientChartStore,
 } from '@openmrs/esm-patient-common-lib';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ const GrowthChartOverview: React.FC<GrowthChartProps> = ({ patient, patientUuid 
   const headerTitle = t('growthChart', 'Growth Chart');
   const displayText = t('relatedData', 'related data');
   const formWorkspace = 'newborn-anthropometric-form';
-  const { currentVisit } = useVisitOrOfflineVisit(patientUuid);
+  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
 
   // Estado para controlar el modo de visualización (percentiles vs z-scores)
   const [isPercentiles, setIsPercentiles] = useState(true);
