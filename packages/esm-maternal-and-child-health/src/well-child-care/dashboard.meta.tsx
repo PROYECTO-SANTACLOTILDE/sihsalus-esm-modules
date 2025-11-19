@@ -5,7 +5,7 @@ export const neonatalCareDashboardMeta = {
   path: 'neonatal-care-dashboard',
   moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
-};
+} as const;
 
 export const wellChildControlDashboardMeta = {
   icon: 'omrs-icon-calendar-heat-map',
@@ -14,7 +14,7 @@ export const wellChildControlDashboardMeta = {
   path: 'well-child-care-dashboard',
   moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
-};
+} as const;
 
 export const childImmunizationScheduleDashboardMeta = {
   icon: 'omrs-icon-syringe',
@@ -23,7 +23,7 @@ export const childImmunizationScheduleDashboardMeta = {
   path: 'child-immunization-schedule-dashboard',
   moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
-};
+} as const;
 
 export const wellChildCareNavGroup = {
   title: 'Curso de Vida del Niño',

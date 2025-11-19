@@ -5,7 +5,7 @@ export const prenatalDashboardMeta = {
   path: 'prenatal-care-dashboard',
   moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
-};
+} as const;
 
 export const labourAndDeliveryDashboardMeta = {
   icon: 'omrs-icon-hospital-bed',
@@ -14,7 +14,7 @@ export const labourAndDeliveryDashboardMeta = {
   path: 'labour-and-delivery-dashboard',
   moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
-};
+} as const;
 
 export const postnatalDashboardMeta = {
   icon: 'omrs-icon-mother',
@@ -23,7 +23,7 @@ export const postnatalDashboardMeta = {
   path: 'postnatal-care-dashboard',
   moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
   config: {},
-};
+} as const;
 
 export const maternalAndChildHealthNavGroup = {
   title: 'Madre Gestante',
