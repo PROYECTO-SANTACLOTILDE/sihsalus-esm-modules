@@ -4,6 +4,7 @@
     "description": "Gestión avanzada de búsqueda de pacientes para SIH SALUS",
     "browser": "dist/pucp-gidis-hiisc-esm-patient-search-app.js",
     "main": "src/index.ts",
+    "source": true,
     "license": "MPL-2.0",
     "scripts": {
         "start": "openmrs develop",
@@ -38,9 +39,9 @@
     },
     "dependencies": {
         "@carbon/react": "^1.83.0",
-        "classnames": "^2.3.2",
+        "classnames": "^2.5.1",
         "lodash-es": "^4.17.15",
-        "react-hook-form": "^7.54.0"
+        "react-hook-form": "^7.56.1"
     },
     "peerDependencies": {
         "@openmrs/esm-framework": "8.x",
