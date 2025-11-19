@@ -1,12 +1,12 @@
 export const ClinicalDashboardGroup = {
-  icon: 'clinical',
+  icon: 'omrs-icon-clinical',
   title: 'Otros Servicios',
   slotName: 'patient-clinical-view-slot',
   isExpanded: false,
 } as const;
 
 export const defaulterTracingDashboardMeta = {
-  icon: 'defaulter-tracing',
+  icon: 'omrs-icon-group',
   slot: 'patient-chart-defaulter-tracing-dashboard-slot',
   columns: 1,
   title: 'Defaulter Tracing',
@@ -15,7 +15,7 @@ export const defaulterTracingDashboardMeta = {
 } as const;
 
 export const htsDashboardMeta = {
-  icon: 'hts',
+  icon: 'omrs-icon-group',
   slot: 'patient-chart-hts-dashboard-slot',
   columns: 1,
   title: 'HTS',
@@ -24,7 +24,7 @@ export const htsDashboardMeta = {
 } as const;
 
 export const familyHistoryDashboardMeta = {
-  icon: 'family-history',
+  icon: 'omrs-icon-pedestrian-family',
   slot: 'patient-chart-family-history-slot',
   columns: 1,
   title: 'Family History',
@@ -33,7 +33,7 @@ export const familyHistoryDashboardMeta = {
 } as const;
 
 export const contactListDashboardMeta = {
-  icon: 'contact-list',
+  icon: 'omrs-icon-group',
   slot: 'patient-chart-relationships-slot',
   columns: 1,
   title: 'Contact List',
@@ -42,7 +42,7 @@ export const contactListDashboardMeta = {
 } as const;
 
 export const otherRelationshipsDashboardMeta = {
-  icon: 'other-relationships',
+  icon: 'omrs-icon-group',
   slot: 'patient-chart-relationships-slot',
   columns: 1,
   title: 'Other Relationships',

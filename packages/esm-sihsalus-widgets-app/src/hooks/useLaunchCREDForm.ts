@@ -8,11 +8,11 @@ import { type Form } from '../types';
  * Custom hook for launching CRED forms with workspace functionality
  * Similar to useLaunchVitalsAndBiometricsForm but specific to CRED forms
  */
-export function useLaunchCREDForm() {
+export function useLaunchCREDForm(patientUuid: string) {
   const config = useConfig<ConfigObject>();
 
   // Use the form entry workspace for CRED forms
-  const launchCREDFormWorkspace = useLaunchWorkspaceRequiringVisit('patient-form-entry-workspace');
+  const launchCREDFormWorkspace = useLaunchWorkspaceRequiringVisit(patientUuid, 'patient-form-entry-workspace');
 
   const launchCREDForm = useCallback(
     (form: Form, encounterUuid: string = '') => {

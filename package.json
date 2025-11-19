@@ -7,7 +7,7 @@
         "packages/*"
     ],
     "scripts": {
-        "start": "openmrs develop --sources 'packages/esm-maternal-and-child-health' --sources 'packages/esm-fua-app' --sources 'packages/esm-sihsalus-widgets-app' --sources 'packages/esm-dyaku-app' --sources 'packages/esm-patient-immunizations-app' --sources 'packages/esm-patient-registration-app' --sources 'packages/esm-patient-search-app'",
+        "start": "openmrs develop --sources 'packages/esm-maternal-and-child-health' --sources 'packages/esm-fua-app' --sources 'packages/esm-dyaku-app' --sources 'packages/esm-patient-immunizations-app' --sources 'packages/esm-patient-registration-app' --sources 'packages/esm-patient-search-app'",
         "build": "yarn turbo run build --concurrency=1",
         "ci:publish": "yarn workspaces foreach --all --topological --exclude @pucp-gidis-hiisc/esm-sihsalus-modules npm publish --access public --tag latest",
         "ci:prepublish": "yarn workspaces foreach --all --topological --exclude @pucp-gidis-hiisc/esm-sihsalus-modules npm publish --access public --tag next",
