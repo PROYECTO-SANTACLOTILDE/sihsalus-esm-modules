@@ -1,0 +1,15 @@
+.actionBtns {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 0;
+}
+
+.extensionSlot {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
