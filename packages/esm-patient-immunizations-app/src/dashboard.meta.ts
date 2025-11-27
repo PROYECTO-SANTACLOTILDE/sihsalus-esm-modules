@@ -3,4 +3,4 @@ export const dashboardMeta = {
   path: 'Immunizations',
   title: 'Immunizations',
   icon: 'omrs-icon-syringe',
-};
+} as const;

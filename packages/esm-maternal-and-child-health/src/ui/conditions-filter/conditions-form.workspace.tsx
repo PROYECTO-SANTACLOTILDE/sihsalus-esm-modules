@@ -5,7 +5,8 @@ import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-l
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form';
-import { type TFunction, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import { z } from 'zod';
 import styles from './conditions-form.scss';
 import ConditionsWidget from './conditions-widget.component';

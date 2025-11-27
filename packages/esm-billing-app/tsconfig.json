@@ -1,5 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "include": ["src/**/*", "../esm-fua-app/src/hooks/useFuaRequests.ts", "../esm-fua-app/src/constant.ts"],
-  "exclude": ["src/**/*.test.tsx"]
-}

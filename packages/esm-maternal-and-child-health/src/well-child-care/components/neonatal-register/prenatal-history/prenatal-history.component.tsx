@@ -17,7 +17,7 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  useVisitOrOfflineVisit,
+  usePatientChartStore,
   launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
 import { AddIcon, launchWorkspace, useConfig, useLayoutType } from '@openmrs/esm-framework';
@@ -38,7 +38,7 @@ const PrenatalAntecedents: React.FC<NeonatalSummaryProps> = ({ patientUuid }) =>
   const config = useConfig<ConfigObject>();
   const { data: formattedObs, isLoading, error, mutate } = usePrenatalAntecedents(patientUuid);
   const { data: conceptUnits } = usePrenatalConceptMetadata();
-  const { currentVisit } = useVisitOrOfflineVisit(patientUuid);
+  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
 
   const launchPerinatalForm = useCallback(() => {
     if (!currentVisit) {

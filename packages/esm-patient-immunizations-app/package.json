@@ -1,6 +1,6 @@
 {
   "name": "@pucp-gidis-hiisc/esm-patient-immunizations-app",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "license": "MPL-2.0",
   "description": "Patient immunizations microfrontend for the SIHSALUS SPA",
   "browser": "dist/openmrs-esm-patient-immunizations-app.js",
@@ -41,15 +41,15 @@
     "@carbon/react": "^1.83.0",
     "@hookform/resolvers": "^3.3.1",
     "lodash-es": "^4.17.21",
-    "react-hook-form": "^7.46.2",
-    "zod": "^3.23.8"
+    "react-hook-form": "^7.56.1",
+    "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "@openmrs/esm-framework": "6.x",
-    "@openmrs/esm-patient-common-lib": "10.x",
+    "@openmrs/esm-framework": "8.x",
+    "@openmrs/esm-patient-common-lib": "11.x",
     "dayjs": "1.x",
     "react": "18.x",
-    "react-i18next": "11.x",
+    "react-i18next": "15.x",
     "react-router-dom": "6.x",
     "rxjs": "6.x",
     "swr": "2.x"

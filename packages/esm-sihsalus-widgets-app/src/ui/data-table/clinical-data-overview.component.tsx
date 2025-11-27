@@ -6,7 +6,7 @@ import {
   EmptyState,
   ErrorState,
   launchStartVisitPrompt,
-  useVisitOrOfflineVisit,
+  usePatientChartStore,
 } from '@openmrs/esm-patient-common-lib';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -81,7 +81,7 @@ const ClinicalDataOverview: React.FC<ClinicalDataOverviewProps> = ({
   const { t } = useTranslation();
   const [chartView, setChartView] = useState(false);
   const isTablet = useLayoutType() === 'tablet';
-  const { currentVisit } = useVisitOrOfflineVisit(patientUuid);
+  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
 
   const launchForm = useCallback(() => {
     if (!currentVisit) {

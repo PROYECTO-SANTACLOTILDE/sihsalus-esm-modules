@@ -7,10 +7,14 @@ import {
 import React, { type ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const CREDFormActionButton: React.FC = () => {
+interface CREDFormActionButtonProps {
+  patientUuid: string;
+}
+
+const CREDFormActionButton: React.FC<CREDFormActionButtonProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const { workspaces } = useWorkspaces();
-  const launchCREDFormsWorkspace = useLaunchWorkspaceRequiringVisit('cred-forms-workspace');
+  const launchCREDFormsWorkspace = useLaunchWorkspaceRequiringVisit(patientUuid, 'cred-forms-workspace');
 
   const formEntryWorkspaces = workspaces.filter((w) => w.name === formEntryWorkspace);
   const recentlyOpenedForm = formEntryWorkspaces[0];

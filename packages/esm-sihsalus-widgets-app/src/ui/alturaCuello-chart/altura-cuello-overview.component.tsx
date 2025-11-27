@@ -5,7 +5,7 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  useVisitOrOfflineVisit,
+  usePatientChartStore,
   launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
 import { getPatientName, launchWorkspace, useConfig } from '@openmrs/esm-framework';
@@ -29,7 +29,7 @@ const AlturaCuelloOverview: React.FC<AlturaCuelloOverviewProps> = ({ patient, pa
   const displayText = t('noMeasurementDataAvailable', 'No hay datos de mediciones disponibles');
   //const formWorkspace = config.formsList?.prenatalCare || 'prenatal-measurements-form';
 
-  const { currentVisit } = useVisitOrOfflineVisit(patientUuid);
+  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
 
   const launchForm = useCallback(() => {
     if (!currentVisit) {

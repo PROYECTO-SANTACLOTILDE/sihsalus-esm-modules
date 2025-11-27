@@ -7,7 +7,7 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  useVisitOrOfflineVisit,
+  usePatientChartStore,
   launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
 import { usePrenatalAntecedents, usePrenatalConceptMetadata } from '../../hooks/usePrenatalAntecedents';
@@ -30,7 +30,7 @@ const ObstetricHistoryBase: React.FC<ObstetricHistoryBaseProps> = ({ patientUuid
   const config = useConfig<ConfigObject>();
   const { data: formattedObs, isLoading, error, mutate, isValidating } = usePrenatalAntecedents(patientUuid);
   const { data: conceptUnits } = usePrenatalConceptMetadata();
-  const { currentVisit } = useVisitOrOfflineVisit(patientUuid);
+  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
 
   const launchObstetricForm = useCallback(() => {
     if (!currentVisit) {

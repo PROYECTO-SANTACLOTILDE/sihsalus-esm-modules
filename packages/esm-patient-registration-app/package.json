@@ -1,9 +1,10 @@
 {
     "name": "@pucp-gidis-hiisc/esm-patient-registration-app",
-    "version": "1.0.6",
+    "version": "1.1.0",
     "description": "Gestión avanzada de registro de pacientes para SIH SALUS",
     "browser": "dist/pucp-gidis-hiisc-esm-patient-registration-app.js",
     "main": "src/index.ts",
+    "source": true,
     "license": "MPL-2.0",
     "scripts": {
         "start": "openmrs develop",
@@ -38,17 +39,17 @@
     },
     "dependencies": {
         "@carbon/react": "^1.83.0",
-        "classnames": "^2.3.2",
+        "classnames": "^2.5.1",
         "formik": "^2.1.5",
         "lodash-es": "^4.17.15",
         "uuid": "^8.3.2",
         "yup": "^0.29.1"
     },
     "peerDependencies": {
-        "@openmrs/esm-framework": "6.x",
+        "@openmrs/esm-framework": "8.x",
         "dayjs": "1.x",
         "react": "18.x",
-        "react-i18next": "11.x",
+        "react-i18next": "15.x",
         "react-router-dom": "6.x",
         "swr": "2.x"
     },
