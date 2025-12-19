@@ -18,7 +18,8 @@ import { ClaimManagementHeader } from './case-management-header';
 import styles from './fua-request-table.scss';
 
 const FuaRequestTable: React.FC = () => {
-  const { data, isLoading, error } = useFuaRequests();
+  const { data, isLoading, error, generateFua } = useFuaRequests();
+
   const [expandedRowIndex, setExpandedRowIndex] = useState<number | null>(null);
   const { t } = useTranslation();
 
@@ -105,11 +106,29 @@ const FuaRequestTable: React.FC = () => {
                             <TableCell key={cell.id} className={styles.payloadCell}>
                               <button
                                 className={styles.payloadButton}
-                                onClick={(e) => {
+                                onClick={async (e) => {
                                   e.stopPropagation();
-                                  toggleExpand(index);
+
+                                  const visitUuid = data[index].visitUuid;
+
+                                  try {
+                                    const html = await generateFua(visitUuid);
+
+                                    // Convertimos el HTML a un Blob
+                                    const blob = new Blob([html], { type: "text/html" });
+
+                                    // Creamos una URL temporal del Blob
+                                    const url = URL.createObjectURL(blob);
+
+                                    // Abrimos en nueva pestaña
+                                    window.open(url, "_blank");
+
+                                  } catch (err) {
+                                    console.error("Error generando FUA:", err);
+                                    alert("No se pudo generar el FUA");
+                                  }
                                 }}>
-                                {expandedRowIndex === index ? 'Ocultar payload' : 'Ver payload'}
+                                Mostrar FUA
                               </button>
                             </TableCell>
                           );
