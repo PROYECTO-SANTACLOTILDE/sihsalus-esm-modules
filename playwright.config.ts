@@ -1,6 +1,8 @@
 import { devices, type PlaywrightTestConfig } from '@playwright/test';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { config as dotenvConfig } from 'dotenv';
+import { resolve } from 'node:path';
+dotenvConfig({ path: resolve(process.cwd(), '.env') });
+dotenvConfig();
 
 // See https://playwright.dev/docs/test-configuration.
 const config: PlaywrightTestConfig = {
@@ -9,7 +11,7 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 40 * 1000,
   },
-  fullyParallel: true,
+  fullyParallel: !process.env.CI,
   forbidOnly: !!process.env.CI,
   retries: 0,
   reporter: process.env.CI ? [['junit', { outputFile: 'results.xml' }], ['html']] : [['html']],
@@ -25,6 +27,7 @@ const config: PlaywrightTestConfig = {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        channel: 'chromium',
       },
     },
   ],

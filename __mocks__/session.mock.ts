@@ -1,4 +1,4 @@
-export const mockSession = {
+export const mockSessionDataResponse = {
   data: {
     authenticated: true,
     locale: 'en_GB',
@@ -14,8 +14,8 @@ export const mockSession = {
     },
     sessionLocation: {
       uuid: 'b1a8b05e-3542-4037-bbd3-998ee9c40574',
-      display: 'Test Location',
-      name: 'Test Location',
+      display: 'Inpatient Ward',
+      name: 'Inpatient Ward',
       description: null,
       address1: null,
       address2: null,
@@ -30,8 +30,24 @@ export const mockSession = {
       address4: null,
       address5: null,
       address6: null,
-      tags: [],
-      parentLocation: null,
+      tags: [
+        {
+          uuid: '8d4626ca-7abd-42ad-be48-56767bbcf272',
+          display: 'Transfer Location',
+        },
+        {
+          uuid: 'b8bbf83e-645f-451f-8efe-a0db56f09676',
+          display: 'Login Location',
+        },
+        {
+          uuid: '1c783dca-fd54-4ea8-a0fc-2875374e9cb6',
+          display: 'Admission Location',
+        },
+      ],
+      parentLocation: {
+        uuid: 'aff27d58-a15c-49a6-9beb-d30dcfc0c66e',
+        display: 'Amani Hospital',
+      },
       childLocations: [],
       retired: false,
       attributes: [],
@@ -44,28 +60,63 @@ export const mockSession = {
       address13: null,
       address14: null,
       address15: null,
+      links: [],
     },
     user: {
-      uuid: 'ddd5fa89-48a6-432e-abb8-0d11b4be7e4f',
+      uuid: '45ce6c2e-dd5a-11e6-9d9c-0242ac150002',
       display: 'admin',
-      username: 'admin',
+      username: '',
       systemId: 'admin',
-      userProperties: {},
+      userProperties: {
+        loginAttempts: '0',
+      },
       person: {
-        uuid: 'ddd5fa89-48a6-432e-abb8-0d11b4be7e4f',
+        uuid: '0775e6b7-f439-40e5-87a3-2bd11f3b9ee5',
         display: 'Test User',
       },
-      privileges: [],
+      privileges: [
+        {
+          uuid: '62431c71-5244-11ea-a771-0242ac160002',
+          display: 'Manage Appointment Services',
+          name: 'Manage Appointment Services',
+          links: [],
+        },
+        {
+          uuid: '6206682c-5244-11ea-a771-0242ac160002',
+          display: 'Manage Appointments',
+          name: 'Manage Appointments',
+          links: [],
+        },
+        {
+          uuid: '6280ff58-5244-11ea-a771-0242ac160002',
+          display: 'Manage Appointment Specialities',
+          name: 'Manage Appointment Specialities',
+          links: [],
+        },
+      ],
       roles: [
         {
           uuid: '8d94f852-c2cc-11de-8d13-0010c6dffd0f',
           display: 'System Developer',
+          name: 'System Developer',
+          links: [],
+        },
+        {
+          uuid: '62c195c5-5244-11ea-a771-0242ac160002',
+          display: 'Bahmni Role',
+          name: 'Bahmni Role',
+          links: [],
+        },
+        {
+          uuid: '8d94f280-c2cc-11de-8d13-0010c6dffd0f',
+          display: 'Provider',
+          name: 'Provider',
           links: [],
         },
       ],
       retired: false,
       locale: 'en_GB',
-      allowedLocales: ['en_GB', 'es'],
+      allowedLocales: ['en_GB'],
     },
     sessionId: 'D4F7D4D4-6A6D-4D4D-8D4D-4D4D4D4D4D4D',
   },

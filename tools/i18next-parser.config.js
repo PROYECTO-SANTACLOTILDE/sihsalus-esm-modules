@@ -1,5 +1,5 @@
 module.exports = {
-  contextSeparator: '_',
+  contextSeparator: false,
   // Key separator used in your translation keys
 
   createOldCatalogs: false,
@@ -8,9 +8,9 @@ module.exports = {
   defaultNamespace: 'translations',
   // Default namespace used in your i18next config
 
-  defaultValue: '',
+  defaultValue: (locale, namespace, key, value) => value || key,
   // Default value to give to empty keys
-  // You may also specify a function accepting the locale, namespace, and key as arguments
+  // You may also specify a function accepting the locale, namespace, key, and value as arguments
 
   indentation: 2,
   // Indentation of the catalog files
@@ -42,7 +42,7 @@ module.exports = {
   lineEnding: 'lf',
   // Control the line ending. See options at https://github.com/ryanve/eol
 
-  locales: ['en', 'es'],
+  locales: ['en'],
   // An array of the locales in your applications
 
   namespaceSeparator: ':',

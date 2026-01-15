@@ -1,57 +1,41 @@
-import React, { type ReactElement } from 'react';
-import { Route, Routes, MemoryRouter } from 'react-router-dom';
+/* eslint-disable testing-library/no-node-access */
+import React from 'react';
 import { SWRConfig } from 'swr';
-import { type RenderOptions, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 
-const swrWrapper = ({ children }) => {
+// This component wraps whatever component is passed to it with an SWRConfig context which provides a global configuration for all SWR hooks.
+const swrWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <SWRConfig
       value={{
+        // Sets the `dedupingInterval` to 0 - we don't need to dedupe requests in our test environment.
         dedupingInterval: 0,
+        // Returns a new Map object, effectively wrapping our application with an empty cache provider. This is useful for resetting the SWR cache between test cases.
         provider: () => new Map(),
-      }}>
+      }}
+    >
       {children}
     </SWRConfig>
   );
 };
 
-const withSwr = (ui: ReactElement) => (
-  <SWRConfig value={{ dedupingInterval: 0, provider: () => new Map() }}>{ui}</SWRConfig>
-);
+// Render the provided component within the wrapper we created above
+export const renderWithSwr = (ui, options?) => render(ui, { wrapper: swrWrapper, ...options });
 
-const renderWithSwr = (ui: ReactElement, options?: Omit<RenderOptions, 'queries'>) =>
-  render(ui, { wrapper: swrWrapper, ...options });
-
-const renderWithContext = <T,>(
-  ui: ReactElement,
-  ContextProvider: React.ComponentType<{ value: T; children: React.ReactNode }>,
-  contextValue: T,
-) => {
-  return render(<ContextProvider value={contextValue}>{ui}</ContextProvider>);
-};
-
-const renderWithRouter = (component: React.ReactElement, initialRoute = '/') => {
-  return render(
-    <MemoryRouter initialEntries={[initialRoute]}>
-      <Routes>
-        <Route path="/" element={component} />
-      </Routes>
-    </MemoryRouter>,
-  );
-};
-
-function waitForLoadingToFinish() {
-  return waitForElementToBeRemoved(() => [...screen.queryAllByRole('progressbar')], {
-    timeout: 4000,
-  });
+// Helper function that waits for a loading state to disappear from the screen
+export function waitForLoadingToFinish() {
+  if (screen.queryAllByRole('progressbar').length) {
+    return waitForElementToBeRemoved(() => [...screen.queryAllByRole('progressbar')], {
+      timeout: 4000,
+    });
+  }
 }
 
 // Custom matcher that queries elements split up by multiple HTML elements by text
-function getByTextWithMarkup(text: RegExp | string) {
+export function getByTextWithMarkup(text: RegExp | string) {
   try {
     return screen.getByText((content, node) => {
       const hasText = (node: Element) => node.textContent === text || node.textContent.match(text);
-      // eslint-disable-next-line testing-library/no-node-access
       const childrenDontHaveText = Array.from(node.children).every((child) => !hasText(child as HTMLElement));
       return hasText(node) && childrenDontHaveText;
     });
@@ -60,7 +44,7 @@ function getByTextWithMarkup(text: RegExp | string) {
   }
 }
 
-const mockPatient = {
+export const mockPatient: fhir.Patient = {
   resourceType: 'Patient',
   id: '8673ee4f-e2ab-4077-ba55-4980f408773e',
   extension: [
@@ -78,12 +62,14 @@ const mockPatient = {
       id: '1f0ad7a1-430f-4397-b571-59ea654a52db',
       use: 'secondary',
       system: 'Old Identification Number',
+      type: { text: 'Old Identification Number', coding: [{ code: 'Old Identification Number' }] },
       value: '100732HE',
     },
     {
-      id: '1f0ad7a1-430f-4397-b571-59ea654a52db',
+      id: 'ceda35a8-a445-455d-9928-ac088692190a',
       use: 'usual',
       system: 'OpenMRS ID',
+      type: { text: 'OpenMRS ID', coding: [{ code: 'OpenMRS ID' }] },
       value: '100GEJ',
     },
   ],
@@ -94,16 +80,31 @@ const mockPatient = {
       use: 'usual',
       family: 'Wilson',
       given: ['John'],
-      text: 'Wilson, John',
     },
   ],
   gender: 'male',
   birthDate: '1972-04-04',
   deceasedBoolean: false,
-  address: [],
+  address: [
+    {
+      id: '0c244eae-85c8-4cc9-b168-96b51f864e77',
+      use: 'home',
+      line: ['Address10351'],
+      city: 'City0351',
+      state: 'State0351tested',
+      postalCode: '60351',
+      country: 'Country0351',
+    },
+  ],
+  telecom: [
+    {
+      system: 'Mobile',
+      value: '+25467388299499',
+    },
+  ],
 };
 
-const mockPatientWithLongName = {
+export const mockPatientWithLongName = {
   ...mockPatient,
   name: [
     {
@@ -111,34 +112,8 @@ const mockPatientWithLongName = {
       use: 'usual',
       family: 'family name',
       given: ['Some very long given name'],
-      text: 'family name, Some very long given name',
     },
   ],
 };
 
-const mockPatientWithoutFormattedName = {
-  ...mockPatient,
-  name: [
-    {
-      id: 'efdb246f-4142-4c12-a27a-9be60b9592e9',
-      use: 'usual',
-      family: 'family name',
-      given: ['given', 'middle'],
-    },
-  ],
-};
-
-const patientChartBasePath = `/patient/${mockPatient.id}/chart`;
-
-export {
-  getByTextWithMarkup,
-  mockPatient,
-  mockPatientWithLongName,
-  mockPatientWithoutFormattedName,
-  patientChartBasePath,
-  renderWithContext,
-  renderWithSwr,
-  renderWithRouter,
-  waitForLoadingToFinish,
-  withSwr,
-};
+export const patientChartBasePath = `/patient/${mockPatient.id}/chart`;

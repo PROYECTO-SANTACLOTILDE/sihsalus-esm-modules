@@ -1,0 +1,156 @@
+name: OpenMRS CI
+
+on:
+  push:
+    branches: [main, 'patch/*']
+  pull_request:
+    branches: [main]
+  release:
+    types:
+      - created
+
+env:
+  TURBO_API: 'http://127.0.0.1:9080'
+  TURBO_TOKEN: 'turbo-token'
+  TURBO_TEAM: ${{ github.repository_owner }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+
+      - name: 📦 Install dependencies
+        run: yarn install --immutable
+
+      - name: 🚀 Setup a local cache server for Turborepo
+        uses: felixmosh/turborepo-gh-artifacts@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ env.TURBO_TOKEN }}
+
+      - name: 🔍 Run lint, type checks and tests
+        run: yarn verify
+
+      - name: 🏗️ Run build
+        run: yarn turbo run build --color --concurrency=5
+
+  pre_release:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    if: ${{ github.event_name == 'push' }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 📦 Install dependencies
+        run: yarn install --immutable
+
+      - name: 🚀 Setup local cache server for Turborepo
+        uses: felixmosh/turborepo-gh-artifacts@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ env.TURBO_TOKEN }}
+
+      - name: 🏷️ Version (main)
+        if: github.ref_name == 'main'
+        run: yarn workspaces foreach --all --topological --exclude @openmrs/esm-patient-chart version "$(node -e "console.log(require('semver').inc(require('./package.json').version, 'patch'))")-pre.${{ github.run_number }}"
+
+      - name: 🏷️ Version (patch)
+        if: startsWith(github.ref_name, 'patch/')
+        run: yarn workspaces foreach --all --topological --exclude @openmrs/esm-patient-chart version "$(node -e "console.log(require('semver').inc(require('./package.json').version, 'patch'))")-patch.${{ github.run_number }}"
+
+      - name: 🏗️ Build
+        run: yarn turbo run build --color --concurrency=5
+
+      - name: 🔧 Configure Git
+        run: git config user.email "info@openmrs.org" && git config user.name "OpenMRS CI"
+      - name: 💾 Commit changes
+        run: git add . && git commit -m "Prerelease version" --no-verify
+
+      - name: 📤 Pre-release (main)
+        if: github.ref_name == 'main'
+        run: yarn config set npmAuthToken "${NODE_AUTH_TOKEN}" && yarn run ci:prepublish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: 📤 Pre-release (patch)
+        if: startsWith(github.ref_name, 'patch/')
+        run: yarn config set npmAuthToken "${NODE_AUTH_TOKEN}" && yarn run ci:prepublish-patch
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: |
+            packages/**/dist
+          overwrite: true
+
+  deploy_patient_chart:
+    runs-on: ubuntu-latest
+
+    needs: pre_release
+
+    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+
+    steps:
+      - name: 🚀 Trigger RefApp Build
+        uses: fjogeleit/http-request-action@v1
+        continue-on-error: true
+        with:
+          url: https://ci.openmrs.org/rest/api/latest/queue/O3-BF
+          method: 'POST'
+          customHeaders: '{ "Authorization": "Bearer ${{ secrets.BAMBOO_TOKEN }}" }'
+
+  release:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    if: ${{ github.event_name == 'release' }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 📦 Install dependencies
+        run: yarn install --immutable
+
+      - name: 🚀 Setup local cache server for Turborepo
+        uses: felixmosh/turborepo-gh-artifacts@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ env.TURBO_TOKEN }}
+
+      - name: 🏗️ Build
+        run: yarn turbo run build --color --concurrency=5
+
+      - name: 📢 Publish
+        run: yarn config set npmAuthToken "${NODE_AUTH_TOKEN}" && yarn run ci:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
