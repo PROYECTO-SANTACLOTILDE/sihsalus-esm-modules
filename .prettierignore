@@ -2,4 +2,4 @@ dist/
 node_modules/
 **/*.md
 **/*.json
-**/*.yml
+packages/esm-form-entry-app/src/app/loader/loader.component.html
