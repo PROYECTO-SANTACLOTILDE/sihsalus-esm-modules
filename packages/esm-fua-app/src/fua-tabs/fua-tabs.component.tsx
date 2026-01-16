@@ -11,9 +11,6 @@ const FuaOrdersTabs: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const tabExtensions = useAssignedExtensions(fuaPanelSlot) as AssignedExtension[];
 
-  console.log('🟩 FUA ORDERS TABS RENDERING - CUSTOM TABS');
-  console.log('🟩 tabExtensions:', tabExtensions);
-
   const filteredExtensions = tabExtensions.filter((extension) => Object.keys(extension.meta).length > 0);
 
   if (filteredExtensions.length === 0) {

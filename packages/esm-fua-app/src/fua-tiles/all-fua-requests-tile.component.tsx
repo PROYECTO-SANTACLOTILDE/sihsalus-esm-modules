@@ -8,12 +8,10 @@ import useFuaRequests from '../hooks/useFuaRequests';
 import styles from './tile.scss';
 
 const AllFuaRequestsTile: React.FC = () => {
-  console.log('🟦 ALL FUA REQUESTS TILE RENDERING');
   const { t } = useTranslation();
   const { data, isLoading } = useFuaRequests();
 
   const count = data?.length || 0;
-  console.log('🟦 Tile data:', { data, isLoading, count });
 
   const handleTileClick = () => {
     navigate({
@@ -22,7 +20,7 @@ const AllFuaRequestsTile: React.FC = () => {
   };
 
   return (
-    <Tile className={styles.tileContainer} onClick={handleTileClick} style={{ border: '2px solid blue', backgroundColor: 'lightyellow' }}>
+    <Tile className={styles.tileContainer} onClick={handleTileClick}>
       <div className={styles.tileHeader}>
         <div>
           <span className={styles.headerLabelText}>{t('fuasOrdered', 'FUAs solicitados')}</span>
