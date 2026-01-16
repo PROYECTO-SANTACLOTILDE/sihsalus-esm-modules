@@ -17,8 +17,23 @@ import useFuaRequests from '../hooks/useFuaRequests';
 import { ClaimManagementHeader } from './case-management-header';
 import styles from './fua-request-table.scss';
 
-const FuaRequestTable: React.FC = () => {
-  const { data, isLoading, error } = useFuaRequests();
+interface FuaRequestTableProps {
+  statusFilter?: string;
+}
+
+const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' }) => {
+  const { data: allData, isLoading, error } = useFuaRequests();
+
+  // Filter data based on statusFilter
+  const data = React.useMemo(() => {
+    if (!allData || statusFilter === 'all') return allData;
+    return allData.filter(req => {
+      if (statusFilter === 'in-progress') return req.fuaEstado?.nombre === 'in-progress';
+      if (statusFilter === 'completed') return req.fuaEstado?.nombre === 'completed';
+      if (statusFilter === 'declined') return req.fuaEstado?.nombre === 'declined';
+      return true;
+    });
+  }, [allData, statusFilter]);
   const [expandedRowIndex, setExpandedRowIndex] = useState<number | null>(null);
   const { t } = useTranslation();
 

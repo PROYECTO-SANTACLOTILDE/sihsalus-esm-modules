@@ -1,0 +1,14 @@
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: spacing.$spacing-05;
+  margin: 0 spacing.$spacing-05 spacing.$spacing-05 spacing.$spacing-05;
+
+  // Make ExtensionSlot children participate in grid
+  > div {
+    display: contents;
+  }
+}

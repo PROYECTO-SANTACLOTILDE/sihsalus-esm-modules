@@ -3,25 +3,97 @@
   "backendDependencies": {
     "webservices.rest": ">=2.2.0"
   },
+  "pages": [
+    {
+      "component": "root",
+      "route": "fua-request"
+    }
+  ],
   "extensions": [
     {
-      "name": "fua-request-dashboard-link",
-      "component": "fuaRequestDashboardLink",
+      "name": "fua-dashboard",
+      "slot": "fua-dashboard-slot",
+      "component": "root"
+    },
+    {
+      "name": "fua-dashboard-link",
       "slot": "homepage-dashboard-slot",
+      "component": "fuaDashboardLink",
       "meta": {
         "name": "fua-request",
-        "title": "Manejo de FUA",
-        "slot": "fua-request-dashboard-slot",
-        "path": "/fua-request"
+        "slot": "fua-dashboard-slot",
+        "title": "Formato Único de Atención"
       }
     },
     {
-      "name": "fua-request-table",
-      "slot": "fua-request-dashboard-slot",
-      "component": "fuaRequestTable",
+      "name": "all-fua-requests-tile",
+      "component": "allFuaRequestsTile",
+      "slot": "fua-tiles-slot",
       "order": 0,
-      "online": true,
-      "offline": false
+      "meta": {
+        "name": "allFuasRequestsTileSlot",
+        "title": "FUAs solicitados"
+      }
+    },
+    {
+      "name": "in-progress-fua-requests-tile",
+      "component": "inProgressFuaRequestsTile",
+      "slot": "fua-tiles-slot",
+      "order": 1,
+      "meta": {
+        "name": "inProgressTileSlot",
+        "title": "Worklist"
+      }
+    },
+    {
+      "name": "completed-fua-requests-tile",
+      "component": "completedFuaRequestsTile",
+      "slot": "fua-tiles-slot",
+      "order": 2,
+      "meta": {
+        "name": "completedTileSlot",
+        "title": "Resultados"
+      }
+    },
+    {
+      "name": "all-fua-requests-panel",
+      "component": "allFuaRequestsTable",
+      "slot": "fua-panels-slot",
+      "order": 0,
+      "meta": {
+        "name": "allFuasPanel",
+        "title": "FUAs solicitados"
+      }
+    },
+    {
+      "name": "in-progress-fua-requests-panel",
+      "component": "inProgressFuaRequestsTable",
+      "slot": "fua-panels-slot",
+      "order": 1,
+      "meta": {
+        "name": "inProgressPanel",
+        "title": "En progreso"
+      }
+    },
+    {
+      "name": "completed-fua-requests-panel",
+      "component": "completedFuaRequestsTable",
+      "slot": "fua-panels-slot",
+      "order": 2,
+      "meta": {
+        "name": "completedPanel",
+        "title": "Completadas"
+      }
+    },
+    {
+      "name": "declined-fua-requests-panel",
+      "component": "declinedFuaRequestsTable",
+      "slot": "fua-panels-slot",
+      "order": 3,
+      "meta": {
+        "name": "declinedPanel",
+        "title": "Rechazadas"
+      }
     }
   ]
 }

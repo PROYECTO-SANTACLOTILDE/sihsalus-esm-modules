@@ -1,1 +1,13 @@
-{}
+{
+  "fua": "Formato Único de Atención",
+  "fuaManagement": "Gestión de FUA",
+  "fuaRequests": "Solicitudes FUA",
+  "fuasOrdered": "FUAs solicitados",
+  "allRequests": "FUAs solicitados",
+  "inProgress": "En progreso",
+  "completed": "Completadas",
+  "declined": "Rechazadas",
+  "orders": "Ordenes",
+  "worklist": "Worklist",
+  "results": "Resultados"
+}
