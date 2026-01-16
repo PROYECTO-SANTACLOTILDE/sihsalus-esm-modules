@@ -14,7 +14,6 @@ import {
 } from '@carbon/react';
 import { useTranslation } from 'react-i18next';
 import useFuaRequests from '../hooks/useFuaRequests';
-import { ClaimManagementHeader } from './case-management-header';
 import styles from './fua-request-table.scss';
 
 interface FuaRequestTableProps {
@@ -89,7 +88,6 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
 
   return (
     <div className="omrs-main-content">
-      <ClaimManagementHeader title={t('fuaRequests', 'Solicitudes FUA')} />
       <TableContainer>
         <DataTable rows={rows} headers={headers} isSortable={false} size="sm">
           {({ rows, headers, getHeaderProps, getRowProps }) => (
