@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChartRelationship } from '@carbon/react/icons';
-import styles from './fua-request-table.scss';
+import styles from './case-management-header.scss';
 
 const CaseManagementIllustration: React.FC = () => {
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Calendar, Location } from '@carbon/react/icons';
 import { useSession, formatDate } from '@openmrs/esm-framework';
-import styles from './fua-request-table.scss';
+import styles from './case-management-header.scss';
 import CaseManagementIllustration from './case-management-illustration';
 
 interface ClaimManagementHeaderProps {

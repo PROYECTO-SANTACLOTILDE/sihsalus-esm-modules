@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   DataTable,
   Table,
@@ -7,12 +7,15 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-  TableExpandHeader,
-  TableExpandRow,
-  TableExpandedRow,
   TableContainer,
+  TableToolbar,
+  TableToolbarContent,
+  TableToolbarSearch,
+  Pagination,
+  Layer,
 } from '@carbon/react';
 import { useTranslation } from 'react-i18next';
+import { formatDate, usePagination } from '@openmrs/esm-framework';
 import useFuaRequests from '../hooks/useFuaRequests';
 import styles from './fua-request-table.scss';
 
@@ -21,138 +24,161 @@ interface FuaRequestTableProps {
 }
 
 const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' }) => {
+  const { t } = useTranslation();
   const { data: allData, isLoading, error } = useFuaRequests();
+  const [searchString, setSearchString] = useState('');
 
   // Filter data based on statusFilter
-  const data = React.useMemo(() => {
-    if (!allData || statusFilter === 'all') return allData;
-    return allData.filter(req => {
-      if (statusFilter === 'in-progress') return req.fuaEstado?.nombre === 'in-progress';
-      if (statusFilter === 'completed') return req.fuaEstado?.nombre === 'completed';
-      if (statusFilter === 'declined') return req.fuaEstado?.nombre === 'declined';
-      return true;
-    });
-  }, [allData, statusFilter]);
-  const [expandedRowIndex, setExpandedRowIndex] = useState<number | null>(null);
-  const { t } = useTranslation();
+  const filteredData = useMemo(() => {
+    if (!allData) return [];
 
-  const toggleExpand = (index: number) => {
-    setExpandedRowIndex(expandedRowIndex === index ? null : index);
-  };
+    let filtered = allData;
 
-  const renderJsonAsTable = (obj: any): JSX.Element => {
-    if (typeof obj !== 'object' || obj === null) {
-      return <span>{String(obj)}</span>;
+    // Apply status filter
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(req => {
+        if (statusFilter === 'in-progress') return req.fuaEstado?.nombre === 'in-progress';
+        if (statusFilter === 'completed') return req.fuaEstado?.nombre === 'completed';
+        if (statusFilter === 'declined') return req.fuaEstado?.nombre === 'declined';
+        return true;
+      });
     }
 
-    return (
-      <table className={styles.jsonTable}>
-        <tbody>
-          {Object.entries(obj).map(([key, value], idx) => (
-            <tr key={idx} className={styles.jsonRow}>
-              <td className={styles.jsonKey}>{key}</td>
-              <td className={styles.jsonValue}>
-                {typeof value === 'object' ? renderJsonAsTable(value) : String(value)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  };
+    // Apply search filter
+    if (searchString) {
+      const search = searchString.toLowerCase();
+      filtered = filtered.filter(req =>
+        req.name?.toLowerCase().includes(search) ||
+        req.uuid?.toLowerCase().includes(search) ||
+        req.fuaEstado?.nombre?.toLowerCase().includes(search)
+      );
+    }
 
-  if (isLoading) return <div>Cargando datos...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+    return filtered;
+  }, [allData, statusFilter, searchString]);
+
+  const pageSizes = [10, 20, 30, 40, 50];
+  const [currentPageSize, setPageSize] = useState(10);
+  const { results, goTo, currentPage } = usePagination(filteredData ?? [], currentPageSize);
 
   const headers = [
-    { key: 'name', header: 'Nombre del FUA' },
-    { key: 'estado', header: 'Estado' },
-    { key: 'uuid', header: 'UUID del FUA' },
-    { key: 'visitUuid', header: 'UUID de la Visita' },
-    { key: 'fechaCreacion', header: 'Fecha de Creación' },
-    { key: 'fechaActualizacion', header: 'Fecha de Actualización' },
-    { key: 'payload', header: 'Payload' },
+    { key: 'name', header: t('fuaName', 'Nombre del FUA') },
+    { key: 'estado', header: t('status', 'Estado') },
+    { key: 'uuid', header: t('fuaUuid', 'UUID del FUA') },
+    { key: 'visitUuid', header: t('visitUuid', 'UUID de la Visita') },
+    { key: 'fechaCreacion', header: t('creationDate', 'Fecha de Creación') },
+    { key: 'fechaActualizacion', header: t('updateDate', 'Fecha de Actualización') },
   ];
 
-  const rows =
-    data?.map((request: any, index: number) => ({
-      id: String(index),
-      name: request.name || 'N/A',
-      estado: request.fuaEstado?.nombre || 'N/A',
-      uuid: request.uuid,
-      visitUuid: request.visitUuid || 'N/A',
-      fechaCreacion: new Date(request.fechaCreacion).toLocaleString(),
-      fechaActualizacion: new Date(request.fechaActualizacion).toLocaleString(),
-      payload: request.payload,
-    })) ?? [];
+  const rows = results?.map((request: any, index: number) => ({
+    id: String(index),
+    name: request.name || 'N/A',
+    estado: request.fuaEstado?.nombre || 'N/A',
+    uuid: request.uuid,
+    visitUuid: request.visitUuid || 'N/A',
+    fechaCreacion: formatDate(new Date(request.fechaCreacion), { mode: 'standard' }),
+    fechaActualizacion: formatDate(new Date(request.fechaActualizacion), { mode: 'standard' }),
+  })) ?? [];
+
+  if (isLoading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <p>{t('loading', 'Cargando datos...')}</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.errorContainer}>
+        <p>{t('error', 'Error')}: {error.message}</p>
+      </div>
+    );
+  }
+
+  if (!filteredData || filteredData.length === 0) {
+    return (
+      <div className={styles.emptyState}>
+        <Layer>
+          <p className={styles.emptyStateContent}>
+            {t('noFuaRequestsFound', 'No se encontraron solicitudes FUA')}
+          </p>
+          <p className={styles.emptyStateHelper}>
+            {searchString
+              ? t('tryAdjustingFilters', 'Intenta ajustar los filtros o la búsqueda')
+              : t('noRequestsAtThisTime', 'No hay solicitudes en este momento')}
+          </p>
+        </Layer>
+      </div>
+    );
+  }
 
   return (
-    <div className="omrs-main-content">
-      <TableContainer>
-        <DataTable rows={rows} headers={headers} isSortable={false} size="sm">
-          {({ rows, headers, getHeaderProps, getRowProps }) => (
-            <Table>
+    <div className={styles.tableContainer}>
+      <DataTable rows={rows} headers={headers} isSortable useZebraStyles size="sm">
+        {({ rows, headers, getHeaderProps, getTableProps, getRowProps }) => (
+          <TableContainer className={styles.tableContainer}>
+            <TableToolbar>
+              <TableToolbarContent className={styles.toolbarContent}>
+                <Layer className={styles.toolbarItem}>
+                  <TableToolbarSearch
+                    expanded
+                    onChange={(e) => {
+                      if (typeof e === 'string') {
+                        setSearchString(e);
+                      } else {
+                        setSearchString(e.target.value);
+                      }
+                    }}
+                    placeholder={t('searchThisList', 'Buscar en esta lista')}
+                  />
+                </Layer>
+              </TableToolbarContent>
+            </TableToolbar>
+            <Table {...getTableProps()} className={styles.table}>
               <TableHead>
                 <TableRow>
-                  <TableExpandHeader />
                   {headers.map((header) => (
                     <TableHeader
                       key={header.key}
                       {...getHeaderProps({ header })}
-                      className={`${styles.productiveHeading01} ${styles.text02}`}>
+                      className={styles.tableHeader}
+                    >
                       {header.header}
                     </TableHeader>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row, index) => (
-                  <React.Fragment key={row.id}>
-                    <TableExpandRow
-                      {...getRowProps({ row })}
-                      onExpand={() => toggleExpand(index)}
-                      isExpanded={expandedRowIndex === index}>
-                      {row.cells.map((cell) => {
-                        if (cell.info.header === 'payload') {
-                          return (
-                            <TableCell key={cell.id} className={styles.payloadCell}>
-                              <button
-                                className={styles.payloadButton}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  toggleExpand(index);
-                                }}>
-                                {expandedRowIndex === index ? 'Ocultar payload' : 'Ver payload'}
-                              </button>
-                            </TableCell>
-                          );
-                        }
-                        return <TableCell key={cell.id}>{cell.value}</TableCell>;
-                      })}
-                    </TableExpandRow>
-                    {expandedRowIndex === index && (
-                      <TableExpandedRow colSpan={headers.length + 1}>
-                        <div className={styles.payloadExpandedContent}>
-                          {(() => {
-                            const payload = data?.[index]?.payload;
-                            if (!payload) return <div>No hay datos de payload</div>;
-                            try {
-                              const parsed = typeof payload === 'string' ? JSON.parse(payload) : payload;
-                              return renderJsonAsTable(parsed);
-                            } catch (err) {
-                              return <div>Payload inválido o no es JSON</div>;
-                            }
-                          })()}
-                        </div>
-                      </TableExpandedRow>
-                    )}
-                  </React.Fragment>
+                {rows.map((row) => (
+                  <TableRow key={row.id} {...getRowProps({ row })}>
+                    {row.cells.map((cell) => (
+                      <TableCell key={cell.id} className={styles.tableCell}>
+                        {cell.value}
+                      </TableCell>
+                    ))}
+                  </TableRow>
                 ))}
               </TableBody>
             </Table>
-          )}
-        </DataTable>
-      </TableContainer>
+          </TableContainer>
+        )}
+      </DataTable>
+      {filteredData.length > 0 && (
+        <Pagination
+          page={currentPage}
+          pageSize={currentPageSize}
+          pageSizes={pageSizes}
+          totalItems={filteredData.length}
+          onChange={({ page, pageSize }) => {
+            if (pageSize !== currentPageSize) {
+              setPageSize(pageSize);
+            }
+            goTo(page);
+          }}
+          className={styles.pagination}
+        />
+      )}
     </div>
   );
 };
