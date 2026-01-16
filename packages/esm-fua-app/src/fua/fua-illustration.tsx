@@ -1,8 +1,8 @@
 import React from 'react';
 import { ChartRelationship } from '@carbon/react/icons';
-import styles from './case-management-header.scss';
+import styles from './fua-header.scss';
 
-const CaseManagementIllustration: React.FC = () => {
+const FuaIllustration: React.FC = () => {
   return (
     <div className={styles.svgContainer}>
       <ChartRelationship className={styles.iconOverrides} />
@@ -10,4 +10,4 @@ const CaseManagementIllustration: React.FC = () => {
   );
 };
 
-export default CaseManagementIllustration;
+export default FuaIllustration;

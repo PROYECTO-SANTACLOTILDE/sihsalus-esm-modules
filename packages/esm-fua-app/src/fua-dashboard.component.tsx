@@ -5,7 +5,7 @@ import { useDefineAppContext } from '@openmrs/esm-framework';
 import { type DateFilterContext } from './types';
 import FuaOrdersTabs from './fua-tabs/fua-tabs.component';
 import FuaSummaryTiles from './fua-tiles/fua-summary-tiles.component';
-import { ClaimManagementHeader } from './fua/case-management-header';
+import { FuaHeader } from './fua/fua-header';
 import styles from './fua-dashboard.scss';
 
 const FuaDashboard: React.FC = () => {
@@ -15,7 +15,7 @@ const FuaDashboard: React.FC = () => {
 
   return (
     <div className={styles.dashboard}>
-      <ClaimManagementHeader title={t('fuaRequests', 'FUA Requests')} />
+      <FuaHeader title={t('fuaRequests', 'FUA Requests')} />
       <FuaSummaryTiles />
       <FuaOrdersTabs />
     </div>

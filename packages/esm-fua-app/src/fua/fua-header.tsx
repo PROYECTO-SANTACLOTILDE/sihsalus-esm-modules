@@ -2,14 +2,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Calendar, Location } from '@carbon/react/icons';
 import { useSession, formatDate } from '@openmrs/esm-framework';
-import styles from './case-management-header.scss';
-import CaseManagementIllustration from './case-management-illustration';
+import styles from './fua-header.scss';
+import FuaIllustration from './fua-illustration';
 
-interface ClaimManagementHeaderProps {
+interface FuaHeaderProps {
   title: string;
 }
 
-export const ClaimManagementHeader: React.FC<ClaimManagementHeaderProps> = ({ title }) => {
+export const FuaHeader: React.FC<FuaHeaderProps> = ({ title }) => {
   const { t } = useTranslation();
   const userSession = useSession();
   const userLocation = userSession?.sessionLocation?.display;
@@ -17,7 +17,7 @@ export const ClaimManagementHeader: React.FC<ClaimManagementHeaderProps> = ({ ti
   return (
     <div className={styles.header}>
       <div className={styles['left-justified-items']}>
-        <CaseManagementIllustration />
+        <FuaIllustration />
         <div className={styles['page-labels']}>
           <p>{t('fuaRequest', 'Manejo de FUAs')}</p>
           <p className={styles['page-name']}>{title}</p>
