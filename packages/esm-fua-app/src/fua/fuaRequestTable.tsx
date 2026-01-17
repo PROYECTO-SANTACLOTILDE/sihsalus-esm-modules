@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import {
   DataTable,
+  DataTableSkeleton,
   Table,
   TableHead,
   TableRow,
@@ -13,10 +14,12 @@ import {
   TableToolbarSearch,
   Pagination,
   Layer,
+  Tile,
 } from '@carbon/react';
 import { useTranslation } from 'react-i18next';
 import { formatDate, usePagination } from '@openmrs/esm-framework';
 import useFuaRequests from '../hooks/useFuaRequests';
+import { FuaDateRangePicker } from './fua-date-range-picker.component';
 import styles from './fua-request-table.scss';
 
 interface FuaRequestTableProps {
@@ -81,36 +84,7 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
   })) ?? [];
 
   if (isLoading) {
-    return (
-      <div className={styles.loaderContainer}>
-        <p>{t('loading', 'Cargando datos...')}</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.errorContainer}>
-        <p>{t('error', 'Error')}: {error.message}</p>
-      </div>
-    );
-  }
-
-  if (!filteredData || filteredData.length === 0) {
-    return (
-      <div className={styles.emptyState}>
-        <Layer>
-          <p className={styles.emptyStateContent}>
-            {t('noFuaRequestsFound', 'No se encontraron solicitudes FUA')}
-          </p>
-          <p className={styles.emptyStateHelper}>
-            {searchString
-              ? t('tryAdjustingFilters', 'Intenta ajustar los filtros o la búsqueda')
-              : t('noRequestsAtThisTime', 'No hay solicitudes en este momento')}
-          </p>
-        </Layer>
-      </div>
-    );
+    return <DataTableSkeleton role="progressbar" showHeader={false} showToolbar={false} />;
   }
 
   return (
@@ -120,6 +94,9 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
           <TableContainer className={styles.tableContainer}>
             <TableToolbar>
               <TableToolbarContent className={styles.toolbarContent}>
+                <Layer className={styles.toolbarItem}>
+                  <FuaDateRangePicker />
+                </Layer>
                 <Layer className={styles.toolbarItem}>
                   <TableToolbarSearch
                     expanded
@@ -131,6 +108,7 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
                       }
                     }}
                     placeholder={t('searchThisList', 'Buscar en esta lista')}
+                    size="sm"
                   />
                 </Layer>
               </TableToolbarContent>
@@ -161,6 +139,18 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
                 ))}
               </TableBody>
             </Table>
+            {rows.length === 0 ? (
+              <div className={styles.tileContainer}>
+                <Tile className={styles.tile}>
+                  <div className={styles.tileContent}>
+                    <p className={styles.content}>{t('noFuaRequestsFound', 'No se encontraron solicitudes FUA')}</p>
+                    <p className={styles.emptyStateHelperText}>
+                      {t('checkFilters', 'Por favor revisa los filtros de arriba e intenta de nuevo')}
+                    </p>
+                  </div>
+                </Tile>
+              </div>
+            ) : null}
           </TableContainer>
         )}
       </DataTable>

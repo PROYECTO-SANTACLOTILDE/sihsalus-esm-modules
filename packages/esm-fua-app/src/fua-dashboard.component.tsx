@@ -15,7 +15,7 @@ const FuaDashboard: React.FC = () => {
 
   return (
     <div className={styles.dashboard}>
-      <FuaHeader title={t('fuaRequests', 'FUA Requests')} />
+      <FuaHeader title={t('fuaRequests', 'Solicitudes de Formato Único de Atención')} />
       <FuaSummaryTiles />
       <FuaOrdersTabs />
     </div>

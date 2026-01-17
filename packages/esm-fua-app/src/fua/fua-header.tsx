@@ -19,7 +19,7 @@ export const FuaHeader: React.FC<FuaHeaderProps> = ({ title }) => {
       <div className={styles['left-justified-items']}>
         <FuaIllustration />
         <div className={styles['page-labels']}>
-          <p>{t('fuaRequest', 'Manejo de FUAs')}</p>
+          <p>{t('fuaManagement', 'Gestión de Formato Único de Atención')}</p>
           <p className={styles['page-name']}>{title}</p>
         </div>
       </div>
