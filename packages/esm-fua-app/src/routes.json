@@ -7,6 +7,10 @@
     {
       "component": "root",
       "route": "fua-request"
+    },
+    {
+      "component": "fuaViewerPage",
+      "route": "fua-viewer"
     }
   ],
   "extensions": [
@@ -23,6 +27,15 @@
         "name": "fua-request",
         "slot": "fua-dashboard-slot",
         "title": "Formato Único de Atención"
+      }
+    },
+    {
+      "name": "fua-viewer-page-link",
+      "slot": "homepage-dashboard-slot",
+      "component": "fuaViewerPageLink",
+      "meta": {
+        "name": "fua-viewer",
+        "title": "Visor de FUA (Demo)"
       }
     },
     {

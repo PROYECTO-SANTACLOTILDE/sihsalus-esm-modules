@@ -1,6 +1,7 @@
 import { defineConfigSchema, getAsyncLifecycle, getSyncLifecycle } from '@openmrs/esm-framework';
 import { configSchema } from './config-schema';
 import { createLeftPanelLink } from './left-panel-link.component';
+import { createFuaViewerPageLink } from './fua-viewer-page-link.component';
 import rootComponent from './root.component';
 
 export const importTranslation = require.context('../translations', false, /.json$/, 'lazy');
@@ -34,6 +35,8 @@ export const fuaDashboardLink = getSyncLifecycle(
   }),
   options,
 );
+
+export const fuaViewerPageLink = getSyncLifecycle(createFuaViewerPageLink(), options);
 
 // ================================================================================
 // TILES
@@ -89,5 +92,13 @@ export const fuaHtmlViewer = getAsyncLifecycle(
 // ================================================================================
 export const fuaViewerWorkspace = getAsyncLifecycle(
   () => import('./workspaces/fua-viewer.workspace'),
+  options,
+);
+
+// ================================================================================
+// FUA VIEWER PAGE
+// ================================================================================
+export const fuaViewerPage = getAsyncLifecycle(
+  () => import('./fua-viewer-page/fua-viewer-page.component'),
   options,
 );
