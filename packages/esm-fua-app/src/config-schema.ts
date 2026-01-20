@@ -11,7 +11,13 @@ export const configSchema = {
     _default: false,
     _description: 'Habilitar el flujo de aprobación de FUA (Formato Único de Atención)',
   },
+  fuaGeneratorEndpoint: {
+    _type: Type.String,
+    _default: 'http://hii1sc-dev.inf.pucp.edu.pe/services/fua-generator/demo',
+    _description: 'URL del endpoint del generador de FUA',
+  },
 };
 export type Config = {
   enableReviewingLabResultsBeforeApproval: boolean;
+  fuaGeneratorEndpoint: string;
 };
