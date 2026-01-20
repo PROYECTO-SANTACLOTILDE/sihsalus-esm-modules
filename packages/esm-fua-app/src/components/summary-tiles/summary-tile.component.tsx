@@ -2,14 +2,14 @@ import React from 'react';
 import { Tile } from '@carbon/react';
 import styles from './lab-summary-tile.scss';
 
-interface LabSummaryTileProps {
+interface FuaSummaryTileProps {
   label: string;
   value: number;
   headerLabel: string;
   children?: React.ReactNode;
 }
 
-const LabSummaryTile: React.FC<LabSummaryTileProps> = ({ label, value, headerLabel, children }) => {
+const FuaSummaryTile: React.FC<FuaSummaryTileProps> = ({ label, value, headerLabel, children }) => {
   return (
     <Tile className={styles.tileContainer} light>
       <div className={styles.tileHeader}>
@@ -32,4 +32,4 @@ const LabSummaryTile: React.FC<LabSummaryTileProps> = ({ label, value, headerLab
   );
 };
 
-export default LabSummaryTile;
+export default FuaSummaryTile;

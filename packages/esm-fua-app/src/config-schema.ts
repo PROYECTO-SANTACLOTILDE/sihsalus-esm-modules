@@ -1,4 +1,5 @@
-import { Type } from '@openmrs/esm-framework';
+import { Type, validators } from '@openmrs/esm-framework';
+
 
 // ===============================
 // MAIN CONFIGURATION SCHEMA
@@ -11,7 +12,6 @@ export const configSchema = {
     _description: 'Habilitar el flujo de aprobación de FUA (Formato Único de Atención)',
   },
 };
-
-export interface ConfigObject {
-  enableFuaApprovalWorkflow: boolean;
-}
+export type Config = {
+  enableReviewingLabResultsBeforeApproval: boolean;
+};
