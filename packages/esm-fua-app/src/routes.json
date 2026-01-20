@@ -30,15 +30,6 @@
       }
     },
     {
-      "name": "fua-viewer-page-link",
-      "slot": "homepage-dashboard-slot",
-      "component": "fuaViewerPageLink",
-      "meta": {
-        "name": "fua-viewer",
-        "title": "Visor de FUA (Demo)"
-      }
-    },
-    {
       "name": "all-fua-requests-tile",
       "component": "allFuaRequestsTile",
       "slot": "fua-tiles-slot",
