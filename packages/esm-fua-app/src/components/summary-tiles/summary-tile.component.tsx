@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tile } from '@carbon/react';
-import styles from './lab-summary-tile.scss';
+import styles from './summary-tiles.scss';
 
 interface FuaSummaryTileProps {
   label: string;
