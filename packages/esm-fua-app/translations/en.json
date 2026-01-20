@@ -1,13 +1,15 @@
 {
   "fua": "Formato Único de Atención",
-  "fuaManagement": "FUA Management",
-  "fuaRequests": "FUA Requests",
-  "fuasOrdered": "FUAs Ordered",
-  "allRequests": "FUAs Ordered",
-  "inProgress": "In Progress",
-  "completed": "Completed",
-  "declined": "Declined",
-  "orders": "Orders",
-  "worklist": "Worklist",
-  "results": "Results"
+  "fuaManagement": "Gestión de Formato Único de Atención",
+  "fuaRequests": "Solicitudes de Formato Único de Atención",
+  "fuasOrdered": "Formatos Únicos de Atención solicitados",
+  "allRequests": "Formatos Únicos de Atención solicitados",
+  "inProgress": "En progreso",
+  "completed": "Completadas",
+  "declined": "Rechazadas",
+  "orders": "Órdenes",
+  "worklist": "Lista de trabajo",
+  "results": "Resultados",
+  "fuaName": "Nombre del Formato Único de Atención",
+  "fuaUuid": "UUID del Formato Único de Atención"
 }
