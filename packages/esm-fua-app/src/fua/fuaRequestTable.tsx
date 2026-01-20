@@ -28,24 +28,20 @@ interface FuaRequestTableProps {
 
 const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' }) => {
   const { t } = useTranslation();
-  const { data: allData, isLoading, error } = useFuaRequests();
+
+  // Use the refactored hook with status filtering
+  const { fuaOrders, isLoading, isError } = useFuaRequests({
+    status: statusFilter !== 'all' ? statusFilter : null,
+    excludeCanceled: true,
+  });
+
   const [searchString, setSearchString] = useState('');
 
-  // Filter data based on statusFilter
+  // Apply search filter only (status filtering is now done by the hook)
   const filteredData = useMemo(() => {
-    if (!allData) return [];
+    if (!fuaOrders) return [];
 
-    let filtered = allData;
-
-    // Apply status filter
-    if (statusFilter !== 'all') {
-      filtered = filtered.filter(req => {
-        if (statusFilter === 'in-progress') return req.fuaEstado?.nombre === 'in-progress';
-        if (statusFilter === 'completed') return req.fuaEstado?.nombre === 'completed';
-        if (statusFilter === 'declined') return req.fuaEstado?.nombre === 'declined';
-        return true;
-      });
-    }
+    let filtered = fuaOrders;
 
     // Apply search filter
     if (searchString) {
@@ -58,7 +54,7 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
     }
 
     return filtered;
-  }, [allData, statusFilter, searchString]);
+  }, [fuaOrders, searchString]);
 
   const pageSizes = [10, 20, 30, 40, 50];
   const [currentPageSize, setPageSize] = useState(10);
