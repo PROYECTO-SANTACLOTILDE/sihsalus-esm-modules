@@ -19,7 +19,7 @@ export interface FuaRequest {
   fechaActualizacion: number;
 }
 
-function useFuaRequests() {
+export function useFuaRequests() {
   const [data, setData] = useState<FuaRequest[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);

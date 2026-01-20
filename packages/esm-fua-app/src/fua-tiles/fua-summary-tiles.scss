@@ -1,14 +1,16 @@
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/type';
+@use '@carbon/layout';
+@use '@carbon/type';
+@use '@openmrs/esm-styleguide/src/vars' as *;
 
 .cardContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: spacing.$spacing-05;
-  margin: 0 spacing.$spacing-05 spacing.$spacing-05 spacing.$spacing-05;
+  background-color: $ui-02;
+  display: flex;
+  flex-wrap: wrap;
+  padding: layout.$spacing-03;
+  gap: 0 layout.$spacing-01;
+}
 
-  // Make ExtensionSlot children participate in grid
-  > div {
-    display: contents;
-  }
+.cardContainer>div {
+  flex: 1 1 300px;
+  box-sizing: border-box;
 }

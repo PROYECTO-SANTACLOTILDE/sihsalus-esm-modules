@@ -3,14 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { Tile } from '@carbon/react';
 import { ArrowRight } from '@carbon/react/icons';
 import { navigate } from '@openmrs/esm-framework';
-import useFuaRequests from '../hooks/useFuaRequests';
-import styles from './tile.scss';
+import { useFuaRequests } from '../hooks/useFuaRequests';
 
 const InProgressFuaRequestsTile: React.FC = () => {
   const { t } = useTranslation();
   const { data, isLoading } = useFuaRequests();
 
-  const count = data?.filter(req => req.fuaEstado?.nombre === 'in-progress').length || 0;
+  const count = data?.filter(req => req.fuaEstado?.nombre === 'in_progress').length || 0;
 
   const handleTileClick = () => {
     navigate({
@@ -22,7 +21,7 @@ const InProgressFuaRequestsTile: React.FC = () => {
     <Tile className={styles.tileContainer} onClick={handleTileClick}>
       <div className={styles.tileHeader}>
         <div>
-          <span className={styles.headerLabelText}>{t('worklist', 'Worklist')}</span>
+          <span className={styles.headerLabelText}>{t('worklist', 'Lista de trabajo')}</span>
         </div>
       </div>
       <div>
