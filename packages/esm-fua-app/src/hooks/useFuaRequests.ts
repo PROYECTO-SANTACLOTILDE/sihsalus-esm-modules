@@ -69,16 +69,20 @@ export function useFuaRequests(params: Partial<UseFuaRequestsParams> = useFuaReq
     url = `${url}?${queryParams.join('&')}`;
   }
 
-  const { data, error, mutate, isLoading, isValidating } = useSWR<{
-    data: Array<FuaRequest>;
-  }>(`${url}`, openmrsFetch);
+  const { data, error, mutate, isLoading, isValidating } = useSWR<{ data: Array<FuaRequest> }>(
+    url,
+    openmrsFetch,
+  );
 
-  const filteredOrders = data?.data?.filter(
+  // openmrsFetch returns { data: T }, so we access data.data to get the array
+  const allOrders = data?.data ?? [];
+
+  const filteredOrders = allOrders.filter(
     (order) => !newOrdersOnly || (order?.fuaEstado === null || order?.fuaEstado === undefined),
   );
 
   return {
-    fuaOrders: filteredOrders ?? [],
+    fuaOrders: filteredOrders,
     isLoading,
     isError: error,
     mutate,

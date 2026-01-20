@@ -95,5 +95,13 @@
         "title": "Rechazadas"
       }
     }
+  ],
+  "workspaces": [
+    {
+      "name": "fua-viewer-workspace",
+      "component": "fuaViewerWorkspace",
+      "type": "form",
+      "title": "Ver FUA"
+    }
   ]
 }

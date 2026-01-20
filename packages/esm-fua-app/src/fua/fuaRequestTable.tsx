@@ -15,9 +15,11 @@ import {
   Pagination,
   Layer,
   Tile,
+  Button,
 } from '@carbon/react';
+import { View } from '@carbon/react/icons';
 import { useTranslation } from 'react-i18next';
-import { formatDate, usePagination } from '@openmrs/esm-framework';
+import { formatDate, usePagination, launchWorkspace } from '@openmrs/esm-framework';
 import useFuaRequests from '../hooks/useFuaRequests';
 import { FuaDateRangePicker } from './fua-date-range-picker.component';
 import styles from './fua-request-table.scss';
@@ -60,6 +62,12 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
   const [currentPageSize, setPageSize] = useState(10);
   const { results, goTo, currentPage } = usePagination(filteredData ?? [], currentPageSize);
 
+  const handleViewFua = (fuaId: string) => {
+    launchWorkspace('fua-viewer-workspace', {
+      fuaId,
+    });
+  };
+
   const headers = [
     { key: 'name', header: t('fuaName', 'Nombre del FUA') },
     { key: 'estado', header: t('status', 'Estado') },
@@ -67,6 +75,7 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
     { key: 'visitUuid', header: t('visitUuid', 'UUID de la Visita') },
     { key: 'fechaCreacion', header: t('creationDate', 'Fecha de Creación') },
     { key: 'fechaActualizacion', header: t('updateDate', 'Fecha de Actualización') },
+    { key: 'actions', header: t('actions', 'Acciones') },
   ];
 
   const rows = results?.map((request: any, index: number) => ({
@@ -77,6 +86,7 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
     visitUuid: request.visitUuid || 'N/A',
     fechaCreacion: formatDate(new Date(request.fechaCreacion), { mode: 'standard' }),
     fechaActualizacion: formatDate(new Date(request.fechaActualizacion), { mode: 'standard' }),
+    actions: request.uuid,
   })) ?? [];
 
   if (isLoading) {
@@ -128,7 +138,19 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
                   <TableRow key={row.id} {...getRowProps({ row })}>
                     {row.cells.map((cell) => (
                       <TableCell key={cell.id} className={styles.tableCell}>
-                        {cell.value}
+                        {cell.info.header === 'actions' ? (
+                          <Button
+                            kind="ghost"
+                            size="sm"
+                            renderIcon={View}
+                            iconDescription={t('viewFua', 'Ver FUA')}
+                            onClick={() => handleViewFua(cell.value)}
+                          >
+                            {t('view', 'Ver')}
+                          </Button>
+                        ) : (
+                          cell.value
+                        )}
                       </TableCell>
                     ))}
                   </TableRow>

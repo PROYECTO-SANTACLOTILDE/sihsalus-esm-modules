@@ -75,3 +75,19 @@ export const declinedFuaRequestsTable = getAsyncLifecycle(
   () => import('./fua-tabs/data-table-extensions/declined-fua-requests-table.extension'),
   options,
 );
+
+// ================================================================================
+// HTML VIEWER
+// ================================================================================
+export const fuaHtmlViewer = getAsyncLifecycle(
+  () => import('./components/fua-html-viewer.component'),
+  options,
+);
+
+// ================================================================================
+// WORKSPACES
+// ================================================================================
+export const fuaViewerWorkspace = getAsyncLifecycle(
+  () => import('./workspaces/fua-viewer.workspace'),
+  options,
+);
