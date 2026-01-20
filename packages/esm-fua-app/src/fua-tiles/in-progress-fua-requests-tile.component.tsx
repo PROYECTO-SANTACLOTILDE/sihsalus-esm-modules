@@ -6,12 +6,12 @@ import FuaSummaryTile from '../components/summary-tiles/summary-tile.component';
 
 const InProgressFuaRequestsTile = () => {
   const { t } = useTranslation();
-  const { data } = useFuaRequests({ status: 'IN_PROGRESS' });
+  const { fuaOrders } = useFuaRequests({ status: 'IN_PROGRESS' });
 
   return (
     <FuaSummaryTile
       label={t('inProgress', 'In progress')}
-      value={data?.length}
+      value={fuaOrders?.length}
       headerLabel={t('worklist', 'Ex-Worklist')}
     />
   );

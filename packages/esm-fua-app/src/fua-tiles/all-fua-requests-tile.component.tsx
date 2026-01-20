@@ -1,39 +1,19 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tile } from '@carbon/react';
-import { ArrowRight } from '@carbon/react/icons';
-import { useAppContext, navigate } from '@openmrs/esm-framework';
-import { type DateFilterContext } from '../types';
-import useFuaRequests from '../hooks/useFuaRequests';
-import styles from './tile.scss';
+import { useFuaRequests } from '../hooks/useFuaRequests';
+import FuaSummaryTile from '../components/summary-tiles/summary-tile.component';
 
-const AllFuaRequestsTile: React.FC = () => {
+const AllFuaRequestsTile = () => {
   const { t } = useTranslation();
-  const { data, isLoading } = useFuaRequests();
 
-  const count = data?.length || 0;
-
-  const handleTileClick = () => {
-    navigate({
-      to: `${window.spaBase}/home/fua-request`,
-    });
-  };
+  const { fuaOrders } = useFuaRequests({ newOrdersOnly: true });
 
   return (
-    <Tile className={styles.tileContainer} onClick={handleTileClick}>
-      <div className={styles.tileHeader}>
-        <div>
-          <span className={styles.headerLabelText}>{t('fuasOrdered', 'FUAs solicitados')}</span>
-        </div>
-      </div>
-      <div>
-        <label className={styles.totalsLabel}>{t('orders', 'Ordenes')}</label>
-        <p className={styles.totalsValue}>{isLoading ? '--' : count}</p>
-      </div>
-      <div className={styles.footerContainer}>
-        <ArrowRight size={16} className={styles.arrowIcon} />
-      </div>
-    </Tile>
+    <FuaSummaryTile
+      label={t('orders', 'Orders')}
+      value={fuaOrders?.length}
+      headerLabel={t('testsOrdered', 'Tests ordered')}
+    />
   );
 };
 

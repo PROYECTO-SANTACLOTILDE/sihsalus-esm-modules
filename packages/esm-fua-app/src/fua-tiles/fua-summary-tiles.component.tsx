@@ -5,7 +5,7 @@ import { ComponentContext } from '@openmrs/esm-framework/src/internal';
 import styles from './fua-summary-tiles.scss';
 import { type Config } from '../config-schema';
 
-const FuaSummaryTile: React.FC = () => {
+const FuaSummaryTiles: React.FC = () => {
   const { t } = useTranslation();
   const { enableReviewingLabResultsBeforeApproval } = useConfig<Config>();
   const fuaTileSlot = 'fua-tiles-slot';
@@ -43,4 +43,4 @@ return (
   );
 };
 
-export default FuaSummaryTile;
+export default FuaSummaryTiles;
