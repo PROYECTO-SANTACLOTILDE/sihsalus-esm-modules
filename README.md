@@ -125,6 +125,16 @@ yarn turbo lint -- --fix
 yarn turbo typescript
 ```
 
+### Gestión de Tareas
+
+```bash
+# Generar lista de tareas desde comentarios TODO/FIXME/XXX
+yarn generate-tasks
+
+# Esto generará un archivo TASKS.md con todas las tareas pendientes
+# organizadas por paquete y tipo
+```
+
 ### Release
 
 ```bash
