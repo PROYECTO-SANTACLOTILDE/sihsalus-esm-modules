@@ -132,7 +132,24 @@ yarn turbo typescript
 yarn generate-tasks
 
 # Esto generará un archivo TASKS.md con todas las tareas pendientes
-# organizadas por paquete y tipo
+# organizadas por paquete y tipo (📋 TODO, 🔧 FIXME, ⚠️ XXX)
+
+# Ejecutar tests del generador de tareas
+node tools/generate-tasks.test.js
+```
+
+**Ejemplo de salida:**
+```
+🔍 Escaneando el código en busca de TODOs, FIXMEs y XXXs...
+📁 Encontrados 850 archivos para escanear
+✅ Encontradas 43 tareas pendientes
+
+Resumen:
+  - TODO: 38
+  - FIXME: 5
+  - XXX: 0
+
+📝 Archivo generado: TASKS.md
 ```
 
 ### Release
