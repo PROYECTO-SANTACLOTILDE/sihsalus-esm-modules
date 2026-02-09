@@ -29,9 +29,6 @@ export const DashboardGroupExtension: React.FC<DashboardGroupExtensionProps> = (
     }
   }, [slotName, isChild]);
 
-  // TODO: Remove after debugging
-  console.log('[DashboardGroup]', { title, slotName, basePath });
-
   return (
     <SideNavItems className={styles.sideMenuItems} isSideNavExpanded={true}>
       <SideNavMenu

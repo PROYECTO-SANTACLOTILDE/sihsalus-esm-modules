@@ -29,7 +29,7 @@ export const PrenatalCare: React.FC<PrenatalCareProps> = ({
         slotName: 'prenatal-current-pregnancy-slot',
       },
       {
-        labelKey: 'prenatalCareChart',
+        labelKey: 'prenatalAttention',
         icon: ChartLineData,
         slotName: 'prenatal-care-chart-slot',
       },

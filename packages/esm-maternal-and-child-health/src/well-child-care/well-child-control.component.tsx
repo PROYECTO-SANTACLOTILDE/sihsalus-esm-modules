@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Friendship, ReminderMedical } from '@carbon/react/icons';
+import { Friendship, ReminderMedical, Growth } from '@carbon/react/icons';
 import { usePatient } from '@openmrs/esm-framework';
 import type { TabConfig } from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 import TabbedDashboard from '../ui/tabbed-dashboard/tabbed-dashboard.component';
@@ -29,9 +29,9 @@ export const WellChildControl: React.FC<WellChildControlProps> = ({
         slotName: 'cred-schedule-slot',
       },
       {
-        labelKey: 'nonCredControls',
-        icon: ReminderMedical,
-        slotName: 'non-cred-control-slot',
+        labelKey: 'desarrollo',
+        icon: Growth,
+        slotName: 'cred-development-slot',
       },
       {
         labelKey: 'additionalServices',
