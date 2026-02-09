@@ -609,13 +609,13 @@ export const configSchema = {
     _type: Type.Object,
     _description: 'Configuración del tamizaje de anemia según NTS 137',
     _default: {
-      hemoglobinaConceptUuid: '',
+      hemoglobinaConceptUuid: '0ffe780c-a3ee-4c9c-b4dd-bf2e0f79dc7f',
       anemiaThreshold: 11.0,
     },
     hemoglobinaConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID para valor de hemoglobina (g/dL)',
-      _default: '',
+      _description: 'Concept UUID para valor de hemoglobina (g/dL) — OCL: Hemoglobina #655',
+      _default: '0ffe780c-a3ee-4c9c-b4dd-bf2e0f79dc7f',
     },
     anemiaThreshold: {
       _type: Type.Number,
@@ -629,16 +629,16 @@ export const configSchema = {
     _type: Type.Object,
     _description: 'Configuración de suplementación MMN y prenatal',
     _default: {
-      mmnConceptUuid: '',
+      mmnConceptUuid: 'd80c3551-2a6c-49ac-a541-0b17957f9657',
       mmnTotalTarget: 360,
-      ironConceptUuid: '',
-      folicAcidConceptUuid: '',
-      calciumConceptUuid: '',
+      ironConceptUuid: '03a4f101-bf46-4923-97a1-759d926dee00',
+      folicAcidConceptUuid: '7418c3a3-4c2a-4943-91db-ae2b561d6ded',
+      calciumConceptUuid: '15df7b2b-ad43-410e-9edb-d1f40320faf4',
     },
     mmnConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID de multimicronutrientes entregados',
-      _default: '',
+      _description: 'Concept UUID de multimicronutrientes entregados — OCL: Administración Micronutriente #3162',
+      _default: 'd80c3551-2a6c-49ac-a541-0b17957f9657',
     },
     mmnTotalTarget: {
       _type: Type.Number,
@@ -647,18 +647,18 @@ export const configSchema = {
     },
     ironConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID de sulfato ferroso entregado',
-      _default: '',
+      _description: 'Concept UUID de indicación fierro/ácido fólico — OCL: Indicación Fierro/Acido Fólico #2112',
+      _default: '03a4f101-bf46-4923-97a1-759d926dee00',
     },
     folicAcidConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID de ácido fólico entregado',
-      _default: '',
+      _description: 'Concept UUID de indicación ácido fólico — OCL: Indicación Acido Fólico #2114',
+      _default: '7418c3a3-4c2a-4943-91db-ae2b561d6ded',
     },
     calciumConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID de calcio entregado',
-      _default: '',
+      _description: 'Concept UUID de indicación calcio — OCL: Indicación Calcio #2113',
+      _default: '15df7b2b-ad43-410e-9edb-d1f40320faf4',
     },
   },
 
@@ -667,18 +667,24 @@ export const configSchema = {
     _type: Type.Object,
     _description: 'Configuración del plan de parto según NTS 105',
     _default: {
-      encounterTypeUuid: '',
+      encounterTypeUuid: '58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba',
       formUuid: '',
+      indicatorConceptUuid: '47bb64cf-f63c-46a0-839a-9573bcedf9be',
     },
     encounterTypeUuid: {
       _type: Type.UUID,
-      _description: 'Encounter type UUID para plan de parto',
-      _default: '',
+      _description: 'Encounter type UUID para plan de parto (usa Control Prenatal)',
+      _default: '58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba',
     },
     formUuid: {
       _type: Type.UUID,
-      _description: 'Form UUID (Ampath) del plan de parto. Ver formsList.birthPlanForm para el form existente.',
+      _description: 'Form UUID (Ampath) del plan de parto. Ver formsList.birthPlanForm = OBST-004-FICHA PLAN DE PARTO',
       _default: '',
+    },
+    indicatorConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID del indicador de plan de parto — OCL: Plan de Parto #1608',
+      _default: '47bb64cf-f63c-46a0-839a-9573bcedf9be',
     },
   },
 
@@ -687,24 +693,24 @@ export const configSchema = {
     _type: Type.Object,
     _description: 'Concepts de tamizaje prenatal obligatorio (NTS 159)',
     _default: {
-      vihResultConceptUuid: '',
-      sifilisResultConceptUuid: '',
-      hepatitisBResultConceptUuid: '',
+      vihResultConceptUuid: 'afc399df-0376-4e3a-a8f5-cac6aa2d4bb9',
+      sifilisResultConceptUuid: '7218b021-712f-49d8-b733-76bf899c1bde',
+      hepatitisBResultConceptUuid: '6d2eaa49-ea92-4404-a5be-5f7081e6c6d5',
     },
     vihResultConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID del resultado de prueba VIH',
-      _default: '',
+      _description: 'Concept UUID del resultado de prueba rápida VIH — OCL: Prueba rápida VIH #330',
+      _default: 'afc399df-0376-4e3a-a8f5-cac6aa2d4bb9',
     },
     sifilisResultConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID del resultado de RPR/VDRL (sífilis)',
-      _default: '',
+      _description: 'Concept UUID del resultado de RPR/VDRL (sífilis) — OCL: Prueba sífilis VDRL #652',
+      _default: '7218b021-712f-49d8-b733-76bf899c1bde',
     },
     hepatitisBResultConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID del resultado de HBsAg (Hepatitis B)',
-      _default: '',
+      _description: 'Concept UUID del resultado de HBsAg (Hepatitis B) — OCL: Prueba rápida Ags HB #4310',
+      _default: '6d2eaa49-ea92-4404-a5be-5f7081e6c6d5',
     },
   },
 
@@ -714,12 +720,18 @@ export const configSchema = {
     _description: 'Configuración de psicoprofilaxis obstétrica',
     _default: {
       encounterTypeUuid: '',
+      conceptUuid: '400ebbfe-bdb6-42b8-a783-226e027e2e05',
       totalSessionsRequired: 6,
     },
     encounterTypeUuid: {
       _type: Type.UUID,
-      _description: 'Encounter type UUID para sesiones de psicoprofilaxis',
+      _description: 'Encounter type UUID para sesiones de psicoprofilaxis (pendiente crear en servidor)',
       _default: '',
+    },
+    conceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de psicoprofilaxis obstétrica — OCL: Psicoprofilaxis #1598',
+      _default: '400ebbfe-bdb6-42b8-a783-226e027e2e05',
     },
     totalSessionsRequired: {
       _type: Type.Number,
@@ -1211,6 +1223,7 @@ export interface ConfigObject {
   birthPlan: {
     encounterTypeUuid: string;
     formUuid: string;
+    indicatorConceptUuid: string;
   };
   prenatalScreening: {
     vihResultConceptUuid: string;
@@ -1219,6 +1232,7 @@ export interface ConfigObject {
   };
   psychoprophylaxis: {
     encounterTypeUuid: string;
+    conceptUuid: string;
     totalSessionsRequired: number;
   };
   obstetricRisk: {
