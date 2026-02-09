@@ -3646,6 +3646,7 @@ __metadata:
     "@carbon/react": "npm:^1.83.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.1"
+    "@openmrs/esm-patient-common-lib": "npm:next"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
@@ -3672,6 +3673,7 @@ __metadata:
   dependencies:
     "@carbon/react": "npm:^1.83.0"
     "@hookform/resolvers": "npm:^3.3.1"
+    "@openmrs/esm-patient-common-lib": "npm:next"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
     webpack: "npm:^5.99.9"
@@ -3803,6 +3805,7 @@ __metadata:
     "@carbon/react": "npm:^1.83.0"
     "@carbon/styles": "npm:^1.81.0"
     "@hookform/resolvers": "npm:^3.3.1"
+    "@openmrs/esm-patient-common-lib": "npm:next"
     classnames: "npm:^2.5.1"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
