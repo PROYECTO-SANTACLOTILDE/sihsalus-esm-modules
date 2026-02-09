@@ -3794,9 +3794,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pucp-gidis-hiisc/esm-sihsalus-widgets-app@workspace:packages/esm-sihsalus-widgets-app":
+"@pucp-gidis-hiisc/esm-sihsalus-widgets-app@workspace:packages/esm-sihsalus-consulta-externa-app":
   version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-sihsalus-widgets-app@workspace:packages/esm-sihsalus-widgets-app"
+  resolution: "@pucp-gidis-hiisc/esm-sihsalus-widgets-app@workspace:packages/esm-sihsalus-consulta-externa-app"
   dependencies:
     "@carbon/charts": "npm:^1.23.7"
     "@carbon/charts-react": "npm:^1.23.7"
