@@ -53,6 +53,7 @@ export const configSchema = {
       deliveryRoomCare: '7g8h9i0j-7234-5678-9101-abcdefghij07',
       obstetricUltrasound: '8b9c0d1e-8234-5678-9101-abcdefghij28',
       antecedentesPerinatales: 'a99e704f-46f6-4461-937d-606481fb0fc3',
+      psicoprofilaxis: '3cde4d44-72f8-4aeb-9025-7a8906a56ae8',
 
       // Child Health
       healthyChildControl: '3w4x5y6z-3234-5678-9101-abcdefghij23',
@@ -719,14 +720,14 @@ export const configSchema = {
     _type: Type.Object,
     _description: 'Configuración de psicoprofilaxis obstétrica',
     _default: {
-      encounterTypeUuid: '',
+      encounterTypeUuid: '3cde4d44-72f8-4aeb-9025-7a8906a56ae8',
       conceptUuid: '400ebbfe-bdb6-42b8-a783-226e027e2e05',
       totalSessionsRequired: 6,
     },
     encounterTypeUuid: {
       _type: Type.UUID,
-      _description: 'Encounter type UUID para sesiones de psicoprofilaxis (pendiente crear en servidor)',
-      _default: '',
+      _description: 'Encounter type UUID para sesiones de psicoprofilaxis — Sesión de Psicoprofilaxis (RM 361-2011)',
+      _default: '3cde4d44-72f8-4aeb-9025-7a8906a56ae8',
     },
     conceptUuid: {
       _type: Type.ConceptUuid,
