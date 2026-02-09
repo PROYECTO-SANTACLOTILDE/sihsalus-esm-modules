@@ -1,15 +1,21 @@
 import React, { useMemo } from 'react';
 import { Report, ChartMultitype } from '@carbon/react/icons';
-import { BabyIcon } from '@openmrs/esm-framework';
+import { BabyIcon, usePatient } from '@openmrs/esm-framework';
 import TabbedDashboard from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 import type { TabConfig } from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 
 export interface LabourDeliveryProps {
-  patient: fhir.Patient | null;
-  patientUuid: string | null;
+  patient?: fhir.Patient | null;
+  patientUuid?: string | null;
 }
 
-export const LabourDelivery: React.FC<LabourDeliveryProps> = ({ patient, patientUuid }) => {
+export const LabourDelivery: React.FC<LabourDeliveryProps> = ({
+  patient: patientProp,
+  patientUuid: patientUuidProp,
+}) => {
+  const { patient: hookPatient, patientUuid: hookPatientUuid } = usePatient();
+  const patient = patientProp ?? hookPatient;
+  const patientUuid = patientUuidProp ?? hookPatientUuid;
   const tabs: TabConfig[] = useMemo(
     () => [
       {

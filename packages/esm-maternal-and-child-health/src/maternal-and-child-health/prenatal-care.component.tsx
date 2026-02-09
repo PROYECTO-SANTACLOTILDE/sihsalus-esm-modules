@@ -1,14 +1,21 @@
 import React, { useMemo } from 'react';
 import { UserFollow, Task, ChartLineData } from '@carbon/react/icons';
+import { usePatient } from '@openmrs/esm-framework';
 import TabbedDashboard from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 import type { TabConfig } from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 
 export interface PrenatalCareProps {
-  patient: fhir.Patient | null;
-  patientUuid: string | null;
+  patient?: fhir.Patient | null;
+  patientUuid?: string | null;
 }
 
-export const PrenatalCare: React.FC<PrenatalCareProps> = ({ patient, patientUuid }) => {
+export const PrenatalCare: React.FC<PrenatalCareProps> = ({
+  patient: patientProp,
+  patientUuid: patientUuidProp,
+}) => {
+  const { patient: hookPatient, patientUuid: hookPatientUuid } = usePatient();
+  const patient = patientProp ?? hookPatient;
+  const patientUuid = patientUuidProp ?? hookPatientUuid;
   const tabs: TabConfig[] = useMemo(
     () => [
       {

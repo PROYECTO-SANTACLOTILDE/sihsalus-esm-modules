@@ -1,14 +1,21 @@
 import React, { useMemo } from 'react';
 import { Eyedropper, Pills } from '@carbon/react/icons';
+import { usePatient } from '@openmrs/esm-framework';
 import type { TabConfig } from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 import TabbedDashboard from '../ui/tabbed-dashboard/tabbed-dashboard.component';
 
 export interface ChildImmunizationProps {
-  patient: fhir.Patient | null;
-  patientUuid: string | null;
+  patient?: fhir.Patient | null;
+  patientUuid?: string | null;
 }
 
-export const ChildImmunizationSchedule: React.FC<ChildImmunizationProps> = ({ patient, patientUuid }) => {
+export const ChildImmunizationSchedule: React.FC<ChildImmunizationProps> = ({
+  patient: patientProp,
+  patientUuid: patientUuidProp,
+}) => {
+  const { patient: hookPatient, patientUuid: hookPatientUuid } = usePatient();
+  const patient = patientProp ?? hookPatient;
+  const patientUuid = patientUuidProp ?? hookPatientUuid;
   const tabs: TabConfig[] = useMemo(
     () => [
       {
