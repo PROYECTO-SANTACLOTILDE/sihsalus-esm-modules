@@ -1,4 +1,5 @@
 // index.ts
+import React from 'react';
 import { defineConfigSchema, getAsyncLifecycle, getSyncLifecycle } from '@openmrs/esm-framework';
 import { createDashboardLink } from '@openmrs/esm-patient-common-lib';
 import { createDashboardGroup } from './clinical-view-group/createDashboardGroup';
@@ -176,6 +177,14 @@ export const childMedicalHistory = getSyncLifecycle(ChildMedicalHistory, options
 export const anemiaScreening = getSyncLifecycle(AnemiaScreening, options);
 export const supplementationTracker = getSyncLifecycle(SupplementationTracker, options);
 export const screeningIndicators = getSyncLifecycle(ScreeningIndicators, options);
+
+// ================================================================================
+// HIDDEN DASHBOARD ROUTE MARKERS
+// These invisible extensions register dashboard routes with the patient chart.
+// Without them, the patient chart cannot route to our custom dashboards.
+// ================================================================================
+const HiddenDashboardMarker: React.FC = () => null;
+export const hiddenDashboardMarker = getSyncLifecycle(HiddenDashboardMarker, options);
 
 // ================================================================================
 // ASYNC COMPONENTS

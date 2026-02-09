@@ -55,7 +55,7 @@
     {
       "name": "maternal-and-child-health-dashboard-group-link",
       "component": "maternalAndChildHealthSideNavGroup",
-      "slot": "clinical-view-section"
+      "slot": "patient-chart-dashboard-slot"
     },
     {
       "name": "maternal-history-chart",
@@ -322,12 +322,90 @@
     {
       "name": "well-child-care-dashboard-group-link",
       "component": "wellChildCareSideNavGroup",
-      "slot": "clinical-view-section"
+      "slot": "patient-chart-dashboard-slot"
     },
     {
       "name": "antecedentes-patologicos-overview",
       "component": "antecedentesPatologicos",
       "slot": "additional-health-services-slot"
+    },
+    {
+      "name": "prenatal-care-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-prenatal-care-dashboard-slot",
+        "path": "prenatal-care-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "labour-and-delivery-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-labour-and-delivery-dashboard-slot",
+        "path": "labour-and-delivery-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "postnatal-care-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-postnatal-care-dashboard-slot",
+        "path": "postnatal-care-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "well-child-care-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-well-child-care-dashboard-slot",
+        "path": "well-child-care-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "neonatal-care-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-neonatal-care-dashboard-slot",
+        "path": "neonatal-care-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "child-immunization-schedule-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-child-immunization-schedule-dashboard-slot",
+        "path": "child-immunization-schedule-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
     }
   ],
   "modals": [],
