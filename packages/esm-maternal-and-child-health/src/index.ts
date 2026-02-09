@@ -21,6 +21,11 @@ import PostpartumControlTable from './maternal-and-child-health/components/postn
 import CurrentPregnancyTable from './maternal-and-child-health/components/prenatal-care/currentPregnancy.component';
 import MaternalHistoryTable from './maternal-and-child-health/components/prenatal-care/maternalHistory.component';
 import PrenatalCareChart from './maternal-and-child-health/components/prenatal-care/prenatalCareChart.component';
+import BirthPlanWidget from './maternal-and-child-health/components/prenatal-care/birth-plan/birth-plan.component';
+import RiskClassification from './maternal-and-child-health/components/prenatal-care/risk-classification/risk-classification.component';
+import PsychoprophylaxisWidget from './maternal-and-child-health/components/prenatal-care/psychoprophylaxis/psychoprophylaxis.component';
+import PrenatalSupplementationWidget from './maternal-and-child-health/components/prenatal-care/prenatal-supplementation/prenatal-supplementation.component';
+import PostpartumTrackingWidget from './maternal-and-child-health/components/postnatal-care/postpartum-tracking.component';
 import PartographChart from './ui/partography/partograph-chart';
 import { ObstetricHistoryBase } from './ui/obstetric-history-widget';
 
@@ -48,6 +53,9 @@ import NewbornBalanceOverview from './well-child-care/components/newborn-monitor
 import NewbornBiometricsBase from './well-child-care/components/newborn-monitoring/newborn biometrics/biometrics-base.component';
 import VaccinationSchedule from './well-child-care/components/vaccination-schema-widget/vaccinationSchedule.component';
 import { AdverseReactionForm } from './well-child-care/workspace/adverse-reaction/adverseReaction.component';
+import AnemiaScreening from './well-child-care/components/anemia-screening/anemia-screening.component';
+import SupplementationTracker from './well-child-care/components/supplementation/supplementation-tracker.component';
+import ScreeningIndicators from './well-child-care/components/screening/screening-indicators.component';
 import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.component';
 
 // Module Configuration
@@ -104,11 +112,16 @@ export const obstetricHistoryChart = getSyncLifecycle(ObstetricHistoryBase, opti
 // Postnatal Care Components
 export const immediatePostpartumTable = getSyncLifecycle(ImmediatePostpartumTable, options);
 export const postpartumControlTable = getSyncLifecycle(PostpartumControlTable, options);
+export const postpartumTracking = getSyncLifecycle(PostpartumTrackingWidget, options);
 
 // Prenatal Care Components
 export const currentPregnancyTable = getSyncLifecycle(CurrentPregnancyTable, options);
 export const maternalHistoryTable = getSyncLifecycle(MaternalHistoryTable, options);
 export const prenatalCareChart = getSyncLifecycle(PrenatalCareChart, options);
+export const birthPlan = getSyncLifecycle(BirthPlanWidget, options);
+export const riskClassification = getSyncLifecycle(RiskClassification, options);
+export const psychoprophylaxis = getSyncLifecycle(PsychoprophylaxisWidget, options);
+export const prenatalSupplementation = getSyncLifecycle(PrenatalSupplementationWidget, options);
 
 // ================================================================================
 // WELL CHILD CARE EXPORTS
@@ -158,6 +171,11 @@ export const vaccinationSchedule = getSyncLifecycle(VaccinationSchedule, options
 
 // Child Medical History
 export const childMedicalHistory = getSyncLifecycle(ChildMedicalHistory, options);
+
+// CRED Fase 1 — Screening & Supplementation Widgets
+export const anemiaScreening = getSyncLifecycle(AnemiaScreening, options);
+export const supplementationTracker = getSyncLifecycle(SupplementationTracker, options);
+export const screeningIndicators = getSyncLifecycle(ScreeningIndicators, options);
 
 // ================================================================================
 // ASYNC COMPONENTS

@@ -99,6 +99,12 @@
       "order": 1
     },
     {
+      "name": "postpartum-tracking-widget",
+      "component": "postpartumTracking",
+      "slot": "postnatal-care-controls-slot",
+      "order": 2
+    },
+    {
       "name": "prenatal-care-dashboard",
       "slot": "patient-chart-prenatal-care-dashboard-slot",
       "component": "prenatalCare"
@@ -134,6 +140,30 @@
       "order": 1
     },
     {
+      "name": "birth-plan-widget",
+      "component": "birthPlan",
+      "slot": "prenatal-care-chart-slot",
+      "order": 2
+    },
+    {
+      "name": "risk-classification-widget",
+      "component": "riskClassification",
+      "slot": "prenatal-current-pregnancy-slot",
+      "order": 5
+    },
+    {
+      "name": "psychoprophylaxis-widget",
+      "component": "psychoprophylaxis",
+      "slot": "prenatal-care-chart-slot",
+      "order": 3
+    },
+    {
+      "name": "prenatal-supplementation-widget",
+      "component": "prenatalSupplementation",
+      "slot": "prenatal-care-chart-slot",
+      "order": 4
+    },
+    {
       "name": "child-immunization-schedule",
       "component": "childImmunizationScheduleLink",
       "slot": "well-child-care-slot",
@@ -167,6 +197,24 @@
       "component": "credControlsMatrix",
       "slot": "cred-following-slot",
       "order": 3
+    },
+    {
+      "name": "anemia-screening-widget",
+      "component": "anemiaScreening",
+      "slot": "cred-following-slot",
+      "order": 4
+    },
+    {
+      "name": "supplementation-tracker-widget",
+      "component": "supplementationTracker",
+      "slot": "cred-following-slot",
+      "order": 5
+    },
+    {
+      "name": "screening-indicators-widget",
+      "component": "screeningIndicators",
+      "slot": "cred-following-slot",
+      "order": 6
     },
     {
       "name": "neonatal-attention-chart",

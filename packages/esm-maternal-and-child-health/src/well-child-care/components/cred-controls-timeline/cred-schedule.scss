@@ -55,6 +55,12 @@
   &.current {
     background-color: colors.$gray-10;
   }
+
+  &.neonatal {
+    border-color: colors.$purple-30;
+    border-left: 3px solid colors.$purple-60;
+    flex: 1 1 100px;
+  }
 }
 
 .checkups {

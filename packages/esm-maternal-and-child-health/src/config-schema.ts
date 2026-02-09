@@ -609,7 +609,10 @@ export const configSchema = {
     _type: Type.Array,
     _description: 'Configuración de grupos etarios para CRED',
     _default: [
-      { label: 'RECIÉN NACIDO', sublabel: '0 A 29 DÍAS', minDays: 0, maxDays: 29 },
+      { label: 'RN - 48h', sublabel: 'CONTROL 1 (2 DÍAS)', minDays: 0, maxDays: 3, neonatalControl: 1 },
+      { label: 'RN - 7d', sublabel: 'CONTROL 2 (7 DÍAS)', minDays: 4, maxDays: 10, neonatalControl: 2 },
+      { label: 'RN - 14d', sublabel: 'CONTROL 3 (14 DÍAS)', minDays: 11, maxDays: 17, neonatalControl: 3 },
+      { label: 'RN - 21d', sublabel: 'CONTROL 4 (21 DÍAS)', minDays: 18, maxDays: 29, neonatalControl: 4 },
       { label: '0 AÑOS', sublabel: '1 A 11 MESES', minMonths: 1, maxMonths: 11 },
       { label: '1 AÑO', sublabel: '12 A 23 MESES', minMonths: 12, maxMonths: 23 },
       { label: '2 AÑOS', sublabel: '24 A 35 MESES', minMonths: 24, maxMonths: 35 },
@@ -631,6 +634,7 @@ export const configSchema = {
       maxDays: { _type: Type.Number, _optional: true },
       minMonths: { _type: Type.Number, _optional: true },
       maxMonths: { _type: Type.Number, _optional: true },
+      neonatalControl: { _type: Type.Number, _optional: true },
     },
   },
 
@@ -745,10 +749,32 @@ export const configSchema = {
     _description: 'Configuración de formularios CRED por grupo etario',
     _default: [
       {
-        label: 'RECIÉN NACIDO',
-        minMonths: 0,
-        maxMonths: 0.93,
+        label: 'RN - 48h (Control 1)',
+        minDays: 0,
+        maxDays: 3,
+        neonatalControl: 1,
         forms: ['atencionImmediataNewborn', 'newbornNeuroEval', 'breastfeedingObservation', 'roomingIn'],
+      },
+      {
+        label: 'RN - 7d (Control 2)',
+        minDays: 4,
+        maxDays: 10,
+        neonatalControl: 2,
+        forms: ['nursingAssessment', 'breastfeedingObservation'],
+      },
+      {
+        label: 'RN - 14d (Control 3)',
+        minDays: 11,
+        maxDays: 17,
+        neonatalControl: 3,
+        forms: ['nursingAssessment', 'breastfeedingObservation'],
+      },
+      {
+        label: 'RN - 21d (Control 4)',
+        minDays: 18,
+        maxDays: 29,
+        neonatalControl: 4,
+        forms: ['nursingAssessment', 'breastfeedingObservation'],
       },
       {
         label: '2 MESES',
@@ -876,6 +902,7 @@ export interface AgeRange {
   maxDays?: number;
   minMonths?: number;
   maxMonths?: number;
+  neonatalControl?: number;
 }
 
 export interface ConfigObject {
