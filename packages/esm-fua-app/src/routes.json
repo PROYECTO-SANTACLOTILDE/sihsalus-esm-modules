@@ -107,5 +107,15 @@
       "type": "form",
       "title": "Ver FUA"
     }
+  ],
+  "modals": [
+    {
+      "name": "change-fua-status-modal",
+      "component": "changeFuaStatusModal"
+    },
+    {
+      "name": "cancel-fua-modal",
+      "component": "cancelFuaModal"
+    }
   ]
 }

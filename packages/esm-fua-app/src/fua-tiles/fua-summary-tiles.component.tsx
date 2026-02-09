@@ -7,7 +7,7 @@ import { type Config } from '../config-schema';
 
 const FuaSummaryTiles: React.FC = () => {
   const { t } = useTranslation();
-  const { enableReviewingLabResultsBeforeApproval } = useConfig<Config>();
+  const { enableFuaApprovalWorkflow } = useConfig<Config>();
   const fuaTileSlot = 'fua-tiles-slot';
   const tilesExtensions = useAssignedExtensions(fuaTileSlot) as AssignedExtension[];
 
@@ -15,7 +15,7 @@ const FuaSummaryTiles: React.FC = () => {
     .filter((extension) => Object.keys(extension.meta).length > 0)
     .filter((extension) => {
       if (extension.name === 'pending-review-list-tile-component') {
-        return enableReviewingLabResultsBeforeApproval === true;
+        return enableFuaApprovalWorkflow === true;
       }
       return true;
     });

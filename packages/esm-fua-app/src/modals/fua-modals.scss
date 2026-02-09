@@ -1,0 +1,45 @@
+@use '@carbon/colors';
+@use '@carbon/layout';
+@use '@carbon/type';
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: layout.$spacing-05;
+}
+
+.fuaInfo {
+  background-color: colors.$gray-10;
+  padding: layout.$spacing-04;
+  border-radius: 4px;
+
+  p {
+    @include type.type-style('body-compact-01');
+    margin-bottom: layout.$spacing-02;
+    color: colors.$gray-80;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.warningMessage {
+  background-color: #fff8e1;
+  border-left: 4px solid #f1c21b;
+  padding: layout.$spacing-04;
+  border-radius: 0 4px 4px 0;
+
+  p {
+    @include type.type-style('body-compact-01');
+    color: colors.$gray-80;
+    margin: 0;
+  }
+}
+
+.noTransitions {
+  @include type.type-style('body-compact-01');
+  color: colors.$gray-60;
+  padding: layout.$spacing-05 0;
+  text-align: center;
+}

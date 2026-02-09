@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
   DataTable,
   DataTableSkeleton,
@@ -16,11 +16,14 @@ import {
   Layer,
   Tile,
   Button,
+  OverflowMenu,
+  OverflowMenuItem,
+  Tag,
 } from '@carbon/react';
 import { View } from '@carbon/react/icons';
 import { useTranslation } from 'react-i18next';
-import { formatDate, usePagination, launchWorkspace } from '@openmrs/esm-framework';
-import useFuaRequests from '../hooks/useFuaRequests';
+import { formatDate, usePagination, launchWorkspace, showModal } from '@openmrs/esm-framework';
+import useFuaRequests, { type FuaRequest } from '../hooks/useFuaRequests';
 import { FuaDateRangePicker } from './fua-date-range-picker.component';
 import styles from './fua-request-table.scss';
 
@@ -28,24 +31,32 @@ interface FuaRequestTableProps {
   statusFilter?: string;
 }
 
+type TagType = 'blue' | 'cyan' | 'gray' | 'green' | 'magenta' | 'red' | 'teal' | 'warm-gray' | 'cool-gray' | 'high-contrast' | 'outline';
+
+const estadoTagType: Record<string, TagType> = {
+  'Pendiente': 'gray',
+  'En Proceso': 'blue',
+  'Completado': 'green',
+  'Enviado a SETI-SIS': 'cyan',
+  'Rechazado': 'red',
+  'Cancelado': 'magenta',
+};
+
 const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' }) => {
   const { t } = useTranslation();
 
-  // Use the refactored hook with status filtering
-  const { fuaOrders, isLoading, isError } = useFuaRequests({
+  const { fuaOrders, isLoading, isError, mutate } = useFuaRequests({
     status: statusFilter !== 'all' ? statusFilter : null,
     excludeCanceled: true,
   });
 
   const [searchString, setSearchString] = useState('');
 
-  // Apply search filter only (status filtering is now done by the hook)
   const filteredData = useMemo(() => {
     if (!fuaOrders) return [];
 
     let filtered = fuaOrders;
 
-    // Apply search filter
     if (searchString) {
       const search = searchString.toLowerCase();
       filtered = filtered.filter(req =>
@@ -62,31 +73,47 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
   const [currentPageSize, setPageSize] = useState(10);
   const { results, goTo, currentPage } = usePagination(filteredData ?? [], currentPageSize);
 
-  const handleViewFua = (fuaId: string) => {
-    launchWorkspace('fua-viewer-workspace', {
-      fuaId,
+  const handleViewFua = useCallback((fuaId: string) => {
+    launchWorkspace('fua-viewer-workspace', { fuaId });
+  }, []);
+
+  const handleChangeStatus = useCallback((fuaRequest: FuaRequest) => {
+    const dispose = showModal('change-fua-status-modal', {
+      fuaRequest,
+      onStatusChanged: () => {
+        mutate();
+      },
+      closeModal: () => dispose(),
     });
-  };
+  }, [mutate]);
+
+  const handleCancelFua = useCallback((fuaRequest: FuaRequest) => {
+    const dispose = showModal('cancel-fua-modal', {
+      fuaRequest,
+      onCancelled: () => {
+        mutate();
+      },
+      closeModal: () => dispose(),
+    });
+  }, [mutate]);
 
   const headers = [
     { key: 'name', header: t('fuaName', 'Nombre del FUA') },
     { key: 'estado', header: t('status', 'Estado') },
-    { key: 'uuid', header: t('fuaUuid', 'UUID del FUA') },
     { key: 'visitUuid', header: t('visitUuid', 'UUID de la Visita') },
     { key: 'fechaCreacion', header: t('creationDate', 'Fecha de Creación') },
     { key: 'fechaActualizacion', header: t('updateDate', 'Fecha de Actualización') },
     { key: 'actions', header: t('actions', 'Acciones') },
   ];
 
-  const rows = results?.map((request: any, index: number) => ({
+  const rows = results?.map((request: FuaRequest, index: number) => ({
     id: String(index),
     name: request.name || 'N/A',
-    estado: request.fuaEstado?.nombre || 'N/A',
-    uuid: request.uuid,
+    estado: request.fuaEstado?.nombre || t('noStatus', 'Sin estado'),
     visitUuid: request.visitUuid || 'N/A',
     fechaCreacion: formatDate(new Date(request.fechaCreacion), { mode: 'standard' }),
     fechaActualizacion: formatDate(new Date(request.fechaActualizacion), { mode: 'standard' }),
-    actions: request.uuid,
+    actions: request,
   })) ?? [];
 
   if (isLoading) {
@@ -134,27 +161,48 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id} {...getRowProps({ row })}>
-                    {row.cells.map((cell) => (
-                      <TableCell key={cell.id} className={styles.tableCell}>
-                        {cell.info.header === 'actions' ? (
-                          <Button
-                            kind="ghost"
-                            size="sm"
-                            renderIcon={View}
-                            iconDescription={t('viewFua', 'Ver FUA')}
-                            onClick={() => handleViewFua(cell.value)}
-                          >
-                            {t('view', 'Ver')}
-                          </Button>
-                        ) : (
-                          cell.value
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
+                {rows.map((row, rowIndex) => {
+                  const fuaRequest = results[rowIndex];
+                  return (
+                    <TableRow key={row.id} {...getRowProps({ row })}>
+                      {row.cells.map((cell) => (
+                        <TableCell key={cell.id} className={styles.tableCell}>
+                          {cell.info.header === 'estado' ? (
+                            <Tag type={estadoTagType[cell.value] || 'gray'} size="sm">
+                              {cell.value}
+                            </Tag>
+                          ) : cell.info.header === 'actions' ? (
+                            <div className={styles.actionsCell}>
+                              <Button
+                                kind="ghost"
+                                size="sm"
+                                renderIcon={View}
+                                iconDescription={t('viewFua', 'Ver FUA')}
+                                hasIconOnly
+                                onClick={() => handleViewFua(fuaRequest.uuid)}
+                                tooltipPosition="left"
+                              />
+                              <OverflowMenu size="sm" flipped ariaLabel={t('actions', 'Acciones')}>
+                                <OverflowMenuItem
+                                  itemText={t('changeStatus', 'Cambiar Estado')}
+                                  onClick={() => handleChangeStatus(fuaRequest)}
+                                />
+                                <OverflowMenuItem
+                                  itemText={t('cancelFua', 'Cancelar FUA')}
+                                  onClick={() => handleCancelFua(fuaRequest)}
+                                  isDelete
+                                  hasDivider
+                                />
+                              </OverflowMenu>
+                            </div>
+                          ) : (
+                            cell.value
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
             {rows.length === 0 ? (

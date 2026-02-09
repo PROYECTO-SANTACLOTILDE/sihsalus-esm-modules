@@ -1,5 +1,4 @@
-import { Type, validators } from '@openmrs/esm-framework';
-
+import { Type } from '@openmrs/esm-framework';
 
 // ===============================
 // MAIN CONFIGURATION SCHEMA
@@ -17,7 +16,8 @@ export const configSchema = {
     _description: 'URL del endpoint del generador de FUA',
   },
 };
+
 export type Config = {
-  enableReviewingLabResultsBeforeApproval: boolean;
+  enableFuaApprovalWorkflow: boolean;
   fuaGeneratorEndpoint: string;
 };

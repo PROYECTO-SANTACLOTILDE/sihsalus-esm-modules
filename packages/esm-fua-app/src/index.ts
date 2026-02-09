@@ -100,3 +100,16 @@ export const fuaViewerPage = getAsyncLifecycle(
   () => import('./fua-viewer-page/fua-viewer-page.component'),
   options,
 );
+
+// ================================================================================
+// MODALS
+// ================================================================================
+export const changeFuaStatusModal = getAsyncLifecycle(
+  () => import('./modals/change-fua-status.modal'),
+  options,
+);
+
+export const cancelFuaModal = getAsyncLifecycle(
+  () => import('./modals/cancel-fua.modal'),
+  options,
+);

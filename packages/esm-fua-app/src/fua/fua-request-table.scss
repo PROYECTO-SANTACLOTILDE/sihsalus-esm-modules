@@ -123,3 +123,9 @@
   border-top: 1px solid var(--cds-border-subtle-01);
   background-color: var(--cds-layer-01);
 }
+
+.actionsCell {
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-01;
+}
