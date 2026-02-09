@@ -1,5 +1,5 @@
 import { useConfig } from '@openmrs/esm-framework';
-import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
+import { type DefaultPatientWorkspaceProps } from '../types';
 import React from 'react';
 import type { ConfigObject } from '../config-schema';
 import ConditionsFormWorkspace from '../ui/conditions-filter/conditions-form.workspace';

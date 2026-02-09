@@ -15,7 +15,7 @@ import {
   Stack,
 } from '@carbon/react';
 import { createErrorHandler, showSnackbar, useConfig, useLayoutType, useSession } from '@openmrs/esm-framework';
-import type { DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
+import type { DefaultPatientWorkspaceProps } from '../../../types';
 import type { ConfigObject } from '../../../config-schema';
 import { isValueWithinReferenceRange } from './vitals-biometrics-form.utils';
 import { invalidateCachedVitalsAndBiometrics, saveVitalsAndBiometrics, useVitalsConceptMetadata } from '../../common';

@@ -1,6 +1,6 @@
 import { Button, ButtonSet, Form } from '@carbon/react';
 import { ArrowLeftIcon, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
-import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
+import { type DefaultPatientWorkspaceProps } from '../../types';
 import React, { type ComponentProps, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormsList from './forms-list.component';

@@ -18,7 +18,7 @@ import {
   useDebounce,
   useSession,
 } from '@openmrs/esm-framework';
-import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
+import { type DefaultPatientWorkspaceProps } from '../../types';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import 'dayjs/plugin/utc';
@@ -416,7 +416,7 @@ function SearchResults({
     <Layer>
       <Tile className={styles.emptyResults}>
         <span>
-          {t('noResultsFor', 'No results for')} <strong>"{value}"</strong>
+          {String(t('noResultsFor', 'No results for'))} <strong>"{value}"</strong>
         </span>
       </Tile>
     </Layer>

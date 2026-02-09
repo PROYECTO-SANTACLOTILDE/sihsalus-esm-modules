@@ -33,7 +33,7 @@ import {
   useVisit,
   getPatientName,
 } from '@openmrs/esm-framework';
-import type { DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-lib';
+import type { DefaultPatientWorkspaceProps } from '../../../types';
 import type { ConfigObject } from '../../../config-schema';
 import styles from './tepsi-form.scss';
 

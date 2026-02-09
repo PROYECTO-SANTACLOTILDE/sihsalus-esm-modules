@@ -2,7 +2,8 @@ import { Button, ButtonSet, Column, Form, InlineNotification, TextInput, Tooltip
 import { Information as InformationIcon } from '@carbon/react/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { age, ResponsiveWrapper, useConfig, useLayoutType, usePatient, launchWorkspace } from '@openmrs/esm-framework';
-import { type DefaultPatientWorkspaceProps, usePatientChartStore } from '@openmrs/esm-patient-common-lib';
+import { usePatientChartStore } from '@openmrs/esm-patient-common-lib';
+import { type DefaultPatientWorkspaceProps } from '../../../types';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
