@@ -1,10 +1,13 @@
-import { useConfig } from '@openmrs/esm-framework';
+import useSWR from 'swr';
+import { openmrsFetch, restBaseUrl, useConfig } from '@openmrs/esm-framework';
+import { useMemo } from 'react';
 import type { ConfigObject } from '../config-schema';
 
 interface SupplementItem {
   name: string;
   delivered: number;
   total: number;
+  percentage: number;
   isComplete: boolean;
 }
 
@@ -21,22 +24,81 @@ interface PrenatalSupplementationResult {
  * - Sulfato ferroso: 60mg Fe elemental/día (desde semana 14)
  * - Calcio: 500mg/día (desde semana 20 hasta el parto)
  *
- * TODO: Conectar con obs de suplementación prenatal del servidor
+ * Usa: config.supplementation.{ironConceptUuid, folicAcidConceptUuid, calciumConceptUuid}
  */
 export function usePrenatalSupplementation(patientUuid: string): PrenatalSupplementationResult {
   const config = useConfig<ConfigObject>();
 
-  // TODO: Implementar fetch real con concept UUIDs de suplementación
+  const supplementDefs = useMemo(() => {
+    const defs: Array<{ name: string; uuid: string; total: number }> = [];
+
+    if (config.supplementation?.folicAcidConceptUuid) {
+      defs.push({ name: 'Ácido Fólico', uuid: config.supplementation.folicAcidConceptUuid, total: 90 });
+    }
+    if (config.supplementation?.ironConceptUuid) {
+      defs.push({ name: 'Sulfato Ferroso', uuid: config.supplementation.ironConceptUuid, total: 180 });
+    }
+    if (config.supplementation?.calciumConceptUuid) {
+      defs.push({ name: 'Calcio', uuid: config.supplementation.calciumConceptUuid, total: 140 });
+    }
+
+    return defs;
+  }, [config]);
+
+  const urls = useMemo(() => {
+    if (!patientUuid || supplementDefs.length === 0) return null;
+    return supplementDefs.map(
+      (s) => `${restBaseUrl}/obs?patient=${patientUuid}&concept=${s.uuid}&v=custom:(uuid,value,obsDatetime)`,
+    );
+  }, [patientUuid, supplementDefs]);
+
+  const { data, isLoading, error } = useSWR(
+    urls,
+    async (fetchUrls: string[]) => {
+      const responses = await Promise.all(fetchUrls.map((u) => openmrsFetch(u)));
+      return responses.map((r) => r?.data);
+    },
+  );
+
+  const result = useMemo(() => {
+    if (!data || data.length === 0) {
+      return {
+        supplements: supplementDefs.map((s) => ({
+          name: s.name,
+          delivered: 0,
+          total: s.total,
+          percentage: 0,
+          isComplete: false,
+        })),
+        overallPercentage: 0,
+      };
+    }
+
+    const supplements: SupplementItem[] = supplementDefs.map((def, idx) => {
+      const observations = data[idx]?.results ?? [];
+      const delivered = observations.reduce((sum: number, obs: any) => {
+        const val = typeof obs.value === 'number' ? obs.value : parseFloat(obs.value);
+        return sum + (isNaN(val) ? 0 : val);
+      }, 0);
+
+      const percentage = def.total > 0 ? Math.min((delivered / def.total) * 100, 100) : 0;
+      const isComplete = delivered >= def.total;
+
+      return { name: def.name, delivered, total: def.total, percentage, isComplete };
+    });
+
+    const overallPercentage =
+      supplements.length > 0
+        ? supplements.reduce((sum, s) => sum + s.percentage, 0) / supplements.length
+        : 0;
+
+    return { supplements, overallPercentage };
+  }, [data, supplementDefs]);
 
   return {
-    supplements: [
-      { name: 'Ácido Fólico', delivered: 0, total: 90, isComplete: false },
-      { name: 'Sulfato Ferroso', delivered: 0, total: 180, isComplete: false },
-      { name: 'Calcio', delivered: 0, total: 140, isComplete: false },
-    ],
-    overallPercentage: 0,
-    isLoading: false,
-    error: null,
+    ...result,
+    isLoading,
+    error,
   };
 }
 

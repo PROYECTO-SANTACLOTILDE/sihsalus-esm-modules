@@ -1,4 +1,6 @@
-import { useConfig } from '@openmrs/esm-framework';
+import useSWR from 'swr';
+import { openmrsFetch, restBaseUrl, useConfig } from '@openmrs/esm-framework';
+import { useMemo } from 'react';
 import type { ConfigObject } from '../config-schema';
 
 interface SupplementationResult {
@@ -14,23 +16,44 @@ interface SupplementationResult {
  * Hook para tracking de suplementación con MMN según Directiva 068-MINSA:
  * - 360 sobres de multimicronutrientes (MMN) en polvo
  * - 1 sobre diario desde los 6 meses hasta completar 360
- * - También trackea sulfato ferroso gotas (4-5 meses)
  *
- * TODO: Conectar con concept UUID de MMN entregados del servidor
+ * Usa: config.supplementation.mmnConceptUuid, config.supplementation.mmnTotalTarget
  */
 export function useSupplementationTracker(patientUuid: string): SupplementationResult {
   const config = useConfig<ConfigObject>();
+  const conceptUuid = config.supplementation?.mmnConceptUuid;
+  const totalTarget = config.supplementation?.mmnTotalTarget ?? 360;
 
-  // TODO: Implementar fetch real cuando se tenga el concept UUID
-  // const mmnConceptUuid = config.supplementation?.mmnConceptUuid;
+  const url = useMemo(() => {
+    if (!patientUuid || !conceptUuid) return null;
+    return `${restBaseUrl}/obs?patient=${patientUuid}&concept=${conceptUuid}&v=custom:(uuid,value,obsDatetime)`;
+  }, [patientUuid, conceptUuid]);
+
+  const { data, isLoading, error } = useSWR(
+    url,
+    async (fetchUrl: string) => {
+      const response = await openmrsFetch(fetchUrl);
+      return response?.data;
+    },
+  );
+
+  const result = useMemo(() => {
+    const observations = data?.results ?? [];
+    const delivered = observations.reduce((sum: number, obs: any) => {
+      const val = typeof obs.value === 'number' ? obs.value : parseFloat(obs.value);
+      return sum + (isNaN(val) ? 0 : val);
+    }, 0);
+
+    const percentage = totalTarget > 0 ? Math.min((delivered / totalTarget) * 100, 100) : 0;
+    const isComplete = delivered >= totalTarget;
+
+    return { delivered, total: totalTarget, percentage, isComplete };
+  }, [data, totalTarget]);
 
   return {
-    delivered: 0,
-    total: 360,
-    percentage: 0,
-    isComplete: false,
-    isLoading: false,
-    error: null,
+    ...result,
+    isLoading,
+    error,
   };
 }
 

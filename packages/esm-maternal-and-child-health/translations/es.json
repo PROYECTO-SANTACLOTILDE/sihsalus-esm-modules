@@ -463,5 +463,11 @@
   "risk_indeterminado": "Sin Evaluar",
   "sachets": "sobres",
   "screeningIndicators": "Tamizajes Obligatorios",
-  "sessions": "sesiones"
+  "sessions": "sesiones",
+  "contractionFrequency": "Contracciones /10min",
+  "contractionDuration": "Duración (s)",
+  "editBirthPlan": "Editar plan",
+  "createBirthPlan": "Crear plan",
+  "edit": "Editar",
+  "create": "Crear"
 }

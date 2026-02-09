@@ -604,6 +604,156 @@ export const configSchema = {
     // (Truncated for brevity - the remaining CRED concepts would follow the same organization)
   },
 
+  // 10A. TAMIZAJE DE ANEMIA (NTS 137)
+  anemiaScreening: {
+    _type: Type.Object,
+    _description: 'Configuración del tamizaje de anemia según NTS 137',
+    _default: {
+      hemoglobinaConceptUuid: '',
+      anemiaThreshold: 11.0,
+    },
+    hemoglobinaConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID para valor de hemoglobina (g/dL)',
+      _default: '',
+    },
+    anemiaThreshold: {
+      _type: Type.Number,
+      _description: 'Umbral para considerar anemia (g/dL). NTS 137: < 11.0',
+      _default: 11.0,
+    },
+  },
+
+  // 10B. SUPLEMENTACIÓN (Directiva 068 niño / Directiva 069 gestante)
+  supplementation: {
+    _type: Type.Object,
+    _description: 'Configuración de suplementación MMN y prenatal',
+    _default: {
+      mmnConceptUuid: '',
+      mmnTotalTarget: 360,
+      ironConceptUuid: '',
+      folicAcidConceptUuid: '',
+      calciumConceptUuid: '',
+    },
+    mmnConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de multimicronutrientes entregados',
+      _default: '',
+    },
+    mmnTotalTarget: {
+      _type: Type.Number,
+      _description: 'Meta total de sobres MMN (Directiva 068: 360)',
+      _default: 360,
+    },
+    ironConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de sulfato ferroso entregado',
+      _default: '',
+    },
+    folicAcidConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de ácido fólico entregado',
+      _default: '',
+    },
+    calciumConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de calcio entregado',
+      _default: '',
+    },
+  },
+
+  // 10C. PLAN DE PARTO (NTS 105)
+  birthPlan: {
+    _type: Type.Object,
+    _description: 'Configuración del plan de parto según NTS 105',
+    _default: {
+      encounterTypeUuid: '',
+      formUuid: '',
+    },
+    encounterTypeUuid: {
+      _type: Type.UUID,
+      _description: 'Encounter type UUID para plan de parto',
+      _default: '',
+    },
+    formUuid: {
+      _type: Type.UUID,
+      _description: 'Form UUID (Ampath) del plan de parto. Ver formsList.birthPlanForm para el form existente.',
+      _default: '',
+    },
+  },
+
+  // 10D. TAMIZAJE PRENATAL (NTS 159 - VIH/Sífilis/HepB)
+  prenatalScreening: {
+    _type: Type.Object,
+    _description: 'Concepts de tamizaje prenatal obligatorio (NTS 159)',
+    _default: {
+      vihResultConceptUuid: '',
+      sifilisResultConceptUuid: '',
+      hepatitisBResultConceptUuid: '',
+    },
+    vihResultConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID del resultado de prueba VIH',
+      _default: '',
+    },
+    sifilisResultConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID del resultado de RPR/VDRL (sífilis)',
+      _default: '',
+    },
+    hepatitisBResultConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID del resultado de HBsAg (Hepatitis B)',
+      _default: '',
+    },
+  },
+
+  // 10E. PSICOPROFILAXIS (RM 361-2011)
+  psychoprophylaxis: {
+    _type: Type.Object,
+    _description: 'Configuración de psicoprofilaxis obstétrica',
+    _default: {
+      encounterTypeUuid: '',
+      totalSessionsRequired: 6,
+    },
+    encounterTypeUuid: {
+      _type: Type.UUID,
+      _description: 'Encounter type UUID para sesiones de psicoprofilaxis',
+      _default: '',
+    },
+    totalSessionsRequired: {
+      _type: Type.Number,
+      _description: 'Número total de sesiones requeridas (RM 361-2011: 6)',
+      _default: 6,
+    },
+  },
+
+  // 10F. RIESGO OBSTÉTRICO (NTS 105)
+  obstetricRisk: {
+    _type: Type.Object,
+    _description: 'Configuración de clasificación de riesgo obstétrico',
+    _default: {
+      classificationConceptUuid: '',
+      highRiskConceptUuid: '',
+      lowRiskConceptUuid: '',
+    },
+    classificationConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de la clasificación de riesgo obstétrico',
+      _default: '',
+    },
+    highRiskConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID para "Alto Riesgo"',
+      _default: '',
+    },
+    lowRiskConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID para "Bajo Riesgo"',
+      _default: '',
+    },
+  },
+
   // 10. AGE GROUPS CONFIGURATION
   ageGroupsCRED: {
     _type: Type.Array,
@@ -893,6 +1043,8 @@ export interface PartograpyComponents {
   fetalHeartRate: number;
   cervicalDilation: number;
   descentOfHead: string;
+  contractionFrequency?: number;
+  contractionDuration?: number;
 }
 
 export interface AgeRange {
@@ -1043,4 +1195,35 @@ export interface ConfigObject {
   };
   CREDFormsByAgeGroup;
   ageGroupsCRED: AgeRange[];
+
+  // Fase 1 — Config sections normativos
+  anemiaScreening: {
+    hemoglobinaConceptUuid: string;
+    anemiaThreshold: number;
+  };
+  supplementation: {
+    mmnConceptUuid: string;
+    mmnTotalTarget: number;
+    ironConceptUuid: string;
+    folicAcidConceptUuid: string;
+    calciumConceptUuid: string;
+  };
+  birthPlan: {
+    encounterTypeUuid: string;
+    formUuid: string;
+  };
+  prenatalScreening: {
+    vihResultConceptUuid: string;
+    sifilisResultConceptUuid: string;
+    hepatitisBResultConceptUuid: string;
+  };
+  psychoprophylaxis: {
+    encounterTypeUuid: string;
+    totalSessionsRequired: number;
+  };
+  obstetricRisk: {
+    classificationConceptUuid: string;
+    highRiskConceptUuid: string;
+    lowRiskConceptUuid: string;
+  };
 }

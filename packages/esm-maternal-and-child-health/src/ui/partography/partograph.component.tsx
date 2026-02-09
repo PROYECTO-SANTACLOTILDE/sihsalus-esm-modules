@@ -22,6 +22,8 @@ import { usePartograph } from '../../hooks/usePartograph';
 import dayjs from 'dayjs';
 import {
   CervicalDilation,
+  ContractionDuration,
+  ContractionFrequency,
   DeviceRecorded,
   FetalHeartRate,
   PartographEncounterFormUuid,
@@ -63,6 +65,14 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
       header: t('descentOfHead', 'Descent of Head'),
       key: 'descentOfHead',
     },
+    {
+      header: t('contractionFrequency', 'Contractions /10min'),
+      key: 'contractionFrequency',
+    },
+    {
+      header: t('contractionDuration', 'Duration (s)'),
+      key: 'contractionDuration',
+    },
   ];
   const tableRows =
     encounters.map((encounter) => {
@@ -79,8 +89,8 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
         fetalHeartRate: groupmembersObj[FetalHeartRate],
         cervicalDilation: groupmembersObj[CervicalDilation],
         descentOfHead: descentOfHeadObj[groupmembersObj[SurgicalProcedure]],
-        contractionFrequency: '--', // TODO: get from obsGroup 163750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        contractionDuration: '--', // TODO: get from obsGroup 163750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        contractionFrequency: groupmembersObj[ContractionFrequency] ?? '--',
+        contractionDuration: groupmembersObj[ContractionDuration] ?? '--',
       };
     }) ?? [];
   const chartData =
@@ -97,6 +107,8 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
         fetalHeartRate: groupmembersObj[FetalHeartRate],
         cervicalDilation: groupmembersObj[CervicalDilation],
         descentOfHead: descentOfHeadObj[groupmembersObj[SurgicalProcedure]],
+        contractionFrequency: groupmembersObj[ContractionFrequency],
+        contractionDuration: groupmembersObj[ContractionDuration],
       };
     }) ?? [];
   const handleAddHistory = () => {

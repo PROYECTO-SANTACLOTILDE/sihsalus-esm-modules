@@ -46,6 +46,16 @@ const PartographChart: React.FC<PartographChartProps> = ({ partograpyComponents 
       title: `Descent of Head  ${convertedData[0]?.descentOfHead?.toString() ?? '-'})`,
       value: 'descentOfHead',
     },
+    {
+      id: 'contractionFrequency',
+      title: `Contractions /10min ${convertedData[0]?.contractionFrequency?.toString() ?? '-'})`,
+      value: 'contractionFrequency',
+    },
+    {
+      id: 'contractionDuration',
+      title: `Duration (s) ${convertedData[0]?.contractionDuration?.toString() ?? '-'})`,
+      value: 'contractionDuration',
+    },
   ];
   function parseTodayTime(dateString: string): string | null {
     const dateTimeRegex = /(\d{2}:\d{2} [APMapm]{2})/;

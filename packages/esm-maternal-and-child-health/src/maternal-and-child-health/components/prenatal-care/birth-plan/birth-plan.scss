@@ -16,6 +16,12 @@
   }
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-03;
+}
+
 .content {
   display: flex;
   flex-direction: column;

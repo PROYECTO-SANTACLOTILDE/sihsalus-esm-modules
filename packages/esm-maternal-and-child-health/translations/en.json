@@ -463,5 +463,11 @@
   "risk_indeterminado": "Not Evaluated",
   "sachets": "sachets",
   "screeningIndicators": "Required Screenings",
-  "sessions": "sessions"
+  "sessions": "sessions",
+  "contractionFrequency": "Contractions /10min",
+  "contractionDuration": "Duration (s)",
+  "editBirthPlan": "Edit plan",
+  "createBirthPlan": "Create plan",
+  "edit": "Edit",
+  "create": "Create"
 }
