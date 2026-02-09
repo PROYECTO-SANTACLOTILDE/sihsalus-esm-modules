@@ -1,13 +1,5 @@
 import React, { useCallback, useEffect, useId, useState } from 'react';
-import {
-  Button,
-  Layer,
-  Select,
-  SelectItem,
-  InlineNotification,
-  NotificationActionButton,
-  SkeletonText,
-} from '@carbon/react';
+import { ActionableNotification, Button, Layer, Select, SelectItem, SkeletonText } from '@carbon/react';
 import { TrashCan } from '@carbon/react/icons';
 import { FieldArray } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -154,14 +146,11 @@ const RelationshipView: React.FC<RelationshipViewProps> = ({
       </div>
     </div>
   ) : (
-    <InlineNotification
+    <ActionableNotification
       kind="info"
       title={t('relationshipRemovedText', 'Relationship removed')}
-      actions={
-        <NotificationActionButton onClick={restoreRelationship}>
-          {t('restoreRelationshipActionButton', 'Undo')}
-        </NotificationActionButton>
-      }
+      actionButtonLabel={t('restoreRelationshipActionButton', 'Undo')}
+      onActionButtonClick={restoreRelationship}
     />
   );
 };
@@ -175,33 +164,33 @@ export const RelationshipsSection = () => {
   useEffect(() => {
     if (relationshipTypes) {
       const tmp: RelationshipType[] = [];
-      const allowedRelationshipTypes = config.fieldConfigurations.relationships.allowedRelationshipTypes;
-
-      relationshipTypes.results
-        .filter((type) => allowedRelationshipTypes.length === 0 || allowedRelationshipTypes.includes(type.uuid))
-        .forEach((type) => {
-          const aIsToB = {
-            display: `${type.displayAIsToB} del Paciente`,
-            uuid: type.uuid,
-            direction: 'aIsToB',
-          };
-          const bIsToA = {
-            display: `${type.displayBIsToA} del Paciente (${type.displayAIsToB})`,
-            uuid: type.uuid,
-            direction: 'bIsToA',
-          };
-
-          // Si ambas direcciones son iguales (ej: Hermano/Hermano), solo agregamos una
-          if (type.displayAIsToB === type.displayBIsToA) {
-            tmp.push(aIsToB);
-          } else {
-            // Agregamos ambas direcciones
-            tmp.push(aIsToB, bIsToA);
-          }
-        });
+      relationshipTypes.results.forEach((type) => {
+        const aIsToB = {
+          display: type.displayAIsToB ? type.displayAIsToB : type.displayBIsToA,
+          uuid: type.uuid,
+          direction: 'aIsToB',
+        };
+        const bIsToA = {
+          display: type.displayBIsToA ? type.displayBIsToA : type.displayAIsToB,
+          uuid: type.uuid,
+          direction: 'bIsToA',
+        };
+        aIsToB.display === bIsToA.display
+          ? tmp.push(aIsToB)
+          : bIsToA.display === 'Patient'
+            ? tmp.push(aIsToB, { display: `Patient (${aIsToB.display})`, uuid: type.uuid, direction: 'bIsToA' })
+            : tmp.push(aIsToB, bIsToA);
+        if (aIsToB.display === bIsToA.display) {
+          tmp.push(aIsToB);
+        } else if (bIsToA.display === 'Patient') {
+          tmp.push(aIsToB, { display: `Patient (${aIsToB.display})`, uuid: type.uuid, direction: 'bIsToA' });
+        } else {
+          tmp.push(aIsToB, bIsToA);
+        }
+      });
       setDisplayRelationshipTypes(tmp);
     }
-  }, [relationshipTypes, config.fieldConfigurations.relationships.allowedRelationshipTypes]);
+  }, [relationshipTypes]);
 
   if (!relationshipTypes) {
     return (

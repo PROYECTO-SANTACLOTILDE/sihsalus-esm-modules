@@ -3,7 +3,7 @@ declare module '*.css';
 declare module '*.scss';
 declare module '*.png';
 declare module '*.svg';
-declare type SideNavProps = {};
+//declare type SideNavProps = {};
 
 // Temporary type declarations for missing dependencies
 declare module 'formik' {

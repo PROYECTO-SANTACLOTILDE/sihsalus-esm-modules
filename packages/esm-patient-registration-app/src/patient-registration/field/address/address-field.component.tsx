@@ -78,7 +78,9 @@ export const AddressComponent: React.FC<AddressComponentProps> = ({ fieldPrefix 
   if (addressTemplate && !Object.keys(addressTemplate)?.length) {
     return (
       <AddressComponentContainer>
-        <SkeletonText role="progressbar" />
+        <SkeletonText
+        role="progressbar" 
+        />
       </AddressComponentContainer>
     );
   }
@@ -103,7 +105,9 @@ export const AddressComponent: React.FC<AddressComponentProps> = ({ fieldPrefix 
   if (isLoadingFieldOrder) {
     return (
       <AddressComponentContainer>
-        <SkeletonText />
+        <SkeletonText
+        role="progressbar" 
+        />
       </AddressComponentContainer>
     );
   }
