@@ -97,7 +97,7 @@ import { ObstetricHistoryBase } from './ui/obstetric-history-widget';
 // ================================================================================
 export const importTranslation = require.context('../translations', false, /.json$/, 'lazy');
 
-const moduleName = '@pucp-gidis-hiisc/esm-sihsalus-widgets-app';
+const moduleName = '@pucp-gidis-hiisc/esm-sihsalus-consulta-externa-app';
 const options = {
   featureName: 'patient-clinical-view-app',
   moduleName,
