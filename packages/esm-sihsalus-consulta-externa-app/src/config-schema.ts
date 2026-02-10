@@ -95,6 +95,9 @@ export const configSchema = {
       htsInitialTest: '402dc5d7-46da-42d4-b2be-f43ea4ad87b0',
       htsRetest: 'b08471f6-0892-4bf7-ab2b-bf79797b8ea4',
 
+      // Consulta Externa Forms
+      consultaExternaForm: 'CE-001-CONSULTA EXTERNA',
+
       // Hospital Forms
       medicalProgress: 'HOSP-004-EVOLUCIÓN MÉDICA',
       nursingNotes: 'HOSP-009-NOTAS DE ENFERMERÍA',
@@ -248,6 +251,49 @@ export const configSchema = {
       _type: Type.ConceptUuid,
       _description: 'Height or length measurement of the patient',
       _default: '5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+
+    // Chief Complaint (CE-3)
+    chiefComplaintUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Chief complaint / reason for visit (CIEL 5219)',
+      _default: '5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+
+    // SOAP Notes (CE-5)
+    soapSubjectiveUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'SOAP Subjective concept (CIEL 160531)',
+      _default: '160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    soapObjectiveUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'SOAP Objective concept (CIEL 160532)',
+      _default: '160532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    soapAssessmentUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'SOAP Assessment concept (CIEL 160533)',
+      _default: '160533AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    soapPlanUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'SOAP Plan concept (CIEL 159615)',
+      _default: '159615AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+
+    // Insurance Provider (CE-6)
+    insuranceProviderUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Insurance/payer type concept (SIS, EsSalud, Privado, Particular)',
+      _default: '161631AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+
+    // Diagnosis Occurrence (CE-2)
+    diagnosisOccurrenceUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Diagnosis occurrence: New vs Repeat',
+      _default: '159946AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
     },
   },
 
@@ -479,6 +525,8 @@ export interface ConfigObject {
     medicalProgressNote: string;
     epicrisis: string;
     clinicalEncounterFormUuid: string;
+    // Consulta Externa Forms
+    consultaExternaForm: string;
     // HIV/HTS Forms
     defaulterTracingFormUuid: string;
     htsScreening: string;

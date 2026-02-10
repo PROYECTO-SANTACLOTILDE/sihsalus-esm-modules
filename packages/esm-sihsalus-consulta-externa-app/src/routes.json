@@ -166,6 +166,27 @@
       "slot": "clinical-view-section"
     },
     {
+      "name": "consulta-externa-dashboard-link",
+      "component": "consultaExternaDashboardLink",
+      "slot": "patient-chart-dashboard-slot",
+      "order": 10,
+      "meta": {
+        "columns": 1,
+        "columnSpan": 1,
+        "slot": "patient-chart-consulta-externa-slot",
+        "path": "consulta-externa",
+        "layoutMode": "anchored"
+      }
+    },
+    {
+      "name": "consulta-externa-dashboard",
+      "slot": "patient-chart-consulta-externa-slot",
+      "component": "consultaExternaDashboard",
+      "order": 0,
+      "online": true,
+      "offline": false
+    },
+    {
       "name": "social-history-dashboard",
       "slot": "patient-chart-social-history-dashboard-slot",
       "component": "inPatientClinicalEncounter",

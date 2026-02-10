@@ -13,6 +13,7 @@ import { configSchema } from './config-schema';
 import {
   caseEncounterDashboardMeta,
   caseManagementDashboardMeta,
+  consultaExternaDashboardMeta,
   contactListDashboardMeta,
   familyHistoryDashboardMeta,
   otherRelationshipsDashboardMeta,
@@ -75,6 +76,11 @@ import {
   htsDashboardMeta,
 } from './specialized-clinics/hiv-care-and-treatment-services/hiv-care-and-treatment-dashboard.meta';
 import HivTestingEncountersList from './specialized-clinics/hiv-care-and-treatment-services/hiv-testing-services/views/hiv-testing/hiv-testing-services.component';
+
+// ================================================================================
+// CONSULTA EXTERNA DOMAIN
+// ================================================================================
+import ConsultaExternaDashboard from './consulta-externa/consulta-externa-dashboard.component';
 
 // ================================================================================
 // SOCIAL HISTORY DOMAIN
@@ -205,6 +211,15 @@ export const conditionFilterDeleteConfirmationDialog = getAsyncLifecycle(
 // ================================================================================
 export const genericConditionsOverview = getAsyncLifecycle(
   () => import('./ui/conditions-filter/generic-conditions-overview.component'),
+  options,
+);
+
+// ================================================================================
+// CONSULTA EXTERNA EXPORTS
+// ================================================================================
+export const consultaExternaDashboard = getSyncLifecycle(ConsultaExternaDashboard, options);
+export const consultaExternaDashboardLink = getSyncLifecycle(
+  createDashboardLink({ ...consultaExternaDashboardMeta, moduleName }),
   options,
 );
 
