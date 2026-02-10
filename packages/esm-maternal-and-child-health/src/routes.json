@@ -330,6 +330,12 @@
       "slot": "additional-health-services-slot"
     },
     {
+      "name": "development-overview-widget",
+      "component": "developmentOverview",
+      "slot": "cred-development-slot",
+      "order": 1
+    },
+    {
       "name": "prenatal-care-dashboard-route",
       "component": "hiddenDashboardMarker",
       "slot": "patient-chart-dashboard-slot",
@@ -438,6 +444,18 @@
       "name": "antecedentes-patologicos-form-workspace",
       "component": "antecedentesPatologicosFormWorkspace",
       "title": "Antecedentes Patológicos del Menor",
+      "type": "form"
+    },
+    {
+      "name": "tepsi-form",
+      "component": "tepsiFormWorkspace",
+      "title": "Test de Desarrollo Psicomotor (TEPSI)",
+      "type": "form"
+    },
+    {
+      "name": "test-peruano-form",
+      "component": "testPeruanoFormWorkspace",
+      "title": "Test Peruano de Desarrollo Infantil",
       "type": "form"
     }
   ]

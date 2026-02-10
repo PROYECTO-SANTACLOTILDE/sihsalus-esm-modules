@@ -57,6 +57,7 @@ import { AdverseReactionForm } from './well-child-care/workspace/adverse-reactio
 import AnemiaScreening from './well-child-care/components/anemia-screening/anemia-screening.component';
 import SupplementationTracker from './well-child-care/components/supplementation/supplementation-tracker.component';
 import ScreeningIndicators from './well-child-care/components/screening/screening-indicators.component';
+import DevelopmentOverview from './well-child-care/components/development-overview/development-overview.component';
 import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.component';
 
 // Module Configuration
@@ -178,6 +179,9 @@ export const anemiaScreening = getSyncLifecycle(AnemiaScreening, options);
 export const supplementationTracker = getSyncLifecycle(SupplementationTracker, options);
 export const screeningIndicators = getSyncLifecycle(ScreeningIndicators, options);
 
+// Development Evaluation Overview
+export const developmentOverview = getSyncLifecycle(DevelopmentOverview, options);
+
 // ================================================================================
 // HIDDEN DASHBOARD ROUTE MARKERS
 // These invisible extensions register dashboard routes with the patient chart.
@@ -243,5 +247,13 @@ export const antecedentesPatologicosFormWorkspace = getAsyncLifecycle(
 );
 export const formsSelectorWorkspace = getAsyncLifecycle(
   () => import('./ui/forms-selector/forms-selector.workspace'),
+  options,
+);
+export const tepsiFormWorkspace = getAsyncLifecycle(
+  () => import('./well-child-care/workspace/tepsi-form/tepsi-form.component'),
+  options,
+);
+export const testPeruanoFormWorkspace = getAsyncLifecycle(
+  () => import('./well-child-care/workspace/test-peruano-form/test-peruano-form.component'),
   options,
 );
