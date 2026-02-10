@@ -241,6 +241,14 @@ export const configSchema = {
       _type: Type.ConceptUuid,
       _default: '5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
     },
+    diastolicBloodPressureUuid: {
+      _type: Type.ConceptUuid,
+      _default: '5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    pulseUuid: {
+      _type: Type.ConceptUuid,
+      _default: '5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
     respiratoryRateUuid: {
       _type: Type.ConceptUuid,
       _default: '5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
@@ -326,6 +334,13 @@ export const configSchema = {
       _type: Type.ConceptUuid,
       _description: 'Next appointment date concept',
       _default: '5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+
+    // Ethnic Identity (CE-7)
+    ethnicIdentityUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Ethnic self-identification concept for HIS reporting (Pertenencia Étnica)',
+      _default: '160581AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
     },
   },
 
