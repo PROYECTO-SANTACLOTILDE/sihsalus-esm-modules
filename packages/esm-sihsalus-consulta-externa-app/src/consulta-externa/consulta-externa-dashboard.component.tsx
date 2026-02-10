@@ -6,11 +6,13 @@ import {
   Catalog,
   DocumentMultiple_01,
   Finance,
+  ListChecked,
 } from '@carbon/react/icons';
 import styles from './consulta-externa-dashboard.scss';
 import MotivoConsulta from './motivo-consulta.component';
 import DiagnosticoClasificado from './diagnostico-clasificado.component';
 import NotasSoap from './notas-soap.component';
+import PlanTratamiento from './plan-tratamiento.component';
 import Financiador from './financiador.component';
 
 interface ConsultaExternaDashboardProps {
@@ -36,6 +38,7 @@ const ConsultaExternaDashboard: React.FC<ConsultaExternaDashboardProps> = ({ pat
             <Tab renderIcon={Chat}>{t('chiefComplaint', 'Motivo de Consulta')}</Tab>
             <Tab renderIcon={Catalog}>{t('diagnosisClassification', 'Diagnóstico')}</Tab>
             <Tab renderIcon={DocumentMultiple_01}>{t('soapNotes', 'Notas SOAP')}</Tab>
+            <Tab renderIcon={ListChecked}>{t('treatmentPlan', 'Plan de Tratamiento')}</Tab>
             <Tab renderIcon={Finance}>{t('insuranceProvider', 'Financiador')}</Tab>
           </TabList>
 
@@ -48,6 +51,9 @@ const ConsultaExternaDashboard: React.FC<ConsultaExternaDashboardProps> = ({ pat
             </TabPanel>
             <TabPanel>
               <NotasSoap patientUuid={patientUuid} />
+            </TabPanel>
+            <TabPanel>
+              <PlanTratamiento patientUuid={patientUuid} />
             </TabPanel>
             <TabPanel>
               <Financiador patientUuid={patientUuid} />

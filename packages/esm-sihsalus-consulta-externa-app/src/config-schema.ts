@@ -295,6 +295,38 @@ export const configSchema = {
       _description: 'Diagnosis occurrence: New vs Repeat',
       _default: '159946AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
     },
+
+    // Treatment Plan (CE-4)
+    labOrdersUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Lab orders / auxiliary exams concept',
+      _default: '1271AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    proceduresUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Procedures performed concept (CPMS)',
+      _default: '1651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    prescriptionsUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Prescriptions / medication orders concept',
+      _default: '1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    therapeuticIndicationsUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Therapeutic indications free-text concept',
+      _default: '162169AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    referralUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Referral / interconsultation concept',
+      _default: '1272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
+    nextAppointmentUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Next appointment date concept',
+      _default: '5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    },
   },
 
 
