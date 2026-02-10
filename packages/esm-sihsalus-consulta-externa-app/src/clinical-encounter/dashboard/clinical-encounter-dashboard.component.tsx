@@ -2,19 +2,15 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ClinicalEncounter from '../clinical-enc.component';
 import SurgicalSummary from '../summary/surgical summary/surgical-summary.component';
-import NeonatalSummary from '../summary/neonatal summary/neonatal-summary.component';
 import {
   Activity,
   CloudMonitoring,
   Dashboard,
   Friendship,
   ReminderMedical,
-  UserFollow,
-  UserMultiple,
 } from '@carbon/react/icons';
 import { Layer, Tab, TabList, TabPanel, TabPanels, Tabs, Tile } from '@carbon/react';
 import styles from './in-patient.scss';
-import MaternalSummary from '../summary/maternal-summary/maternal-summary.component';
 import InPatientSummary from '../summary/in-patient-medical-summary/in-patient-medical-summary.component';
 import OutPatientSocialHistory from '../summary/out-patient-summary/patient-social-history.component';
 import OutPatientMedicalHistory from '../summary/out-patient-summary/patient-medical-history.component';
@@ -87,8 +83,6 @@ const ClinicalEncounterDashboard: React.FC<ClinicalEncounterDashboardProps> = ({
             <Tab renderIcon={ReminderMedical}>{t('medicalHistory', 'Medical History')}</Tab>
             {isInPatient && <Tab renderIcon={CloudMonitoring}>{t('encounterDetails', 'Encounter details')}</Tab>}
             {isInPatient && <Tab renderIcon={Activity}>{t('surgicalSummary', 'Surgical Summary')}</Tab>}
-            {isInPatient && <Tab renderIcon={UserMultiple}>{t('neonatalSummary', 'Neonatal Summary')}</Tab>}
-            {isInPatient && <Tab renderIcon={UserFollow}>{t('maternalSummary', 'Maternal Summary')}</Tab>}
             {isInPatient && <Tab renderIcon={Dashboard}>{t('inPatientSummary', 'In-Patient Summary')}</Tab>}
           </TabList>
 
@@ -138,12 +132,6 @@ const ClinicalEncounterDashboard: React.FC<ClinicalEncounterDashboardProps> = ({
                 mutate={mutate}
                 isValidating={isValidating}
               />
-            </TabPanel>
-            <TabPanel>
-              <NeonatalSummary patientUuid={patientUuid} />
-            </TabPanel>
-            <TabPanel>
-              <MaternalSummary patientUuid={patientUuid} />
             </TabPanel>
             <TabPanel>
               <InPatientSummary

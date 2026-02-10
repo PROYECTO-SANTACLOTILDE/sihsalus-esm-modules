@@ -77,20 +77,8 @@ import {
 import HivTestingEncountersList from './specialized-clinics/hiv-care-and-treatment-services/hiv-testing-services/views/hiv-testing/hiv-testing-services.component';
 
 // ================================================================================
-// UI COMPONENTS DOMAIN
-// ================================================================================
-import { ObstetricHistoryBase } from './ui/obstetric-history-widget';
-
-//Change this to a custom component, add an interface to reuse it!
-
-// ================================================================================
 // SOCIAL HISTORY DOMAIN
 // ================================================================================
-
-// TEPSI FORM
-
-// ODONTOGRAM
-// import Odontogram from './ui/workspace/odontogram/odontogram.component';
 
 // ================================================================================
 // EXPORTS SETUP
@@ -150,9 +138,6 @@ export const familyHistoryLink = getSyncLifecycle(
 );
 export const familyRelationshipForm = getSyncLifecycle(FamilyRelationshipForm, options);
 
-// Obstetric History
-export const obstetricHistoryChart = getSyncLifecycle(ObstetricHistoryBase, options);
-
 // ================================================================================
 // OTHER RELATIONSHIPS EXPORTS
 // ================================================================================
@@ -199,14 +184,6 @@ export const htsDashboardLink = getSyncLifecycle(createDashboardLink({ ...htsDas
 // ================================================================================
 // ASYNC COMPONENTS
 // ================================================================================
-export const alturaUterinaChart = getAsyncLifecycle(
-  () => import('./ui/alturaCuello-chart/altura-cuello-overview.component'),
-  options,
-);
-export const growthChart = getAsyncLifecycle(
-  () => import('./ui/growth-chart/growth-chart-overview.component'),
-  options,
-);
 export const monthlyAppointmentFilterCalendar = getAsyncLifecycle(
   () => import('./ui/appointment-filter-calendar/appointment-filter-calendar'),
   options,

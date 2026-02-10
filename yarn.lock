@@ -4038,6 +4038,38 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@pucp-gidis-hiisc/esm-sihsalus-consulta-externa-app@workspace:packages/esm-sihsalus-consulta-externa-app":
+  version: 0.0.0-use.local
+  resolution: "@pucp-gidis-hiisc/esm-sihsalus-consulta-externa-app@workspace:packages/esm-sihsalus-consulta-externa-app"
+  dependencies:
+    "@carbon/charts": "npm:^1.23.7"
+    "@carbon/charts-react": "npm:^1.23.7"
+    "@carbon/colors": "npm:^11.34.0"
+    "@carbon/layout": "npm:^11.35.0"
+    "@carbon/react": "npm:^1.83.0"
+    "@carbon/styles": "npm:^1.81.0"
+    "@hookform/resolvers": "npm:^3.3.1"
+    "@openmrs/esm-patient-common-lib": "npm:next"
+    classnames: "npm:^2.5.1"
+    lodash-es: "npm:^4.17.21"
+    react-hook-form: "npm:^7.56.1"
+    react-is: "npm:^19.1.0"
+    single-spa: "npm:^6.0.0"
+    webpack: "npm:^5.99.9"
+    xlsx: "npm:^0.18.5"
+    zod: "npm:^3.24.1"
+  peerDependencies:
+    "@openmrs/esm-framework": 8.x
+    "@openmrs/esm-patient-common-lib": 11.x
+    dayjs: 1.x
+    react: 18.x
+    react-i18next: 15.x
+    react-router-dom: 6.x
+    rxjs: 6.x
+    swr: 2.x
+  languageName: unknown
+  linkType: soft
+
 "@pucp-gidis-hiisc/esm-sihsalus-modules@workspace:.":
   version: 0.0.0-use.local
   resolution: "@pucp-gidis-hiisc/esm-sihsalus-modules@workspace:."
@@ -4100,38 +4132,6 @@ __metadata:
     webpack-cli: "npm:^4.10.0"
     webpack-dev-server: "npm:^4.15.1"
     zod: "npm:^3.23.8"
-  languageName: unknown
-  linkType: soft
-
-"@pucp-gidis-hiisc/esm-sihsalus-widgets-app@workspace:packages/esm-sihsalus-consulta-externa-app":
-  version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-sihsalus-widgets-app@workspace:packages/esm-sihsalus-consulta-externa-app"
-  dependencies:
-    "@carbon/charts": "npm:^1.23.7"
-    "@carbon/charts-react": "npm:^1.23.7"
-    "@carbon/colors": "npm:^11.34.0"
-    "@carbon/layout": "npm:^11.35.0"
-    "@carbon/react": "npm:^1.83.0"
-    "@carbon/styles": "npm:^1.81.0"
-    "@hookform/resolvers": "npm:^3.3.1"
-    "@openmrs/esm-patient-common-lib": "npm:next"
-    classnames: "npm:^2.5.1"
-    lodash-es: "npm:^4.17.21"
-    react-hook-form: "npm:^7.56.1"
-    react-is: "npm:^19.1.0"
-    single-spa: "npm:^6.0.0"
-    webpack: "npm:^5.99.9"
-    xlsx: "npm:^0.18.5"
-    zod: "npm:^3.24.1"
-  peerDependencies:
-    "@openmrs/esm-framework": 8.x
-    "@openmrs/esm-patient-common-lib": 11.x
-    dayjs: 1.x
-    react: 18.x
-    react-i18next: 15.x
-    react-router-dom: 6.x
-    rxjs: 6.x
-    swr: 2.x
   languageName: unknown
   linkType: soft
 

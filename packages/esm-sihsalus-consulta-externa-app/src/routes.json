@@ -166,11 +166,6 @@
       "slot": "clinical-view-section"
     },
     {
-      "name": "prenatal-family-history",
-      "component": "familyHistory",
-      "slot": "neonatal-perinatal-slot"
-    },
-    {
       "name": "social-history-dashboard",
       "slot": "patient-chart-social-history-dashboard-slot",
       "component": "inPatientClinicalEncounter",
