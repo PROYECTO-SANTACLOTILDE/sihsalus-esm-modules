@@ -25,6 +25,24 @@ export const childImmunizationScheduleDashboardMeta = {
   config: {},
 } as const;
 
+export const earlyStimulationDashboardMeta = {
+  icon: 'omrs-icon-baby',
+  slot: 'patient-chart-early-stimulation-dashboard-slot',
+  title: 'Estimulación Temprana',
+  path: 'early-stimulation-dashboard',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
+  config: {},
+} as const;
+
+export const childNutritionDashboardMeta = {
+  icon: 'omrs-icon-medication',
+  slot: 'patient-chart-child-nutrition-dashboard-slot',
+  title: 'Nutrición Infantil',
+  path: 'child-nutrition-dashboard',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
+  config: {},
+} as const;
+
 export const wellChildCareNavGroup = {
   title: 'Curso de Vida del Niño',
   slotName: 'well-child-care-slot',

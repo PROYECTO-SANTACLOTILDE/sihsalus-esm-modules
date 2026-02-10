@@ -58,6 +58,40 @@
       "slot": "patient-chart-dashboard-slot"
     },
     {
+      "name": "family-planning-dashboard",
+      "slot": "patient-chart-family-planning-dashboard-slot",
+      "component": "familyPlanning"
+    },
+    {
+      "name": "family-planning-dashboard-link",
+      "component": "familyPlanningLink",
+      "slot": "maternal-and-child-health-slot",
+      "meta": {
+        "columns": 1,
+        "columnSpan": 1,
+        "slot": "patient-chart-family-planning-dashboard-slot",
+        "path": "family-planning-dashboard",
+        "layoutMode": "anchored"
+      }
+    },
+    {
+      "name": "cancer-prevention-dashboard",
+      "slot": "patient-chart-cancer-prevention-dashboard-slot",
+      "component": "cancerPrevention"
+    },
+    {
+      "name": "cancer-prevention-dashboard-link",
+      "component": "cancerPreventionLink",
+      "slot": "maternal-and-child-health-slot",
+      "meta": {
+        "columns": 1,
+        "columnSpan": 1,
+        "slot": "patient-chart-cancer-prevention-dashboard-slot",
+        "path": "cancer-prevention-dashboard",
+        "layoutMode": "anchored"
+      }
+    },
+    {
       "name": "maternal-history-chart",
       "component": "maternalHistoryTable",
       "slot": "prenatal-maternal-history-slot",
@@ -325,6 +359,40 @@
       "slot": "patient-chart-dashboard-slot"
     },
     {
+      "name": "early-stimulation-dashboard",
+      "slot": "patient-chart-early-stimulation-dashboard-slot",
+      "component": "earlyStimulation"
+    },
+    {
+      "name": "early-stimulation-dashboard-link",
+      "component": "earlyStimulationLink",
+      "slot": "well-child-care-slot",
+      "meta": {
+        "columns": 1,
+        "columnSpan": 1,
+        "slot": "patient-chart-early-stimulation-dashboard-slot",
+        "path": "early-stimulation-dashboard",
+        "layoutMode": "anchored"
+      }
+    },
+    {
+      "name": "child-nutrition-dashboard",
+      "slot": "patient-chart-child-nutrition-dashboard-slot",
+      "component": "childNutrition"
+    },
+    {
+      "name": "child-nutrition-dashboard-link",
+      "component": "childNutritionLink",
+      "slot": "well-child-care-slot",
+      "meta": {
+        "columns": 1,
+        "columnSpan": 1,
+        "slot": "patient-chart-child-nutrition-dashboard-slot",
+        "path": "child-nutrition-dashboard",
+        "layoutMode": "anchored"
+      }
+    },
+    {
       "name": "antecedentes-patologicos-overview",
       "component": "antecedentesPatologicos",
       "slot": "additional-health-services-slot"
@@ -407,6 +475,58 @@
       "meta": {
         "slot": "patient-chart-child-immunization-schedule-dashboard-slot",
         "path": "child-immunization-schedule-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "family-planning-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-family-planning-dashboard-slot",
+        "path": "family-planning-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "cancer-prevention-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-cancer-prevention-dashboard-slot",
+        "path": "cancer-prevention-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "early-stimulation-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-early-stimulation-dashboard-slot",
+        "path": "early-stimulation-dashboard",
+        "columns": 1,
+        "columnSpan": 1,
+        "layoutMode": "anchored"
+      },
+      "order": 100
+    },
+    {
+      "name": "child-nutrition-dashboard-route",
+      "component": "hiddenDashboardMarker",
+      "slot": "patient-chart-dashboard-slot",
+      "meta": {
+        "slot": "patient-chart-child-nutrition-dashboard-slot",
+        "path": "child-nutrition-dashboard",
         "columns": 1,
         "columnSpan": 1,
         "layoutMode": "anchored"

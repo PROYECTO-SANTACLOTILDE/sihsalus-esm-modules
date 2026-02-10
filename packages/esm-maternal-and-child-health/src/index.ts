@@ -11,10 +11,14 @@ import {
   maternalAndChildHealthNavGroup,
   postnatalDashboardMeta,
   prenatalDashboardMeta,
+  familyPlanningDashboardMeta,
+  cancerPreventionDashboardMeta,
 } from './maternal-and-child-health/dashboard.meta';
 import { LabourDelivery } from './maternal-and-child-health/labour-delivery.component';
 import { PostnatalCare } from './maternal-and-child-health/postnatal-care.component';
 import { PrenatalCare } from './maternal-and-child-health/prenatal-care.component';
+import { FamilyPlanning } from './maternal-and-child-health/family-planning.component';
+import { CancerPrevention } from './maternal-and-child-health/cancer-prevention.component';
 import DeliveryOrAbortionTable from './maternal-and-child-health/components/labour-delivery/deliveryOrAbortion.component';
 import SummaryOfLaborAndPostpartumTable from './maternal-and-child-health/components/labour-delivery/summaryOfLaborAndPostpartum.component';
 import ImmediatePostpartumTable from './maternal-and-child-health/components/postnatal-care/immediatePostpartum.component';
@@ -36,10 +40,14 @@ import {
   neonatalCareDashboardMeta,
   wellChildCareNavGroup,
   wellChildControlDashboardMeta,
+  earlyStimulationDashboardMeta,
+  childNutritionDashboardMeta,
 } from './well-child-care/dashboard.meta';
 import { ChildImmunizationSchedule } from './well-child-care/child-immunization.component';
 import { NeonatalCare } from './well-child-care/neonatal-care.component';
 import { WellChildControl } from './well-child-care/well-child-control.component';
+import { EarlyStimulation } from './well-child-care/early-stimulation.component';
+import { ChildNutrition } from './well-child-care/child-nutrition.component';
 import AlojamientoConjunto from './well-child-care/components/alojamiento-conjunto';
 import CredControlsCheckout from './well-child-care/components/cred-controls-timeline/cred-checkups.component';
 import CredControlsMatrix from './well-child-care/components/cred-controls-timeline/cred-matrix.component';
@@ -97,11 +105,21 @@ export const prenatalCareLink = getSyncLifecycle(
   createDashboardLink({ ...prenatalDashboardMeta, moduleName }),
   options,
 );
+export const familyPlanningLink = getSyncLifecycle(
+  createDashboardLink({ ...familyPlanningDashboardMeta, moduleName }),
+  options,
+);
+export const cancerPreventionLink = getSyncLifecycle(
+  createDashboardLink({ ...cancerPreventionDashboardMeta, moduleName }),
+  options,
+);
 
 // Main Components
 export const labourAndDelivery = getSyncLifecycle(LabourDelivery, options);
 export const postnatalCare = getSyncLifecycle(PostnatalCare, options);
 export const prenatalCare = getSyncLifecycle(PrenatalCare, options);
+export const familyPlanning = getSyncLifecycle(FamilyPlanning, options);
+export const cancerPrevention = getSyncLifecycle(CancerPrevention, options);
 
 // Labour & Delivery Components
 export const deliveryOrAbortionTable = getSyncLifecycle(DeliveryOrAbortionTable, options);
@@ -143,11 +161,21 @@ export const wellChildCareLink = getSyncLifecycle(
   createDashboardLink({ ...wellChildControlDashboardMeta, moduleName }),
   options,
 );
+export const earlyStimulationLink = getSyncLifecycle(
+  createDashboardLink({ ...earlyStimulationDashboardMeta, moduleName }),
+  options,
+);
+export const childNutritionLink = getSyncLifecycle(
+  createDashboardLink({ ...childNutritionDashboardMeta, moduleName }),
+  options,
+);
 
 // Main Components
 export const childImmunizationSchedule = getSyncLifecycle(ChildImmunizationSchedule, options);
 export const neonatalCare = getSyncLifecycle(NeonatalCare, options);
 export const wellChildCare = getSyncLifecycle(WellChildControl, options);
+export const earlyStimulation = getSyncLifecycle(EarlyStimulation, options);
+export const childNutrition = getSyncLifecycle(ChildNutrition, options);
 
 // CRED Controls
 export const credCheckouts = getSyncLifecycle(CredControlsCheckout, options);

@@ -505,5 +505,29 @@
   "startTepsi": "Realizar TEPSI",
   "startTestPeruano": "Realizar Test Peruano",
   "noEvaluationsYet": "No se han realizado evaluaciones de desarrollo",
-  "lastEvaluationDate": "Última evaluación"
+  "lastEvaluationDate": "Última evaluación",
+
+  "familyPlanning": "Planificación Familiar",
+  "familyPlanningTabs": "Pestañas de Planificación Familiar",
+  "contraceptiveMethods": "Métodos Anticonceptivos",
+  "fpCounseling": "Consejería",
+  "fpFollowUp": "Seguimiento",
+
+  "cancerPrevention": "Prevención del Cáncer",
+  "cancerPreventionTabs": "Pestañas de Prevención del Cáncer",
+  "cervicalCancer": "Cáncer Cervical (PAP/VIA)",
+  "breastCancer": "Cáncer de Mama",
+  "cancerFollowUp": "Seguimiento",
+
+  "earlyStimulation": "Estimulación Temprana",
+  "earlyStimulationTabs": "Pestañas de Estimulación Temprana",
+  "stimulationSessions": "Sesiones de Estimulación",
+  "stimulationFollowUp": "Seguimiento del Desarrollo",
+  "stimulationCounseling": "Consejería a Padres",
+
+  "childNutrition": "Nutrición Infantil",
+  "childNutritionTabs": "Pestañas de Nutrición Infantil",
+  "nutritionalAssessment": "Evaluación Nutricional",
+  "feedingCounseling": "Consejería Alimentaria",
+  "nutritionFollowUp": "Seguimiento Nutricional"
 }

@@ -25,6 +25,24 @@ export const postnatalDashboardMeta = {
   config: {},
 } as const;
 
+export const familyPlanningDashboardMeta = {
+  icon: 'omrs-icon-pedestrian-family',
+  slot: 'patient-chart-family-planning-dashboard-slot',
+  title: 'Planificación Familiar',
+  path: 'family-planning-dashboard',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
+  config: {},
+} as const;
+
+export const cancerPreventionDashboardMeta = {
+  icon: 'omrs-icon-microscope',
+  slot: 'patient-chart-cancer-prevention-dashboard-slot',
+  title: 'Prevención del Cáncer',
+  path: 'cancer-prevention-dashboard',
+  moduleName: '@pucp-gidis-hiisc/esm-maternal-and-child-health-app',
+  config: {},
+} as const;
+
 export const maternalAndChildHealthNavGroup = {
   title: 'Madre Gestante',
   slotName: 'maternal-and-child-health-slot',
