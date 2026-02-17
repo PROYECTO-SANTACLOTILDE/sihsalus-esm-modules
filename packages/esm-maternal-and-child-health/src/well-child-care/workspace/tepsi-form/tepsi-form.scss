@@ -3,6 +3,13 @@
 @use '@carbon/type';
 @use '@openmrs/esm-styleguide/src/vars' as *;
 
+// Carbon v10 tokens not exported by esm-styleguide _vars.scss
+$text-01: #161616;
+$support-01: #da1e28;
+$support-03: #f1c21b;
+$support-04: #0f62fe;
+$focus: #0f62fe;
+
 .productiveHeading03 {
   @include type.type-style('heading-03');
 }

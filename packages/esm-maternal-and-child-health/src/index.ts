@@ -67,6 +67,7 @@ import SupplementationTracker from './well-child-care/components/supplementation
 import ScreeningIndicators from './well-child-care/components/screening/screening-indicators.component';
 import DevelopmentOverview from './well-child-care/components/development-overview/development-overview.component';
 import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.component';
+import SlotPlaceholder from './ui/slot-placeholder/slot-placeholder.component';
 
 // Module Configuration
 const moduleName = '@pucp-gidis-hiisc/esm-maternal-and-child-health-app';
@@ -209,6 +210,9 @@ export const screeningIndicators = getSyncLifecycle(ScreeningIndicators, options
 
 // Development Evaluation Overview
 export const developmentOverview = getSyncLifecycle(DevelopmentOverview, options);
+
+// Generic Slot Placeholder (used for empty tabs)
+export const slotPlaceholder = getSyncLifecycle(SlotPlaceholder, options);
 
 // ================================================================================
 // HIDDEN DASHBOARD ROUTE MARKERS

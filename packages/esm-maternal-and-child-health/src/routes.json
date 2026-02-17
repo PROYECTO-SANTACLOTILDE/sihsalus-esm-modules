@@ -393,6 +393,78 @@
       }
     },
     {
+      "name": "family-planning-methods-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "family-planning-methods-slot",
+      "order": 1
+    },
+    {
+      "name": "family-planning-counseling-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "family-planning-counseling-slot",
+      "order": 1
+    },
+    {
+      "name": "family-planning-followup-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "family-planning-followup-slot",
+      "order": 1
+    },
+    {
+      "name": "cancer-prevention-cervical-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "cancer-prevention-cervical-slot",
+      "order": 1
+    },
+    {
+      "name": "cancer-prevention-breast-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "cancer-prevention-breast-slot",
+      "order": 1
+    },
+    {
+      "name": "cancer-prevention-followup-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "cancer-prevention-followup-slot",
+      "order": 1
+    },
+    {
+      "name": "child-nutrition-assessment-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "child-nutrition-assessment-slot",
+      "order": 1
+    },
+    {
+      "name": "child-nutrition-counseling-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "child-nutrition-counseling-slot",
+      "order": 1
+    },
+    {
+      "name": "child-nutrition-followup-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "child-nutrition-followup-slot",
+      "order": 1
+    },
+    {
+      "name": "early-stimulation-sessions-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "early-stimulation-sessions-slot",
+      "order": 1
+    },
+    {
+      "name": "early-stimulation-followup-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "early-stimulation-followup-slot",
+      "order": 1
+    },
+    {
+      "name": "early-stimulation-counseling-placeholder",
+      "component": "slotPlaceholder",
+      "slot": "early-stimulation-counseling-slot",
+      "order": 1
+    },
+    {
       "name": "antecedentes-patologicos-overview",
       "component": "antecedentesPatologicos",
       "slot": "additional-health-services-slot"

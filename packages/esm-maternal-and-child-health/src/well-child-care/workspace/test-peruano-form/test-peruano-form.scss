@@ -2,6 +2,21 @@
 @use '@carbon/styles/scss/type';
 @use '@openmrs/esm-styleguide/src/vars' as *;
 
+// Carbon v11 tokens not exported by esm-styleguide _vars.scss
+$text-primary: #161616;
+$text-secondary: #525252;
+$layer-01: #f4f4f4;
+$layer-02: #ffffff;
+$background: #ffffff;
+$border-subtle-01: #e0e0e0;
+$border-subtle-02: #c6c6c6;
+$layer-accent-01: #e0e0e0;
+$support-info: #0043ce;
+$support-success: #24a148;
+$support-success-inverse: #42be65;
+$support-warning: #f1c21b;
+$notification-background-info: #edf5ff;
+
 .form {
   height: 100%;
   display: flex;

@@ -21,14 +21,7 @@
   margin: 1.3125rem;
 }
 
-// See https://zpl.io/lrlmdq0 for the Visits dashboard design
-[data-extension-slot-name='patient-chart-encounters-dashboard-slot'],
-// See https://zpl.io/RmMXrDE for the Test Results dashboard design
-[data-extension-slot-name='patient-chart-test-results-dashboard-slot'] {
-  margin: 0 layout.$spacing-05;
-}
-
-.dashboardContainer:not(:has([data-extension-slot-name='patient-chart-attachments-dashboard-slot'])) {
+.dashboardContainer {
   container-name: dashboard;
   container-type: inline-size;
 }
@@ -53,81 +46,66 @@
   }
 }
 
-// When the dashboard's width is less than or equal to 68.25rem (1100px),
-// the layout should switch to a single column. This adjustment ensures
-// proper rendering when the workspace area is opened.
 @container dashboard (width <= 68.25rem) {
   .dashboard {
     grid-template-columns: 1fr;
   }
 }
 
-.extensionWrapper {
-  height: 100%;
-
-  > * {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.extension:only-child {
-  grid-column: 1 / -1;
-}
-
-.fullWidth {
-  grid-column: 1 / -1;
-}
-
 :global(.omrs-breakpoint-lt-desktop) .dashboard {
   grid-template-columns: 1fr;
 }
 
-:global(.omrs-breakpoint-lt-tablet) .container {
-  margin: 5px;
-  overflow-x: auto;
-  justify-content: center;
-}
-
-:global(.omrs-breakpoint-lt-tablet) .dashboard {
+// Custom tab bar (avoids Carbon Tabs version mismatch issues)
+.tabBar {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-:global(.omrs-breakpoint-lt-tablet) .dashboard > div {
-  margin: layout.$spacing-01 0px;
-}
-
-// Overriding styles for RTL support
-html[dir='rtl'] {
-  .dashboardTitle {
-    margin: layout.$spacing-05 1.3125rem layout.$spacing-05 0;
-  }
-}
-
-.tabList {
+  overflow-x: auto;
+  background-color: $ui-01;
+  border-bottom: 2px solid $ui-03;
   position: sticky;
   top: 3rem;
   z-index: 10;
-  background-color: $ui-01;
-  border-bottom: 2px solid $ui-03;
+  gap: 0;
+}
 
-  & :global(.cds--tabs__nav-link) {
-    border-bottom: none !important;
+.tabButton {
+  @include type.type-style('body-compact-01');
+  display: inline-flex;
+  align-items: center;
+  gap: layout.$spacing-03;
+  padding: layout.$spacing-03 layout.$spacing-05;
+  height: 2.5rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: $text-02;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    color: colors.$gray-100;
+    background-color: colors.$gray-10;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $interactive-01;
+    outline-offset: -2px;
   }
 }
 
-.tab {
-  height: 2.5rem;
+.tabButtonActive {
+  color: colors.$gray-100;
+  border-bottom-color: var(--brand-03, #007d79);
+  font-weight: 600;
+}
 
-  &:active,
-  &:focus {
-    outline: none !important;
-  }
+.tabIcon {
+  flex-shrink: 0;
+}
 
-  &[aria-selected='true'] {
-    border-bottom: 3px solid var(--brand-03) !important;
+html[dir='rtl'] {
+  .dashboardTitle {
+    margin: layout.$spacing-05 1.3125rem layout.$spacing-05 0;
   }
 }

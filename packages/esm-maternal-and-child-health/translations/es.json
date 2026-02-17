@@ -525,6 +525,9 @@
   "stimulationFollowUp": "Seguimiento del Desarrollo",
   "stimulationCounseling": "Consejería a Padres",
 
+  "slotComingSoon": "En desarrollo",
+  "slotComingSoonDescription": "Este módulo se encuentra en desarrollo. Los datos estarán disponibles próximamente.",
+
   "childNutrition": "Nutrición Infantil",
   "childNutritionTabs": "Pestañas de Nutrición Infantil",
   "nutritionalAssessment": "Evaluación Nutricional",
