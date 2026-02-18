@@ -69,6 +69,26 @@ import DevelopmentOverview from './well-child-care/components/development-overvi
 import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.component';
 import SlotPlaceholder from './ui/slot-placeholder/slot-placeholder.component';
 
+// Family Planning Components
+import ContraceptiveMethods from './maternal-and-child-health/components/family-planning/contraceptive-methods/contraceptive-methods.component';
+import FpCounseling from './maternal-and-child-health/components/family-planning/fp-counseling/fp-counseling.component';
+import FpFollowup from './maternal-and-child-health/components/family-planning/fp-followup/fp-followup.component';
+
+// Cancer Prevention Components
+import CervicalScreening from './maternal-and-child-health/components/cancer-prevention/cervical-screening/cervical-screening.component';
+import BreastScreening from './maternal-and-child-health/components/cancer-prevention/breast-screening/breast-screening.component';
+import CancerFollowup from './maternal-and-child-health/components/cancer-prevention/cancer-followup/cancer-followup.component';
+
+// Child Nutrition Components
+import NutritionalAssessment from './well-child-care/components/child-nutrition/nutritional-assessment/nutritional-assessment.component';
+import FeedingCounseling from './well-child-care/components/child-nutrition/feeding-counseling/feeding-counseling.component';
+import NutritionFollowup from './well-child-care/components/child-nutrition/nutrition-followup/nutrition-followup.component';
+
+// Early Stimulation Components
+import StimulationSessions from './well-child-care/components/early-stimulation/stimulation-sessions/stimulation-sessions.component';
+import StimulationFollowup from './well-child-care/components/early-stimulation/stimulation-followup/stimulation-followup.component';
+import StimulationCounseling from './well-child-care/components/early-stimulation/stimulation-counseling/stimulation-counseling.component';
+
 // Module Configuration
 const moduleName = '@pucp-gidis-hiisc/esm-maternal-and-child-health-app';
 const options = {
@@ -213,6 +233,26 @@ export const developmentOverview = getSyncLifecycle(DevelopmentOverview, options
 
 // Generic Slot Placeholder (used for empty tabs)
 export const slotPlaceholder = getSyncLifecycle(SlotPlaceholder, options);
+
+// Family Planning Widgets
+export const contraceptiveMethods = getSyncLifecycle(ContraceptiveMethods, options);
+export const fpCounseling = getSyncLifecycle(FpCounseling, options);
+export const fpFollowup = getSyncLifecycle(FpFollowup, options);
+
+// Cancer Prevention Widgets
+export const cervicalScreening = getSyncLifecycle(CervicalScreening, options);
+export const breastScreening = getSyncLifecycle(BreastScreening, options);
+export const cancerFollowup = getSyncLifecycle(CancerFollowup, options);
+
+// Child Nutrition Widgets
+export const nutritionalAssessment = getSyncLifecycle(NutritionalAssessment, options);
+export const feedingCounseling = getSyncLifecycle(FeedingCounseling, options);
+export const nutritionFollowup = getSyncLifecycle(NutritionFollowup, options);
+
+// Early Stimulation Widgets
+export const stimulationSessions = getSyncLifecycle(StimulationSessions, options);
+export const stimulationFollowup = getSyncLifecycle(StimulationFollowup, options);
+export const stimulationCounseling = getSyncLifecycle(StimulationCounseling, options);
 
 // ================================================================================
 // HIDDEN DASHBOARD ROUTE MARKERS

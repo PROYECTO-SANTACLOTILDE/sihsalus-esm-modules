@@ -393,74 +393,74 @@
       }
     },
     {
-      "name": "family-planning-methods-placeholder",
-      "component": "slotPlaceholder",
+      "name": "contraceptive-methods-widget",
+      "component": "contraceptiveMethods",
       "slot": "family-planning-methods-slot",
       "order": 1
     },
     {
-      "name": "family-planning-counseling-placeholder",
-      "component": "slotPlaceholder",
+      "name": "fp-counseling-widget",
+      "component": "fpCounseling",
       "slot": "family-planning-counseling-slot",
       "order": 1
     },
     {
-      "name": "family-planning-followup-placeholder",
-      "component": "slotPlaceholder",
+      "name": "fp-followup-widget",
+      "component": "fpFollowup",
       "slot": "family-planning-followup-slot",
       "order": 1
     },
     {
-      "name": "cancer-prevention-cervical-placeholder",
-      "component": "slotPlaceholder",
+      "name": "cervical-screening-widget",
+      "component": "cervicalScreening",
       "slot": "cancer-prevention-cervical-slot",
       "order": 1
     },
     {
-      "name": "cancer-prevention-breast-placeholder",
-      "component": "slotPlaceholder",
+      "name": "breast-screening-widget",
+      "component": "breastScreening",
       "slot": "cancer-prevention-breast-slot",
       "order": 1
     },
     {
-      "name": "cancer-prevention-followup-placeholder",
-      "component": "slotPlaceholder",
+      "name": "cancer-followup-widget",
+      "component": "cancerFollowup",
       "slot": "cancer-prevention-followup-slot",
       "order": 1
     },
     {
-      "name": "child-nutrition-assessment-placeholder",
-      "component": "slotPlaceholder",
+      "name": "nutritional-assessment-widget",
+      "component": "nutritionalAssessment",
       "slot": "child-nutrition-assessment-slot",
       "order": 1
     },
     {
-      "name": "child-nutrition-counseling-placeholder",
-      "component": "slotPlaceholder",
+      "name": "feeding-counseling-widget",
+      "component": "feedingCounseling",
       "slot": "child-nutrition-counseling-slot",
       "order": 1
     },
     {
-      "name": "child-nutrition-followup-placeholder",
-      "component": "slotPlaceholder",
+      "name": "nutrition-followup-widget",
+      "component": "nutritionFollowup",
       "slot": "child-nutrition-followup-slot",
       "order": 1
     },
     {
-      "name": "early-stimulation-sessions-placeholder",
-      "component": "slotPlaceholder",
+      "name": "stimulation-sessions-widget",
+      "component": "stimulationSessions",
       "slot": "early-stimulation-sessions-slot",
       "order": 1
     },
     {
-      "name": "early-stimulation-followup-placeholder",
-      "component": "slotPlaceholder",
+      "name": "stimulation-followup-widget",
+      "component": "stimulationFollowup",
       "slot": "early-stimulation-followup-slot",
       "order": 1
     },
     {
-      "name": "early-stimulation-counseling-placeholder",
-      "component": "slotPlaceholder",
+      "name": "stimulation-counseling-widget",
+      "component": "stimulationCounseling",
       "slot": "early-stimulation-counseling-slot",
       "order": 1
     },
