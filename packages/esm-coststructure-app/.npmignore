@@ -1,0 +1,44 @@
+# Development files
+node_modules/
+.git/
+.github/
+.vscode/
+.yarn/
+.yarnrc.yml
+yarn.lock
+
+# Tests
+__mocks__/
+e2e/
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Config files
+.editorconfig
+.eslintrc
+.eslintignore
+.prettierignore
+prettier.config.js
+jest.config.js
+playwright.config.ts
+webpack.config.js
+turbo.json
+.turbo.json
+.husky/
+
+# Build artifacts (will be included via 'files' field)
+# We explicitly include dist/ in package.json
+
+# Tools
+tools/
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,25 @@
+@use '@carbon/layout';
+@use '@carbon/colors';
+
+.card {
+ display:flex;
+ flex-flow: column nowrap;
+ gap:.5rem;
+ padding: layout.$spacing-03 layout.$spacing-05;
+ background-color: colors.$white;
+}
+.search,.container{
+    display: flex;
+}
+.container{
+ justify-content: space-between;
+ align-items: center;
+}
+.container > h3{
+    font-weight: 600;
+    color: #525252
+}
+.search{
+    gap:.3rem;
+    align-items: center;
+}
