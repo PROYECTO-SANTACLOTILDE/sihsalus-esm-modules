@@ -45,11 +45,11 @@ export default function CostStructureForm() {
     formState: { errors },
   } = form;
   const onSubmit = (data: CostStructureFormValues) => {
-    console.log('💾 Datos enviados:', data);
+    // TODO: Implementar guardado via API (POST al OMOD de coststructure)
   };
 
-  const onError = (errors: any) => {
-    console.log('❌ Errores de validación:', errors);
+  const onError = (formErrors: Record<string, unknown>) => {
+    // TODO: Mostrar notificación de errores de validación al usuario
   };
 
   const handleTanbChange = (state: { selectedIndex: number }) => {

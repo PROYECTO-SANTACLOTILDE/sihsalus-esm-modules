@@ -35,7 +35,7 @@ export default function SupplyTab({ form }: Props) {
     });
   };
 
-  if (isLoading) return <div>dsadas</div>;
+  if (isLoading) return <div>Cargando insumos...</div>;
   return (
     <section className={styles['tab-container']}>
       <div>

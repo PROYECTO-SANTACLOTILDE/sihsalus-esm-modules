@@ -1,14 +1,14 @@
-export function calculateCostPerMinuteHumanResource(
-  priceMonth: number,
-): number {
-  const costPerMinute = priceMonth / 9000; 
-  return costPerMinute;
+/** Minutos laborables por mes: 150 horas (15 días * 8h + 30 horas extras) * 60 min */
+const WORK_MINUTES_PER_MONTH = 9000;
+
+export function calculateCostPerMinuteHumanResource(priceMonth: number): number {
+  return priceMonth / WORK_MINUTES_PER_MONTH;
 }
+
 export function calculateUnitCostHumanResource(
   costPerMinute: number,
   timeMinutes: number,
   quantity: number,
 ): number {
-  const unitCost = costPerMinute * timeMinutes * quantity;
-  return unitCost;
+  return costPerMinute * timeMinutes * quantity;
 }

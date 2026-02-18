@@ -7,10 +7,6 @@ import {
   TableBody,
   TableCell,
   DataTableHeader,
-  DataTableRow,
-  TableContainer,
-  Button,
-  Pagination,
 } from '@carbon/react';
 import { TrashCan, Edit } from '@carbon/react/icons';
 import React from 'react';
@@ -86,8 +82,8 @@ const HomeTableRow: React.FC<HomeTableRowProps> = ({ row, getRowProps, getCellPr
       <TableCell {...getCellProps({ cell: { id: `${row.id}-end` } })}>{row.end_date}</TableCell>
       <TableCell {...getCellProps({ cell: { id: `${row.id}-actions` } })}>
         <div>
-          <Edit size={20} style={{ cursor: 'pointer' }} onClick={() => console.log('Editar', row.id)} />
-          <TrashCan size={20} style={{ cursor: 'pointer' }} onClick={() => console.log('Eliminar', row.id)} />
+          <Edit size={20} style={{ cursor: 'pointer' }} onClick={() => { /* TODO: Implementar edición */ }} />
+          <TrashCan size={20} style={{ cursor: 'pointer' }} onClick={() => { /* TODO: Implementar eliminación */ }} />
         </div>
       </TableCell>
     </TableRow>

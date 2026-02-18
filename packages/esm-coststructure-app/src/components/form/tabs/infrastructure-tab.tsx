@@ -95,7 +95,7 @@ export default function InfrastructureTab({ form }: Props) {
                         control={control}
                         render={({ field }) => (
                           <Select
-                            id="infrastructure-select-{{index}}"
+                            id={`infrastructure-select-${index}`}
                             key={row.id}
                             {...field}
                             onChange={(e) => {
