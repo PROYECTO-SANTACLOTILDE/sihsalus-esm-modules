@@ -195,7 +195,9 @@ export const RelationshipsSection = () => {
   if (!relationshipTypes) {
     return (
       <section aria-label="Loading relationships section">
-        <SkeletonText role="progressbar" />
+        <div role="progressbar" aria-label={t('loading', 'Loading')}>
+          <SkeletonText />
+        </div>
       </section>
     );
   }

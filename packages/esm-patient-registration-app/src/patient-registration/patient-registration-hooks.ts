@@ -21,6 +21,7 @@ import {
   type PatientRegistration,
   type PatientUuidMapType,
   type PersonAttributeResponse,
+  type AddressProperties
 } from './patient-registration.types';
 import {
   getAddressFieldValuesFromFhirPatient,
@@ -30,16 +31,7 @@ import {
   latestFirstEncounter,
 } from './patient-registration-utils';
 
-interface AddressFieldValues {
-  address?: {
-    cityVillage?: string;
-    country?: string;
-    countyDistrict?: string;
-    postalCode?: string;
-    stateProvince?: string;
-    [key: string]: string | undefined;
-  };
-}
+type AddressFieldValues = Partial<Record<AddressProperties, string>>;
 
 interface DeathInfoResults {
   causeOfDeath: OpenmrsResource | null;
@@ -247,7 +239,7 @@ export function usePatientUuidMap(
         try {
           const registration = await getPatientRegistration(patientUuid);
           if (!abortController.signal.aborted) {
-            setPatientUuidMap(registration?._patientRegistrationData.initialAddressFieldValues ?? fallbackRef.current);
+            setPatientUuidMap(registration?._patientRegistrationData.patientUuidMap?? fallbackRef.current);
           }
         } catch (error) {
           if (!abortController.signal.aborted) {

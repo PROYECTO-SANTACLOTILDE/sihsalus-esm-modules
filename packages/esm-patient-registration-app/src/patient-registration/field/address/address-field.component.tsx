@@ -78,9 +78,9 @@ export const AddressComponent: React.FC<AddressComponentProps> = ({ fieldPrefix 
   if (addressTemplate && !Object.keys(addressTemplate)?.length) {
     return (
       <AddressComponentContainer>
-        <SkeletonText
-        role="progressbar" 
-        />
+        <div role="progressbar" aria-label={t('loading', 'Loading')}>
+          <SkeletonText />
+        </div>
       </AddressComponentContainer>
     );
   }
@@ -105,9 +105,9 @@ export const AddressComponent: React.FC<AddressComponentProps> = ({ fieldPrefix 
   if (isLoadingFieldOrder) {
     return (
       <AddressComponentContainer>
-        <SkeletonText
-        role="progressbar" 
-        />
+        <div role="progressbar" aria-label={t('loading', 'Loading')}>
+          <SkeletonText />
+        </div>
       </AddressComponentContainer>
     );
   }
@@ -152,7 +152,7 @@ const AddressComponentContainer = ({ children }) => {
     () =>
       ({
         fieldConfigurations: {},
-        setFieldValue: () => {},
+        setFieldValue: async () => {},
         values: {},
       }) as unknown as PatientRegistrationContextProps,
     [],
@@ -164,7 +164,7 @@ const AddressComponentContainer = ({ children }) => {
         addressTemplate: {} as AddressTemplate,
         currentSession: {} as Session,
         identifierTypes: [],
-        relationshipTypes: [],
+        relationshipTypes: {results: []},
       }}>
       <PatientRegistrationContextProvider value={contextValue}>
         <div>

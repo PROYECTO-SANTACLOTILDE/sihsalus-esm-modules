@@ -4,6 +4,8 @@ import { TextInput, Layer } from '@carbon/react';
 import SelectionTick from './selection-tick.component';
 import styles from '../input.scss';
 
+type TextInputProps = React.ComponentProps<typeof TextInput>;
+
 interface ComboInputProps {
   entries: Array<string>;
   name: string;
@@ -11,10 +13,9 @@ interface ComboInputProps {
     value: string;
     labelText: string;
     id?: string;
-    [x: string]: any;
-  };
+ } & Omit<TextInputProps, 'value' | 'labelText' | 'id' | 'onChange' | 'onFocus' | 'autoComplete' | 'onKeyDown'>;
   handleInputChange: (newValue: string) => void;
-  handleSelection: (newSelection) => void;
+  handleSelection: (newSelection: string) => void;
 }
 
 // Optimización: Memoizar el componente para evitar re-renders innecesarios
@@ -72,7 +73,7 @@ const ComboInput: React.FC<ComboInputProps> = React.memo(
     );
 
     useEffect(() => {
-      const listener = (e) => {
+      const listener = (e : MouseEvent) => {
         if (!comboInputRef.current.contains(e.target as Node)) {
           setShowEntries(false);
           setHighlightedEntry(-1);

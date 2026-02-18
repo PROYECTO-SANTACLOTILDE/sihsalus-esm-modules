@@ -24,7 +24,7 @@ export interface FetchedPatientIdentifierType {
   required: boolean;
   uuid: string;
   fieldName: string;
-  description: string;
+  //description: string;
   format: string;
   formatDescription?: string;
   isPrimary: boolean;
@@ -87,7 +87,7 @@ export interface PatientRegistration {
     isNewPatient: boolean;
     formValues: FormValues;
     patientUuidMap: PatientUuidMapType;
-    initialAddressFieldValues: Record<string, any>;
+    initialAddressFieldValues: Partial<Record<AddressProperties, string>>;
     capturePhotoProps: CapturePhotoProps;
     currentLocation: string;
     initialIdentifierValues: FormValues['identifiers'];
@@ -273,6 +273,19 @@ export interface ConceptResponse {
 export interface ConceptAnswers {
   display: string;
   uuid: string;
+}
+export interface RelationshipType {
+  uuid: string;
+  display: string;
+  aIsToB: string;
+  bIsToA: string;
+  displayAIsToB?: string;
+  displayBIsToA?: string;
+  description?: string;
+}
+
+export interface RelationshipTypesResponse {
+  results: Array<RelationshipType>;
 }
 
 export type AddressProperties =
