@@ -1,59 +1,59 @@
 {
-    "name": "@pucp-gidis-hiisc/esm-patient-registration-app",
-    "version": "1.2.0",
-    "description": "Gestión avanzada de registro de pacientes para SIH SALUS",
-    "browser": "dist/pucp-gidis-hiisc-esm-patient-registration-app.js",
-    "main": "src/index.ts",
-    "source": true,
-    "license": "MPL-2.0",
-    "scripts": {
-        "start": "openmrs develop",
-        "serve": "webpack serve --mode=development",
-        "debug": "npm run serve",
-        "build": "webpack --mode production",
-        "analyze": "webpack --mode=production --env.analyze=true",
-        "lint": "cross-env eslint src --ext ts,tsx",
-        "test": "cross-env TZ=UTC jest --config jest.config.js --passWithNoTests --color",
-        "test:watch": "cross-env TZ=UTC jest --watch --config jest.config.js --color",
-        "coverage": "yarn test --coverage",
-        "typescript": "tsc",
-        "extract-translations": "i18next 'src/**/*.component.tsx' 'src/**/*.extension.tsx' 'src/**/*modal.tsx' 'src/**/*.workspace.tsx' 'src/index.ts' 'src/patient-registration/validation/patient-registration-validation.ts' --config ../../tools/i18next-parser.config.js"
-    },
-    "browserslist": [
-        "extends browserslist-config-openmrs"
-    ],
-    "keywords": [
-        "openmrs",
-        "sihsalus"
-    ],
-    "publishConfig": {
-        "access": "public"
-    },
-    "homepage": "https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules#readme",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules.git"
-    },
-    "bugs": {
-        "url": "https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules/issues"
-    },
-    "dependencies": {
-        "@carbon/react": "^1.83.0",
-        "classnames": "^2.5.1",
-        "formik": "^2.1.5",
-        "lodash-es": "^4.17.15",
-        "uuid": "^8.3.2",
-        "yup": "^0.29.1"
-    },
-    "peerDependencies": {
-        "@openmrs/esm-framework": "8.x",
-        "dayjs": "1.x",
-        "react": "18.x",
-        "react-i18next": "15.x",
-        "react-router-dom": "6.x",
-        "swr": "2.x"
-    },
-    "devDependencies": {
-        "webpack": "^5.99.9"
-    }
+  "name": "@pucp-gidis-hiisc/esm-patient-registration-app",
+  "version": "1.4.0",
+  "description": "Gestión avanzada de registro de pacientes para SIH SALUS",
+  "browser": "dist/pucp-gidis-hiisc-esm-patient-registration-app.js",
+  "main": "src/index.ts",
+  "source": true,
+  "license": "MPL-2.0",
+  "scripts": {
+    "start": "openmrs develop",
+    "serve": "webpack serve --mode=development",
+    "debug": "npm run serve",
+    "build": "webpack --mode production",
+    "analyze": "webpack --mode=production --env.analyze=true",
+    "lint": "cross-env eslint src --ext ts,tsx",
+    "test": "cross-env TZ=UTC jest --config jest.config.js --passWithNoTests --color",
+    "test:watch": "cross-env TZ=UTC jest --watch --config jest.config.js --color",
+    "coverage": "yarn test --coverage",
+    "typescript": "tsc",
+    "extract-translations": "i18next 'src/**/*.component.tsx' 'src/**/*.extension.tsx' 'src/**/*modal.tsx' 'src/**/*.workspace.tsx' 'src/index.ts' 'src/patient-registration/validation/patient-registration-validation.ts' --config ../../tools/i18next-parser.config.js"
+  },
+  "browserslist": [
+    "extends browserslist-config-openmrs"
+  ],
+  "keywords": [
+    "openmrs",
+    "sihsalus"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules/issues"
+  },
+  "dependencies": {
+    "@carbon/react": "^1.83.0",
+    "classnames": "^2.5.1",
+    "formik": "^2.1.5",
+    "lodash-es": "^4.17.15",
+    "uuid": "^8.3.2",
+    "yup": "^0.29.1"
+  },
+  "peerDependencies": {
+    "@openmrs/esm-framework": "8.x",
+    "dayjs": "1.x",
+    "react": "18.x",
+    "react-i18next": "15.x",
+    "react-router-dom": "6.x",
+    "swr": "2.x"
+  },
+  "devDependencies": {
+    "webpack": "^5.99.9"
+  }
 }
