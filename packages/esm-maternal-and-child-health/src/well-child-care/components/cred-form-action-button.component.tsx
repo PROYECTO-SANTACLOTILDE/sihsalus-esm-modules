@@ -11,7 +11,7 @@ interface CREDFormActionButtonProps {
 const CREDFormActionButton: React.FC<CREDFormActionButtonProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const { workspaces } = useWorkspaces();
-  const launchCREDFormsWorkspace = useLaunchWorkspaceRequiringVisit(patientUuid, 'cred-forms-workspace');
+  const launchCREDFormsWorkspace = useLaunchWorkspaceRequiringVisit(patientUuid, 'forms-selector-workspace');
 
   const formEntryWorkspaces = workspaces.filter((w) => w.name === formEntryWorkspace);
   const recentlyOpenedForm = formEntryWorkspaces[0];

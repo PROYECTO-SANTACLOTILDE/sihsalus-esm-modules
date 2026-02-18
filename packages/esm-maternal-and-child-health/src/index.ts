@@ -68,6 +68,8 @@ import ScreeningIndicators from './well-child-care/components/screening/screenin
 import DevelopmentOverview from './well-child-care/components/development-overview/development-overview.component';
 import ChildMedicalHistory from './ui/conditions-filter/conditions-overview.component';
 import SlotPlaceholder from './ui/slot-placeholder/slot-placeholder.component';
+import PrenatalAntecedents from './well-child-care/components/neonatal-register/prenatal-history/prenatal-history.component';
+import CREDFormActionButton from './well-child-care/components/cred-form-action-button.component';
 
 // Family Planning Components
 import ContraceptiveMethods from './maternal-and-child-health/components/family-planning/contraceptive-methods/contraceptive-methods.component';
@@ -230,6 +232,12 @@ export const screeningIndicators = getSyncLifecycle(ScreeningIndicators, options
 
 // Development Evaluation Overview
 export const developmentOverview = getSyncLifecycle(DevelopmentOverview, options);
+
+// Prenatal History (Obstetric Formula)
+export const prenatalHistory = getSyncLifecycle(PrenatalAntecedents, options);
+
+// CRED Form Action Button
+export const credFormActionButton = getSyncLifecycle(CREDFormActionButton, options);
 
 // Generic Slot Placeholder (used for empty tabs)
 export const slotPlaceholder = getSyncLifecycle(SlotPlaceholder, options);

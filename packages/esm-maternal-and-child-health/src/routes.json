@@ -294,7 +294,20 @@
     {
       "name": "prenatal-antecedents-history",
       "component": "childMedicalHistory",
-      "slot": "neonatal-perinatal-slot"
+      "slot": "neonatal-perinatal-slot",
+      "order": 1
+    },
+    {
+      "name": "prenatal-history-widget",
+      "component": "prenatalHistory",
+      "slot": "neonatal-perinatal-slot",
+      "order": 2
+    },
+    {
+      "name": "labour-history-chart",
+      "component": "neonatalRegisterChart",
+      "slot": "neonatal-perinatal-slot",
+      "order": 3
     },
     {
       "name": "detalles-nacimiento-chart",
@@ -465,6 +478,12 @@
       "order": 1
     },
     {
+      "name": "cred-form-action-button",
+      "component": "credFormActionButton",
+      "slot": "action-menu-items-slot",
+      "order": 1
+    },
+    {
       "name": "antecedentes-patologicos-overview",
       "component": "antecedentesPatologicos",
       "slot": "additional-health-services-slot"
@@ -606,7 +625,12 @@
       "order": 100
     }
   ],
-  "modals": [],
+  "modals": [
+    {
+      "name": "condition-delete-confirmation-dialog",
+      "component": "conditionFilterDeleteConfirmationDialog"
+    }
+  ],
   "workspaces": [
     {
       "name": "newborn-anthropometric-form",
@@ -648,6 +672,24 @@
       "name": "test-peruano-form",
       "component": "testPeruanoFormWorkspace",
       "title": "Test Peruano de Desarrollo Infantil",
+      "type": "form"
+    },
+    {
+      "name": "conditions-filter-form-workspace",
+      "component": "conditionsFilterWorkspace",
+      "title": "Antecedentes Patológicos",
+      "type": "form"
+    },
+    {
+      "name": "conditions-form-workspace",
+      "component": "conditionsFilterWorkspace",
+      "title": "Editar Condición",
+      "type": "form"
+    },
+    {
+      "name": "forms-selector-workspace",
+      "component": "formsSelectorWorkspace",
+      "title": "Selección de Formularios",
       "type": "form"
     }
   ]
