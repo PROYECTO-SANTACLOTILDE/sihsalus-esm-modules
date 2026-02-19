@@ -671,6 +671,8 @@ export const configSchema = {
       encounterTypeUuid: '58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba',
       formUuid: '',
       indicatorConceptUuid: '47bb64cf-f63c-46a0-839a-9573bcedf9be',
+      transportConceptUuid: '830ecf86-edd6-41dd-9211-7785a930e995',
+      referenceHospitalConceptUuid: 'fb3f4592-1ec5-4bb0-a7ea-4864df29afd1',
     },
     encounterTypeUuid: {
       _type: Type.UUID,
@@ -686,6 +688,16 @@ export const configSchema = {
       _type: Type.ConceptUuid,
       _description: 'Concept UUID del indicador de plan de parto — OCL: Plan de Parto #1608',
       _default: '47bb64cf-f63c-46a0-839a-9573bcedf9be',
+    },
+    transportConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de transporte planificado al parto — OCL: Transporte planificado al parto #1053 (Coded)',
+      _default: '830ecf86-edd6-41dd-9211-7785a930e995',
+    },
+    referenceHospitalConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID del establecimiento de referencia — OCL: Establecimiento de referencia #1103 (Text)',
+      _default: 'fb3f4592-1ec5-4bb0-a7ea-4864df29afd1',
     },
   },
 
@@ -746,24 +758,36 @@ export const configSchema = {
     _type: Type.Object,
     _description: 'Configuración de clasificación de riesgo obstétrico',
     _default: {
-      classificationConceptUuid: '',
-      highRiskConceptUuid: '',
-      lowRiskConceptUuid: '',
+      classificationConceptUuid: '6b38e548-6cbb-456a-ae5d-51eecba16651',
+      highRiskConceptUuid: '735bfdaa-7005-4dae-90c8-0b45d3f71208',
+      lowRiskConceptUuid: '7be08cd5-d237-445b-b218-42450cfb4874',
+      veryHighRiskConceptUuid: 'f01af67b-322c-4067-b77f-fe0c92148ed1',
+      riskFactorsConceptUuid: '601c996b-1edb-4406-948a-2ba4cc26789a',
     },
     classificationConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID de la clasificación de riesgo obstétrico',
-      _default: '',
+      _description: 'Concept UUID de Grupo de Riesgo — OCL: Grupo de Riesgo #1530 (Coded)',
+      _default: '6b38e548-6cbb-456a-ae5d-51eecba16651',
     },
     highRiskConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID para "Alto Riesgo"',
-      _default: '',
+      _description: 'Concept UUID para "Riesgo Sanitario Alto" — OCL: #3622',
+      _default: '735bfdaa-7005-4dae-90c8-0b45d3f71208',
     },
     lowRiskConceptUuid: {
       _type: Type.ConceptUuid,
-      _description: 'Concept UUID para "Bajo Riesgo"',
-      _default: '',
+      _description: 'Concept UUID para "Riesgo Sanitario Mínimo" — OCL: #3620',
+      _default: '7be08cd5-d237-445b-b218-42450cfb4874',
+    },
+    veryHighRiskConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID para "Riesgo Sanitario Muy Alto" — OCL: #3623',
+      _default: 'f01af67b-322c-4067-b77f-fe0c92148ed1',
+    },
+    riskFactorsConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de factores de riesgo obstétrico (23 answers) — OCL: Motivo derivación casa espera #378 (Coded)',
+      _default: '601c996b-1edb-4406-948a-2ba4cc26789a',
     },
   },
 
@@ -1225,6 +1249,8 @@ export interface ConfigObject {
     encounterTypeUuid: string;
     formUuid: string;
     indicatorConceptUuid: string;
+    transportConceptUuid: string;
+    referenceHospitalConceptUuid: string;
   };
   prenatalScreening: {
     vihResultConceptUuid: string;
@@ -1240,5 +1266,7 @@ export interface ConfigObject {
     classificationConceptUuid: string;
     highRiskConceptUuid: string;
     lowRiskConceptUuid: string;
+    veryHighRiskConceptUuid: string;
+    riskFactorsConceptUuid: string;
   };
 }

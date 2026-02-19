@@ -27,10 +27,12 @@ interface BirthPlanResult {
 export function useBirthPlan(patientUuid: string): BirthPlanResult {
   const config = useConfig<ConfigObject>();
   const encounterTypeUuid = config.birthPlan?.encounterTypeUuid;
+  const transportConceptUuid = config.birthPlan?.transportConceptUuid;
+  const referenceHospitalConceptUuid = config.birthPlan?.referenceHospitalConceptUuid;
 
   const url = useMemo(() => {
     if (!patientUuid || !encounterTypeUuid) return null;
-    return `${restBaseUrl}/encounter?patient=${patientUuid}&encounterType=${encounterTypeUuid}&v=custom:(uuid,encounterDatetime,obs:(uuid,display,value:(uuid,display)))&limit=1&order=desc`;
+    return `${restBaseUrl}/encounter?patient=${patientUuid}&encounterType=${encounterTypeUuid}&v=custom:(uuid,encounterDatetime,obs:(uuid,concept:(uuid),value:(uuid,display),display))&limit=1&order=desc`;
   }, [patientUuid, encounterTypeUuid]);
 
   const { data, isLoading, error, mutate } = useSWR(
@@ -53,14 +55,28 @@ export function useBirthPlan(patientUuid: string): BirthPlanResult {
       };
     }
 
+    const obs = encounter.obs ?? [];
+
+    // Transport: Coded concept — check if obs exists (any answer means transport is arranged)
+    const transportObs = transportConceptUuid
+      ? obs.find((o: any) => o.concept?.uuid === transportConceptUuid)
+      : undefined;
+    const transportArranged = !!transportObs;
+
+    // Reference hospital: Text concept — extract display value
+    const hospitalObs = referenceHospitalConceptUuid
+      ? obs.find((o: any) => o.concept?.uuid === referenceHospitalConceptUuid)
+      : undefined;
+    const referenceHospital = hospitalObs?.value?.display ?? hospitalObs?.display?.split(': ')?.[1] ?? null;
+
     return {
       hasBirthPlan: true,
       planDate: encounter.encounterDatetime ? dayjs(encounter.encounterDatetime).format('DD/MM/YYYY') : null,
-      transportArranged: false, // TODO: parse from obs when transport concept UUID is available
-      referenceHospital: null, // TODO: parse from obs when reference hospital concept UUID is available
+      transportArranged,
+      referenceHospital,
       encounterUuid: encounter.uuid,
     };
-  }, [data]);
+  }, [data, transportConceptUuid, referenceHospitalConceptUuid]);
 
   return {
     ...result,
