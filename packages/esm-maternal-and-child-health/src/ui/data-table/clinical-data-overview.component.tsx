@@ -1,12 +1,11 @@
 import { Button, ContentSwitcher, DataTableSkeleton, IconSwitch, InlineLoading } from '@carbon/react';
 import { Add, Analytics, Table } from '@carbon/react/icons';
-import { launchWorkspace, useLayoutType } from '@openmrs/esm-framework';
+import { launchWorkspace2, useLayoutType, useVisit } from '@openmrs/esm-framework';
 import {
   CardHeader,
   EmptyState,
   ErrorState,
   launchStartVisitPrompt,
-  usePatientChartStore,
 } from '@openmrs/esm-patient-common-lib';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -81,14 +80,14 @@ const ClinicalDataOverview: React.FC<ClinicalDataOverviewProps> = ({
   const { t } = useTranslation();
   const [chartView, setChartView] = useState(false);
   const isTablet = useLayoutType() === 'tablet';
-  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
+  const { currentVisit } = useVisit(patientUuid);
 
   const launchForm = useCallback(() => {
     if (!currentVisit) {
       launchStartVisitPrompt();
       return;
     }
-    launchWorkspace(formWorkspace, { patientUuid });
+    launchWorkspace2(formWorkspace, { patientUuid });
   }, [currentVisit, patientUuid, formWorkspace]);
 
   return (

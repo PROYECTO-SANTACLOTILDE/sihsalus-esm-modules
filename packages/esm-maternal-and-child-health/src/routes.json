@@ -631,66 +631,56 @@
       "component": "conditionFilterDeleteConfirmationDialog"
     }
   ],
-  "workspaces": [
+  "workspaces2": [
     {
       "name": "newborn-anthropometric-form",
       "component": "newbornAnthropometricsworkspace",
-      "title": "Monitoreo del Recien Nacido",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "newborn-fluidBalance-form",
       "component": "newbornFluidBalanceworkspace",
-      "title": "Monitoreo del Recien Nacido",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "perinatal-register-form",
       "component": "perinatalRegisterworkspace",
-      "title": "Carnet Materno Perinatal",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "wellchild-control-form",
       "component": "wellchildControlsworkspace",
-      "title": "Controles de Niño Sano",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "antecedentes-patologicos-form-workspace",
       "component": "antecedentesPatologicosFormWorkspace",
-      "title": "Antecedentes Patológicos del Menor",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "tepsi-form",
       "component": "tepsiFormWorkspace",
-      "title": "Test de Desarrollo Psicomotor (TEPSI)",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "test-peruano-form",
       "component": "testPeruanoFormWorkspace",
-      "title": "Test Peruano de Desarrollo Infantil",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "conditions-filter-form-workspace",
       "component": "conditionsFilterWorkspace",
-      "title": "Antecedentes Patológicos",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "conditions-form-workspace",
       "component": "conditionsFilterWorkspace",
-      "title": "Editar Condición",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     },
     {
       "name": "forms-selector-workspace",
       "component": "formsSelectorWorkspace",
-      "title": "Selección de Formularios",
-      "type": "form"
+      "window": "patient-chart-clinical-forms"
     }
   ]
 }

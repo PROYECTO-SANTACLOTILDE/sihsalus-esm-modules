@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Tile, Tag, Button } from '@carbon/react';
 import { Add, Edit, CheckmarkFilled, WarningFilled } from '@carbon/react/icons';
-import { launchWorkspace, useConfig } from '@openmrs/esm-framework';
+import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
 import { useBirthPlan } from '../../../../hooks/useBirthPlan';
 import type { ConfigObject } from '../../../../config-schema';
 import styles from './birth-plan.scss';
@@ -29,16 +29,9 @@ const BirthPlan: React.FC<BirthPlanProps> = ({ patientUuid }) => {
       return;
     }
 
-    launchWorkspace('patient-form-entry-workspace', {
-      workspaceTitle: t('birthPlan', 'Plan de Parto'),
-      mutateForm: () => {
-        mutate?.();
-      },
-      formInfo: {
-        formUuid,
-        encounterUuid: encounterUuid ?? '',
-        additionalProps: {},
-      },
+    launchWorkspace2('patient-form-entry-workspace', {
+      formUuid,
+      encounterUuid: encounterUuid ?? '',
     });
   }, [config, encounterUuid, mutate, t]);
 

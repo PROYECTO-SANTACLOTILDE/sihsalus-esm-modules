@@ -1,4 +1,4 @@
-import { launchWorkspace, useConfig } from '@openmrs/esm-framework';
+import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ConfigObject } from '../../../config-schema';
@@ -35,19 +35,14 @@ const AlojamientoConjunto: React.FC<AlojamientoConjuntoProps> = ({ patientUuid }
     }
 
     try {
-      launchWorkspace('patient-form-entry-workspace', {
-        workspaceTitle: headerTitle,
-        patientUuid,
-        mutateForm: mutate,
-        formInfo: {
-          formUuid: config.formsList.roomingIn,
-          encounterUuid: encounter?.uuid || '',
-        },
+      launchWorkspace2('patient-form-entry-workspace', {
+        formUuid: config.formsList.roomingIn,
+        encounterUuid: encounter?.uuid || '',
       });
     } catch (error) {
       console.error('Error launching workspace:', error);
     }
-  }, [headerTitle, patientUuid, mutate, config.formsList.roomingIn, encounter?.uuid]);
+  }, [config.formsList.roomingIn, encounter?.uuid]);
 
   const dataHook = React.useCallback(() => {
     return {

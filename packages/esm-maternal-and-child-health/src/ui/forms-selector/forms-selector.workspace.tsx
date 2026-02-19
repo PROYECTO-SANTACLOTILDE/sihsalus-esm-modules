@@ -1,5 +1,5 @@
 import { Button, ButtonSet, Form } from '@carbon/react';
-import { ArrowLeftIcon, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
+import { ArrowLeftIcon, useLayoutType, launchWorkspace2 } from '@openmrs/esm-framework';
 import { type DefaultPatientWorkspaceProps } from '../../types';
 import React, { type ComponentProps, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,11 +40,8 @@ export default function FormsSelectorWorkspace({
   const [completedForms, setCompletedForms] = useState<Set<string>>(new Set());
 
   const backToPreviousWorkspace = useCallback(() => {
-    closeWorkspace({
-      onWorkspaceClose: () => launchWorkspace(backWorkspace),
-      closeWorkspaceGroup: false,
-    });
-  }, [closeWorkspace, backWorkspace]);
+    launchWorkspace2(backWorkspace);
+  }, [backWorkspace]);
 
   const handleFormOpen = useCallback(
     (form: any, encounterUuid: string) => {
@@ -60,9 +57,7 @@ export default function FormsSelectorWorkspace({
       onComplete();
     }
 
-    closeWorkspaceWithSavedChanges({
-      onWorkspaceClose: () => {},
-    });
+    closeWorkspace({ ignoreChanges: true });
   }, [closeWorkspaceWithSavedChanges, onComplete]);
 
   const isAnyFormCompleted = completedForms.size > 0;

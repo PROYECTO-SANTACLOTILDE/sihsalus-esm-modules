@@ -1,5 +1,5 @@
 import { Tile } from '@carbon/react';
-import { launchWorkspace, useConfig, usePatient } from '@openmrs/esm-framework';
+import { launchWorkspace2, useConfig, usePatient } from '@openmrs/esm-framework';
 import dayjs from 'dayjs';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -48,13 +48,11 @@ const CredAgeGroups: React.FC<CredAgeGroupsProps> = ({ patientUuid }) => {
 
   const handleAgeGroupClick = (group) => {
     setSelectedAgeGroup(group);
-    launchWorkspace('wellchild-control-form', {
+    launchWorkspace2('wellchild-control-form', {
       workspaceTitle: `${t('ageGroupDetails', 'Control CRED - Grupo Etario')} - ${group.label}`,
-      additionalProps: {
-        patientUuid,
-        ageGroup: group,
-        type: 'ageGroup',
-      },
+      patientUuid,
+      ageGroup: group,
+      type: 'ageGroup',
     });
   };
 

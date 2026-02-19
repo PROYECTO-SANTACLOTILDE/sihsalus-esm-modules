@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useConfig, launchWorkspace } from '@openmrs/esm-framework';
+import { useConfig, launchWorkspace2 } from '@openmrs/esm-framework';
 import { useLatestValidEncounter } from '../../../hooks/useLatestEncounter'; // Ajusta la ruta
 import PatientSummaryTable from '../../../ui/patient-summary-table/patient-summary-table.component'; // Ajusta la ruta
 import type { ConfigObject } from '../../../config-schema';
@@ -43,14 +43,9 @@ const NeonatalAttention: React.FC<ImmediateNewbornAttentionProps> = ({ patientUu
   }, [encounter]);
 
   const handleLaunchForm = () => {
-    launchWorkspace('patient-form-entry-workspace', {
-      workspaceTitle: headerTitle,
-      patientUuid,
-      mutateForm: mutate,
-      formInfo: {
-        formUuid: config.formsList.atencionImmediataNewborn,
-        encounterUuid: encounter?.uuid || '',
-      },
+    launchWorkspace2('patient-form-entry-workspace', {
+      formUuid: config.formsList.atencionImmediataNewborn,
+      encounterUuid: encounter?.uuid || '',
     });
     setTimeout(() => mutate(), 1000); // Forzar revalidación
   };

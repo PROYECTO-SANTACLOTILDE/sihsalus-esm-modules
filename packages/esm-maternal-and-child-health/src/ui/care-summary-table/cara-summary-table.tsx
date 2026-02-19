@@ -15,10 +15,9 @@ import { useTranslation } from 'react-i18next';
 import {
   CardHeader,
   EmptyState,
-  usePatientChartStore,
   launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
-import { launchWorkspace } from '@openmrs/esm-framework';
+import { launchWorkspace2, useVisit } from '@openmrs/esm-framework';
 import dayjs from 'dayjs';
 import styles from './care-summary-table.scss';
 import { Add } from '@carbon/react/icons';
@@ -71,7 +70,7 @@ const CareSummaryTable: React.FC<CareSummaryTableProps> = ({
 }) => {
   const { t } = useTranslation();
   const { prenatalEncounters, isValidating, mutate } = useEncountersHook(patientUuid);
-  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
+  const { currentVisit } = useVisit(patientUuid);
 
   const launchForm = useCallback(() => {
     try {
@@ -79,10 +78,9 @@ const CareSummaryTable: React.FC<CareSummaryTableProps> = ({
         launchStartVisitPrompt();
       } else {
         if (formUuid) {
-          launchWorkspace('patient-form-entry-workspace', {
-            workspaceTitle: title,
-            mutateForm: mutate,
-            formInfo: { formUuid, patientUuid, additionalProps: {} },
+          launchWorkspace2('patient-form-entry-workspace', {
+            formUuid,
+            encounterUuid: '',
           });
         }
       }

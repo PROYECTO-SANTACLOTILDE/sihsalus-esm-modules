@@ -2,12 +2,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ContentSwitcher, DataTableSkeleton, IconSwitch, InlineLoading } from '@carbon/react';
-import { useConfig, useLayoutType, AddIcon, launchWorkspace } from '@openmrs/esm-framework';
+import { useConfig, useLayoutType, AddIcon, launchWorkspace2, useVisit } from '@openmrs/esm-framework';
 import {
   CardHeader,
   EmptyState,
   ErrorState,
-  usePatientChartStore,
   launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
 import { usePrenatalAntecedents, usePrenatalConceptMetadata } from '../../hooks/usePrenatalAntecedents';
@@ -30,7 +29,7 @@ const ObstetricHistoryBase: React.FC<ObstetricHistoryBaseProps> = ({ patientUuid
   const config = useConfig<ConfigObject>();
   const { data: formattedObs, isLoading, error, mutate, isValidating } = usePrenatalAntecedents(patientUuid);
   const { data: conceptUnits } = usePrenatalConceptMetadata();
-  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
+  const { currentVisit } = useVisit(patientUuid);
 
   const launchObstetricForm = useCallback(() => {
     if (!currentVisit) {
@@ -38,7 +37,7 @@ const ObstetricHistoryBase: React.FC<ObstetricHistoryBaseProps> = ({ patientUuid
       return;
     }
 
-    launchWorkspace('perinatal-register-form', {
+    launchWorkspace2('perinatal-register-form', {
       patientUuid,
       workspaceTitle: headerTitle,
     });

@@ -1,4 +1,4 @@
-import { ActionMenuButton, DocumentIcon, useWorkspaces, launchWorkspace } from '@openmrs/esm-framework';
+import { ActionMenuButton, DocumentIcon, useWorkspaces, launchWorkspace2 } from '@openmrs/esm-framework';
 import { useLaunchWorkspaceRequiringVisit } from '@openmrs/esm-patient-common-lib';
 import { formEntryWorkspace, htmlFormEntryWorkspace } from '../../types';
 import React, { type ComponentProps } from 'react';
@@ -24,13 +24,13 @@ const CREDFormActionButton: React.FC<CREDFormActionButtonProps> = ({ patientUuid
 
   const launchWorkspaceCb = () => {
     if (isFormOpen) {
-      launchWorkspace(formEntryWorkspace, {
+      launchWorkspace2(formEntryWorkspace, {
         workspaceTitle: recentlyOpenedForm?.additionalProps?.['workspaceTitle'],
       });
     }
     // We aren't currently supporting keeping HTML Form workspaces open, but just in case
     else if (isHtmlFormOpen) {
-      launchWorkspace(htmlFormEntryWorkspace, {
+      launchWorkspace2(htmlFormEntryWorkspace, {
         workspaceTitle: recentlyOpenedHtmlForm?.additionalProps?.['workspaceTitle'],
       });
     } else {

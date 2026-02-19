@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Tile, Tag } from '@carbon/react';
 import { Growth, Education } from '@carbon/react/icons';
-import { launchWorkspace } from '@openmrs/esm-framework';
+import { launchWorkspace2 } from '@openmrs/esm-framework';
 import styles from './development-overview.scss';
 
 interface DevelopmentOverviewProps {
@@ -17,11 +17,11 @@ const DevelopmentOverview: React.FC<DevelopmentOverviewProps> = ({ patientUuid }
   const { t } = useTranslation();
 
   const handleLaunchTepsi = () => {
-    launchWorkspace('tepsi-form', { patientUuid });
+    launchWorkspace2('tepsi-form', { patientUuid });
   };
 
   const handleLaunchTestPeruano = () => {
-    launchWorkspace('test-peruano-form', { patientUuid });
+    launchWorkspace2('test-peruano-form', { patientUuid });
   };
 
   return (

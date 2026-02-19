@@ -18,17 +18,17 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  usePatientChartStore,
   launchStartVisitPrompt,
   PatientChartPagination,
 } from '@openmrs/esm-patient-common-lib';
 import {
-  launchWorkspace,
+  launchWorkspace2,
   useLayoutType,
   usePagination,
   formatDate,
   parseDate,
   isOmrsDateStrict,
+  useVisit,
 } from '@openmrs/esm-framework';
 import styles from './patient-summary-table.scss';
 
@@ -75,7 +75,7 @@ const PatientSummaryTable = <T,>({
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const { data, isLoading, error, mutate } = dataHook(patientUuid);
-  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
+  const { currentVisit } = useVisit(patientUuid);
 
   const launchForm = useCallback(() => {
     try {
@@ -83,7 +83,7 @@ const PatientSummaryTable = <T,>({
         launchStartVisitPrompt();
       } else {
         if (formWorkspace) {
-          launchWorkspace(formWorkspace, { patientUuid });
+          launchWorkspace2(formWorkspace, { patientUuid });
         } else if (onFormLaunch) {
           onFormLaunch(patientUuid);
         }

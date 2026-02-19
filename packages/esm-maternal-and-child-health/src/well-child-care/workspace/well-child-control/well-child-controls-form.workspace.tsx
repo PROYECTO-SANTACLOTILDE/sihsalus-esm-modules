@@ -1,8 +1,7 @@
 import { Button, ButtonSet, Column, Form, InlineNotification, TextInput, Tooltip } from '@carbon/react';
 import { Information as InformationIcon } from '@carbon/react/icons';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { age, ResponsiveWrapper, useConfig, useLayoutType, usePatient, launchWorkspace } from '@openmrs/esm-framework';
-import { usePatientChartStore } from '@openmrs/esm-patient-common-lib';
+import { age, ResponsiveWrapper, useConfig, useLayoutType, usePatient, useVisit, launchWorkspace2 } from '@openmrs/esm-framework';
 import { type DefaultPatientWorkspaceProps } from '../../../types';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -34,7 +33,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
   const { patient, isLoading: isPatientLoading } = usePatient(patientUuid);
-  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
+  const { currentVisit } = useVisit(patientUuid);
   const { encounters, isLoading: isEncountersLoading } = useCREDEncounters(patientUuid);
   const { getAgeGroupForForms } = useAgeGroups();
 
@@ -98,22 +97,18 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
       }),
     );
 
-    closeWorkspace({
-      onWorkspaceClose: () =>
-        launchWorkspace('forms-selector-workspace', {
-          availableForms: allAvailableForms,
-          patientAge: formattedAge,
-          controlNumber: credControlNumber,
-          title: t('credFormsSelection', 'Selección de Formularios CRED'),
-          subtitle: t(
-            'credFormsInstructions',
-            'Seleccione los formularios que desea completar para este control CRED.',
-          ),
-          backWorkspace: 'wellchild-control-form',
-        }),
-      closeWorkspaceGroup: false,
+    launchWorkspace2('forms-selector-workspace', {
+      availableForms: allAvailableForms,
+      patientAge: formattedAge,
+      controlNumber: credControlNumber,
+      title: t('credFormsSelection', 'Selección de Formularios CRED'),
+      subtitle: t(
+        'credFormsInstructions',
+        'Seleccione los formularios que desea completar para este control CRED.',
+      ),
+      backWorkspace: 'wellchild-control-form',
     });
-  }, [watch, patientUuid, currentVisit, closeWorkspace, allAvailableForms, formattedAge, credControlNumber, t]);
+  }, [watch, patientUuid, currentVisit, allAvailableForms, formattedAge, credControlNumber, t]);
 
   useEffect(() => {
     const now = new Date();

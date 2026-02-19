@@ -19,7 +19,7 @@ import { Add } from '@carbon/react/icons';
 import { useImmunizations } from '../../../hooks/useImmunizations';
 import { useAgeRanges } from '../../../hooks/useAgeRanges';
 import { useVaccinationSchema } from '../../../hooks/useVaccinationSchema';
-import { launchWorkspace, useConfig, usePatient } from '@openmrs/esm-framework';
+import { launchWorkspace2, showSnackbar, useConfig, usePatient } from '@openmrs/esm-framework';
 import styles from './vaccination-schedule.scss';
 import { type ConfigObject } from '../../../config-schema';
 
@@ -165,14 +165,25 @@ const VaccinationSchedule: React.FC<VaccinationScheduleProps> = ({ patientUuid }
   );
 
   const handleAddVaccination = useCallback(() => {
-    launchWorkspace('immunization-form-workspace', {
-      patientUuid,
-      workspaceTitle: t('addVaccination', 'Añadir Vacuna'),
-      mutateForm: () => {
-        mutateImmunizations();
-        mutateVaccines(); // Refetch both immunizations and schema after adding
-      },
-    });
+    try {
+      launchWorkspace2('immunization-form-workspace', {
+        patientUuid,
+        workspaceTitle: t('addVaccination', 'Añadir Vacuna'),
+        mutateForm: () => {
+          mutateImmunizations();
+          mutateVaccines();
+        },
+      });
+    } catch {
+      showSnackbar({
+        title: t('immunizationFormNotAvailable', 'Formulario de inmunización no disponible'),
+        subtitle: t(
+          'immunizationFormNotAvailableSubtitle',
+          'El módulo de inmunizaciones no está instalado. Registre vacunas desde el formulario de inmunizaciones del paciente.',
+        ),
+        kind: 'warning',
+      });
+    }
   }, [patientUuid, t, mutateImmunizations, mutateVaccines]);
 
   if (isLoading) {

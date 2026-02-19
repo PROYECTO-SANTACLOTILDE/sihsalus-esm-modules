@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useConfig, launchWorkspace } from '@openmrs/esm-framework';
+import { useConfig, launchWorkspace2 } from '@openmrs/esm-framework';
 import { useLatestValidEncounter } from '../../../../hooks/useLatestEncounter'; // Ajusta la ruta
 import PatientSummaryTable from '../../../../ui/patient-summary-table/patient-summary-table.component'; // Ajusta la ruta
 import type { ConfigObject } from '../../../../config-schema';
@@ -27,14 +27,9 @@ const BirthDataTable: React.FC<BirthDataProps> = ({ patientUuid }) => {
   }, [encounter]);
 
   const handleLaunchForm = () => {
-    launchWorkspace('patient-form-entry-workspace', {
-      workspaceTitle: headerTitle,
-      patientUuid,
-      mutateForm: mutate, // Pasa mutate para refrescar después de guardar
-      formInfo: {
-        formUuid: config.formsList.birthDetails,
-        encounterUuid: encounter?.uuid || '', // Usa el último si existe
-      },
+    launchWorkspace2('patient-form-entry-workspace', {
+      formUuid: config.formsList.birthDetails,
+      encounterUuid: encounter?.uuid || '',
     });
   };
 

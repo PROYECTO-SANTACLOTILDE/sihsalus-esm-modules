@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, InlineLoading, Tag } from '@carbon/react';
-import { AddIcon, launchWorkspace, formatDate } from '@openmrs/esm-framework';
+import { AddIcon, launchWorkspace2, formatDate } from '@openmrs/esm-framework';
 import styles from './cred-schedule.scss';
 import useEncountersCRED from '../../../hooks/useEncountersCRED';
 import useAppointmentsCRED from '../../../hooks/useAppointmentsCRED';
@@ -17,13 +17,11 @@ const CredCheckups: React.FC<CredCheckupsProps> = ({ patientUuid }) => {
   const { appointments: credAppointments, isLoading: isLoadingAppointments } = useAppointmentsCRED(patientUuid);
 
   const handleAddCredControl = (checkup: any) => {
-    launchWorkspace('wellchild-control-form', {
+    launchWorkspace2('wellchild-control-form', {
       workspaceTitle: `${t('newCredEncounter', 'Nuevo Control CRED')} - ${checkup.serviceName || checkup.service?.name || ''}`,
-      additionalProps: {
-        patientUuid,
-        checkup,
-        type: 'newControl',
-      },
+      patientUuid,
+      checkup,
+      type: 'newControl',
     });
   };
 

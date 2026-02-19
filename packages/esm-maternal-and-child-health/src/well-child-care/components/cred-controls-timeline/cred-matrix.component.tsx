@@ -13,7 +13,7 @@ import {
 } from '@carbon/react';
 import { CardHeader, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { Add } from '@carbon/react/icons';
-import { useConfig, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
+import { useConfig, useLayoutType, launchWorkspace2 } from '@openmrs/esm-framework';
 import useEncountersCRED from '../../../hooks/useEncountersCRED';
 import styles from './cred-matrix.scss';
 import CredTile from './cred-tile';
@@ -56,13 +56,11 @@ const CredControlsMatrix: React.FC<CredControlsMatrixProps> = ({ patientUuid, on
   }, [encounters]);
 
   const launchForm = (group) => {
-    launchWorkspace('wellchild-control-form', {
+    launchWorkspace2('wellchild-control-form', {
       workspaceTitle: `${t('ageGroupDetails', 'Detalles del grupo de edad')} - ${group.label}`,
-      additionalProps: {
-        patientUuid,
-        ageGroup: group,
-        type: 'ageGroup',
-      },
+      patientUuid,
+      ageGroup: group,
+      type: 'ageGroup',
     });
   };
 

@@ -1,4 +1,4 @@
-import { launchWorkspace, useConfig } from '@openmrs/esm-framework';
+import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ConfigObject } from '../../../config-schema'; // Ajusta la ruta
@@ -32,14 +32,9 @@ const CephaloCaudalNeurologicalEvaluationTable: React.FC<CephaloCaudalNeurologic
   }, [encounter]);
 
   const handleLaunchForm = () => {
-    launchWorkspace('patient-form-entry-workspace', {
-      workspaceTitle: headerTitle,
-      patientUuid,
-      mutateForm: mutate, // Pasa mutate para refrescar después de guardar
-      formInfo: {
-        formUuid: config.formsList.newbornNeuroEval,
-        encounterUuid: encounter?.uuid || '', // Usa el último si existe
-      },
+    launchWorkspace2('patient-form-entry-workspace', {
+      formUuid: config.formsList.newbornNeuroEval,
+      encounterUuid: encounter?.uuid || '',
     });
   };
 

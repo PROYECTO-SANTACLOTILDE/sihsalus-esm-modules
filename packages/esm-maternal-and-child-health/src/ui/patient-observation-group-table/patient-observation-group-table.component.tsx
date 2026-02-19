@@ -20,10 +20,9 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  usePatientChartStore,
   launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
-import { AddIcon, launchWorkspace, useLayoutType, isDesktop, formatDate } from '@openmrs/esm-framework';
+import { AddIcon, launchWorkspace2, useLayoutType, isDesktop, formatDate, useVisit } from '@openmrs/esm-framework';
 import styles from './patient-observation-group-table.scss';
 
 // Importar tipos desde el componente separado
@@ -82,7 +81,7 @@ const PatientObservationGroupTable: React.FC<PatientObservationGroupTableProps> 
     error,
     mutate,
   } = useFilteredEncounter(patientUuid, encounterType, formUuid);
-  const { visitContext: currentVisit } = usePatientChartStore(patientUuid);
+  const { currentVisit } = useVisit(patientUuid);
   //TODO: MODIFY THIS TO SEND THE CURRENT DATA TO THE WORKSPACE , IT SHOULD BE EDITABLE
   const launchForm = useCallback(() => {
     try {
@@ -90,10 +89,9 @@ const PatientObservationGroupTable: React.FC<PatientObservationGroupTableProps> 
         launchStartVisitPrompt();
       } else {
         if (formWorkspace) {
-          launchWorkspace('patient-form-entry-workspace', {
-            workspaceTitle: headerTitle,
-            mutateForm: mutate,
-            formInfo: { formUuid: formWorkspace, patientUuid, additionalProps: {} },
+          launchWorkspace2('patient-form-entry-workspace', {
+            formUuid: formWorkspace,
+            encounterUuid: '',
           });
         }
       }

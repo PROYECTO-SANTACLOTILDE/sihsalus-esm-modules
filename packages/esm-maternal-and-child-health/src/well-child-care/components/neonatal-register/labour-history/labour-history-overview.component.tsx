@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, ContentSwitcher, DataTableSkeleton, IconSwitch, InlineLoading } from '@carbon/react';
 import { Add, Analytics, Table } from '@carbon/react/icons';
 import { CardHeader, EmptyState, ErrorState } from '@openmrs/esm-patient-common-lib';
-import { formatDate, parseDate, useConfig, useLayoutType, launchWorkspace } from '@openmrs/esm-framework';
+import { formatDate, parseDate, useConfig, useLayoutType, launchWorkspace2 } from '@openmrs/esm-framework';
 import { useCurrentPregnancy } from '../../../../hooks/useCurrentPregnancy';
 import PaginatedLabourHistory from './paginated-labour-history.component';
 import LabourHistoryChart from './labour-history-chart.component';
@@ -27,12 +27,11 @@ const LabourHistoryOverview: React.FC<LabourHistoryOverviewProps> = ({ patientUu
   const formPrenatalUuid = config.formsList.deliveryOrAbortion;
 
   const launchLabourForm = useCallback(() => {
-    launchWorkspace('patient-form-entry-workspace', {
-      workspaceTitle: t('labourDetails', 'Labour Details'),
-      mutateForm: mutate,
-      formInfo: { formUuid: formPrenatalUuid, patientUuid, additionalProps: {} },
+    launchWorkspace2('patient-form-entry-workspace', {
+      formUuid: formPrenatalUuid,
+      encounterUuid: '',
     });
-  }, [patientUuid, formPrenatalUuid, mutate, t]);
+  }, [formPrenatalUuid]);
 
   const tableHeaders = useMemo(
     () => [

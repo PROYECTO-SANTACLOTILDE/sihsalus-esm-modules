@@ -1,4 +1,4 @@
-import { launchWorkspace, useConfig } from '@openmrs/esm-framework';
+import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ConfigObject } from '../../../config-schema';
@@ -42,14 +42,9 @@ const NeonatalCounseling: React.FC<NeonatalCounselingProps> = ({ patientUuid }) 
   }, [encounter]);
 
   const handleLaunchForm = () => {
-    launchWorkspace('patient-form-entry-workspace', {
-      workspaceTitle: headerTitle,
-      patientUuid,
-      mutateForm: mutate,
-      formInfo: {
-        formUuid: config.formsList.breastfeedingObservation,
-        encounterUuid: encounter?.uuid || '',
-      },
+    launchWorkspace2('patient-form-entry-workspace', {
+      formUuid: config.formsList.breastfeedingObservation,
+      encounterUuid: encounter?.uuid || '',
     });
     setTimeout(() => mutate(), 1000); // Forzar revalidación
   };

@@ -21,7 +21,7 @@ import {
   useConfig,
   useLayoutType,
   usePagination,
-  launchWorkspace,
+  launchWorkspace2,
 } from '@openmrs/esm-framework';
 import { CardHeader, EmptyState, ErrorState, PatientChartPagination } from '@openmrs/esm-patient-common-lib';
 import classNames from 'classnames';
@@ -78,7 +78,7 @@ const GenericConditionsOverview: React.FC<GenericConditionsOverviewProps> = ({
 
   const launchConditionsForm = useCallback(
     () =>
-      launchWorkspace(workspaceFormId, {
+      launchWorkspace2(workspaceFormId, {
         formContext: 'creating',
         conceptSetUuid,
         title,

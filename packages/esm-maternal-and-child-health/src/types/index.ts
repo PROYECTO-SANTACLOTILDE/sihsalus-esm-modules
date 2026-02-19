@@ -2,14 +2,15 @@ import type { OpenmrsResource, FetchResponse, FHIRResource } from '@openmrs/esm-
 import type { amPm } from '@openmrs/esm-patient-common-lib';
 
 /**
- * Compatibility type for workspace props.
- * DefaultPatientWorkspaceProps was removed from esm-patient-common-lib@11.x.
+ * Compatibility type for workspace2 props.
+ * Workspace2 system passes patientUuid via the patient-chart group props.
  */
 export interface DefaultPatientWorkspaceProps {
   patientUuid: string;
-  closeWorkspace(options?: { onWorkspaceClose?: () => void; closeWorkspaceGroup?: boolean } | boolean): void;
-  closeWorkspaceWithSavedChanges(options?: { onWorkspaceClose?: () => void }): void;
-  promptBeforeClosing(testFcn: () => boolean): void;
+  closeWorkspace(options?: { ignoreChanges?: boolean }): void;
+  closeWorkspaceWithSavedChanges?(options?: { onWorkspaceClose?: () => void }): void;
+  promptBeforeClosing?(testFcn: () => boolean): void;
+  setHasUnsavedChanges?(hasUnsavedChanges: boolean): void;
   setTitle?(title: string): void;
 }
 

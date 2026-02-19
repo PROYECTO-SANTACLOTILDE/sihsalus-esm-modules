@@ -17,16 +17,8 @@ export function useLaunchCREDForm(patientUuid: string) {
   const launchCREDForm = useCallback(
     (form: Form, encounterUuid: string = '') => {
       const workspaceProps = {
-        workspaceTitle: form.display || form.name,
-        formInfo: {
-          formUuid: form.uuid,
-          encounterUuid,
-        },
-        // Add mutation callback if needed
-        mutateForm: () => {
-          // This could be used to refresh data after form submission
-          // Similar to invalidateCachedVitalsAndBiometrics from the example
-        },
+        formUuid: form.uuid,
+        encounterUuid,
       };
 
       launchCREDFormWorkspace(workspaceProps);
