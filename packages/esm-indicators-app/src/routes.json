@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.openmrs.org/routes.schema.json",
+  "backendDependencies": {
+    "indicators": ">=1.0.0"
+  },
+  "pages": [
+    {
+      "component": "root",
+      "route": "indicators"
+    }
+  ],
+  "extensions": []
+}
