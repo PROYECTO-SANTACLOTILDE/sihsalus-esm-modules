@@ -1,6 +1,8 @@
 {
   "$schema": "https://json.openmrs.org/routes.schema.json",
-  "backendDependencies": {},
+  "backendDependencies": {
+    "coststructure": ">=1.0.0"
+  },
   "extensions": [
     {
       "component": "homeLeftPanelLink",
