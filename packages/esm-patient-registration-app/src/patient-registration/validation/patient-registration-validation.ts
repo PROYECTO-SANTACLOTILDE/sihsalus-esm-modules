@@ -130,6 +130,12 @@ export function getValidationSchema(
         relatedPersonUuid: Yup.string().required(),
         relationshipType: Yup.string().required(),
       }),
-    ),
-  });
+    )
+    .test('minorRequieresRelationship', t('minorRequiresRelationship', 'Minor patients must have at least one relationship'),
+      function(){
+        const { birthdate, birthdateEstimated, yearsEstimated } = this.parent;
+        const isMinor = birthdate ? dayjs().diff(birthdate, 'year') < 18 : birthdateEstimated && yearsEstimated < 18;
+        return !isMinor || (this.parent.relationships && this.parent.relationships.length > 0); // tenga un papá ps
+      }   
+  ),});
 }
