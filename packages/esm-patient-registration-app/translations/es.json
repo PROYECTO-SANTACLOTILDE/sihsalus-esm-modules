@@ -76,6 +76,7 @@
   "jumpTo": "Saltar a",
   "male": "Masculino",
   "middleNameLabelText": "Segundo Nombre",
+  "minorRequieresRelationship": "Los pacientes menores de edad deben estar relacionados con el tutor legal",
   "mothersFamilyNameLabelText": "Apellido Materno",
   "mothersFamilyNameRequired": "El Apellido Materno es obligatorio",
   "negativeMonths": "Los meses estimados no pueden ser negativos",

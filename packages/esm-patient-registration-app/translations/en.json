@@ -78,6 +78,7 @@
   "loading": "Loading",
   "male": "Male",
   "middleNameLabelText": "Middle Name",
+  "minorRequieresRelationship": "Minor patients must be related to a legal guardian",
   "mothersFamilyNameLabelText": "Mother's Family Name",
   "mothersFamilyNameRequired": "Mothers Family name is required",
   "negativeMonths": "Estimated months cannot be negative",
