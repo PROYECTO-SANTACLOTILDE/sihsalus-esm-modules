@@ -345,7 +345,7 @@ export function saveVitalsAndBiometrics(
       patient: patientUuid,
       location: location,
       encounterType: encounterTypeUuid,
-      form: formUuid,
+      ...(formUuid ? { form: formUuid } : {}),
       obs: createObsObject(vitals, concepts),
     },
   });

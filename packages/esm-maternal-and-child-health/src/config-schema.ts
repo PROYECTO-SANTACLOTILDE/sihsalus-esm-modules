@@ -172,7 +172,7 @@ export const configSchema = {
     },
     encounterTypeUuid: {
       _type: Type.UUID,
-      _default: '2v3w4x5y-2234-5678-9101-abcdefghij22',
+      _default: '9da40eb7-927e-44e6-a981-2480c1f5386b',
     },
     formUuid: {
       _type: Type.UUID,
