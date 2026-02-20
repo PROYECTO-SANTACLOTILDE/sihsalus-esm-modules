@@ -1,5 +1,5 @@
 // index.ts
-import React from 'react';
+import type React from 'react';
 import { defineConfigSchema, getAsyncLifecycle, getSyncLifecycle } from '@openmrs/esm-framework';
 import { createDashboardLink } from '@openmrs/esm-patient-common-lib';
 import { createDashboardGroup } from './clinical-view-group/createDashboardGroup';
