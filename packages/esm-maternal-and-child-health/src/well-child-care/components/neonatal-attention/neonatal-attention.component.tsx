@@ -5,9 +5,6 @@ import { useLatestValidEncounter } from '../../../hooks/useLatestEncounter'; // 
 import PatientSummaryTable from '../../../ui/patient-summary-table/patient-summary-table.component'; // Ajusta la ruta
 import type { ConfigObject } from '../../../config-schema';
 
-// UUID del encounterType del formulario "Atención Inmediata del Recién Nacido"
-export const immediateNewbornAttentionEncounterTypeUuid = '3w4x5y6z-3234-5678-9101-abcdefghij23';
-
 interface ImmediateNewbornAttentionProps {
   patientUuid: string;
 }
@@ -19,7 +16,7 @@ const NeonatalAttention: React.FC<ImmediateNewbornAttentionProps> = ({ patientUu
   const displayText = t('immediateNewbornAttention', 'Atención Inmediata del Recién Nacido');
   const { encounter, isLoading, error, mutate } = useLatestValidEncounter(
     patientUuid,
-    immediateNewbornAttentionEncounterTypeUuid,
+    config.encounterTypes.atencionInmediata,
   );
 
   // Procesar observaciones, manejando múltiples valores para checkboxes

@@ -5,9 +5,6 @@ import type { ConfigObject } from '../../../config-schema';
 import { useLatestValidEncounter } from '../../../hooks/useLatestEncounter'; // Ajusta la ruta
 import PatientSummaryTable from '../../../ui/patient-summary-table/patient-summary-table.component'; // Ajusta la ruta
 
-// UUID del encounterType del formulario "Consejeria Lactancia Materna"
-export const neonatalCounselingEncounterTypeUuid = '3w4x5y6z-3234-5678-9101-abcdefghij23';
-
 interface NeonatalCounselingProps {
   patientUuid: string;
 }
@@ -18,7 +15,7 @@ const NeonatalCounseling: React.FC<NeonatalCounselingProps> = ({ patientUuid }) 
   const headerTitle = t('neonatalCounseling', 'Consejeria Lactancia Materna');
   const { encounter, isLoading, error, mutate } = useLatestValidEncounter(
     patientUuid,
-    neonatalCounselingEncounterTypeUuid,
+    config.encounterTypes.consejeriaMaterna,
   );
 
   // Procesar observaciones, manejando múltiples valores para checkboxes
