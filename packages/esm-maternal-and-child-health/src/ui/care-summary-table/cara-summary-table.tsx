@@ -74,7 +74,7 @@ const CareSummaryTable: React.FC<CareSummaryTableProps> = ({
     try {
       if (formUuid) {
         launchWorkspace2('patient-form-entry-workspace', {
-          formUuid,
+          form: { uuid: formUuid },
           encounterUuid: '',
         });
       }

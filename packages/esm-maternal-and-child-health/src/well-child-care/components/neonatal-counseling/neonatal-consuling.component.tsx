@@ -43,7 +43,7 @@ const NeonatalCounseling: React.FC<NeonatalCounselingProps> = ({ patientUuid }) 
 
   const handleLaunchForm = () => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: config.formsList.breastfeedingObservation,
+      form: { uuid: config.formsList.breastfeedingObservation },
       encounterUuid: encounter?.uuid || '',
     });
     setTimeout(() => mutate(), 1000); // Forzar revalidación

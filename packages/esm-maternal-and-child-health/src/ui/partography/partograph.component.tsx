@@ -113,7 +113,7 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
     }) ?? [];
   const handleAddHistory = () => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: PartographEncounterFormUuid,
+      form: { uuid: PartographEncounterFormUuid },
       encounterUuid: '',
     });
   };

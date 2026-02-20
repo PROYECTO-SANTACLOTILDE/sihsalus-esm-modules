@@ -29,7 +29,7 @@ const AlturaCuelloOverview: React.FC<AlturaCuelloOverviewProps> = ({ patient, pa
 
   const launchForm = useCallback(() => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: 'OBST-003-ATENCIÓN PRENATAL',
+      form: { uuid: 'OBST-003-ATENCIÓN PRENATAL' },
     });
   }, []);
 

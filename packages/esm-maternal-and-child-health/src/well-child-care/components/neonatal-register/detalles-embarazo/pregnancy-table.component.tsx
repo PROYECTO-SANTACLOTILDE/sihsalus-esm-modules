@@ -28,7 +28,7 @@ const PregnancyBirthTable: React.FC<PregnancyBirthProps> = ({ patientUuid }) => 
 
   const handleLaunchForm = () => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: config.formsList.pregnancyDetails,
+      form: { uuid: config.formsList.pregnancyDetails },
       encounterUuid: encounter?.uuid || '',
     });
   };

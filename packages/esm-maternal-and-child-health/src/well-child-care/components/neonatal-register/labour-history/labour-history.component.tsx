@@ -102,7 +102,7 @@ const LabourHistorySummary: React.FC<LabourHistorySummaryProps> = ({ patientUuid
   // Handler to launch form for additional data
   const handleAddLabourDetails = () => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: formPrenatalUuid,
+      form: { uuid: formPrenatalUuid },
       encounterUuid: '',
     });
   };

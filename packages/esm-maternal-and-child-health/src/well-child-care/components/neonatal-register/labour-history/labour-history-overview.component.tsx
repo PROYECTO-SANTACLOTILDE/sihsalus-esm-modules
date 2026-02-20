@@ -28,7 +28,7 @@ const LabourHistoryOverview: React.FC<LabourHistoryOverviewProps> = ({ patientUu
 
   const launchLabourForm = useCallback(() => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: formPrenatalUuid,
+      form: { uuid: formPrenatalUuid },
       encounterUuid: '',
     });
   }, [formPrenatalUuid]);

@@ -36,7 +36,7 @@ const AlojamientoConjunto: React.FC<AlojamientoConjuntoProps> = ({ patientUuid }
 
     try {
       launchWorkspace2('patient-form-entry-workspace', {
-        formUuid: config.formsList.roomingIn,
+        form: { uuid: config.formsList.roomingIn },
         encounterUuid: encounter?.uuid || '',
       });
     } catch (error) {

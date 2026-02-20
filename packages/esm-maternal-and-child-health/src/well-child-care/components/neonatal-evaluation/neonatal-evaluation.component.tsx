@@ -33,7 +33,7 @@ const CephaloCaudalNeurologicalEvaluationTable: React.FC<CephaloCaudalNeurologic
 
   const handleLaunchForm = () => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: config.formsList.newbornNeuroEval,
+      form: { uuid: config.formsList.newbornNeuroEval },
       encounterUuid: encounter?.uuid || '',
     });
   };

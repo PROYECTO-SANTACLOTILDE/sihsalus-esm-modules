@@ -44,7 +44,7 @@ const NeonatalAttention: React.FC<ImmediateNewbornAttentionProps> = ({ patientUu
 
   const handleLaunchForm = () => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: config.formsList.atencionImmediataNewborn,
+      form: { uuid: config.formsList.atencionImmediataNewborn },
       encounterUuid: encounter?.uuid || '',
     });
     setTimeout(() => mutate(), 1000); // Forzar revalidación

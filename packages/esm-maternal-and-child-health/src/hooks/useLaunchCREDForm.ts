@@ -1,5 +1,4 @@
-import { useConfig } from '@openmrs/esm-framework';
-import { useLaunchWorkspaceRequiringVisit } from '@openmrs/esm-patient-common-lib';
+import { useConfig, launchWorkspace2 } from '@openmrs/esm-framework';
 import { useCallback } from 'react';
 import { type ConfigObject } from '../config-schema';
 import { type Form } from '../types';
@@ -11,19 +10,14 @@ import { type Form } from '../types';
 export function useLaunchCREDForm(patientUuid: string) {
   const config = useConfig<ConfigObject>();
 
-  // Use the form entry workspace for CRED forms
-  const launchCREDFormWorkspace = useLaunchWorkspaceRequiringVisit(patientUuid, 'patient-form-entry-workspace');
-
   const launchCREDForm = useCallback(
     (form: Form, encounterUuid: string = '') => {
-      const workspaceProps = {
-        formUuid: form.uuid,
+      launchWorkspace2('patient-form-entry-workspace', {
+        form,
         encounterUuid,
-      };
-
-      launchCREDFormWorkspace(workspaceProps);
+      });
     },
-    [launchCREDFormWorkspace],
+    [],
   );
 
   /**

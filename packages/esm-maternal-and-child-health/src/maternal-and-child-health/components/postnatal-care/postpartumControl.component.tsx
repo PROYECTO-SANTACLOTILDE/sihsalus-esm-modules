@@ -42,7 +42,7 @@ const PostpartumControlTable: React.FC<ProgramsDetailedSummaryProps> = ({ patien
 
   const handleAddPrenatalAttention = () => {
     launchWorkspace2('patient-form-entry-workspace', {
-      formUuid: formPrenatalUuid,
+      form: { uuid: formPrenatalUuid },
       encounterUuid: '',
     });
   };
