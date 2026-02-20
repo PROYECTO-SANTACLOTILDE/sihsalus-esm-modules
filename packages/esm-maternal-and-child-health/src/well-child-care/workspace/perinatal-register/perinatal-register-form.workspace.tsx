@@ -97,11 +97,10 @@ const PerinatalRegisterSchema = z
 export type PerinatalRegisterFormType = z.infer<typeof PerinatalRegisterSchema>;
 
 const PerinatalRegisterForm: React.FC<DefaultPatientWorkspaceProps> = ({
-  patientUuid,
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
-  promptBeforeClosing,
+  workspaceProps,
 }) => {
+  const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
@@ -117,7 +116,7 @@ const PerinatalRegisterForm: React.FC<DefaultPatientWorkspaceProps> = ({
     control,
     handleSubmit,
     setValue,
-    formState: { isDirty, errors },
+    formState: { errors },
   } = useForm<PerinatalRegisterFormType>({
     mode: 'all',
     resolver: zodResolver(PerinatalRegisterSchema),
@@ -141,10 +140,6 @@ const PerinatalRegisterForm: React.FC<DefaultPatientWorkspaceProps> = ({
       setValue('partoNacidoVivo', latestData.partoNacidoVivo ?? undefined);
     }
   }, [formattedObs, isLoadingFormattedObs, setValue]);
-
-  useEffect(() => {
-    promptBeforeClosing(() => isDirty);
-  }, [isDirty, promptBeforeClosing]);
 
   const savePerinatalData = useCallback(
     (data: PerinatalRegisterFormType) => {
@@ -173,7 +168,7 @@ const PerinatalRegisterForm: React.FC<DefaultPatientWorkspaceProps> = ({
         .then((response) => {
           if (response.status === 201) {
             invalidateCachedPrenatalAntecedents(patientUuid);
-            closeWorkspaceWithSavedChanges();
+            closeWorkspace({ discardUnsavedChanges: true });
             showSnackbar({
               isLowContrast: true,
               kind: 'success',
@@ -196,7 +191,7 @@ const PerinatalRegisterForm: React.FC<DefaultPatientWorkspaceProps> = ({
           abortController.abort();
         });
     },
-    [closeWorkspaceWithSavedChanges, config, patientUuid, session?.sessionLocation?.uuid, t],
+    [closeWorkspace, config, patientUuid, session?.sessionLocation?.uuid, t],
   );
 
   function onError(err) {

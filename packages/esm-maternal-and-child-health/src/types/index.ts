@@ -2,16 +2,17 @@ import type { OpenmrsResource, FetchResponse, FHIRResource } from '@openmrs/esm-
 import type { amPm } from '@openmrs/esm-patient-common-lib';
 
 /**
- * Compatibility type for workspace2 props.
- * Workspace2 system passes patientUuid via the patient-chart group props.
+ * Workspace2-compatible props for workspace components.
+ * In workspace2, patientUuid lives inside workspaceProps.
+ * closeWorkspace returns Promise<boolean> and accepts { discardUnsavedChanges }.
+ * promptBeforeClosing is NOT available — unsaved changes are tracked via <Workspace2> component.
  */
 export interface DefaultPatientWorkspaceProps {
-  patientUuid: string;
-  closeWorkspace(options?: { ignoreChanges?: boolean }): void;
-  closeWorkspaceWithSavedChanges?(options?: { onWorkspaceClose?: () => void }): void;
-  promptBeforeClosing?(testFcn: () => boolean): void;
-  setHasUnsavedChanges?(hasUnsavedChanges: boolean): void;
-  setTitle?(title: string): void;
+  closeWorkspace(options?: { closeWindow?: boolean; discardUnsavedChanges?: boolean }): Promise<boolean>;
+  workspaceProps?: Record<string, any> | null;
+  workspaceName?: string;
+  windowName?: string;
+  [key: string]: any;
 }
 
 /**

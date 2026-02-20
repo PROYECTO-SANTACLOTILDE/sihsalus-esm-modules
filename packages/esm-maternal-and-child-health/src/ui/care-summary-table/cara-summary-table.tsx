@@ -15,9 +15,8 @@ import { useTranslation } from 'react-i18next';
 import {
   CardHeader,
   EmptyState,
-  launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
-import { launchWorkspace2, useVisit } from '@openmrs/esm-framework';
+import { launchWorkspace2 } from '@openmrs/esm-framework';
 import dayjs from 'dayjs';
 import styles from './care-summary-table.scss';
 import { Add } from '@carbon/react/icons';
@@ -70,19 +69,14 @@ const CareSummaryTable: React.FC<CareSummaryTableProps> = ({
 }) => {
   const { t } = useTranslation();
   const { prenatalEncounters, isValidating, mutate } = useEncountersHook(patientUuid);
-  const { currentVisit } = useVisit(patientUuid);
 
   const launchForm = useCallback(() => {
     try {
-      if (!currentVisit) {
-        launchStartVisitPrompt();
-      } else {
-        if (formUuid) {
-          launchWorkspace2('patient-form-entry-workspace', {
-            formUuid,
-            encounterUuid: '',
-          });
-        }
+      if (formUuid) {
+        launchWorkspace2('patient-form-entry-workspace', {
+          formUuid,
+          encounterUuid: '',
+        });
       }
       if (mutate) {
         setTimeout(() => mutate(), 1000);
@@ -90,7 +84,7 @@ const CareSummaryTable: React.FC<CareSummaryTableProps> = ({
     } catch (err) {
       console.error('Failed to launch form:', err);
     }
-  }, [patientUuid, currentVisit, formUuid, title, mutate]);
+  }, [formUuid, mutate]);
 
   const activeRows = useMemo(() => {
     if (!prenatalEncounters || prenatalEncounters.length === 0) {

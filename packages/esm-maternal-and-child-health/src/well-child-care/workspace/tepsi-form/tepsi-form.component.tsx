@@ -226,11 +226,10 @@ export type TEPSIFormType = z.infer<typeof TEPSISchema>;
 
 // Componente principal
 const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
-  patientUuid,
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
-  promptBeforeClosing,
+  workspaceProps,
 }) => {
+  const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
@@ -247,7 +246,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
     handleSubmit,
     watch,
     setValue,
-    formState: { isDirty, errors },
+    formState: { errors },
   } = useForm<TEPSIFormType>({
     mode: 'all',
     resolver: zodResolver(TEPSISchema),
@@ -356,7 +355,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
           subtitle: t('tepsiDataAvailable', 'The evaluation is now available in the patient record'),
         });
 
-        closeWorkspaceWithSavedChanges();
+        closeWorkspace({ discardUnsavedChanges: true });
       } catch (error) {
         console.error('Error saving TEPSI:', error);
         setShowErrorNotification(true);
@@ -370,12 +369,8 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
         setIsSubmitting(false);
       }
     },
-    [selectedItems, results, appropriateItems, closeWorkspaceWithSavedChanges, t],
+    [selectedItems, results, appropriateItems, closeWorkspace, t],
   );
-
-  useEffect(() => {
-    promptBeforeClosing(() => isDirty);
-  }, [isDirty, promptBeforeClosing]);
 
   const getClassificationColor = (classification: string) => {
     switch (classification) {

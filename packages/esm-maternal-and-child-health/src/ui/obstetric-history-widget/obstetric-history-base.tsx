@@ -2,12 +2,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ContentSwitcher, DataTableSkeleton, IconSwitch, InlineLoading } from '@carbon/react';
-import { useConfig, useLayoutType, AddIcon, launchWorkspace2, useVisit } from '@openmrs/esm-framework';
+import { useConfig, useLayoutType, AddIcon, launchWorkspace2 } from '@openmrs/esm-framework';
 import {
   CardHeader,
   EmptyState,
   ErrorState,
-  launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
 import { usePrenatalAntecedents, usePrenatalConceptMetadata } from '../../hooks/usePrenatalAntecedents';
 import ObstetricHistoryTable from './obstetric-history-table.component';
@@ -29,19 +28,12 @@ const ObstetricHistoryBase: React.FC<ObstetricHistoryBaseProps> = ({ patientUuid
   const config = useConfig<ConfigObject>();
   const { data: formattedObs, isLoading, error, mutate, isValidating } = usePrenatalAntecedents(patientUuid);
   const { data: conceptUnits } = usePrenatalConceptMetadata();
-  const { currentVisit } = useVisit(patientUuid);
 
   const launchObstetricForm = useCallback(() => {
-    if (!currentVisit) {
-      launchStartVisitPrompt();
-      return;
-    }
-
     launchWorkspace2('perinatal-register-form', {
       patientUuid,
-      workspaceTitle: headerTitle,
     });
-  }, [currentVisit, patientUuid, headerTitle]);
+  }, [patientUuid]);
 
   // Preparar datos para ambas vistas
   const obstetricData = useMemo(() => {

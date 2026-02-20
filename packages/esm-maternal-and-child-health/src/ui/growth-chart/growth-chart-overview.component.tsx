@@ -1,11 +1,10 @@
 import { Button, ContentSwitcher, DataTableSkeleton, IconSwitch } from '@carbon/react';
 import { Add, Analytics, Table } from '@carbon/react/icons';
-import { getPatientName, isDesktop as isDesktopLayout, launchWorkspace2, useLayoutType, useVisit } from '@openmrs/esm-framework';
+import { getPatientName, isDesktop as isDesktopLayout, launchWorkspace2, useLayoutType } from '@openmrs/esm-framework';
 import {
   CardHeader,
   EmptyState,
   ErrorState,
-  launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +22,6 @@ const GrowthChartOverview: React.FC<GrowthChartProps> = ({ patient, patientUuid 
   const headerTitle = t('growthChart', 'Growth Chart');
   const displayText = t('relatedData', 'related data');
   const formWorkspace = 'newborn-anthropometric-form';
-  const { currentVisit } = useVisit(patientUuid);
 
   // Estado para controlar el modo de visualización (percentiles vs z-scores)
   const [isPercentiles, setIsPercentiles] = useState(true);
@@ -33,12 +31,8 @@ const GrowthChartOverview: React.FC<GrowthChartProps> = ({ patient, patientUuid 
   const isTablet = !isDesktop;
 
   const launchForm = useCallback(() => {
-    if (!currentVisit) {
-      launchStartVisitPrompt();
-    } else {
-      launchWorkspace2(formWorkspace, { patientUuid });
-    }
-  }, [currentVisit, patientUuid]);
+    launchWorkspace2(formWorkspace, { patientUuid });
+  }, [patientUuid]);
 
   const patientName = getPatientName(patient);
 

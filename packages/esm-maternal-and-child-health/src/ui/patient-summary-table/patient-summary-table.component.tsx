@@ -18,7 +18,6 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  launchStartVisitPrompt,
   PatientChartPagination,
 } from '@openmrs/esm-patient-common-lib';
 import {
@@ -28,7 +27,6 @@ import {
   formatDate,
   parseDate,
   isOmrsDateStrict,
-  useVisit,
 } from '@openmrs/esm-framework';
 import styles from './patient-summary-table.scss';
 
@@ -75,26 +73,21 @@ const PatientSummaryTable = <T,>({
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const { data, isLoading, error, mutate } = dataHook(patientUuid);
-  const { currentVisit } = useVisit(patientUuid);
 
   const launchForm = useCallback(() => {
     try {
-      if (!currentVisit) {
-        launchStartVisitPrompt();
-      } else {
-        if (formWorkspace) {
-          launchWorkspace2(formWorkspace, { patientUuid });
-        } else if (onFormLaunch) {
-          onFormLaunch(patientUuid);
-        }
-        if (mutate) {
-          setTimeout(() => mutate(), 1000);
-        }
+      if (formWorkspace) {
+        launchWorkspace2(formWorkspace, { patientUuid });
+      } else if (onFormLaunch) {
+        onFormLaunch(patientUuid);
+      }
+      if (mutate) {
+        setTimeout(() => mutate(), 1000);
       }
     } catch (err) {
       console.error('Failed to launch form:', err);
     }
-  }, [patientUuid, currentVisit, formWorkspace, onFormLaunch, mutate]);
+  }, [patientUuid, formWorkspace, onFormLaunch, mutate]);
 
   const tableRows = useMemo(() => {
     if (!data || data.length === 0) return [];

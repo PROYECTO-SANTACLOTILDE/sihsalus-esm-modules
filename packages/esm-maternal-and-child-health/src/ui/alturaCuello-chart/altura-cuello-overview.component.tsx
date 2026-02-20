@@ -5,9 +5,8 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
-import { getPatientName, launchWorkspace2, useConfig, useVisit } from '@openmrs/esm-framework';
+import { getPatientName, launchWorkspace2, useConfig } from '@openmrs/esm-framework';
 import { Button, DataTableSkeleton, InlineLoading } from '@carbon/react';
 import { Add } from '@carbon/react/icons';
 import AlturaCuelloChart from './altura-cuello-chart.component';
@@ -28,17 +27,11 @@ const AlturaCuelloOverview: React.FC<AlturaCuelloOverviewProps> = ({ patient, pa
   const displayText = t('noMeasurementDataAvailable', 'No hay datos de mediciones disponibles');
   //const formWorkspace = config.formsList?.prenatalCare || 'prenatal-measurements-form';
 
-  const { currentVisit } = useVisit(patientUuid);
-
   const launchForm = useCallback(() => {
-    if (!currentVisit) {
-      launchStartVisitPrompt();
-    } else {
-      launchWorkspace2('patient-form-entry-workspace', {
-        formUuid: 'OBST-003-ATENCIÓN PRENATAL',
-      });
-    }
-  }, [currentVisit]);
+    launchWorkspace2('patient-form-entry-workspace', {
+      formUuid: 'OBST-003-ATENCIÓN PRENATAL',
+    });
+  }, []);
 
   const patientName = getPatientName(patient);
 

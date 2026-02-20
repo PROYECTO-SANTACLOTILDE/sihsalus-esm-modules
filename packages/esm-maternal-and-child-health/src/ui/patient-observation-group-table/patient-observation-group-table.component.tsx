@@ -20,9 +20,8 @@ import {
   CardHeader,
   EmptyState,
   ErrorState,
-  launchStartVisitPrompt,
 } from '@openmrs/esm-patient-common-lib';
-import { AddIcon, launchWorkspace2, useLayoutType, isDesktop, formatDate, useVisit } from '@openmrs/esm-framework';
+import { AddIcon, launchWorkspace2, useLayoutType, isDesktop, formatDate } from '@openmrs/esm-framework';
 import styles from './patient-observation-group-table.scss';
 
 // Importar tipos desde el componente separado
@@ -81,19 +80,14 @@ const PatientObservationGroupTable: React.FC<PatientObservationGroupTableProps> 
     error,
     mutate,
   } = useFilteredEncounter(patientUuid, encounterType, formUuid);
-  const { currentVisit } = useVisit(patientUuid);
   //TODO: MODIFY THIS TO SEND THE CURRENT DATA TO THE WORKSPACE , IT SHOULD BE EDITABLE
   const launchForm = useCallback(() => {
     try {
-      if (!currentVisit) {
-        launchStartVisitPrompt();
-      } else {
-        if (formWorkspace) {
-          launchWorkspace2('patient-form-entry-workspace', {
-            formUuid: formWorkspace,
-            encounterUuid: '',
-          });
-        }
+      if (formWorkspace) {
+        launchWorkspace2('patient-form-entry-workspace', {
+          formUuid: formWorkspace,
+          encounterUuid: '',
+        });
       }
       if (mutate) {
         setTimeout(() => mutate(), 1000);
@@ -101,7 +95,7 @@ const PatientObservationGroupTable: React.FC<PatientObservationGroupTableProps> 
     } catch (err) {
       console.error('Failed to launch form:', err);
     }
-  }, [patientUuid, currentVisit, formWorkspace, headerTitle, mutate]);
+  }, [formWorkspace, mutate]);
 
   const parseDisplay = (display: string) => {
     const [category, ...rest] = display.split(': ');

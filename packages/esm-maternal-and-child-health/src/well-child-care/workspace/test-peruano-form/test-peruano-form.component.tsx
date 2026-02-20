@@ -312,11 +312,10 @@ export type TestPeruanoFormType = z.infer<typeof TestPeruanoSchema>;
 
 // Componente principal
 const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
-  patientUuid,
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
-  promptBeforeClosing,
+  workspaceProps,
 }) => {
+  const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
@@ -333,7 +332,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
     handleSubmit,
     watch,
     setValue,
-    formState: { isDirty, errors },
+    formState: { errors },
   } = useForm<TestPeruanoFormType>({
     mode: 'all',
     resolver: zodResolver(TestPeruanoSchema),
@@ -521,7 +520,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
           subtitle: t('testPeruanoDataAvailable', 'La evaluación está disponible en el registro del paciente'),
         });
 
-        closeWorkspaceWithSavedChanges();
+        closeWorkspace({ discardUnsavedChanges: true });
       } catch (error) {
         console.error('Error saving Test Peruano:', error);
         setShowErrorNotification(true);
@@ -535,12 +534,8 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
         setIsSubmitting(false);
       }
     },
-    [selectedItems, results, appropriateItems, culturalContext, primaryLanguage, closeWorkspaceWithSavedChanges, t],
+    [selectedItems, results, appropriateItems, culturalContext, primaryLanguage, closeWorkspace, t],
   );
-
-  useEffect(() => {
-    promptBeforeClosing(() => isDirty);
-  }, [isDirty, promptBeforeClosing]);
 
   const getClassificationColor = (classification: string) => {
     switch (classification) {

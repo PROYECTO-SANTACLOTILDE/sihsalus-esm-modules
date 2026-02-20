@@ -673,7 +673,7 @@
       "window": "patient-chart-clinical-forms"
     },
     {
-      "name": "conditions-form-workspace",
+      "name": "maternal-conditions-form-workspace",
       "component": "conditionsFilterWorkspace",
       "window": "patient-chart-clinical-forms"
     },

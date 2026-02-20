@@ -40,7 +40,7 @@ import {
 } from './conditions.resource';
 
 interface ConditionsWidgetProps {
-  closeWorkspaceWithSavedChanges?: DefaultPatientWorkspaceProps['closeWorkspaceWithSavedChanges'];
+  closeWorkspace?: DefaultPatientWorkspaceProps['closeWorkspace'];
   conditionToEdit?: ConditionDataTableRow;
   isEditing?: boolean;
   isSubmittingForm: boolean;
@@ -70,7 +70,7 @@ interface SearchResultsProps {
 }
 
 const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
-  closeWorkspaceWithSavedChanges,
+  closeWorkspace,
   conditionToEdit,
   isEditing,
   isSubmittingForm,
@@ -148,13 +148,13 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
         title: t('conditionSaved', 'Condition saved'),
       });
 
-      closeWorkspaceWithSavedChanges();
+      closeWorkspace({ discardUnsavedChanges: true });
     } catch (error) {
       setIsSubmittingForm(false);
       setErrorCreating(error);
     }
   }, [
-    closeWorkspaceWithSavedChanges,
+    closeWorkspace,
     getValues,
     mutate,
     patientUuid,
@@ -190,13 +190,13 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
         title: t('conditionUpdated', 'Condition updated'),
       });
 
-      closeWorkspaceWithSavedChanges();
+      closeWorkspace({ discardUnsavedChanges: true });
     } catch (error) {
       setIsSubmittingForm(false);
       setErrorUpdating(error);
     }
   }, [
-    closeWorkspaceWithSavedChanges,
+    closeWorkspace,
     conditionToEdit?.id,
     displayName,
     editableClinicalStatus,

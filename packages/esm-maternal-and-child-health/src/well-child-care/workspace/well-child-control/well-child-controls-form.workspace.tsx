@@ -24,11 +24,10 @@ const CREDControlsSchema = z.object({
 type CREDControlsFormType = z.infer<typeof CREDControlsSchema>;
 
 const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
-  patientUuid,
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
-  promptBeforeClosing,
+  workspaceProps,
 }) => {
+  const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
@@ -43,7 +42,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
     control,
     handleSubmit,
     watch,
-    formState: { isDirty, isSubmitting },
+    formState: { isSubmitting },
     register,
     setValue,
   } = useForm<CREDControlsFormType>({
@@ -58,10 +57,6 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
       }),
     },
   });
-
-  useEffect(() => {
-    promptBeforeClosing(() => isDirty);
-  }, [isDirty, promptBeforeClosing]);
 
   const credControlNumber = useMemo(() => (encounters ? encounters.length + 1 : 1), [encounters]);
 

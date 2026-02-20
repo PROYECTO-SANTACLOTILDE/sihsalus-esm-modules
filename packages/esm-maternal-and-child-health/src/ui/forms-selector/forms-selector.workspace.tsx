@@ -31,9 +31,7 @@ export default function FormsSelectorWorkspace({
   backWorkspace = 'wellchild-control-form',
   onComplete,
   onFormLaunch,
-  patientUuid,
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
 }: FormsSelectorWorkspace) {
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
@@ -57,8 +55,8 @@ export default function FormsSelectorWorkspace({
       onComplete();
     }
 
-    closeWorkspace({ ignoreChanges: true });
-  }, [closeWorkspaceWithSavedChanges, onComplete]);
+    closeWorkspace({ discardUnsavedChanges: true });
+  }, [closeWorkspace, onComplete]);
 
   const isAnyFormCompleted = completedForms.size > 0;
 

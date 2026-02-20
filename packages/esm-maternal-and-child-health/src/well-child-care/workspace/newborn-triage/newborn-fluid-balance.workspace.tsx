@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -40,11 +40,10 @@ const FluidBalanceSchema = z
 export type FluidBalanceFormType = z.infer<typeof FluidBalanceSchema>;
 
 const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
-  patientUuid,
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
-  promptBeforeClosing,
+  workspaceProps,
 }) => {
+  const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
@@ -56,15 +55,11 @@ const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
   const {
     control,
     handleSubmit,
-    formState: { isDirty, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<FluidBalanceFormType>({
     mode: 'all',
     resolver: zodResolver(FluidBalanceSchema),
   });
-
-  useEffect(() => {
-    promptBeforeClosing(() => isDirty);
-  }, [isDirty, promptBeforeClosing]);
 
   const concepts = useMemo(
     () => ({
@@ -111,7 +106,7 @@ const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
           .then((response) => {
             if (response.status === 201) {
               invalidateCachedVitalsAndBiometrics();
-              closeWorkspaceWithSavedChanges();
+              closeWorkspace({ discardUnsavedChanges: true });
               showSnackbar({
                 isLowContrast: true,
                 kind: 'success',
@@ -135,7 +130,7 @@ const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
       }
     },
     [
-      closeWorkspaceWithSavedChanges,
+      closeWorkspace,
       conceptMetadata,
       config.concepts,
       config.vitals.encounterTypeUuid,

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -44,11 +44,10 @@ const AnthropometricsSchema = z
 export type AnthropometricsFormType = z.infer<typeof AnthropometricsSchema>;
 
 const NewbornAnthropometricsForm: React.FC<DefaultPatientWorkspaceProps> = ({
-  patientUuid,
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
-  promptBeforeClosing,
+  workspaceProps,
 }) => {
+  const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
@@ -61,15 +60,11 @@ const NewbornAnthropometricsForm: React.FC<DefaultPatientWorkspaceProps> = ({
     control,
     handleSubmit,
     watch,
-    formState: { isDirty, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<AnthropometricsFormType>({
     mode: 'all',
     resolver: zodResolver(AnthropometricsSchema),
   });
-
-  useEffect(() => {
-    promptBeforeClosing(() => isDirty);
-  }, [isDirty, promptBeforeClosing]);
 
   const weight = watch('weight');
 
@@ -114,7 +109,7 @@ const NewbornAnthropometricsForm: React.FC<DefaultPatientWorkspaceProps> = ({
           .then((response) => {
             if (response.status === 201) {
               invalidateCachedVitalsAndBiometrics();
-              closeWorkspaceWithSavedChanges();
+              closeWorkspace({ discardUnsavedChanges: true });
               showSnackbar({
                 isLowContrast: true,
                 kind: 'success',
@@ -138,7 +133,7 @@ const NewbornAnthropometricsForm: React.FC<DefaultPatientWorkspaceProps> = ({
       }
     },
     [
-      closeWorkspaceWithSavedChanges,
+      closeWorkspace,
       conceptMetadata,
       config.concepts,
       config.vitals.encounterTypeUuid,

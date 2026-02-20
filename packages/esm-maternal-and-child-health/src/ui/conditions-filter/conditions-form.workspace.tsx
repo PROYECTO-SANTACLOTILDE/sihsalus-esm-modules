@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLayoutType } from '@openmrs/esm-framework';
 import { type DefaultPatientWorkspaceProps } from '../../types';
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
@@ -15,10 +15,6 @@ import { type ConditionDataTableRow, useConditions } from './conditions.resource
 interface ConditionFormProps extends DefaultPatientWorkspaceProps {
   condition?: ConditionDataTableRow;
   formContext: 'creating' | 'editing';
-  workspaceProps?: {
-    conceptSetUuid?: string;
-    title?: string;
-  };
 }
 
 const createSchema = (formContext: 'creating' | 'editing', t: TFunction) => {
@@ -49,13 +45,11 @@ export type ConditionsFormSchema = z.infer<ReturnType<typeof createSchema>>;
 
 const ConditionsForm: React.FC<ConditionFormProps> = ({
   closeWorkspace,
-  closeWorkspaceWithSavedChanges,
   condition,
   formContext,
-  patientUuid,
-  promptBeforeClosing,
   workspaceProps,
 }) => {
+  const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const { conditions } = useConditions(patientUuid);
@@ -82,14 +76,6 @@ const ConditionsForm: React.FC<ConditionFormProps> = ({
     defaultValues,
   });
 
-  const {
-    formState: { isDirty },
-  } = methods;
-
-  useEffect(() => {
-    promptBeforeClosing(() => isDirty);
-  }, [isDirty, promptBeforeClosing]);
-
   const onSubmit: SubmitHandler<ConditionsFormSchema> = () => {
     setIsSubmittingForm(true);
   };
@@ -100,7 +86,7 @@ const ConditionsForm: React.FC<ConditionFormProps> = ({
     <FormProvider {...methods}>
       <Form className={styles.form} onSubmit={methods.handleSubmit(onSubmit, onError)}>
         <ConditionsWidget
-          closeWorkspaceWithSavedChanges={closeWorkspaceWithSavedChanges}
+          closeWorkspace={closeWorkspace}
           conditionToEdit={condition}
           isEditing={isEditing}
           isSubmittingForm={isSubmittingForm}
