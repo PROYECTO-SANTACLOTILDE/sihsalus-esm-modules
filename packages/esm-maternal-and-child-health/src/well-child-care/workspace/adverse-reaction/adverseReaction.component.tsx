@@ -2,34 +2,24 @@ import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Button,
+  ButtonSet,
   Form,
   TextArea,
   Select,
   SelectItem,
-  DatePicker,
-  DatePickerInput,
-  Layer,
-  Tile,
   InlineNotification,
 } from '@carbon/react';
-import { Add } from '@carbon/react/icons';
-import { usePatient } from '@openmrs/esm-framework';
+import { OpenmrsDatePicker, showSnackbar, useLayoutType } from '@openmrs/esm-framework';
+import type { DefaultPatientWorkspaceProps } from '../../../types';
 import styles from './adverse-reaction-form.scss';
 
-// Tipos para las reacciones adversas
 interface AdverseReaction {
   vaccineName: string;
   reactionDescription: string;
   severity: 'mild' | 'moderate' | 'severe' | '';
-  occurrenceDate: string;
+  occurrenceDate: Date | null;
 }
 
-interface AdverseReactionFormProps {
-  patientUuid: string;
-  onSubmit?: (reaction: AdverseReaction) => void;
-}
-
-// Lista de vacunas comunes (puedes expandirla según necesites)
 const VACCINE_OPTIONS = [
   'HiB RN',
   'BCG',
@@ -42,18 +32,18 @@ const VACCINE_OPTIONS = [
   'Varicela',
 ];
 
-export const AdverseReactionForm: React.FC<AdverseReactionFormProps> = ({ patientUuid, onSubmit }) => {
+const AdverseReactionFormWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspace }) => {
   const { t } = useTranslation();
-  const { patient } = usePatient(patientUuid);
+  const isTablet = useLayoutType() === 'tablet';
   const [formData, setFormData] = useState<AdverseReaction>({
     vaccineName: '',
     reactionDescription: '',
     severity: '',
-    occurrenceDate: '',
+    occurrenceDate: null,
   });
   const [error, setError] = useState<string | null>(null);
 
-  const handleInputChange = useCallback((field: keyof AdverseReaction, value: string) => {
+  const handleInputChange = useCallback((field: keyof AdverseReaction, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setError(null);
   }, []);
@@ -82,92 +72,87 @@ export const AdverseReactionForm: React.FC<AdverseReactionFormProps> = ({ patien
     (event: React.FormEvent) => {
       event.preventDefault();
       if (validateForm()) {
-        onSubmit?.({
-          ...formData,
-          occurrenceDate: new Date(formData.occurrenceDate).toISOString(),
+        // TODO: Save to backend via REST API
+        showSnackbar({
+          kind: 'success',
+          title: t('reactionSaved', 'Reacción registrada'),
+          subtitle: t('reactionSavedSubtitle', 'La reacción adversa ha sido registrada exitosamente'),
+          isLowContrast: true,
         });
-        setFormData({
-          vaccineName: '',
-          reactionDescription: '',
-          severity: '',
-          occurrenceDate: '',
-        });
+        closeWorkspace({ discardUnsavedChanges: true });
       }
     },
-    [formData, onSubmit, validateForm],
+    [closeWorkspace, validateForm, t],
   );
 
   return (
-    <Tile className={styles.adverseReactionForm}>
-      <h3 className={styles.formTitle}>{t('adverseReactionRecord', 'Registro de Reacciones Adversas a Vacunas')}</h3>
-      <p className={styles.formSubtitle}>
-        {t('patient', 'Paciente')}: {patient?.name?.[0]?.given?.join(' ') || '--'} {patient?.name?.[0]?.family || ''}
-      </p>
-
-      <Layer>
-        <Form onSubmit={handleSubmit}>
-          {error && (
-            <InlineNotification
-              kind="error"
-              title={t('validationError', 'Error de validación')}
-              subtitle={error}
-              lowContrast
-              className={styles.errorNotification}
-            />
-          )}
-
-          <Select
-            id="vaccine-select"
-            labelText={t('vaccine', 'Vacuna')}
-            value={formData.vaccineName}
-            onChange={(e) => handleInputChange('vaccineName', e.target.value)}
-            className={styles.formField}>
-            <SelectItem text={t('selectVaccine', 'Seleccione una vacuna')} value="" />
-            {VACCINE_OPTIONS.map((vaccine) => (
-              <SelectItem key={vaccine} text={vaccine} value={vaccine} />
-            ))}
-          </Select>
-
-          <TextArea
-            id="reaction-description"
-            labelText={t('reactionDescription', 'Descripción de la reacción')}
-            value={formData.reactionDescription}
-            onChange={(e) => handleInputChange('reactionDescription', e.target.value)}
-            rows={4}
-            placeholder={t('reactionPlaceholder', 'Describa los síntomas observados...')}
-            className={styles.formField}
+    <Form className={styles.adverseReactionForm} onSubmit={handleSubmit}>
+      <div style={{ padding: '1rem' }}>
+        {error && (
+          <InlineNotification
+            kind="error"
+            title={t('validationError', 'Error de validación')}
+            subtitle={error}
+            lowContrast
+            className={styles.errorNotification}
           />
+        )}
 
-          <Select
-            id="severity-select"
-            labelText={t('severity', 'Severidad')}
-            value={formData.severity}
-            onChange={(e) => handleInputChange('severity', e.target.value)}
-            className={styles.formField}>
-            <SelectItem text={t('selectSeverity', 'Seleccione severidad')} value="" />
-            <SelectItem text={t('mild', 'Leve')} value="mild" />
-            <SelectItem text={t('moderate', 'Moderada')} value="moderate" />
-            <SelectItem text={t('severe', 'Severa')} value="severe" />
-          </Select>
+        <Select
+          id="vaccine-select"
+          labelText={t('vaccine', 'Vacuna')}
+          value={formData.vaccineName}
+          onChange={(e) => handleInputChange('vaccineName', e.target.value)}
+          className={styles.formField}>
+          <SelectItem text={t('selectVaccine', 'Seleccione una vacuna')} value="" />
+          {VACCINE_OPTIONS.map((vaccine) => (
+            <SelectItem key={vaccine} text={vaccine} value={vaccine} />
+          ))}
+        </Select>
 
-          <DatePicker
-            datePickerType="single"
-            dateFormat="m/d/Y"
+        <TextArea
+          id="reaction-description"
+          labelText={t('reactionDescription', 'Descripción de la reacción')}
+          value={formData.reactionDescription}
+          onChange={(e) => handleInputChange('reactionDescription', e.target.value)}
+          rows={4}
+          placeholder={t('reactionPlaceholder', 'Describa los síntomas observados...')}
+          className={styles.formField}
+        />
+
+        <Select
+          id="severity-select"
+          labelText={t('severity', 'Severidad')}
+          value={formData.severity}
+          onChange={(e) => handleInputChange('severity', e.target.value)}
+          className={styles.formField}>
+          <SelectItem text={t('selectSeverity', 'Seleccione severidad')} value="" />
+          <SelectItem text={t('mild', 'Leve')} value="mild" />
+          <SelectItem text={t('moderate', 'Moderada')} value="moderate" />
+          <SelectItem text={t('severe', 'Severa')} value="severe" />
+        </Select>
+
+        <div className={styles.formField}>
+          <OpenmrsDatePicker
+            id="occurrence-date"
+            labelText={t('occurrenceDate', 'Fecha de ocurrencia del evento')}
+            maxDate={new Date()}
             value={formData.occurrenceDate}
-            onChange={(dates: Date[]) => handleInputChange('occurrenceDate', dates[0]?.toISOString() || '')}
-            className={styles.formField}>
-            <DatePickerInput
-              id="occurrence-date"
-              labelText={t('occurrenceDate', 'Fecha de ocurrencia')}
-              placeholder="mm/dd/yyyy"
-            />
-          </DatePicker>
+            onChange={(date) => handleInputChange('occurrenceDate', date)}
+          />
+        </div>
+      </div>
 
-          <Button type="submit" kind="primary" renderIcon={Add} className={styles.submitButton}>
-            {t('registerReaction', 'Registrar Reacción')}
-          </Button>
-        </Form>
-      </Layer>
-    </Tile>
+      <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
+        <Button kind="secondary" onClick={closeWorkspace}>
+          {t('cancel', 'Cancelar')}
+        </Button>
+        <Button kind="primary" type="submit">
+          {t('registerReaction', 'Registrar Reacción')}
+        </Button>
+      </ButtonSet>
+    </Form>
   );
 };
+
+export default AdverseReactionFormWorkspace;

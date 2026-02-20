@@ -681,6 +681,11 @@
       "name": "forms-selector-workspace",
       "component": "formsSelectorWorkspace",
       "window": "patient-chart-clinical-forms"
+    },
+    {
+      "name": "adverse-reaction-form-workspace",
+      "component": "adverseReactionFormWorkspace",
+      "window": "patient-chart-clinical-forms"
     }
   ]
 }

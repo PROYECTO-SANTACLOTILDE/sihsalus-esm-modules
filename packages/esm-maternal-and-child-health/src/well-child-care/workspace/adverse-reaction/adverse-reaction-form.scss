@@ -1,24 +1,9 @@
-@use '@carbon/colors';
 @use '@carbon/layout';
-@use '@carbon/type';
 
 .adverseReactionForm {
-  padding: layout.$spacing-05;
-  border: 1px solid colors.$gray-20;
-  background-color: colors.$white-0;
-  margin: layout.$spacing-03;
-
-  .formTitle {
-    @include type.type-style('heading-compact-02');
-    color: colors.$gray-70;
-    margin-bottom: layout.$spacing-03;
-  }
-
-  .formSubtitle {
-    @include type.type-style('body-compact-01');
-    color: colors.$gray-70;
-    margin-bottom: layout.$spacing-04;
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   .formField {
     margin-bottom: layout.$spacing-05;
@@ -27,8 +12,12 @@
   .errorNotification {
     margin-bottom: layout.$spacing-04;
   }
+}
 
-  .submitButton {
-    margin-top: layout.$spacing-04;
-  }
+.tablet {
+  padding: layout.$spacing-05;
+}
+
+.desktop {
+  padding: layout.$spacing-03 layout.$spacing-05;
 }

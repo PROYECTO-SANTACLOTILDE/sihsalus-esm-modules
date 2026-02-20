@@ -61,7 +61,7 @@ import NeonatalEvaluation from './well-child-care/components/neonatal-evaluation
 import NewbornBalanceOverview from './well-child-care/components/newborn-monitoring/newborn balance/balance-overview.component';
 import NewbornBiometricsBase from './well-child-care/components/newborn-monitoring/newborn biometrics/biometrics-base.component';
 import VaccinationSchedule from './well-child-care/components/vaccination-schema-widget/vaccinationSchedule.component';
-import { AdverseReactionForm } from './well-child-care/workspace/adverse-reaction/adverseReaction.component';
+import AdverseReactionsSummary from './well-child-care/components/adverse-reactions-summary/adverse-reactions-summary.component';
 import AnemiaScreening from './well-child-care/components/anemia-screening/anemia-screening.component';
 import SupplementationTracker from './well-child-care/components/supplementation/supplementation-tracker.component';
 import ScreeningIndicators from './well-child-care/components/screening/screening-indicators.component';
@@ -219,7 +219,11 @@ export const newbornBalanceOverviewChart = getSyncLifecycle(NewbornBalanceOvervi
 export const newbornBiometricsBaseChart = getSyncLifecycle(NewbornBiometricsBase, options);
 
 // Vaccination Components
-export const vaccinationAppointment = getSyncLifecycle(AdverseReactionForm, options);
+export const vaccinationAppointment = getSyncLifecycle(AdverseReactionsSummary, options);
+export const adverseReactionFormWorkspace = getAsyncLifecycle(
+  () => import('./well-child-care/workspace/adverse-reaction/adverseReaction.component'),
+  options,
+);
 export const vaccinationSchedule = getSyncLifecycle(VaccinationSchedule, options);
 
 // Child Medical History
