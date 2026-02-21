@@ -1,14 +1,6 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Table,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TableBody,
-  TableCell,
-  DataTableSkeleton,
-} from '@carbon/react';
+import { DataTableSkeleton } from '@carbon/react';
 import { CardHeader, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { useConfig } from '@openmrs/esm-framework';
 import { useCREDSchedule, type CREDControlWithStatus } from '../../../hooks/useCREDSchedule';
@@ -27,7 +19,6 @@ const CredControlsMatrix: React.FC<CredControlsMatrixProps> = ({ patientUuid }) 
 
   const headerTitle = t('controlsAndAtentions', 'Atenciones y Controles');
 
-  // Group controls by ageGroupLabel to match the column headers
   const groupedControls = useMemo(() => {
     const grouped: Record<string, CREDControlWithStatus[]> = {};
 
@@ -65,22 +56,17 @@ const CredControlsMatrix: React.FC<CredControlsMatrixProps> = ({ patientUuid }) 
         </div>
       </CardHeader>
       <div className={styles.matrixScroll}>
-        <Table size="sm" useZebraStyles>
-          <TableHead>
-            <TableRow>
-              {ageGroupsCRED.map((group) => (
-                <TableHeader key={group.label}>
-                  {group.label}
+        <div className={styles.matrixGrid}>
+          {ageGroupsCRED.map((group) => {
+            const groupControls = groupedControls[group.label] ?? [];
+            return (
+              <div key={group.label} className={styles.matrixColumn}>
+                <div className={styles.columnHeader}>
+                  <strong>{group.label}</strong>
                   {group.sublabel && <div className={styles.sublabel}>{group.sublabel}</div>}
-                </TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              {ageGroupsCRED.map((group) => (
-                <TableCell key={group.label} className={styles.cellContent}>
-                  {(groupedControls[group.label] ?? []).map((control) => (
+                </div>
+                <div className={styles.columnBody}>
+                  {groupControls.map((control) => (
                     <CredTile
                       key={control.controlNumber}
                       uuid={control.encounterUuid}
@@ -90,11 +76,11 @@ const CredControlsMatrix: React.FC<CredControlsMatrixProps> = ({ patientUuid }) 
                       status={control.status}
                     />
                   ))}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableBody>
-        </Table>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

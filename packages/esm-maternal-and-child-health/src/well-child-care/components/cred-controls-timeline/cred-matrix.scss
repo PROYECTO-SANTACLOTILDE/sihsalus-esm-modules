@@ -12,47 +12,95 @@
 .clinicalDataHeaderActionItems {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: layout.$spacing-05;
   padding: layout.$spacing-03;
+}
+
+.summaryItem {
+  @include type.type-style('body-compact-01');
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-02;
+}
+
+.overdueCount {
+  color: $danger;
+  font-weight: 600;
+}
+
+// Horizontal scrollable matrix
+.matrixScroll {
+  overflow-x: auto;
+  padding: layout.$spacing-03 0 layout.$spacing-05;
+}
+
+.matrixGrid {
+  display: inline-flex;
+  gap: 0;
+  min-width: 100%;
+}
+
+// Each age-group column
+.matrixColumn {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  min-width: 7.5rem;
+  border-right: 1px solid colors.$gray-20;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.columnHeader {
+  @include type.type-style('label-01');
+  text-align: center;
+  padding: layout.$spacing-03 layout.$spacing-02;
+  background-color: colors.$gray-10;
+  border-bottom: 1px solid colors.$gray-20;
+  font-weight: 600;
+  min-height: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sublabel {
-  @include type.type-style('body-compact-01');
+  @include type.type-style('label-01');
   color: colors.$gray-50;
-  margin-top: layout.$spacing-02;
+  margin-top: 2px;
+  font-weight: 400;
 }
 
-.cellContent {
-  padding: layout.$spacing-03;
-  vertical-align: top;
-}
-
-.ageGroups {
+.columnBody {
   display: flex;
-  flex-wrap: wrap;
-  gap: layout.$spacing-03;
+  flex-direction: column;
+  gap: layout.$spacing-02;
+  padding: layout.$spacing-02;
 }
 
+// Individual tile within the matrix
 .ageTile {
-  @include type.type-style('body-compact-01');
+  @include type.type-style('label-01');
   text-align: center;
-  padding: layout.$spacing-03;
+  padding: layout.$spacing-02;
   border: 1px solid colors.$gray-30;
+  border-radius: 4px;
   cursor: default;
-  flex: 1 1 120px;
-  min-width: 80px;
-  margin-bottom: layout.$spacing-02;
 }
 
 .tileLabel {
-  @include type.type-style('caption-01');
+  @include type.type-style('label-01');
   color: $text-02;
-  margin-top: layout.$spacing-01;
+  margin-top: 1px;
 }
 
 .tileDate {
-  @include type.type-style('caption-01');
+  @include type.type-style('label-01');
   color: $text-02;
-  margin-top: layout.$spacing-01;
+  margin-top: 1px;
 }
 
 // Status colors
@@ -87,7 +135,7 @@
   display: inline-block;
   padding: 1px layout.$spacing-02;
   border-radius: 4px;
-  margin-top: layout.$spacing-02;
+  margin-top: 2px;
   font-weight: 600;
 }
 
@@ -114,30 +162,4 @@
 .labelUser {
   @include type.type-style('caption-01');
   color: colors.$gray-50;
-}
-
-// Summary bar
-.summaryBar {
-  display: flex;
-  align-items: center;
-  gap: layout.$spacing-05;
-  padding: layout.$spacing-03 layout.$spacing-05;
-  border-bottom: 1px solid $ui-03;
-  flex-wrap: wrap;
-}
-
-.summaryItem {
-  @include type.type-style('body-compact-01');
-  display: flex;
-  align-items: center;
-  gap: layout.$spacing-02;
-}
-
-.overdueCount {
-  color: $danger;
-  font-weight: 600;
-}
-
-.matrixScroll {
-  overflow-x: auto;
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
-import { Tile, Button } from '@carbon/react';
-import { TrashCan } from '@carbon/react/icons';
 import { useTranslation } from 'react-i18next';
 import type { ControlStatus } from '../../../hooks/useCREDSchedule';
 import styles from './cred-matrix.scss';
@@ -17,15 +15,7 @@ export interface CredTileProps {
   onDelete?: (id: string) => void;
 }
 
-const CredTile: React.FC<CredTileProps> = ({
-  uuid,
-  controlNumber,
-  label,
-  date,
-  status,
-  createdByCurrentUser = false,
-  onDelete,
-}) => {
+const CredTile: React.FC<CredTileProps> = ({ controlNumber, label, date, status }) => {
   const { t } = useTranslation();
 
   const statusLabels: Record<ControlStatus, string> = {
@@ -37,7 +27,7 @@ const CredTile: React.FC<CredTileProps> = ({
   };
 
   return (
-    <Tile
+    <div
       className={classNames(styles.ageTile, {
         [styles.tileCompleted]: status === 'completed',
         [styles.tileScheduled]: status === 'scheduled',
@@ -46,23 +36,13 @@ const CredTile: React.FC<CredTileProps> = ({
         [styles.tileFuture]: status === 'future',
       })}
     >
-      <strong>{`#${controlNumber}`}</strong>
+      <div className={styles.tileHeader}>
+        <strong>{`#${controlNumber}`}</strong>
+        <span className={classNames(styles.statusBadge, styles[`status-${status}`])}>{statusLabels[status]}</span>
+      </div>
       <div className={styles.tileLabel}>{label}</div>
       {date && <div className={styles.tileDate}>{dayjs(date).format('DD/MM/YYYY')}</div>}
-      <div className={classNames(styles.statusBadge, styles[`status-${status}`])}>{statusLabels[status]}</div>
-      {createdByCurrentUser && uuid && onDelete && (
-        <Button
-          kind="ghost"
-          size="sm"
-          hasIconOnly
-          iconDescription={t('delete', 'Eliminar')}
-          onClick={() => onDelete(uuid)}
-          renderIcon={TrashCan}
-          tooltipAlignment="center"
-          tooltipPosition="bottom"
-        />
-      )}
-    </Tile>
+    </div>
   );
 };
 
