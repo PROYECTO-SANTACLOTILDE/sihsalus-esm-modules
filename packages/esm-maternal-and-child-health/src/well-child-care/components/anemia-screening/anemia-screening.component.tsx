@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   DataTableSkeleton,
   Tag,
+  Button,
   StructuredListWrapper,
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
 } from '@carbon/react';
-import { WarningFilled, CheckmarkFilled } from '@carbon/react/icons';
+import { WarningFilled, CheckmarkFilled, Add } from '@carbon/react/icons';
 import { CardHeader, ErrorState } from '@openmrs/esm-patient-common-lib';
+import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
 import { useAnemiaScreening } from '../../../hooks/useAnemiaScreening';
+import type { ConfigObject } from '../../../config-schema';
 import styles from './anemia-screening.scss';
 
 interface AnemiaScreeningProps {
@@ -19,8 +22,21 @@ interface AnemiaScreeningProps {
 
 const AnemiaScreening: React.FC<AnemiaScreeningProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
+  const config = useConfig<ConfigObject>();
   const { lastHb, lastDate, isAnemic, nextDueDate, isLoading, error } = useAnemiaScreening(patientUuid);
   const headerTitle = t('anemiaScreening', 'Tamizaje de Anemia');
+
+  const handleAdd = useCallback(() => {
+    const formUuid = config.formsList.anemiaScreeningForm;
+    if (!formUuid) {
+      console.warn('Form UUID not configured for anemiaScreeningForm');
+      return;
+    }
+    launchWorkspace2('patient-form-entry-workspace', {
+      form: { uuid: formUuid },
+      encounterUuid: '',
+    });
+  }, [config.formsList.anemiaScreeningForm]);
 
   if (isLoading) {
     return <DataTableSkeleton role="progressbar" compact rowCount={3} columnCount={2} />;
@@ -42,6 +58,9 @@ const AnemiaScreening: React.FC<AnemiaScreeningProps> = ({ patientUuid }) => {
             {isAnemic ? t('anemic', 'Anemia') : t('normal', 'Normal')}
           </Tag>
         )}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
+          {t('add', 'Agregar')}
+        </Button>
       </CardHeader>
       <div className={styles.container}>
         <StructuredListWrapper isCondensed>

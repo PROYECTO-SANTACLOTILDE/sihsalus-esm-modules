@@ -159,6 +159,14 @@ export const configSchema = {
       puerperiumEpicrisis: '(Página 12) Puerperio - Epicrisis',
       puerperiumDischarge: '(Página 14) Puerperio - Informe de Alta',
       clinicalHistory: 'HOSP-003-HISTORIA CLÍNICA OBSTÉTRICA',
+
+      // CRED Seguimiento Forms
+      anemiaScreeningForm: '',
+      supplementationForm: '',
+      screeningIndicatorsForm: '',
+      stimulationSessionForm: '',
+      stimulationFollowupForm: '',
+      stimulationCounselingForm: '',
     },
   },
 
@@ -1207,6 +1215,12 @@ export interface ConfigObject {
     puerperiumEpicrisis: string;
     puerperiumDischarge: string;
     clinicalHistory: string;
+    anemiaScreeningForm: string;
+    supplementationForm: string;
+    screeningIndicatorsForm: string;
+    stimulationSessionForm: string;
+    stimulationFollowupForm: string;
+    stimulationCounselingForm: string;
   };
   clinicalEncounterUuid: string;
   concepts: Record<string, string>;

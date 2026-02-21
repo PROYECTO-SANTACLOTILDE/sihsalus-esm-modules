@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Tag,
+  Button,
   StructuredListWrapper,
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
 } from '@carbon/react';
+import { Add } from '@carbon/react/icons';
 import { CardHeader } from '@openmrs/esm-patient-common-lib';
+import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
+import type { ConfigObject } from '../../../../config-schema';
 import styles from './stimulation-followup.scss';
 
 interface StimulationFollowupProps {
@@ -16,7 +20,20 @@ interface StimulationFollowupProps {
 
 const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
+  const config = useConfig<ConfigObject>();
   const headerTitle = t('esFollowUpTitle', 'Seguimiento del Desarrollo');
+
+  const handleAdd = useCallback(() => {
+    const formUuid = config.formsList.stimulationFollowupForm;
+    if (!formUuid) {
+      console.warn('Form UUID not configured for stimulationFollowupForm');
+      return;
+    }
+    launchWorkspace2('patient-form-entry-workspace', {
+      form: { uuid: formUuid },
+      encounterUuid: '',
+    });
+  }, [config.formsList.stimulationFollowupForm]);
 
   // TODO: Connect to SWR hook when concept UUIDs are configured
   const milestonesAchieved = null;
@@ -31,6 +48,9 @@ const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }
         <Tag type={riskLevel === 'normal' ? 'green' : riskLevel ? 'red' : 'gray'} size="sm">
           {riskLevel ?? t('noData', 'Sin datos')}
         </Tag>
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
+          {t('add', 'Agregar')}
+        </Button>
       </CardHeader>
       <div className={styles.container}>
         <StructuredListWrapper isCondensed>

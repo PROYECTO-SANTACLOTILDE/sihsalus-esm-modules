@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   DataTable,
@@ -11,10 +11,13 @@ import {
   TableHeader,
   TableRow,
   Tag,
+  Button,
 } from '@carbon/react';
-import { CheckmarkFilled, Time } from '@carbon/react/icons';
+import { CheckmarkFilled, Time, Add } from '@carbon/react/icons';
 import { CardHeader, EmptyState, ErrorState } from '@openmrs/esm-patient-common-lib';
+import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
 import { useScreeningIndicators } from '../../../hooks/useScreeningIndicators';
+import type { ConfigObject } from '../../../config-schema';
 import styles from './screening-indicators.scss';
 
 interface ScreeningIndicatorsProps {
@@ -23,8 +26,21 @@ interface ScreeningIndicatorsProps {
 
 const ScreeningIndicators: React.FC<ScreeningIndicatorsProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
+  const config = useConfig<ConfigObject>();
   const { screenings, completedCount, totalRequired, isLoading, error } = useScreeningIndicators(patientUuid);
   const headerTitle = t('screeningIndicators', 'Tamizajes Obligatorios');
+
+  const handleAdd = useCallback(() => {
+    const formUuid = config.formsList.screeningIndicatorsForm;
+    if (!formUuid) {
+      console.warn('Form UUID not configured for screeningIndicatorsForm');
+      return;
+    }
+    launchWorkspace2('patient-form-entry-workspace', {
+      form: { uuid: formUuid },
+      encounterUuid: '',
+    });
+  }, [config.formsList.screeningIndicatorsForm]);
 
   const tableHeaders = useMemo(
     () => [
@@ -68,6 +84,9 @@ const ScreeningIndicators: React.FC<ScreeningIndicatorsProps> = ({ patientUuid }
         <Tag type={completedCount === totalRequired ? 'green' : 'gray'} size="sm">
           {completedCount}/{totalRequired}
         </Tag>
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
+          {t('add', 'Agregar')}
+        </Button>
       </CardHeader>
       <DataTable headers={tableHeaders} rows={tableRows} size="sm" useZebraStyles>
         {({ rows, headers, getHeaderProps, getTableProps }) => (
