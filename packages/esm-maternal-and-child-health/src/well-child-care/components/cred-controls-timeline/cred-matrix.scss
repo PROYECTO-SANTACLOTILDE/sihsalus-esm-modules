@@ -32,7 +32,7 @@
 // Horizontal scrollable matrix
 .matrixScroll {
   overflow-x: auto;
-  padding: layout.$spacing-03 0 layout.$spacing-05;
+  padding-bottom: layout.$spacing-03;
 }
 
 .matrixGrid {
@@ -46,7 +46,8 @@
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
-  min-width: 7.5rem;
+  min-width: 6.5rem;
+  max-width: 8rem;
   border-right: 1px solid colors.$gray-20;
 
   &:last-child {
@@ -57,11 +58,11 @@
 .columnHeader {
   @include type.type-style('label-01');
   text-align: center;
-  padding: layout.$spacing-03 layout.$spacing-02;
+  padding: layout.$spacing-02;
   background-color: colors.$gray-10;
   border-bottom: 1px solid colors.$gray-20;
   font-weight: 600;
-  min-height: 3.5rem;
+  min-height: 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,37 +71,48 @@
 .sublabel {
   @include type.type-style('label-01');
   color: colors.$gray-50;
-  margin-top: 2px;
   font-weight: 400;
+  font-size: 0.625rem;
 }
 
 .columnBody {
   display: flex;
   flex-direction: column;
-  gap: layout.$spacing-02;
-  padding: layout.$spacing-02;
+  gap: 2px;
+  padding: 2px;
 }
 
-// Individual tile within the matrix
+// Compact tile
 .ageTile {
   @include type.type-style('label-01');
   text-align: center;
-  padding: layout.$spacing-02;
-  border: 1px solid colors.$gray-30;
-  border-radius: 4px;
+  padding: 2px 3px;
+  border-radius: 2px;
   cursor: default;
+  font-size: 0.6875rem;
+  line-height: 1.2;
+}
+
+.tileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2px;
 }
 
 .tileLabel {
   @include type.type-style('label-01');
   color: $text-02;
-  margin-top: 1px;
+  font-size: 0.625rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tileDate {
   @include type.type-style('label-01');
   color: $text-02;
-  margin-top: 1px;
+  font-size: 0.625rem;
 }
 
 // Status colors
@@ -131,12 +143,9 @@
 }
 
 .statusBadge {
-  @include type.type-style('label-01');
-  display: inline-block;
-  padding: 1px layout.$spacing-02;
-  border-radius: 4px;
-  margin-top: 2px;
+  font-size: 0.5625rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .status-completed {
