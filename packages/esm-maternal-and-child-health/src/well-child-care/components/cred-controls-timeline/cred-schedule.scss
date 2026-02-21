@@ -206,3 +206,36 @@
   padding: layout.$spacing-04;
   text-align: center;
 }
+
+// Responsive: stack layout on small screens
+@media (max-width: 672px) {
+  .ageGroups {
+    gap: layout.$spacing-02;
+  }
+
+  .ageTile {
+    flex: 1 1 100%;
+  }
+
+  .checkupItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: layout.$spacing-02;
+  }
+
+  .nextDueCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: layout.$spacing-03;
+  }
+
+  .overdueItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: layout.$spacing-02;
+  }
+
+  .widgetCard {
+    padding: layout.$spacing-04;
+  }
+}

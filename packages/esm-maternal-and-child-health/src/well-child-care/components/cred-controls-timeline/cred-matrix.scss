@@ -195,3 +195,31 @@
   @include type.type-style('caption-01');
   color: colors.$gray-50;
 }
+
+// Responsive: narrower columns on small screens
+@media (max-width: 672px) {
+  .matrixColumn {
+    min-width: 6rem;
+    max-width: 8rem;
+  }
+
+  .columnHeader {
+    padding: layout.$spacing-02;
+    min-height: 2.5rem;
+  }
+
+  .ageTile {
+    padding: layout.$spacing-02;
+    font-size: 0.75rem;
+  }
+
+  .statusBadge {
+    font-size: 0.625rem;
+    padding: 1px 3px;
+  }
+
+  .clinicalDataHeaderActionItems {
+    flex-wrap: wrap;
+    gap: layout.$spacing-03;
+  }
+}

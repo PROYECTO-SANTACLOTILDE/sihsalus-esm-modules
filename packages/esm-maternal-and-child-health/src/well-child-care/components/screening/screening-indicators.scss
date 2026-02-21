@@ -21,3 +21,10 @@
 .rowPending {
   background-color: colors.$yellow-10 !important;
 }
+
+// Responsive: allow horizontal scroll on small screens
+@media (max-width: 672px) {
+  .widgetCard {
+    overflow-x: auto;
+  }
+}
