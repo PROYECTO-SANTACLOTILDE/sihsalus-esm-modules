@@ -2,11 +2,17 @@ import { Type } from '@openmrs/esm-framework';
 
 /**
  * Esquema Nacional de Vacunación — NTS N.° 196-MINSA/DGIESP-2022
- * (RM 884-2022, modificada por RM 218-2024)
+ * (RM 884-2022, modificada por RM 218-2024, RM 474-2025, RM 709-2025)
  *
  * Sequence convention: doses [1…9], boosters [11…19].
  * CIEL concept UUIDs follow the pattern {CIEL_ID}AAAAAAAAAAAAAAA…
  * Adjust UUIDs to match the concepts loaded on your OpenMRS server.
+ *
+ * Cambios clave:
+ * - RM 218-2024: IPV reemplaza a APO (esquema 100% IPV inyectable);
+ *                VPH dosis única para niños y niñas 9-13 años.
+ * - RM 474-2025: PCV13 → PCV20; VPH tetravalente → nonavalente.
+ * - RM 709-2025: Hexavalente celular (futuro reemplazo de Penta + IPV).
  */
 export const configSchema = {
   immunizationConceptSet: {
@@ -60,14 +66,15 @@ export const configSchema = {
           { sequenceLabel: '3.ª Dosis', sequenceNumber: 3 },
         ],
       },
-      // ── IPV (Polio Inactivada) — 2m, 4m, 6m + refuerzo 18m ──
+      // ── IPV (Polio Inactivada) — 2m, 4m, 6m, 18m + ref 4a (RM 218-2024: 100% IPV, sin APO) ──
       {
         vaccineConceptUuid: '783AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
         sequences: [
           { sequenceLabel: '1.ª Dosis', sequenceNumber: 1 },
           { sequenceLabel: '2.ª Dosis', sequenceNumber: 2 },
           { sequenceLabel: '3.ª Dosis', sequenceNumber: 3 },
-          { sequenceLabel: 'Refuerzo', sequenceNumber: 11 },
+          { sequenceLabel: '1.er Refuerzo', sequenceNumber: 11 },
+          { sequenceLabel: '2.° Refuerzo', sequenceNumber: 12 },
         ],
       },
       // ── Rotavirus — 2m, 4m ──
@@ -113,6 +120,11 @@ export const configSchema = {
         vaccineConceptUuid: '5864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
         sequences: [{ sequenceLabel: 'Dosis-Única', sequenceNumber: 1 }],
       },
+      // ── Hepatitis A — 15m (1 dosis) ──
+      {
+        vaccineConceptUuid: '5857AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+        sequences: [{ sequenceLabel: 'Dosis-Única', sequenceNumber: 1 }],
+      },
       // ── DPT (refuerzo) — 18m + 2.° refuerzo 4a ──
       {
         vaccineConceptUuid: '781AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
@@ -121,10 +133,10 @@ export const configSchema = {
           { sequenceLabel: '2.° Refuerzo', sequenceNumber: 12 },
         ],
       },
-      // ── APO (Polio Oral bivalente) — refuerzo 4a ──
+      // ── VPH (Virus del Papiloma Humano) — dosis única 9-13a (RM 218-2024) ──
       {
-        vaccineConceptUuid: '784AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-        sequences: [{ sequenceLabel: 'Refuerzo', sequenceNumber: 11 }],
+        vaccineConceptUuid: '5856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+        sequences: [{ sequenceLabel: 'Dosis-Única', sequenceNumber: 1 }],
       },
     ],
   },
