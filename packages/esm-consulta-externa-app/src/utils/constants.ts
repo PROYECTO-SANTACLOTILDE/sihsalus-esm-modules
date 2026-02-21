@@ -27,7 +27,7 @@ export const AdmissionDate_UUID = '1640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const PriorityOfAdmission_UUID = '1655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 // export const AdmittingDoctor_UUID= '';
 export const AdmissionWard_UUID = '5fc29316-0869-4b3b-ae2f-cc37c6014eb7';
-export const MchEncounterType_UUID = '7g8h9i0j-7234-5678-9101-abcdefghij07';
+export const MchEncounterType_UUID = 'b212032f-9903-4696-ab31-173d432d1d3d'; // Atención en Sala de Partos — NTS 050
 
 // 7. SOCIAL HISTORY
 export const Alcohol_Use_UUID = '159449AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
@@ -48,8 +48,8 @@ export const GestationalSize_UUID = '1789AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const BirthAbnormally_UUID = '164122AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const BloodLoss_UUID = '161928AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const GivenVitaminK_UUID = '984AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
-export const DeliveryForm_UUID = 'Gonzalo';
-export const Form_NOMBRE = 'Sample Form';
+export const DeliveryForm_UUID = 'Gonzalo'; // TODO: reemplazar con UUID real del form de parto
+export const Form_NOMBRE = 'Sample Form'; // TODO: reemplazar con nombre real del formulario
 
 // 10. PARTOGRAPHY
 export const Progress_UUID = '160116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
