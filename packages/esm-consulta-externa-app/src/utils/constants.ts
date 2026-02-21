@@ -48,8 +48,8 @@ export const GestationalSize_UUID = '1789AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const BirthAbnormally_UUID = '164122AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const BloodLoss_UUID = '161928AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 export const GivenVitaminK_UUID = '984AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
-export const DeliveryForm_UUID = 'Gonzalo'; // TODO: reemplazar con UUID real del form de parto
-export const Form_NOMBRE = 'Sample Form'; // TODO: reemplazar con nombre real del formulario
+export const DeliveryForm_UUID = 'OBST-005-PARTO O ABORTO'; // Nombre del formulario Ampath (UUID generado al importar)
+export const Form_NOMBRE = 'OBST-005-PARTO O ABORTO';
 
 // 10. PARTOGRAPHY
 export const Progress_UUID = '160116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
