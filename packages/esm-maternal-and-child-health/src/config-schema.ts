@@ -164,9 +164,9 @@ export const configSchema = {
       anemiaScreeningForm: 'CRED-001-TAMIZAJE DE ANEMIA',
       supplementationForm: 'CRED-002-SUPLEMENTACIÓN NIÑO',
       screeningIndicatorsForm: 'OBST-013-TAMIZAJE PRENATAL',
-      stimulationSessionForm: '',
-      stimulationFollowupForm: '',
-      stimulationCounselingForm: '',
+      stimulationSessionForm: 'CRED-003-SESIÓN DE ESTIMULACIÓN TEMPRANA',
+      stimulationFollowupForm: 'CRED-004-SEGUIMIENTO DEL DESARROLLO',
+      stimulationCounselingForm: 'CRED-005-CONSEJERÍA A PADRES',
     },
   },
 

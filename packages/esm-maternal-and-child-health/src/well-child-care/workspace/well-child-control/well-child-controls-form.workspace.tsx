@@ -26,14 +26,17 @@ type CREDControlsFormType = z.infer<typeof CREDControlsSchema>;
 const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
   closeWorkspace,
   workspaceProps,
+  patientUuid: directPatientUuid,
 }) => {
-  const patientUuid = workspaceProps?.patientUuid ?? '';
+  const patientUuid = directPatientUuid ?? workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
   const { patient, isLoading: isPatientLoading } = usePatient(patientUuid);
-  const { currentVisit } = useVisit(patientUuid);
-  const { encounters, isLoading: isEncountersLoading } = useCREDEncounters(patientUuid);
+  const { activeVisit, currentVisit } = useVisit(patientUuid);
+  const visit = currentVisit ?? activeVisit;
+  const { encounters: rawEncounters, isLoading: isEncountersLoading } = useCREDEncounters(patientUuid);
+  const encounters = useMemo(() => rawEncounters ?? [], [rawEncounters]);
   const { getAgeGroupForForms } = useAgeGroups();
 
   const [showErrorNotification, setShowErrorNotification] = useState(false);
@@ -76,7 +79,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
 
   const handleStartControl = useCallback(() => {
     const consultationData = watch();
-    if (!consultationData.consultationDate || !consultationData.consultationTime || !currentVisit) {
+    if (!consultationData.consultationDate || !consultationData.consultationTime || !visit) {
       setShowErrorNotification(true);
       return;
     }
@@ -86,7 +89,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
       JSON.stringify({
         ...consultationData,
         patientUuid,
-        visitUuid: currentVisit.uuid,
+        visitUuid: visit.uuid,
         controlNumber: credControlNumber,
         patientAge: formattedAge,
       }),
@@ -103,7 +106,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
       ),
       backWorkspace: 'wellchild-control-form',
     });
-  }, [watch, patientUuid, currentVisit, allAvailableForms, formattedAge, credControlNumber, t]);
+  }, [watch, patientUuid, visit, allAvailableForms, formattedAge, credControlNumber, t]);
 
   useEffect(() => {
     const now = new Date();
@@ -221,7 +224,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
           className={styles.button}
           kind="primary"
           onClick={handleStartControl}
-          disabled={!currentVisit || isSubmitting}
+          disabled={!visit || isSubmitting}
           type="button">
           {t('startControl', 'Empezar Control')}
         </Button>
