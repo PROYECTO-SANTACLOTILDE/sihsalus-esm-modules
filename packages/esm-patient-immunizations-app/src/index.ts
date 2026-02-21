@@ -1,11 +1,12 @@
-import { defineConfigSchema, getAsyncLifecycle, getSyncLifecycle, translateFrom } from '@openmrs/esm-framework';
+import { defineConfigSchema, getAsyncLifecycle, getSyncLifecycle } from '@openmrs/esm-framework';
 import { createDashboardLink } from '@openmrs/esm-patient-common-lib';
 import { configSchema } from './config-schema';
 import { dashboardMeta } from './dashboard.meta';
 import immunizationsOverviewComponent from './immunizations/immunizations-overview.component';
 import immunizationsDetailedSummaryComponent from './immunizations/immunizations-detailed-summary.component';
+import immunizationHistorySummaryComponent from './immunizations/immunization-history-dashboard.component';
 
-const moduleName = '@openmrs/esm-patient-immunizations-app';
+const moduleName = '@pucp-gidis-hiisc/esm-patient-immunizations-app';
 
 const options = {
   featureName: 'patient-immunizations',
@@ -22,12 +23,12 @@ export const immunizationsOverview = getSyncLifecycle(immunizationsOverviewCompo
 
 export const immunizationsDetailedSummary = getSyncLifecycle(immunizationsDetailedSummaryComponent, options);
 
+export const immunizationHistorySummary = getSyncLifecycle(immunizationHistorySummaryComponent, options);
 export const immunizationsDashboardLink =
   // t('Immunizations', 'Immunizations')
   getSyncLifecycle(
     createDashboardLink({
       ...dashboardMeta,
-      moduleName,
     }),
     options,
   );
