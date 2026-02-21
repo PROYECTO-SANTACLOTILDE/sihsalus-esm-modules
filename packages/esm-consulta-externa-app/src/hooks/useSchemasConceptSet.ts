@@ -15,6 +15,7 @@ interface UseSchemasConceptSetResult {
   schemasConceptSet?: ConceptWithColour;
   isLoading: boolean;
   error?: Error;
+  mutate: () => void;
 }
 
 // Adapter function to make openmrsFetch compatible with SWR
@@ -29,7 +30,7 @@ export function useSchemasConceptSet(config: LegendConfigObject): UseSchemasConc
 
   const url = `${restBaseUrl}/concept?references=${config.legendConceptSet}&v=${conceptRepresentation}`;
 
-  const { data, error, isLoading } = useSWR<ConceptResponse, Error>(url, swrFetcher);
+  const { data, error, isLoading, mutate } = useSWR<ConceptResponse, Error>(url, swrFetcher);
 
   const schemasConceptSet = data?.results[0]
     ? {
@@ -42,5 +43,6 @@ export function useSchemasConceptSet(config: LegendConfigObject): UseSchemasConc
     schemasConceptSet,
     isLoading,
     error,
+    mutate,
   };
 }

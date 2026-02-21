@@ -15,12 +15,13 @@ export interface Supply {
 }
 
 const useGetSupply = () => {
-  const { data, error, isLoading } = useSWR<{ data: Supply[] }>(API_URL, openmrsFetch);
+  const { data, error, isLoading, mutate } = useSWR<{ data: Supply[] }>(API_URL, openmrsFetch);
 
   return {
     supply: data?.data,
     isError: error,
     isLoading,
+    mutate,
   };
 };
 

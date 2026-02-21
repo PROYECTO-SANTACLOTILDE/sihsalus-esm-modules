@@ -18,7 +18,7 @@ interface CostStructureResponse extends CostStructure {
 const useGetCostStructure = (page = 0, size = 10, query = "") => {
   const params = new URLSearchParams({ page: String(page), size: String(size), query });
   const URL = `${API_URL}?${params.toString()}`;
-  const { data, error, isLoading } = useSWR<{data: Response}>(
+  const { data, error, isLoading, mutate } = useSWR<{data: Response}>(
     URL,
     openmrsFetch
   );  
@@ -28,6 +28,7 @@ const useGetCostStructure = (page = 0, size = 10, query = "") => {
     total:data?.data.total,
     isLoading,
     isError: error,
+    mutate,
   };  
 }
 export default useGetCostStructure;

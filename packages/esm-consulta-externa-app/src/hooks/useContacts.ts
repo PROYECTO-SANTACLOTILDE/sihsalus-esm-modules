@@ -105,7 +105,7 @@ const useContacts = (patientUuid: string) => {
     'custom:(display,uuid,personA:(uuid,age,display,dead,causeOfDeath,gender,attributes:(uuid,display,value,attributeType:(uuid,display))),personB:(uuid,age,display,dead,causeOfDeath,gender,attributes:(uuid,display,value,attributeType:(uuid,display))),relationshipType:(uuid,display,description,aIsToB,bIsToA),startDate)';
   const url = `/ws/rest/v1/relationship?v=${customeRepresentation}&person=${patientUuid}`;
   const config = useConfig<ConfigObject>();
-  const { data, error, isLoading, isValidating } = useSWR<{ data: { results: Relationship[] } }, Error>(
+  const { data, error, isLoading, isValidating, mutate } = useSWR<{ data: { results: Relationship[] } }, Error>(
     url,
     openmrsFetch,
   );
@@ -125,6 +125,7 @@ const useContacts = (patientUuid: string) => {
     error,
     isLoading,
     isValidating,
+    mutate,
   };
 };
 

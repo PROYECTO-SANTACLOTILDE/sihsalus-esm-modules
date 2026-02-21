@@ -55,7 +55,8 @@ export function useLocations(
   locations: Array<LocationEntry>;
   isLoading: boolean;
   loadingNewData: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 } {
   const debouncedQuery = useDebounce(searchQuery);
 
@@ -79,7 +80,7 @@ export function useLocations(
     return url + urlSearchParameters.toString();
   }, [locationTag, debouncedQuery]);
 
-  const { data, error, isLoading, isValidating } = useSWR<FetchResponse<LocationResponse>, Error>(
+  const { data, error, isLoading, isValidating, mutate } = useSWR<FetchResponse<LocationResponse>, Error>(
     constructUrl,
     openmrsFetch,
   );
@@ -90,17 +91,19 @@ export function useLocations(
       isLoading,
       loadingNewData: isValidating,
       error,
+      mutate,
     }),
-    [data?.data?.entry, error, isLoading, isValidating],
+    [data?.data?.entry, error, isLoading, isValidating, mutate],
   );
 }
 
 export function usePersonAttributeType(personAttributeTypeUuid: string): {
   data: PersonAttributeTypeResponse | undefined;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 } {
-  const { data, error, isLoading } = useSWRImmutable<FetchResponse<PersonAttributeTypeResponse>>(
+  const { data, error, isLoading, mutate } = useSWRImmutable<FetchResponse<PersonAttributeTypeResponse>>(
     `${restBaseUrl}/personattributetype/${personAttributeTypeUuid}`,
     openmrsFetch,
   );
@@ -110,14 +113,16 @@ export function usePersonAttributeType(personAttributeTypeUuid: string): {
       data: data?.data,
       isLoading,
       error,
+      mutate,
     }),
-    [data, isLoading, error],
+    [data, isLoading, error, mutate],
   );
 }
 
 export function useConfiguredAnswerConcepts(uuids: Array<string>): {
   configuredConceptAnswers: Array<OpenmrsResource>;
   isLoadingConfiguredAnswers: boolean;
+  mutate: () => void;
 } {
   const fetchConcept = async (uuid: string): Promise<OpenmrsResource | null> => {
     try {
@@ -129,7 +134,7 @@ export function useConfiguredAnswerConcepts(uuids: Array<string>): {
     }
   };
 
-  const { data, isLoading } = useSWR(uuids.length > 0 ? ['answer-concepts', uuids] : null, async () => {
+  const { data, isLoading, mutate } = useSWR(uuids.length > 0 ? ['answer-concepts', uuids] : null, async () => {
     const results = await Promise.all(uuids.map(fetchConcept));
     return results.filter((concept) => concept !== null);
   });
@@ -138,7 +143,8 @@ export function useConfiguredAnswerConcepts(uuids: Array<string>): {
     () => ({
       configuredConceptAnswers: data ?? [],
       isLoadingConfiguredAnswers: isLoading,
+      mutate,
     }),
-    [data, isLoading],
+    [data, isLoading, mutate],
   );
 }

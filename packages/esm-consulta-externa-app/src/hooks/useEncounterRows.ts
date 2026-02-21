@@ -1,4 +1,4 @@
-import useSWRImmutable, { mutate } from 'swr';
+import useSWRImmutable from 'swr';
 import { useCallback, useMemo } from 'react';
 import { openmrsFetch } from '@openmrs/esm-framework';
 import type { OpenmrsEncounter } from '../types';
@@ -19,7 +19,7 @@ export interface OpenmrsResource {
 export function useEncounterRows(patientUuid: string, encounterType: string, encounterFilter: (encounter) => boolean) {
   const url = `/ws/rest/v1/encounter?encounterType=${encounterType}&patient=${patientUuid}&v=${encounterRepresentation}`;
 
-  const { data, error, isLoading } = useSWRImmutable<{ data: { results: Array<OpenmrsEncounter> } }, Error>(
+  const { data, error, isLoading, mutate } = useSWRImmutable<{ data: { results: Array<OpenmrsEncounter> } }, Error>(
     url,
     openmrsFetch,
   );
@@ -34,14 +34,15 @@ export function useEncounterRows(patientUuid: string, encounterType: string, enc
   }, [data, encounterFilter, isLoading]);
 
   const onFormSave = useCallback(() => {
-    mutate(url);
-  }, [url]);
+    mutate();
+  }, [mutate]);
 
   return {
     encounters: sortedAndFilteredEncounters,
     isLoading,
     error,
     onFormSave,
+    mutate,
   };
 }
 

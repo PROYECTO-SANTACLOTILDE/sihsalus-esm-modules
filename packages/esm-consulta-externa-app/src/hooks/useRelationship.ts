@@ -6,11 +6,12 @@ import type { Relationship } from '../types';
 const useRelationship = (relationshipUuid: string) => {
   const customRepresentation = `custom:(display,uuid,startDate,endDate,relationshipType:(uuid,display,aIsToB,bIsToA),personA,personB)`;
   const url = `${restBaseUrl}/relationship/${relationshipUuid}?v=${customRepresentation}`;
-  const { isLoading, data, error } = useSWR<FetchResponse<Relationship>>(url, openmrsFetch);
+  const { isLoading, data, error, mutate } = useSWR<FetchResponse<Relationship>>(url, openmrsFetch);
   return {
     isLoading,
     error,
     relationship: data?.data,
+    mutate,
   };
 };
 

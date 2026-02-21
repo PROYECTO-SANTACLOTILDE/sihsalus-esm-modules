@@ -46,7 +46,7 @@ export function useIndicators() {
 
 /** GET /ws/module/indicators/api/indicators/{id}/evaluate */
 export function useEvaluateIndicator(id: number | null) {
-  const { data, isLoading, error } = useSWR<{ data: EvaluationResult }>(
+  const { data, isLoading, error, mutate } = useSWR<{ data: EvaluationResult }>(
     id != null ? `${BASE_URL}/${id}/evaluate` : null,
     openmrsFetch,
   );
@@ -55,6 +55,7 @@ export function useEvaluateIndicator(id: number | null) {
     indicatorName: data?.data?.indicatorName ?? '',
     isLoading,
     error,
+    mutate,
   };
 }
 

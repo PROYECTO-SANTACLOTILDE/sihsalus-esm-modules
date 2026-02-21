@@ -12,14 +12,15 @@ export interface Equipment{
 }
 
 const useGetEquipment = () => {
-    const { data, error, isLoading } = useSWR<{data: Equipment[]}>(
+    const { data, error, isLoading, mutate } = useSWR<{data: Equipment[]}>(
         API_URL,
         openmrsFetch
     );
     return {
         equipments: data?.data,
         isError: error,
-        isLoading 
+        isLoading,
+        mutate,
     }
 }
 export default useGetEquipment;

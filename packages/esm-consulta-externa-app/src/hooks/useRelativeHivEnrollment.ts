@@ -7,11 +7,12 @@ const useRelativeHivEnrollment = (relativeUuid: string) => {
   const customeRepresentation = 'custom:(uuid,program:(name,uuid))';
   const url = `/ws/rest/v1/programenrollment?v=${customeRepresentation}&patient=${relativeUuid}`;
   const config = useConfig<ConfigObject>();
-  const { data, error, isLoading } = useSWR<{ data: { results: Enrollment[] } }>(url, openmrsFetch);
+  const { data, error, isLoading, mutate } = useSWR<{ data: { results: Enrollment[] } }>(url, openmrsFetch);
   return {
     error,
     isLoading,
     enrollment: (data?.data?.results ?? []).find((en) => en.program.uuid === config.hivProgramUuid) ?? null,
+    mutate,
   };
 };
 

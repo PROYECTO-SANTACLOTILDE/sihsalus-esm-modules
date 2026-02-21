@@ -7,9 +7,10 @@ export function useProviders(): {
   isLoading: boolean;
   error: Error | undefined;
   isValidating: boolean;
+  mutate: () => void;
 } {
   const apiUrl = `${restBaseUrl}/provider`;
-  const { data, error, isLoading, isValidating } = useSWR<{ data: { results: Array<Provider> } }, Error>(
+  const { data, error, isLoading, isValidating, mutate } = useSWR<{ data: { results: Array<Provider> } }, Error>(
     apiUrl,
     openmrsFetch,
   );
@@ -19,5 +20,6 @@ export function useProviders(): {
     isLoading,
     error,
     isValidating,
+    mutate,
   };
 }

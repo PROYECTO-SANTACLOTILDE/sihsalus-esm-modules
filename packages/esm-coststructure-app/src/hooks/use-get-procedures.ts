@@ -13,14 +13,15 @@ export interface Procedure {
 const useGetProcedures = (query = "") => {
     const params = new URLSearchParams({ query });
     const URL = `${API_URL}?${params.toString()}`;
-    const { data, error, isLoading } = useSWR<{data: Procedure[]}>(
+    const { data, error, isLoading, mutate } = useSWR<{data: Procedure[]}>(
         URL,
         openmrsFetch
     );
     return {
         procedures: data?.data,
         isError: error,
-        isLoading
+        isLoading,
+        mutate,
     }
 }
 

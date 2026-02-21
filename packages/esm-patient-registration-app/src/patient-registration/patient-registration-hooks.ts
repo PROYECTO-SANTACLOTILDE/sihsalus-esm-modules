@@ -281,10 +281,11 @@ async function getPatientRegistration(patientUuid: string) {
 export function useInitialPatientIdentifiers(patientUuid: string): {
   data: FormValues['identifiers'];
   isLoading: boolean;
+  mutate: () => void;
 } {
   const shouldFetch = !!patientUuid;
 
-  const { data, error, isLoading } = useSWR<FetchResponse<{ results: Array<PatientIdentifierResponse> }>, Error>(
+  const { data, error, isLoading, mutate } = useSWR<FetchResponse<{ results: Array<PatientIdentifierResponse> }>, Error>(
     shouldFetch
       ? `${restBaseUrl}/patient/${patientUuid}/identifier?v=custom:(uuid,identifier,identifierType:(uuid,required,name),preferred)`
       : null,
@@ -294,6 +295,7 @@ export function useInitialPatientIdentifiers(patientUuid: string): {
   const result: {
     data: FormValues['identifiers'];
     isLoading: boolean;
+    mutate: () => void;
   } = useMemo(() => {
     const identifiers: FormValues['identifiers'] = {};
 
@@ -313,15 +315,16 @@ export function useInitialPatientIdentifiers(patientUuid: string): {
     return {
       data: identifiers,
       isLoading,
+      mutate,
     };
-  }, [data?.data?.results, isLoading]);
+  }, [data?.data?.results, isLoading, mutate]);
 
   return result;
 }
 
 function useInitialEncounters(patientUuid: string, patientToEdit: fhir.Patient) {
   const { registrationObs } = useConfig<RegistrationConfig>();
-  const { data, error, isLoading } = useSWR<FetchResponse<{ results: Array<Encounter> }>>(
+  const { data, error, isLoading, mutate } = useSWR<FetchResponse<{ results: Array<Encounter> }>>(
     patientToEdit && registrationObs.encounterTypeUuid
       ? `${restBaseUrl}/encounter?patient=${patientUuid}&v=custom:(encounterDatetime,obs:(concept:ref,value:ref))&encounterType=${registrationObs.encounterTypeUuid}`
       : null,
@@ -334,12 +337,12 @@ function useInitialEncounters(patientUuid: string, patientToEdit: fhir.Patient) 
     }))
     .reduce((accu, curr) => Object.assign(accu, curr), {});
 
-  return { data: encounters, isLoading, error };
+  return { data: encounters, isLoading, error, mutate };
 }
 
 function useInitialPersonAttributes(personUuid: string) {
   const shouldFetch = !!personUuid;
-  const { data, error, isLoading } = useSWR<FetchResponse<{ results: Array<PersonAttributeResponse> }>, Error>(
+  const { data, error, isLoading, mutate } = useSWR<FetchResponse<{ results: Array<PersonAttributeResponse> }>, Error>(
     shouldFetch
       ? `${restBaseUrl}/person/${personUuid}/attribute?v=custom:(uuid,display,attributeType:(uuid,display,format),value)`
       : null,
@@ -349,13 +352,14 @@ function useInitialPersonAttributes(personUuid: string) {
     return {
       data: data?.data?.results,
       isLoading,
+      mutate,
     };
-  }, [data?.data?.results, isLoading]);
+  }, [data?.data?.results, isLoading, mutate]);
   return result;
 }
 
 function useInitialPersonDeathInfo(personUuid: string) {
-  const { data, error, isLoading } = useSWR<FetchResponse<DeathInfoResults>, Error>(
+  const { data, error, isLoading, mutate } = useSWR<FetchResponse<DeathInfoResults>, Error>(
     !!personUuid
       ? `${restBaseUrl}/person/${personUuid}?v=custom:(uuid,display,causeOfDeath,dead,deathDate,causeOfDeathNonCoded)`
       : null,
@@ -366,8 +370,9 @@ function useInitialPersonDeathInfo(personUuid: string) {
     return {
       data: data?.data,
       isLoading,
+      mutate,
     };
-  }, [data?.data, isLoading]);
+  }, [data?.data, isLoading, mutate]);
   return result;
 }
 

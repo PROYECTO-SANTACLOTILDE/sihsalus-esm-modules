@@ -11,14 +11,15 @@ export interface HumanResource{
 }
 
 const useGetHumanResource = () =>{
-    const { data, error, isLoading } = useSWR<{data: HumanResource[]}>(
+    const { data, error, isLoading, mutate } = useSWR<{data: HumanResource[]}>(
         API_URL,
         openmrsFetch
     );
     return {
         humanresource: data?.data,
         isError: error,
-        isLoading 
+        isLoading,
+        mutate,
     }
 }
 export default useGetHumanResource;

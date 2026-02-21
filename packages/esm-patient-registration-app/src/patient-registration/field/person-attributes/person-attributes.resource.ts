@@ -5,9 +5,10 @@ import { type PersonAttributeTypeResponse } from '../../patient-registration.typ
 export function usePersonAttributeType(personAttributeTypeUuid: string): {
   data: PersonAttributeTypeResponse;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 } {
-  const { data, error, isLoading } = useSWRImmutable<FetchResponse<PersonAttributeTypeResponse>>(
+  const { data, error, isLoading, mutate } = useSWRImmutable<FetchResponse<PersonAttributeTypeResponse>>(
     `${restBaseUrl}/personattributetype/${personAttributeTypeUuid}`,
     openmrsFetch,
   );
@@ -16,5 +17,6 @@ export function usePersonAttributeType(personAttributeTypeUuid: string): {
     data: data?.data,
     isLoading,
     error,
+    mutate,
   };
 }

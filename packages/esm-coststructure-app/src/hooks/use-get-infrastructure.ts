@@ -13,14 +13,15 @@ export interface Infrastructure {
 }
 
 const useGetInfrastructure = () => {
-    const { data, error, isLoading } = useSWR<{data: Infrastructure[]}>(
+    const { data, error, isLoading, mutate } = useSWR<{data: Infrastructure[]}>(
         API_URL,
         openmrsFetch
     );
     return {
         infrastructure: data?.data,
         isError: error,
-        isLoading
+        isLoading,
+        mutate,
     }
 }
 export default useGetInfrastructure;
