@@ -804,6 +804,68 @@ export const configSchema = {
     },
   },
 
+  // 10G. NUTRICIÓN INFANTIL (NTS 137)
+  childNutrition: {
+    _type: Type.Object,
+    _description: 'Concepts para evaluación y seguimiento nutricional infantil',
+    _default: {
+      weightForAgeConceptUuid: '44ca0b9e-d453-473d-80fc-cc5c6c97c4e1',
+      heightForAgeConceptUuid: 'f0a86915-09a2-4e1f-a9a3-bb870cea6b80',
+      weightForHeightConceptUuid: '58c5581a-cc71-473e-b3a6-cd1c393b7d54',
+      heightPercentileConceptUuid: 'd37c8f1a-4a7d-4066-835f-253c80ad3fc7',
+      feedingAssessmentConceptUuid: '6d411bf5-4391-4f4b-8ec6-7f789be9a237',
+      breastfeedingConceptUuid: '0c1098a3-d445-4968-9f68-6b687500246e',
+      mmnReceivingConceptUuid: '5ab754bf-9332-4f4a-abac-c0a00f398381',
+      ironReceivingConceptUuid: 'e336f84a-5593-47f9-af88-2d8f2c79bfc2',
+      nutritionCounselingCountConceptUuid: '8231f0af-cbd8-4b93-9708-d88175b81325',
+    },
+    weightForAgeConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de Peso/Edad (P/E) — OCL: Peso Edad #3171',
+      _default: '44ca0b9e-d453-473d-80fc-cc5c6c97c4e1',
+    },
+    heightForAgeConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de Talla/Edad (T/E) — OCL: Talla Edad #3172',
+      _default: 'f0a86915-09a2-4e1f-a9a3-bb870cea6b80',
+    },
+    weightForHeightConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de Peso/Talla (P/T) — OCL: Peso Talla #3173',
+      _default: '58c5581a-cc71-473e-b3a6-cd1c393b7d54',
+    },
+    heightPercentileConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de Percentilo de talla — OCL: #1223 (Numeric)',
+      _default: 'd37c8f1a-4a7d-4066-835f-253c80ad3fc7',
+    },
+    feedingAssessmentConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de evaluación de alimentación del niño — OCL: #2279 (Coded, 17 Q-AND-A)',
+      _default: '6d411bf5-4391-4f4b-8ec6-7f789be9a237',
+    },
+    breastfeedingConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de ¿Recibe lactancia materna? — OCL: #1815 (Coded)',
+      _default: '0c1098a3-d445-4968-9f68-6b687500246e',
+    },
+    mmnReceivingConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de ¿Recibiendo MMN? — OCL: #1812 (Coded)',
+      _default: '5ab754bf-9332-4f4a-abac-c0a00f398381',
+    },
+    ironReceivingConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de ¿Tomando suplemento de hierro? — OCL: #1808 (Coded)',
+      _default: 'e336f84a-5593-47f9-af88-2d8f2c79bfc2',
+    },
+    nutritionCounselingCountConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de número de consejería nutricional — OCL: #4194 (Numeric)',
+      _default: '8231f0af-cbd8-4b93-9708-d88175b81325',
+    },
+  },
+
   // 10. AGE GROUPS CONFIGURATION
   ageGroupsCRED: {
     _type: Type.Array,
@@ -1316,5 +1378,16 @@ export interface ConfigObject {
     appointmentServiceUuid: string;
     lookaheadCount: number;
     defaultAppointmentDurationMins: number;
+  };
+  childNutrition: {
+    weightForAgeConceptUuid: string;
+    heightForAgeConceptUuid: string;
+    weightForHeightConceptUuid: string;
+    heightPercentileConceptUuid: string;
+    feedingAssessmentConceptUuid: string;
+    breastfeedingConceptUuid: string;
+    mmnReceivingConceptUuid: string;
+    ironReceivingConceptUuid: string;
+    nutritionCounselingCountConceptUuid: string;
   };
 }
