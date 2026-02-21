@@ -3,14 +3,16 @@ import { useTranslation } from 'react-i18next';
 import {
   Tag,
   Button,
+  DataTableSkeleton,
   StructuredListWrapper,
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
 } from '@carbon/react';
 import { Add } from '@carbon/react/icons';
-import { CardHeader } from '@openmrs/esm-patient-common-lib';
+import { CardHeader, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
+import { useStimulationSessions } from '../../../../hooks/useStimulationSessions';
 import type { ConfigObject } from '../../../../config-schema';
 import styles from './stimulation-sessions.scss';
 
@@ -21,6 +23,8 @@ interface StimulationSessionsProps {
 const StimulationSessions: React.FC<StimulationSessionsProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const config = useConfig<ConfigObject>();
+  const { totalSessions, lastSessionDate, developmentAreas, isLoading, error } =
+    useStimulationSessions(patientUuid);
   const headerTitle = t('esSessionsTitle', 'Sesiones de Estimulación');
 
   const handleAdd = useCallback(() => {
@@ -35,11 +39,13 @@ const StimulationSessions: React.FC<StimulationSessionsProps> = ({ patientUuid }
     });
   }, [config.formsList.stimulationSessionForm]);
 
-  // TODO: Connect to SWR hook when concept UUIDs are configured
-  const totalSessions = null;
-  const lastSessionDate = null;
-  const developmentAreas = null;
-  const nextSessionDate = null;
+  if (isLoading) {
+    return <DataTableSkeleton role="progressbar" compact rowCount={3} columnCount={2} />;
+  }
+
+  if (error) {
+    return <ErrorState error={error} headerTitle={headerTitle} />;
+  }
 
   return (
     <div className={styles.widgetCard}>
@@ -76,14 +82,6 @@ const StimulationSessions: React.FC<StimulationSessionsProps> = ({ patientUuid }
               </StructuredListCell>
               <StructuredListCell className={styles.value}>
                 {lastSessionDate ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
-              </StructuredListCell>
-            </StructuredListRow>
-            <StructuredListRow>
-              <StructuredListCell className={styles.label}>
-                {t('fpNextSession', 'Próxima sesión')}
-              </StructuredListCell>
-              <StructuredListCell className={styles.value}>
-                {nextSessionDate ?? <span className={styles.noData}>{t('pending', 'Pendiente')}</span>}
               </StructuredListCell>
             </StructuredListRow>
           </StructuredListBody>

@@ -3,14 +3,16 @@ import { useTranslation } from 'react-i18next';
 import {
   Tag,
   Button,
+  DataTableSkeleton,
   StructuredListWrapper,
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
 } from '@carbon/react';
 import { Add } from '@carbon/react/icons';
-import { CardHeader } from '@openmrs/esm-patient-common-lib';
+import { CardHeader, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { launchWorkspace2, useConfig } from '@openmrs/esm-framework';
+import { useStimulationFollowup } from '../../../../hooks/useStimulationFollowup';
 import type { ConfigObject } from '../../../../config-schema';
 import styles from './stimulation-followup.scss';
 
@@ -21,6 +23,8 @@ interface StimulationFollowupProps {
 const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const config = useConfig<ConfigObject>();
+  const { lastEvaluationResult, lastEvaluationDate, hasStimulationLack, isLoading, error } =
+    useStimulationFollowup(patientUuid);
   const headerTitle = t('esFollowUpTitle', 'Seguimiento del Desarrollo');
 
   const handleAdd = useCallback(() => {
@@ -35,18 +39,26 @@ const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }
     });
   }, [config.formsList.stimulationFollowupForm]);
 
-  // TODO: Connect to SWR hook when concept UUIDs are configured
-  const milestonesAchieved = null;
-  const lastEvaluationResult = null;
-  const lastEvaluationDate = null;
-  const nextEvaluationDate = null;
-  const riskLevel = null;
+  if (isLoading) {
+    return <DataTableSkeleton role="progressbar" compact rowCount={4} columnCount={2} />;
+  }
+
+  if (error) {
+    return <ErrorState error={error} headerTitle={headerTitle} />;
+  }
+
+  const riskLabel = hasStimulationLack
+    ? t('esRisk', 'Riesgo')
+    : lastEvaluationResult
+      ? t('esNormal', 'Normal')
+      : null;
+  const riskTagType = hasStimulationLack ? 'red' : lastEvaluationResult ? 'green' : 'gray';
 
   return (
     <div className={styles.widgetCard}>
       <CardHeader title={headerTitle}>
-        <Tag type={riskLevel === 'normal' ? 'green' : riskLevel ? 'red' : 'gray'} size="sm">
-          {riskLevel ?? t('noData', 'Sin datos')}
+        <Tag type={riskTagType} size="sm">
+          {riskLabel ?? t('noData', 'Sin datos')}
         </Tag>
         <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
           {t('add', 'Agregar')}
@@ -55,14 +67,6 @@ const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }
       <div className={styles.container}>
         <StructuredListWrapper isCondensed>
           <StructuredListBody>
-            <StructuredListRow>
-              <StructuredListCell className={styles.label}>
-                {t('esMilestones', 'Hitos alcanzados')}
-              </StructuredListCell>
-              <StructuredListCell className={styles.value}>
-                {milestonesAchieved ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
-              </StructuredListCell>
-            </StructuredListRow>
             <StructuredListRow>
               <StructuredListCell className={styles.label}>
                 {t('esLastEvaluation', 'Última evaluación')}
@@ -81,10 +85,16 @@ const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }
             </StructuredListRow>
             <StructuredListRow>
               <StructuredListCell className={styles.label}>
-                {t('esNextEvaluation', 'Próxima evaluación')}
+                {t('esStimulationRisk', 'Riesgo de estimulación')}
               </StructuredListCell>
               <StructuredListCell className={styles.value}>
-                {nextEvaluationDate ?? <span className={styles.noData}>{t('pending', 'Pendiente')}</span>}
+                {hasStimulationLack ? (
+                  <Tag type="red" size="sm">{t('esRisk', 'Riesgo')}</Tag>
+                ) : lastEvaluationResult ? (
+                  <Tag type="green" size="sm">{t('esNormal', 'Normal')}</Tag>
+                ) : (
+                  <span className={styles.noData}>{t('noData', 'Sin datos')}</span>
+                )}
               </StructuredListCell>
             </StructuredListRow>
           </StructuredListBody>

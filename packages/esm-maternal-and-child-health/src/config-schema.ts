@@ -866,6 +866,44 @@ export const configSchema = {
     },
   },
 
+  // 10H. ESTIMULACIÓN TEMPRANA (NTS 137)
+  earlyStimulation: {
+    _type: Type.Object,
+    _description: 'Concepts para estimulación temprana y seguimiento del desarrollo',
+    _default: {
+      developmentEvalConceptUuid: 'eb31eed5-5070-4d59-90b0-eb1d0e810d31',
+      tepsiCoordinationConceptUuid: 'ecc332d2-6ca1-4238-ac14-d0de521bdb11',
+      tepsiMotorConceptUuid: '7aec4f14-e2fb-4489-bcc5-50c7bf609a5b',
+      stimulationLackConceptUuid: '861b53cc-e5ea-433c-9417-a8d4a6aeda26',
+      counselingConceptUuid: 'de5570f2-70f4-42ee-97c1-def5ca8333df',
+    },
+    developmentEvalConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de evaluación de desarrollo — OCL: Evaluación de Desarrollo #3648',
+      _default: 'eb31eed5-5070-4d59-90b0-eb1d0e810d31',
+    },
+    tepsiCoordinationConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de subtests coordinación TEPSI — OCL: #2195 (Coded)',
+      _default: 'ecc332d2-6ca1-4238-ac14-d0de521bdb11',
+    },
+    tepsiMotorConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de subtests motricidad TEPSI — OCL: #2196 (Coded)',
+      _default: '7aec4f14-e2fb-4489-bcc5-50c7bf609a5b',
+    },
+    stimulationLackConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de falta de estimulación del desarrollo — OCL: #1991 (Coded)',
+      _default: '861b53cc-e5ea-433c-9417-a8d4a6aeda26',
+    },
+    counselingConceptUuid: {
+      _type: Type.ConceptUuid,
+      _description: 'Concept UUID de orientación y consejería — OCL: #2032 (Coded)',
+      _default: 'de5570f2-70f4-42ee-97c1-def5ca8333df',
+    },
+  },
+
   // 10. AGE GROUPS CONFIGURATION
   ageGroupsCRED: {
     _type: Type.Array,
@@ -1389,5 +1427,12 @@ export interface ConfigObject {
     mmnReceivingConceptUuid: string;
     ironReceivingConceptUuid: string;
     nutritionCounselingCountConceptUuid: string;
+  };
+  earlyStimulation: {
+    developmentEvalConceptUuid: string;
+    tepsiCoordinationConceptUuid: string;
+    tepsiMotorConceptUuid: string;
+    stimulationLackConceptUuid: string;
+    counselingConceptUuid: string;
   };
 }
