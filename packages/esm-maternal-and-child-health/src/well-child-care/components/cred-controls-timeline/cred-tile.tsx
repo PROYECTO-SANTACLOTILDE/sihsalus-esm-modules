@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { CheckmarkFilled, WarningFilled, EventSchedule, Time, CircleDash } from '@carbon/react/icons';
 import type { ControlStatus } from '../../../hooks/useCREDSchedule';
 import styles from './cred-matrix.scss';
 
@@ -15,6 +16,14 @@ export interface CredTileProps {
   onDelete?: (id: string) => void;
 }
 
+const STATUS_ICONS: Record<ControlStatus, typeof CheckmarkFilled> = {
+  completed: CheckmarkFilled,
+  scheduled: EventSchedule,
+  overdue: WarningFilled,
+  pending: Time,
+  future: CircleDash,
+};
+
 const CredTile: React.FC<CredTileProps> = ({ controlNumber, label, date, status }) => {
   const { t } = useTranslation();
 
@@ -25,6 +34,8 @@ const CredTile: React.FC<CredTileProps> = ({ controlNumber, label, date, status 
     pending: t('statusPending', 'Pendiente'),
     future: t('statusFuture', 'Futuro'),
   };
+
+  const StatusIcon = STATUS_ICONS[status];
 
   return (
     <div
@@ -38,7 +49,10 @@ const CredTile: React.FC<CredTileProps> = ({ controlNumber, label, date, status 
     >
       <div className={styles.tileHeader}>
         <strong>{`#${controlNumber}`}</strong>
-        <span className={classNames(styles.statusBadge, styles[`status-${status}`])}>{statusLabels[status]}</span>
+        <span className={classNames(styles.statusBadge, styles[`status-${status}`])}>
+          <StatusIcon size={12} />
+          {statusLabels[status]}
+        </span>
       </div>
       <div className={styles.tileLabel}>{label}</div>
       {date && <div className={styles.tileDate}>{dayjs(date).format('DD/MM/YYYY')}</div>}

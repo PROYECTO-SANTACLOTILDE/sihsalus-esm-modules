@@ -1,3 +1,4 @@
+@use '@carbon/colors';
 @use '@carbon/layout';
 @use '@carbon/type';
 @use '@openmrs/esm-styleguide/src/vars' as *;
@@ -11,20 +12,34 @@
 }
 
 .label {
+  @include type.type-style('body-compact-01');
   color: $text-02;
 }
 
 .value {
+  @include type.type-style('body-compact-01');
   font-weight: 600;
   text-align: right;
 }
 
 .anemic {
-  color: $danger;
+  color: colors.$red-70;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background-color: colors.$red-10;
+  border-radius: 4px;
+  border: 1px solid colors.$red-30;
 }
 
 .normalValue {
-  color: $support-02;
+  color: colors.$green-60;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background-color: colors.$green-10;
+  border-radius: 4px;
+  border: 1px solid colors.$green-30;
 }
 
 .noData {

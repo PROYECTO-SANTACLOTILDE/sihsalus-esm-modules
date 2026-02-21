@@ -49,12 +49,17 @@ const SupplementationTracker: React.FC<SupplementationTrackerProps> = ({ patient
         </Button>
       </CardHeader>
       <div className={styles.container}>
-        <ProgressBar
-          label={`${delivered}/${total} ${t('sachets', 'sobres')}`}
-          value={percentage}
-          size="small"
-          status={isComplete ? 'finished' : 'active'}
-        />
+        <div className={styles.progressRow}>
+          <div className={styles.progressBarWrapper}>
+            <ProgressBar
+              label={`${delivered}/${total} ${t('sachets', 'sobres')}`}
+              value={percentage}
+              size="small"
+              status={isComplete ? 'finished' : 'active'}
+            />
+          </div>
+          <span className={styles.percentageLabel}>{Math.round(percentage)}%</span>
+        </div>
         <p className={styles.helperText}>
           {t('mmnDescription', 'Directiva 068: 1 sobre diario desde los 6 meses')}
         </p>
