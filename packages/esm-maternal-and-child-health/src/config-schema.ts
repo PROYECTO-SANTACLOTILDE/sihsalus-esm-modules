@@ -161,9 +161,9 @@ export const configSchema = {
       clinicalHistory: 'HOSP-003-HISTORIA CLÍNICA OBSTÉTRICA',
 
       // CRED Seguimiento Forms
-      anemiaScreeningForm: '',
-      supplementationForm: '',
-      screeningIndicatorsForm: '',
+      anemiaScreeningForm: 'CRED-001-TAMIZAJE DE ANEMIA',
+      supplementationForm: 'CRED-002-SUPLEMENTACIÓN NIÑO',
+      screeningIndicatorsForm: 'OBST-013-TAMIZAJE PRENATAL',
       stimulationSessionForm: '',
       stimulationFollowupForm: '',
       stimulationCounselingForm: '',

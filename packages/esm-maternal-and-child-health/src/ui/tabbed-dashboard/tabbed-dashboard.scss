@@ -16,6 +16,11 @@
   margin: 1.3125rem;
 }
 
+// cred-schedule-slot: age groups full-width on top, checkups below
+.dashboard:global([data-extension-slot-name='cred-schedule-slot']) {
+  grid-template-columns: 1fr;
+}
+
 .dashboardContainer {
   container-name: dashboard;
   container-type: inline-size;
