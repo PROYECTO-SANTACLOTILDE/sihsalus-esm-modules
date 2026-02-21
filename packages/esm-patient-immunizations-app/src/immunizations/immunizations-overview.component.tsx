@@ -86,7 +86,7 @@ const ImmunizationsOverview: React.FC<ImmunizationsOverviewProps> = ({ patient, 
         <DataTable headers={tableHeaders} rows={tableRows} isSortable size="sm" useZebraStyles>
           {({ rows, headers, getHeaderProps, getTableProps }) => (
             <TableContainer>
-              <Table {...getTableProps()}>
+              <Table aria-label="immunizations overview" {...getTableProps()}>
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (

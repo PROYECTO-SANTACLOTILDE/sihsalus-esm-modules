@@ -10,7 +10,7 @@ export const useEncounters = (
   encounters: Encounter[];
   isLoading: boolean;
   isValidating: boolean;
-  error: any;
+  error: Error | null;
   mutate: () => void;
 } => {
   const url = `/ws/rest/v1/encounter?patient=${patientUuid}&encounterType=${encounterUuid}&form=${formUuid}&v=full`;

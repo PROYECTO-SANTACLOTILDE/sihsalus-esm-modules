@@ -142,7 +142,7 @@ const SequenceTable: React.FC<SequenceTableProps> = ({
       <DataTable rows={tableRows} headers={tableHeaders} useZebraStyles>
         {({ rows, headers, getHeaderProps, getTableProps, getRowProps }) => (
           <TableContainer className={styles.sequenceTable}>
-            <Table {...getTableProps()}>
+            <Table aria-label="immunization dose sequence" {...getTableProps()}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (

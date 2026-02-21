@@ -4812,7 +4812,6 @@ __metadata:
     react-hook-form: "npm:^7.56.1"
     react-is: "npm:^19.1.0"
     single-spa: "npm:^6.0.0"
-    webpack: "npm:^5.99.9"
     xlsx: "npm:^0.18.5"
     zod: "npm:^3.24.1"
   peerDependencies:
@@ -4836,7 +4835,6 @@ __metadata:
     "@openmrs/esm-patient-common-lib": "npm:next"
     lodash-es: "npm:^4.17.21"
     react-hook-form: "npm:^7.56.1"
-    webpack: "npm:^5.99.9"
     zod: "npm:^3.24.1"
   peerDependencies:
     "@openmrs/esm-framework": 8.x
@@ -4906,7 +4904,6 @@ __metadata:
     react-hook-form: "npm:^7.56.1"
     react-is: "npm:^19.1.0"
     single-spa: "npm:^6.0.0"
-    webpack: "npm:^5.99.9"
     xlsx: "npm:^0.18.5"
     zod: "npm:^3.24.1"
   peerDependencies:
