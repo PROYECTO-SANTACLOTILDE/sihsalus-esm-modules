@@ -27,7 +27,7 @@ export const OTable: React.FC<TableProps> = ({ tableHeaders, tableRows, formConc
     <TableContainer>
       <DataTable rows={tableRows} headers={tableHeaders} isSortable={true} size="sm">
         {({ rows, headers, getHeaderProps, getTableProps, getRowProps }) => (
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} aria-label="Encounter observations">
             <TableHead>
               <TableRow>
                 <TableExpandHeader enableToggle={false} />

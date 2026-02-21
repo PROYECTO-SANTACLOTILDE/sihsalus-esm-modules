@@ -92,7 +92,7 @@ const Financiador: React.FC<FinanciadorProps> = ({ patientUuid }) => {
         <DataTable rows={rows} headers={headers} size="sm">
           {({ rows: tableRows, headers: tableHeaders, getTableProps, getHeaderProps, getRowProps }) => (
             <TableContainer>
-              <Table {...getTableProps()}>
+              <Table {...getTableProps()} aria-label={t('insuranceHistory', 'Historial de Financiador')}>
                 <TableHead>
                   <TableRow>
                     {tableHeaders.map((header) => (

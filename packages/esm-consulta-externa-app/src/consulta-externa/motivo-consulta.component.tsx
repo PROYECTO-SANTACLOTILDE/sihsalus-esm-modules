@@ -78,7 +78,7 @@ const MotivoConsulta: React.FC<MotivoConsultaProps> = ({ patientUuid }) => {
         <DataTable rows={rows} headers={headers} size="sm">
           {({ rows: tableRows, headers: tableHeaders, getTableProps, getHeaderProps, getRowProps }) => (
             <TableContainer>
-              <Table {...getTableProps()}>
+              <Table {...getTableProps()} aria-label={t('chiefComplaintHistory', 'Historial de Motivos de Consulta')}>
                 <TableHead>
                   <TableRow>
                     {tableHeaders.map((header) => (

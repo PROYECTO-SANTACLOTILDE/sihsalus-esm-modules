@@ -79,7 +79,7 @@ const PatientAppointmentsTable: React.FC<AppointmentTableProps> = ({
       <DataTable rows={tableRows} headers={tableHeaders} isSortable size={isTablet ? 'lg' : 'sm'} useZebraStyles>
         {({ rows, headers, getHeaderProps, getTableProps }) => (
           <TableContainer>
-            <Table {...getTableProps()}>
+            <Table {...getTableProps()} aria-label={t('patientAppointments', 'Patient appointments')}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (

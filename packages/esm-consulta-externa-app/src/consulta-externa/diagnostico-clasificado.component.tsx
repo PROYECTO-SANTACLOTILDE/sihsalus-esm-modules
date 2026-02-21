@@ -93,7 +93,7 @@ const DiagnosticoClasificado: React.FC<DiagnosticoClasificadoProps> = ({ patient
         <DataTable rows={rows} headers={headers} size="sm">
           {({ rows: tableRows, headers: tableHeaders, getTableProps, getHeaderProps, getRowProps }) => (
             <TableContainer>
-              <Table {...getTableProps()}>
+              <Table {...getTableProps()} aria-label={t('diagnosisHistory', 'Historial de Diagnósticos')}>
                 <TableHead>
                   <TableRow>
                     {tableHeaders.map((header) => (
