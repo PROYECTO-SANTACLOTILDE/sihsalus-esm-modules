@@ -82,12 +82,16 @@
   "clinicalViews": "Clinical views",
   "cm": "cm",
   "cnAssessmentTitle": "Nutritional Status",
+  "cnBreastfeeding": "Breastfeeding",
+  "cnCounselingCount": "Counseling Sessions",
   "cnCounselingTitle": "Feeding Counseling",
   "cnDiagnosis": "Nutritional diagnosis",
   "cnFeedingType": "Feeding type",
   "cnFollowUpTitle": "Nutrition Follow-up",
   "cnGrowthMonitoring": "Growth monitoring",
   "cnHeightForAge": "Height/Age (H/A)",
+  "cnIronSupplement": "Iron Supplement",
+  "cnLastFollowup": "Last follow-up",
   "cnLastMeasurement": "Last measurement",
   "cnMmnStatus": "MMN Supplementation",
   "cnNextCheck": "Next check",
@@ -339,6 +343,7 @@
   "nextMonth": "Next month",
   "nextScreening": "Next screening",
   "nipples": "nipples",
+  "no": "No",
   "noConditionsToDisplay": "No conditions to display",
   "noData": "No data",
   "noDataAvailable": "No hay datos disponibles para mostrar",
@@ -697,5 +702,6 @@
   "Puerperio": "Postpartum",
   "Planificación Familiar": "Family Planning",
   "Prevención del Cáncer": "Cancer Prevention",
-  "Madre Gestante": "Maternal Health"
+  "Madre Gestante": "Maternal Health",
+  "yes": "Yes"
 }
