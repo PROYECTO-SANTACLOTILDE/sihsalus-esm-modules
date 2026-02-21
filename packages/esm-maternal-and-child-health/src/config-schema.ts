@@ -833,6 +833,27 @@ export const configSchema = {
     },
   },
 
+  // 11. CRED SCHEDULING CONFIGURATION
+  credScheduling: {
+    _type: Type.Object,
+    _description: 'Configuración para la programación de controles CRED',
+    appointmentServiceUuid: {
+      _type: Type.UUID,
+      _description: 'UUID del AppointmentService para controles CRED',
+      _default: '',
+    },
+    lookaheadCount: {
+      _type: Type.Number,
+      _description: 'Cantidad de citas futuras a generar por defecto',
+      _default: 3,
+    },
+    defaultAppointmentDurationMins: {
+      _type: Type.Number,
+      _description: 'Duración por defecto de citas CRED en minutos',
+      _default: 30,
+    },
+  },
+
   clinicalEncounterUuid: {
     _type: Type.String,
     _description: 'Clinical Encounter UUID',
@@ -1282,5 +1303,10 @@ export interface ConfigObject {
     lowRiskConceptUuid: string;
     veryHighRiskConceptUuid: string;
     riskFactorsConceptUuid: string;
+  };
+  credScheduling: {
+    appointmentServiceUuid: string;
+    lookaheadCount: number;
+    defaultAppointmentDurationMins: number;
   };
 }

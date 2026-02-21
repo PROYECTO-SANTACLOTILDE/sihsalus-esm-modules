@@ -1,9 +1,11 @@
+import React, { useMemo, useState } from 'react';
+import classNames from 'classnames';
 import { Tile } from '@carbon/react';
 import { launchWorkspace2, useConfig, usePatient } from '@openmrs/esm-framework';
 import dayjs from 'dayjs';
-import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ConfigObject } from '../../../config-schema';
+import { useCREDSchedule } from '../../../hooks/useCREDSchedule';
 import styles from './cred-schedule.scss';
 
 interface CredAgeGroupsProps {
@@ -13,19 +15,15 @@ interface CredAgeGroupsProps {
 const CredAgeGroups: React.FC<CredAgeGroupsProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const { ageGroupsCRED } = useConfig<ConfigObject>();
-  const { patient, isLoading, error } = usePatient(patientUuid);
+  const { patient, isLoading: isPatientLoading, error: patientError } = usePatient(patientUuid);
+  const { controls } = useCREDSchedule(patientUuid);
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<(typeof ageGroupsCRED)[0] | null>(null);
 
   const patientAge = useMemo(() => {
     if (!patient?.birthDate) return { inDays: 0, inMonths: 0 };
-
     const birthDate = dayjs(patient.birthDate);
     const today = dayjs();
-
-    const inDays = today.diff(birthDate, 'days');
-    const inMonths = today.diff(birthDate, 'months');
-
-    return { inDays, inMonths };
+    return { inDays: today.diff(birthDate, 'days'), inMonths: today.diff(birthDate, 'months') };
   }, [patient]);
 
   const currentAgeGroup = useMemo(() => {
@@ -35,16 +33,34 @@ const CredAgeGroups: React.FC<CredAgeGroupsProps> = ({ patientUuid }) => {
         group.maxDays !== undefined &&
         patientAge.inDays >= group.minDays &&
         patientAge.inDays <= group.maxDays;
-
       const inMonthRange =
         group.minMonths !== undefined &&
         group.maxMonths !== undefined &&
         patientAge.inMonths >= group.minMonths &&
         patientAge.inMonths <= group.maxMonths;
-
       return inDayRange || inMonthRange;
     });
   }, [patientAge, ageGroupsCRED]);
+
+  // Compute status summary per age group
+  const groupStatusSummary = useMemo(() => {
+    const summary: Record<string, { completed: number; overdue: number; total: number }> = {};
+
+    ageGroupsCRED.forEach((group) => {
+      summary[group.label] = { completed: 0, overdue: 0, total: 0 };
+    });
+
+    controls.forEach((control) => {
+      const s = summary[control.ageGroupLabel];
+      if (s) {
+        s.total++;
+        if (control.status === 'completed') s.completed++;
+        if (control.status === 'overdue') s.overdue++;
+      }
+    });
+
+    return summary;
+  }, [controls, ageGroupsCRED]);
 
   const handleAgeGroupClick = (group) => {
     setSelectedAgeGroup(group);
@@ -56,8 +72,8 @@ const CredAgeGroups: React.FC<CredAgeGroupsProps> = ({ patientUuid }) => {
     });
   };
 
-  if (isLoading) return <div>{t('loadingPatient', 'Cargando paciente...')}</div>;
-  if (error)
+  if (isPatientLoading) return <div>{t('loadingPatient', 'Cargando paciente...')}</div>;
+  if (patientError)
     return <p className={styles.error}>{t('errorLoadingPatient', 'Error cargando los datos del paciente.')}</p>;
 
   return (
@@ -66,17 +82,40 @@ const CredAgeGroups: React.FC<CredAgeGroupsProps> = ({ patientUuid }) => {
         <h4>{t('credAgeGroups', 'Control Según Edad')}</h4>
       </div>
       <div className={styles.ageGroups}>
-        {ageGroupsCRED.map((group) => (
-          <Tile
-            key={group.label}
-            className={`${styles.ageTile} ${selectedAgeGroup?.label === group.label ? styles.active : ''} ${
-              currentAgeGroup?.label === group.label ? styles.current : ''
-            } ${group.neonatalControl ? styles.neonatal : ''}`}
-            onClick={() => handleAgeGroupClick(group)}>
-            <strong>{group.label}</strong>
-            {group.sublabel && <div>{group.sublabel}</div>}
-          </Tile>
-        ))}
+        {ageGroupsCRED.map((group) => {
+          const summary = groupStatusSummary[group.label];
+          const isCurrent = currentAgeGroup?.label === group.label;
+          const isSelected = selectedAgeGroup?.label === group.label;
+          const allCompleted = summary && summary.total > 0 && summary.completed === summary.total;
+          const hasOverdue = summary && summary.overdue > 0;
+
+          return (
+            <Tile
+              key={group.label}
+              className={classNames(styles.ageTile, {
+                [styles.active]: isSelected,
+                [styles.current]: isCurrent,
+                [styles.neonatal]: group.neonatalControl,
+                [styles.groupCompleted]: allCompleted,
+                [styles.groupOverdue]: hasOverdue,
+              })}
+              onClick={() => handleAgeGroupClick(group)}
+            >
+              <strong>{group.label}</strong>
+              {group.sublabel && <div>{group.sublabel}</div>}
+              {summary && summary.total > 0 && (
+                <div className={styles.groupStatus}>
+                  {summary.completed}/{summary.total}
+                </div>
+              )}
+              {hasOverdue && (
+                <div className={styles.overdueIndicator}>
+                  {t('overdueShort', '{{count}} venc.', { count: summary.overdue })}
+                </div>
+              )}
+            </Tile>
+          );
+        })}
       </div>
     </div>
   );

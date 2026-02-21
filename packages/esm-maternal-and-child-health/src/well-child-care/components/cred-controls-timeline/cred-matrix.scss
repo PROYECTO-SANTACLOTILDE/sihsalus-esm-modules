@@ -23,6 +23,7 @@
 
 .cellContent {
   padding: layout.$spacing-03;
+  vertical-align: top;
 }
 
 .ageGroups {
@@ -36,20 +37,107 @@
   text-align: center;
   padding: layout.$spacing-03;
   border: 1px solid colors.$gray-30;
-  cursor: pointer;
+  cursor: default;
   flex: 1 1 120px;
+  min-width: 80px;
+  margin-bottom: layout.$spacing-02;
+}
 
-  &.active {
-    border-color: colors.$blue-60;
-    background-color: colors.$blue-10;
-  }
+.tileLabel {
+  @include type.type-style('caption-01');
+  color: $text-02;
+  margin-top: layout.$spacing-01;
+}
 
-  &.current {
-    background-color: colors.$gray-10;
-  }
+.tileDate {
+  @include type.type-style('caption-01');
+  color: $text-02;
+  margin-top: layout.$spacing-01;
+}
+
+// Status colors
+.tileCompleted {
+  border-left: 3px solid colors.$green-50;
+  background-color: colors.$green-10;
+}
+
+.tileScheduled {
+  border-left: 3px solid colors.$blue-50;
+  background-color: colors.$blue-10;
+}
+
+.tileOverdue {
+  border-left: 3px solid $danger;
+  background-color: colors.$red-10;
+}
+
+.tilePending {
+  border-left: 3px solid colors.$yellow-30;
+  background-color: colors.$yellow-10;
+}
+
+.tileFuture {
+  border-left: 3px solid colors.$gray-30;
+  background-color: transparent;
+  opacity: 0.7;
+}
+
+.statusBadge {
+  @include type.type-style('label-01');
+  display: inline-block;
+  padding: 1px layout.$spacing-02;
+  border-radius: 4px;
+  margin-top: layout.$spacing-02;
+  font-weight: 600;
+}
+
+.status-completed {
+  color: colors.$green-60;
+}
+
+.status-scheduled {
+  color: colors.$blue-60;
+}
+
+.status-overdue {
+  color: $danger;
+}
+
+.status-pending {
+  color: colors.$yellow-50;
+}
+
+.status-future {
+  color: colors.$gray-50;
 }
 
 .labelUser {
   @include type.type-style('caption-01');
   color: colors.$gray-50;
+}
+
+// Summary bar
+.summaryBar {
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-05;
+  padding: layout.$spacing-03 layout.$spacing-05;
+  border-bottom: 1px solid $ui-03;
+  flex-wrap: wrap;
+}
+
+.summaryItem {
+  @include type.type-style('body-compact-01');
+  display: flex;
+  align-items: center;
+  gap: layout.$spacing-02;
+}
+
+.overdueCount {
+  color: $danger;
+  font-weight: 600;
+}
+
+.matrixScroll {
+  overflow-x: auto;
 }
