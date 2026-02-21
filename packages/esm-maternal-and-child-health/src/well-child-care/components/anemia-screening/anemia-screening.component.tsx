@@ -1,7 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tile, Tag } from '@carbon/react';
+import {
+  DataTableSkeleton,
+  Tag,
+  StructuredListWrapper,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '@carbon/react';
 import { WarningFilled, CheckmarkFilled } from '@carbon/react/icons';
+import { CardHeader, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { useAnemiaScreening } from '../../../hooks/useAnemiaScreening';
 import styles from './anemia-screening.scss';
 
@@ -9,42 +17,67 @@ interface AnemiaScreeningProps {
   patientUuid: string;
 }
 
-/**
- * Widget de tamizaje de anemia según NTS 137 (CRED).
- * Muestra último valor de Hb, estado de anemia, y próximo control.
- */
 const AnemiaScreening: React.FC<AnemiaScreeningProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const { lastHb, lastDate, isAnemic, nextDueDate, isLoading, error } = useAnemiaScreening(patientUuid);
+  const headerTitle = t('anemiaScreening', 'Tamizaje de Anemia');
 
-  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Cargando...')}</Tile>;
+  if (isLoading) {
+    return <DataTableSkeleton role="progressbar" compact rowCount={3} columnCount={2} />;
+  }
+
+  if (error) {
+    return <ErrorState error={error} headerTitle={headerTitle} />;
+  }
 
   return (
-    <Tile className={styles.card}>
-      <div className={styles.header}>
-        <h5>{t('anemiaScreening', 'Tamizaje de Anemia')}</h5>
+    <div className={styles.widgetCard}>
+      <CardHeader title={headerTitle}>
         {lastHb !== null && (
-          <Tag type={isAnemic ? 'red' : 'green'} size="sm">
+          <Tag
+            type={isAnemic ? 'red' : 'green'}
+            size="sm"
+            renderIcon={isAnemic ? WarningFilled : CheckmarkFilled}
+          >
             {isAnemic ? t('anemic', 'Anemia') : t('normal', 'Normal')}
           </Tag>
         )}
+      </CardHeader>
+      <div className={styles.container}>
+        <StructuredListWrapper isCondensed>
+          <StructuredListBody>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('lastHb', 'Última Hb')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {lastHb !== null ? (
+                  <span className={isAnemic ? styles.anemic : styles.normalValue}>{lastHb} g/dL</span>
+                ) : (
+                  <span className={styles.noData}>{t('noData', 'Sin datos')}</span>
+                )}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('lastDate', 'Fecha')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {lastDate ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('nextScreening', 'Próximo tamizaje')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {nextDueDate ?? <span className={styles.noData}>{t('pending', 'Pendiente')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListBody>
+        </StructuredListWrapper>
       </div>
-      <div className={styles.content}>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('lastHb', 'Última Hb')}:</span>
-          <span className={styles.value}>{lastHb !== null ? `${lastHb} g/dL` : t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('lastDate', 'Fecha')}:</span>
-          <span className={styles.value}>{lastDate ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('nextScreening', 'Próximo tamizaje')}:</span>
-          <span className={styles.value}>{nextDueDate ?? t('pending', 'Pendiente')}</span>
-        </div>
-      </div>
-      {error && <p className={styles.error}>{t('errorLoading', 'Error al cargar datos')}</p>}
-    </Tile>
+    </div>
   );
 };
 

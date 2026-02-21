@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tile, Tag } from '@carbon/react';
+import {
+  DataTable,
+  DataTableSkeleton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tag,
+} from '@carbon/react';
 import { CheckmarkFilled, Time } from '@carbon/react/icons';
+import { CardHeader, EmptyState, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { useScreeningIndicators } from '../../../hooks/useScreeningIndicators';
 import styles from './screening-indicators.scss';
 
@@ -9,44 +21,81 @@ interface ScreeningIndicatorsProps {
   patientUuid: string;
 }
 
-/**
- * Widget de tamizajes obligatorios según NTS 137 (CRED).
- * Muestra estado de tamizajes: hemoglobina, desarrollo, violencia, visual, auditivo.
- */
 const ScreeningIndicators: React.FC<ScreeningIndicatorsProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
-  const { screenings, completedCount, totalRequired, percentage, isLoading, error } =
-    useScreeningIndicators(patientUuid);
+  const { screenings, completedCount, totalRequired, isLoading, error } = useScreeningIndicators(patientUuid);
+  const headerTitle = t('screeningIndicators', 'Tamizajes Obligatorios');
 
-  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Cargando...')}</Tile>;
+  const tableHeaders = useMemo(
+    () => [
+      { key: 'status', header: '' },
+      { key: 'name', header: t('name', 'Nombre') },
+      { key: 'date', header: t('lastDate', 'Fecha') },
+    ],
+    [t],
+  );
+
+  const tableRows = useMemo(
+    () =>
+      screenings.map((screening, idx) => ({
+        id: `screening-${idx}`,
+        status: screening.completed ? (
+          <CheckmarkFilled size={16} className={styles.iconSuccess} />
+        ) : (
+          <Time size={16} className={styles.iconPending} />
+        ),
+        name: screening.name,
+        date: screening.date ?? '--',
+      })),
+    [screenings],
+  );
+
+  if (isLoading) {
+    return <DataTableSkeleton role="progressbar" compact rowCount={4} columnCount={3} />;
+  }
+
+  if (error) {
+    return <ErrorState error={error} headerTitle={headerTitle} />;
+  }
+
+  if (screenings.length === 0) {
+    return <EmptyState displayText={t('noScreeningData', 'Sin datos de tamizaje registrados')} headerTitle={headerTitle} />;
+  }
 
   return (
-    <Tile className={styles.card}>
-      <div className={styles.header}>
-        <h5>{t('screeningIndicators', 'Tamizajes Obligatorios')}</h5>
+    <div className={styles.widgetCard}>
+      <CardHeader title={headerTitle}>
         <Tag type={completedCount === totalRequired ? 'green' : 'gray'} size="sm">
           {completedCount}/{totalRequired}
         </Tag>
-      </div>
-      <div className={styles.content}>
-        {screenings.length > 0 ? (
-          screenings.map((screening, idx) => (
-            <div key={idx} className={styles.screeningRow}>
-              {screening.completed ? (
-                <CheckmarkFilled size={16} className={styles.iconSuccess} />
-              ) : (
-                <Time size={16} className={styles.iconPending} />
-              )}
-              <span className={screening.completed ? styles.completed : styles.pending}>{screening.name}</span>
-              {screening.date && <span className={styles.date}>{screening.date}</span>}
-            </div>
-          ))
-        ) : (
-          <p className={styles.noData}>{t('noScreeningData', 'Sin datos de tamizaje registrados')}</p>
+      </CardHeader>
+      <DataTable headers={tableHeaders} rows={tableRows} size="sm" useZebraStyles>
+        {({ rows, headers, getHeaderProps, getTableProps }) => (
+          <TableContainer>
+            <Table {...getTableProps()}>
+              <TableHead>
+                <TableRow>
+                  {headers.map((header) => (
+                    <TableHeader {...getHeaderProps({ header })} key={header.key}>
+                      {header.header}
+                    </TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.cells.map((cell) => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         )}
-      </div>
-      {error && <p className={styles.error}>{t('errorLoading', 'Error al cargar datos')}</p>}
-    </Tile>
+      </DataTable>
+    </div>
   );
 };
 

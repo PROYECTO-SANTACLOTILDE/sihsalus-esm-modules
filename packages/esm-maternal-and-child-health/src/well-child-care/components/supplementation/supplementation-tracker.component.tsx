@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tile, Tag, ProgressBar } from '@carbon/react';
+import { DataTableSkeleton, Tag, ProgressBar } from '@carbon/react';
+import { CardHeader, ErrorState } from '@openmrs/esm-patient-common-lib';
 import { useSupplementationTracker } from '../../../hooks/useSupplementationTracker';
 import styles from './supplementation-tracker.scss';
 
@@ -8,37 +9,38 @@ interface SupplementationTrackerProps {
   patientUuid: string;
 }
 
-/**
- * Widget de tracking de suplementación MMN según Directiva 068-MINSA.
- * 360 sobres de multimicronutrientes desde los 6 meses.
- */
 const SupplementationTracker: React.FC<SupplementationTrackerProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const { delivered, total, percentage, isComplete, isLoading, error } = useSupplementationTracker(patientUuid);
+  const headerTitle = t('mmnSupplementation', 'Suplementación MMN');
 
-  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Cargando...')}</Tile>;
+  if (isLoading) {
+    return <DataTableSkeleton role="progressbar" compact rowCount={2} columnCount={2} />;
+  }
+
+  if (error) {
+    return <ErrorState error={error} headerTitle={headerTitle} />;
+  }
 
   return (
-    <Tile className={styles.card}>
-      <div className={styles.header}>
-        <h5>{t('mmnSupplementation', 'Suplementación MMN')}</h5>
+    <div className={styles.widgetCard}>
+      <CardHeader title={headerTitle}>
         <Tag type={isComplete ? 'green' : 'blue'} size="sm">
           {isComplete ? t('complete', 'Completo') : t('inProgress', 'En curso')}
         </Tag>
-      </div>
-      <div className={styles.content}>
+      </CardHeader>
+      <div className={styles.container}>
         <ProgressBar
           label={`${delivered}/${total} ${t('sachets', 'sobres')}`}
           value={percentage}
           size="small"
           status={isComplete ? 'finished' : 'active'}
         />
-        <p className={styles.description}>
+        <p className={styles.helperText}>
           {t('mmnDescription', 'Directiva 068: 1 sobre diario desde los 6 meses')}
         </p>
       </div>
-      {error && <p className={styles.error}>{t('errorLoading', 'Error al cargar datos')}</p>}
-    </Tile>
+    </div>
   );
 };
 

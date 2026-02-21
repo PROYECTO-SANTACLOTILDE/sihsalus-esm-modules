@@ -1,63 +1,14 @@
 @use '@carbon/layout';
+@use '@openmrs/esm-styleguide/src/vars' as *;
 
-.card {
-  border-left: 4px solid #8a3ffc;
-  margin-bottom: layout.$spacing-04;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: layout.$spacing-04;
-
-  h5 {
-    margin: 0;
-  }
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: layout.$spacing-03;
-}
-
-.screeningRow {
-  display: flex;
-  align-items: center;
-  gap: layout.$spacing-03;
+.widgetCard {
+  border: 1px solid $ui-03;
 }
 
 .iconSuccess {
-  fill: #198038;
+  fill: $support-02;
 }
 
 .iconPending {
-  fill: #a8a8a8;
-}
-
-.completed {
-  font-size: 0.875rem;
-}
-
-.pending {
-  font-size: 0.875rem;
-  color: var(--cds-text-02);
-}
-
-.date {
-  margin-left: auto;
-  font-size: 0.75rem;
-  color: var(--cds-text-02);
-}
-
-.noData {
-  font-size: 0.875rem;
-  color: var(--cds-text-02);
-}
-
-.error {
-  color: #da1e28;
-  font-size: 0.75rem;
-  margin-top: layout.$spacing-03;
+  fill: $text-03;
 }
