@@ -167,6 +167,11 @@ export const configSchema = {
       stimulationSessionForm: 'CRED-003-SESIÓN DE ESTIMULACIÓN TEMPRANA',
       stimulationFollowupForm: 'CRED-004-SEGUIMIENTO DEL DESARROLLO',
       stimulationCounselingForm: 'CRED-005-CONSEJERÍA A PADRES',
+
+      // Nutrición Infantil Forms
+      nutritionalAssessmentForm: 'CRED-006-EVALUACIÓN NUTRICIONAL',
+      feedingCounselingForm: 'CRED-007-CONSEJERÍA ALIMENTARIA',
+      nutritionFollowupForm: 'CRED-008-SEGUIMIENTO NUTRICIONAL',
     },
   },
 
@@ -1242,6 +1247,9 @@ export interface ConfigObject {
     stimulationSessionForm: string;
     stimulationFollowupForm: string;
     stimulationCounselingForm: string;
+    nutritionalAssessmentForm: string;
+    feedingCounselingForm: string;
+    nutritionFollowupForm: string;
   };
   clinicalEncounterUuid: string;
   concepts: Record<string, string>;
