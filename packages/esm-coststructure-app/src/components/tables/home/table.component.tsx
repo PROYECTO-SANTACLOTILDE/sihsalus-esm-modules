@@ -48,7 +48,7 @@ const HomeTable: React.FC<HomeTableProps> = ({ data }) => {
     <>
       <DataTable rows={rows} headers={headers}>
         {({ getTableProps, getHeaderProps, getRowProps, getCellProps }) => (
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} aria-label="Estructura de costos">
             <TableHead>
               <TableRow>
                 {headers.map((header) => (

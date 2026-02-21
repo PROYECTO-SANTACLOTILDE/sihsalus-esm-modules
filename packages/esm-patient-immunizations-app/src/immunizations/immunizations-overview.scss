@@ -28,3 +28,14 @@
     border-top: none !important;
   }
 }
+
+@media (max-width: 672px) {
+  .immunizationOverviewSummaryCard {
+    margin: layout.$spacing-03;
+  }
+
+  .immunizationMore {
+    padding: layout.$spacing-03;
+    flex-wrap: wrap;
+  }
+}

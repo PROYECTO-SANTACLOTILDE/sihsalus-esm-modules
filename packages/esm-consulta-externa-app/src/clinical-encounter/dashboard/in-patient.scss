@@ -156,3 +156,29 @@
   display: flex;
   flex-direction: column;
 }
+
+@media (max-width: 672px) {
+  .headerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: layout.$spacing-03;
+    padding: layout.$spacing-03;
+  }
+
+  .cardContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filterEmptyState {
+    margin: layout.$spacing-05;
+    padding: layout.$spacing-03;
+  }
+
+  .visitSummaryContainer {
+    max-width: 100%;
+  }
+
+  .expandedActiveVisitRow td {
+    padding: 0 layout.$spacing-03;
+  }
+}

@@ -36,3 +36,21 @@
   padding: 1rem;
   border-left: 4px solid #0f62fe;
 }
+
+@media (max-width: 672px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .headerActions {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .container {
+    padding: 0.5rem;
+  }
+}

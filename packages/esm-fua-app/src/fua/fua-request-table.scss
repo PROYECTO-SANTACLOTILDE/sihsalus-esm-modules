@@ -129,3 +129,22 @@
   align-items: center;
   gap: layout.$spacing-01;
 }
+
+@media (max-width: 672px) {
+  .toolbarContent {
+    flex-direction: column;
+    align-items: stretch;
+    gap: layout.$spacing-03;
+  }
+
+  .toolbarItem {
+    margin-left: 0;
+    flex-wrap: wrap;
+    gap: layout.$spacing-02;
+  }
+
+  .actionsCell {
+    flex-wrap: wrap;
+    gap: layout.$spacing-02;
+  }
+}

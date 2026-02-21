@@ -194,7 +194,7 @@ const ContactList: React.FC<ContactListProps> = ({ patientUuid }) => {
         headers={headers}
         render={({ rows, headers, getHeaderProps, getTableProps, getTableContainerProps }) => (
           <TableContainer {...getTableContainerProps()}>
-            <Table {...getTableProps()}>
+            <Table {...getTableProps()} aria-label={t('contactList', 'Contact list')}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (

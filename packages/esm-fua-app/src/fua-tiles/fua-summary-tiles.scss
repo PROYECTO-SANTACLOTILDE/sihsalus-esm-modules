@@ -14,3 +14,15 @@
   flex: 1 1 300px;
   box-sizing: border-box;
 }
+
+@media (max-width: 672px) {
+  .cardContainer {
+    flex-direction: column;
+    gap: layout.$spacing-03;
+    padding: layout.$spacing-02;
+  }
+
+  .cardContainer>div {
+    flex: 1 1 100%;
+  }
+}

@@ -198,7 +198,7 @@ const CareSummaryTable: React.FC<CareSummaryTableProps> = ({
           <DataTable rows={tableRows} headers={tableHeaders} isSortable useZebraStyles size="sm">
             {({ rows, headers, getHeaderProps, getTableProps }) => (
               <TableContainer>
-                <Table {...getTableProps()}>
+                <Table {...getTableProps()} aria-label={title}>
                   <TableHead>
                     <TableRow>
                       {headers.map((header) => (

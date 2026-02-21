@@ -1,5 +1,6 @@
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type';
+@use '@carbon/layout';
 @use '../../root.scss';
 
 .widgetContainer {
@@ -47,4 +48,17 @@
 
 .errorContainer {
   margin: spacing.$spacing-05;
+}
+
+@media (max-width: 672px) {
+  .widgetHeaderContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: layout.$spacing-03;
+    padding: layout.$spacing-03 0 layout.$spacing-03 layout.$spacing-03;
+  }
+
+  .widgetContainer {
+    padding: layout.$spacing-03;
+  }
 }

@@ -24,3 +24,14 @@ html[dir='rtl'] {
     margin-left: layout.$spacing-05;
   }
 }
+
+@media (max-width: 672px) {
+  .patientBanner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .patientAvatar {
+    margin: layout.$spacing-03;
+  }
+}

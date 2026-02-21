@@ -52,3 +52,36 @@
 .dateTimePickerContainer {
   margin-left: layout.$spacing-04;
 }
+
+@media (max-width: 672px) {
+  .dateTimeSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buttonSet {
+    position: static;
+    width: 100%;
+    flex-direction: column;
+    gap: layout.$spacing-03;
+
+    & > button {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  .formAdmissionDatepicker input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .formAdmissionTimepicker input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .dateTimePickerContainer {
+    margin-left: 0;
+  }
+}

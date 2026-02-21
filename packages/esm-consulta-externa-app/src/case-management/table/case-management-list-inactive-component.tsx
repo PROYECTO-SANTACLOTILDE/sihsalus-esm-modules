@@ -121,7 +121,7 @@ const CaseManagementListInActive: React.FC<CaseManagementListInActiveProps> = ({
         headers={headers}
         render={({ rows, headers, getHeaderProps, getTableProps, getTableContainerProps }) => (
           <TableContainer {...getTableContainerProps()}>
-            <Table {...getTableProps()}>
+            <Table {...getTableProps()} aria-label={t('inactiveCases', 'Inactive Cases')}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (

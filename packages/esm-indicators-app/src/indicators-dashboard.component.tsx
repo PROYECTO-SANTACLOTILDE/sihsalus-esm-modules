@@ -129,7 +129,7 @@ const IndicatorsDashboard: React.FC = () => {
       {indicators.length > 0 && (
         <DataTable rows={rows} headers={headers}>
           {({ rows: tableRows, headers: tableHeaders, getTableProps, getHeaderProps, getRowProps }) => (
-            <Table {...getTableProps()}>
+            <Table {...getTableProps()} aria-label="Indicadores clínicos">
               <TableHead>
                 <TableRow>
                   {tableHeaders.map((header) => (

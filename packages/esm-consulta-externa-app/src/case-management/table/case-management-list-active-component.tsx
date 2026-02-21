@@ -145,7 +145,7 @@ const CaseManagementListActive: React.FC<CaseManagementListActiveProps> = ({ set
         headers={headers}
         render={({ rows, headers, getHeaderProps, getTableProps, getTableContainerProps }) => (
           <TableContainer {...getTableContainerProps()}>
-            <Table {...getTableProps()}>
+            <Table {...getTableProps()} aria-label={t('activeCases', 'Active Cases')}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (

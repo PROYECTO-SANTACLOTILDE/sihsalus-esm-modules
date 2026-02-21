@@ -49,7 +49,7 @@ const GenericTable: React.FC<GenericTableProps> = ({ encounters, onEdit, onDelet
     <DataTable size="sm" useZebraStyles rows={computedRows} headers={headers}>
       {({ rows, headers, getHeaderProps, getRowProps, getExpandedRowProps, getTableProps, getTableContainerProps }) => (
         <TableContainer {...getTableContainerProps()}>
-          <Table {...getTableProps()} aria-label="sample table">
+          <Table {...getTableProps()} aria-label={t('caseEncounters', 'Case management encounters')}>
             <TableHead>
               <TableRow>
                 <TableExpandHeader aria-label="expand row" />

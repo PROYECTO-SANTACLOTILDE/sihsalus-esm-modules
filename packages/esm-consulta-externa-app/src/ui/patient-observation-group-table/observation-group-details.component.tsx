@@ -55,7 +55,7 @@ const ObservationGroupDetails: React.FC<ObservationGroupDetailsProps> = ({ group
         useZebraStyles>
         {({ rows, headers, getTableProps, getHeaderProps, getRowProps, getExpandHeaderProps, getToolbarProps }) => (
           <TableContainer>
-            <Table {...getTableProps()} className={styles.detailsTable}>
+            <Table {...getTableProps()} className={styles.detailsTable} aria-label={t('observationDetails', 'Observation details')}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (

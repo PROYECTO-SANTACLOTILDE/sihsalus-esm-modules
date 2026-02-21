@@ -16,3 +16,12 @@
   @include type.type-style('heading-03');
   color: $ui-05;
 }
+
+@media (max-width: 672px) {
+  .metricsContainer {
+    flex-direction: column;
+    height: auto;
+    gap: layout.$spacing-03;
+    padding: layout.$spacing-03;
+  }
+}

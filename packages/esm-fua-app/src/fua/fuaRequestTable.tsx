@@ -146,7 +146,7 @@ const FuaRequestTable: React.FC<FuaRequestTableProps> = ({ statusFilter = 'all' 
                 </Layer>
               </TableToolbarContent>
             </TableToolbar>
-            <Table {...getTableProps()} className={styles.table}>
+            <Table {...getTableProps()} className={styles.table} aria-label={t('fuaRequests', 'Solicitudes FUA')}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (
