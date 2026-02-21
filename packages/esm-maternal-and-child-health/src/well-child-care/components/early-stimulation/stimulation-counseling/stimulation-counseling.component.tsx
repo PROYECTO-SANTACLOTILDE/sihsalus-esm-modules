@@ -1,18 +1,22 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tile, Tag } from '@carbon/react';
+import {
+  Tag,
+  StructuredListWrapper,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '@carbon/react';
+import { CardHeader } from '@openmrs/esm-patient-common-lib';
 import styles from './stimulation-counseling.scss';
 
 interface StimulationCounselingProps {
   patientUuid: string;
 }
 
-/**
- * Widget de consejería a padres sobre estimulación temprana según NTS 137-MINSA.
- * Muestra sesiones de consejería, actividades para el hogar y próxima sesión.
- */
 const StimulationCounseling: React.FC<StimulationCounselingProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
+  const headerTitle = t('esCounselingTitle', 'Consejería a Padres');
 
   // TODO: Connect to SWR hook when concept UUIDs are configured
   const parentSessions = null;
@@ -21,32 +25,51 @@ const StimulationCounseling: React.FC<StimulationCounselingProps> = ({ patientUu
   const nextCounselingDate = null;
 
   return (
-    <Tile className={styles.card}>
-      <div className={styles.header}>
-        <h5>{t('esCounselingTitle', 'Consejería a Padres')}</h5>
+    <div className={styles.widgetCard}>
+      <CardHeader title={headerTitle}>
         <Tag type={parentSessions ? 'blue' : 'gray'} size="sm">
           {parentSessions ? `${parentSessions} ${t('sessions', 'sesiones')}` : t('noData', 'Sin datos')}
         </Tag>
+      </CardHeader>
+      <div className={styles.container}>
+        <StructuredListWrapper isCondensed>
+          <StructuredListBody>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('esCounselingSessions', 'Sesiones de consejería')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {parentSessions ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('lastSession', 'Última sesión')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {lastCounselingDate ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('esHomeActivities', 'Actividades para el hogar')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {homeActivities ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('fpNextSession', 'Próxima sesión')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {nextCounselingDate ?? <span className={styles.noData}>{t('pending', 'Pendiente')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListBody>
+        </StructuredListWrapper>
       </div>
-      <div className={styles.content}>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('esCounselingSessions', 'Sesiones de consejería')}:</span>
-          <span className={styles.value}>{parentSessions ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('lastSession', 'Última sesión')}:</span>
-          <span className={styles.value}>{lastCounselingDate ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('esHomeActivities', 'Actividades para el hogar')}:</span>
-          <span className={styles.value}>{homeActivities ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('fpNextSession', 'Próxima sesión')}:</span>
-          <span className={styles.value}>{nextCounselingDate ?? t('pending', 'Pendiente')}</span>
-        </div>
-      </div>
-    </Tile>
+    </div>
   );
 };
 

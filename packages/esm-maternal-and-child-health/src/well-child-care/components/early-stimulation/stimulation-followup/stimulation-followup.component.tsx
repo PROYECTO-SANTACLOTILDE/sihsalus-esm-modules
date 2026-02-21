@@ -1,18 +1,22 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tile, Tag } from '@carbon/react';
+import {
+  Tag,
+  StructuredListWrapper,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '@carbon/react';
+import { CardHeader } from '@openmrs/esm-patient-common-lib';
 import styles from './stimulation-followup.scss';
 
 interface StimulationFollowupProps {
   patientUuid: string;
 }
 
-/**
- * Widget de seguimiento del desarrollo según NTS 137-MINSA (CRED).
- * Muestra hitos alcanzados, resultados de evaluaciones y próxima evaluación.
- */
 const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
+  const headerTitle = t('esFollowUpTitle', 'Seguimiento del Desarrollo');
 
   // TODO: Connect to SWR hook when concept UUIDs are configured
   const milestonesAchieved = null;
@@ -22,32 +26,51 @@ const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }
   const riskLevel = null;
 
   return (
-    <Tile className={styles.card}>
-      <div className={styles.header}>
-        <h5>{t('esFollowUpTitle', 'Seguimiento del Desarrollo')}</h5>
+    <div className={styles.widgetCard}>
+      <CardHeader title={headerTitle}>
         <Tag type={riskLevel === 'normal' ? 'green' : riskLevel ? 'red' : 'gray'} size="sm">
           {riskLevel ?? t('noData', 'Sin datos')}
         </Tag>
+      </CardHeader>
+      <div className={styles.container}>
+        <StructuredListWrapper isCondensed>
+          <StructuredListBody>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('esMilestones', 'Hitos alcanzados')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {milestonesAchieved ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('esLastEvaluation', 'Última evaluación')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {lastEvaluationResult ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('lastDate', 'Fecha')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {lastEvaluationDate ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('esNextEvaluation', 'Próxima evaluación')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {nextEvaluationDate ?? <span className={styles.noData}>{t('pending', 'Pendiente')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListBody>
+        </StructuredListWrapper>
       </div>
-      <div className={styles.content}>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('esMilestones', 'Hitos alcanzados')}:</span>
-          <span className={styles.value}>{milestonesAchieved ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('esLastEvaluation', 'Última evaluación')}:</span>
-          <span className={styles.value}>{lastEvaluationResult ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('lastDate', 'Fecha')}:</span>
-          <span className={styles.value}>{lastEvaluationDate ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('esNextEvaluation', 'Próxima evaluación')}:</span>
-          <span className={styles.value}>{nextEvaluationDate ?? t('pending', 'Pendiente')}</span>
-        </div>
-      </div>
-    </Tile>
+    </div>
   );
 };
 

@@ -1,36 +1,24 @@
 @use '@carbon/layout';
+@use '@openmrs/esm-styleguide/src/vars' as *;
 
-.card {
-  border-left: 4px solid #198038;
-  margin-bottom: layout.$spacing-04;
+.widgetCard {
+  border: 1px solid $ui-03;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: layout.$spacing-04;
-
-  h5 { margin: 0; }
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: layout.$spacing-03;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
+.container {
+  padding: 0 layout.$spacing-05 layout.$spacing-05;
 }
 
 .label {
-  color: var(--cds-text-02);
-  font-size: 0.875rem;
+  color: $text-02;
 }
 
 .value {
   font-weight: 600;
-  font-size: 0.875rem;
+  text-align: right;
+}
+
+.noData {
+  color: $text-02;
+  font-style: italic;
 }

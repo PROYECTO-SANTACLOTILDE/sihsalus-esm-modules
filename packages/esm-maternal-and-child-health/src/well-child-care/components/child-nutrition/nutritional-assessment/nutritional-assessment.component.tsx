@@ -1,18 +1,22 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tile, Tag } from '@carbon/react';
+import {
+  Tag,
+  StructuredListWrapper,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '@carbon/react';
+import { CardHeader } from '@openmrs/esm-patient-common-lib';
 import styles from './nutritional-assessment.scss';
 
 interface NutritionalAssessmentProps {
   patientUuid: string;
 }
 
-/**
- * Widget de evaluación nutricional según NTS 137-MINSA (CRED).
- * Muestra indicadores P/E, T/E, P/T, IMC y diagnóstico nutricional.
- */
 const NutritionalAssessment: React.FC<NutritionalAssessmentProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
+  const headerTitle = t('cnAssessmentTitle', 'Estado Nutricional');
 
   // TODO: Connect to SWR hook when concept UUIDs are configured
   const weightForAge = null;
@@ -22,36 +26,59 @@ const NutritionalAssessment: React.FC<NutritionalAssessmentProps> = ({ patientUu
   const lastMeasurementDate = null;
 
   return (
-    <Tile className={styles.card}>
-      <div className={styles.header}>
-        <h5>{t('cnAssessmentTitle', 'Estado Nutricional')}</h5>
+    <div className={styles.widgetCard}>
+      <CardHeader title={headerTitle}>
         <Tag type={nutritionalDiagnosis ? 'green' : 'gray'} size="sm">
           {nutritionalDiagnosis ?? t('noData', 'Sin datos')}
         </Tag>
+      </CardHeader>
+      <div className={styles.container}>
+        <StructuredListWrapper isCondensed>
+          <StructuredListBody>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('cnWeightForAge', 'Peso/Edad (P/E)')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {weightForAge ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('cnHeightForAge', 'Talla/Edad (T/E)')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {heightForAge ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('cnWeightForHeight', 'Peso/Talla (P/T)')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {weightForHeight ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('cnDiagnosis', 'Diagnóstico nutricional')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {nutritionalDiagnosis ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell className={styles.label}>
+                {t('cnLastMeasurement', 'Última medición')}
+              </StructuredListCell>
+              <StructuredListCell className={styles.value}>
+                {lastMeasurementDate ?? <span className={styles.noData}>{t('noData', 'Sin datos')}</span>}
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListBody>
+        </StructuredListWrapper>
       </div>
-      <div className={styles.content}>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('cnWeightForAge', 'Peso/Edad (P/E)')}:</span>
-          <span className={styles.value}>{weightForAge ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('cnHeightForAge', 'Talla/Edad (T/E)')}:</span>
-          <span className={styles.value}>{heightForAge ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('cnWeightForHeight', 'Peso/Talla (P/T)')}:</span>
-          <span className={styles.value}>{weightForHeight ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('cnDiagnosis', 'Diagnóstico nutricional')}:</span>
-          <span className={styles.value}>{nutritionalDiagnosis ?? t('noData', 'Sin datos')}</span>
-        </div>
-        <div className={styles.row}>
-          <span className={styles.label}>{t('cnLastMeasurement', 'Última medición')}:</span>
-          <span className={styles.value}>{lastMeasurementDate ?? t('noData', 'Sin datos')}</span>
-        </div>
-      </div>
-    </Tile>
+    </div>
   );
 };
 
