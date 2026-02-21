@@ -4923,7 +4923,6 @@ __metadata:
     swr: "npm:^2.3.6"
     turbo: "npm:^2.5.2"
     typescript: "npm:^4.9.5"
-    webpack: "npm:^5.99.9"
     zod: "npm:^4.1.12"
   peerDependencies:
     "@openmrs/esm-framework": "*"
@@ -5032,7 +5031,6 @@ __metadata:
     swc-loader: "npm:^0.2.3"
     swr: "npm:^2.3.6"
     typescript: "npm:^4.9.5"
-    webpack: "npm:^5.99.9"
   peerDependencies:
     "@openmrs/esm-framework": "*"
     dayjs: 1.x
