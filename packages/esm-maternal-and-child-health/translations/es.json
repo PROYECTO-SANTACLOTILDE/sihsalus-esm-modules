@@ -107,6 +107,8 @@
   "complete": "Completo",
   "completeRequiredFields": "Por favor complete los campos requeridos (Fecha y Hora de atención).",
   "completed": "Completado",
+  "consultationDateRequired": "Fecha de atención es requerida",
+  "consultationTimeRequired": "Hora de atención es requerida",
   "condition": "Condición",
   "conditionDeleted": "Condición eliminada",
   "conditionNowVisible": "Ahora es visible en la página de condiciones",

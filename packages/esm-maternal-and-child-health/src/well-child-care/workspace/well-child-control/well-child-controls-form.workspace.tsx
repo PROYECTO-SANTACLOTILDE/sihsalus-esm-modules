@@ -14,14 +14,15 @@ import useCREDEncounters from '../../../hooks/useEncountersCRED';
 import EncounterDateTimeSection from '../../../ui/encounter-date-time/encounter-date-time.component';
 import styles from './well-child-controls-form.scss';
 
-const CREDControlsSchema = z.object({
-  consultationDate: z.date({ required_error: 'Fecha de atención es requerida' }),
-  consultationTime: z.string().min(1, 'Hora de atención es requerida'),
-  controlNumber: z.string().optional(),
-  attendedAge: z.string().optional(),
-});
+const createCREDControlsSchema = (t: (key: string, fallback: string) => string) =>
+  z.object({
+    consultationDate: z.date({ required_error: t('consultationDateRequired', 'Fecha de atención es requerida') }),
+    consultationTime: z.string().min(1, t('consultationTimeRequired', 'Hora de atención es requerida')),
+    controlNumber: z.string().optional(),
+    attendedAge: z.string().optional(),
+  });
 
-type CREDControlsFormType = z.infer<typeof CREDControlsSchema>;
+type CREDControlsFormType = z.infer<ReturnType<typeof createCREDControlsSchema>>;
 
 const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
   closeWorkspace,
@@ -30,6 +31,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
 }) => {
   const patientUuid = directPatientUuid ?? workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
+  const CREDControlsSchema = useMemo(() => createCREDControlsSchema(t), [t]);
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
   const { patient, isLoading: isPatientLoading } = usePatient(patientUuid);

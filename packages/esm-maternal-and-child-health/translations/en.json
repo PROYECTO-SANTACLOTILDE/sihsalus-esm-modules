@@ -96,6 +96,8 @@
   "complete": "Complete",
   "completed": "Administrado",
   "completeRequiredFields": "Por favor complete los campos requeridos (Fecha y Hora de atención).",
+  "consultationDateRequired": "Consultation date is required",
+  "consultationTimeRequired": "Consultation time is required",
   "condition": "Condition",
   "conditionDeleted": "Condition deleted",
   "conditionNowVisible": "It is now visible on the Conditions page",
