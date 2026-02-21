@@ -106,11 +106,13 @@ function matchAppointmentsToControls(
 
 export function useCREDSchedule(patientUuid: string): UseCREDScheduleResult {
   const { patient, isLoading: isPatientLoading } = usePatient(patientUuid);
-  const { encounters, isLoading: isEncountersLoading, error: encountersError } = useEncountersCRED(patientUuid);
-  const { appointments, isLoading: isAppointmentsLoading, error: appointmentsError } = useAppointmentsCRED(patientUuid);
+  const { encounters, isLoading: isEncountersLoading } = useEncountersCRED(patientUuid);
+  const { appointments, isLoading: isAppointmentsLoading } = useAppointmentsCRED(patientUuid);
 
-  const isLoading = isPatientLoading || isEncountersLoading || isAppointmentsLoading;
-  const error = encountersError || appointmentsError || null;
+  // Only block on patient loading; encounters/appointments errors are non-fatal
+  // (the schedule can render from birthDate alone)
+  const isLoading = isPatientLoading || (isEncountersLoading && !encounters) || (isAppointmentsLoading && !appointments);
+  const error: Error | null = null;
 
   const controls = useMemo<CREDControlWithStatus[]>(() => {
     if (!patient?.birthDate) return [];
