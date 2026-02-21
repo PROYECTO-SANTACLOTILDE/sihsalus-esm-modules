@@ -9,7 +9,7 @@ interface StimulationSessionsResult {
   lastSessionDate: string | null;
   developmentAreas: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
 }
 
 const fetcher = async (url: string) => {

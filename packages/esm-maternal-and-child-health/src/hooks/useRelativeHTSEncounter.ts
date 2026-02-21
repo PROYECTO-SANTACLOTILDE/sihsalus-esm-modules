@@ -5,7 +5,7 @@ import type { HTSEncounter } from '../types';
 
 const useRelativeHTSEncounter = (
   relativeUuid: string,
-): { error: any; isLoading: boolean; encounters: HTSEncounter[] } => {
+): { error: Error | null; isLoading: boolean; encounters: HTSEncounter[] } => {
   const customeRepresentation = 'custom:(uuid,display,encounterDatetime,obs:(uuid,display,value:(uuid,display)))';
   const {
     encounterTypes: { hivTestingServices },

@@ -10,7 +10,8 @@ interface AnemiaScreeningResult {
   isAnemic: boolean;
   nextDueDate: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 }
 
 /**
@@ -32,7 +33,7 @@ export function useAnemiaScreening(patientUuid: string): AnemiaScreeningResult {
     return `${restBaseUrl}/obs?patient=${patientUuid}&concept=${conceptUuid}&v=custom:(uuid,value,obsDatetime)&limit=1&sort=desc`;
   }, [patientUuid, conceptUuid]);
 
-  const { data, isLoading, error } = useSWR(
+  const { data, isLoading, error, mutate } = useSWR(
     url,
     async (fetchUrl: string) => {
       const response = await openmrsFetch(fetchUrl);
@@ -60,6 +61,7 @@ export function useAnemiaScreening(patientUuid: string): AnemiaScreeningResult {
     ...result,
     isLoading,
     error,
+    mutate,
   };
 }
 

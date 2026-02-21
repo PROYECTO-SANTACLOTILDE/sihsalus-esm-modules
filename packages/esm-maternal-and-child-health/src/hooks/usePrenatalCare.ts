@@ -37,7 +37,7 @@ type ObsEncounter = {
 
 export const usePrenatalCare = (
   patientUuid: string,
-): { prenatalEncounters: ObsEncounter[]; error: any; isValidating: boolean; mutate: () => void } => {
+): { prenatalEncounters: ObsEncounter[]; error: Error | null; isValidating: boolean; mutate: () => void } => {
   const atencionPrenatal = 'Control Prenatal';
 
   const attentionsUrl = useMemo(() => {

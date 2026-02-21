@@ -9,7 +9,8 @@ interface SupplementationResult {
   percentage: number;
   isComplete: boolean;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 }
 
 /**
@@ -29,7 +30,7 @@ export function useSupplementationTracker(patientUuid: string): SupplementationR
     return `${restBaseUrl}/obs?patient=${patientUuid}&concept=${conceptUuid}&v=custom:(uuid,value,obsDatetime)`;
   }, [patientUuid, conceptUuid]);
 
-  const { data, isLoading, error } = useSWR(
+  const { data, isLoading, error, mutate } = useSWR(
     url,
     async (fetchUrl: string) => {
       const response = await openmrsFetch(fetchUrl);
@@ -54,6 +55,7 @@ export function useSupplementationTracker(patientUuid: string): SupplementationR
     ...result,
     isLoading,
     error,
+    mutate,
   };
 }
 

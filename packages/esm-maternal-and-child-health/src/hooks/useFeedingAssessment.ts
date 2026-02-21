@@ -9,7 +9,7 @@ interface FeedingAssessmentResult {
   lastAssessmentDate: string | null;
   isBreastfeeding: boolean | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
 }
 
 const fetcher = async (url: string) => {

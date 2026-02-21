@@ -91,7 +91,7 @@ const ScreeningIndicators: React.FC<ScreeningIndicatorsProps> = ({ patientUuid }
       <DataTable headers={tableHeaders} rows={tableRows} size="sm" useZebraStyles>
         {({ rows, headers, getHeaderProps, getTableProps }) => (
           <TableContainer>
-            <Table {...getTableProps()}>
+            <Table {...getTableProps()} aria-label={headerTitle}>
               <TableHead>
                 <TableRow>
                   {headers.map((header) => (

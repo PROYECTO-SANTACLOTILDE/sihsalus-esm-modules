@@ -11,7 +11,7 @@ interface StimulationFollowupResult {
   motorResult: string | null;
   hasStimulationLack: boolean;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
 }
 
 const fetcher = async (url: string) => {

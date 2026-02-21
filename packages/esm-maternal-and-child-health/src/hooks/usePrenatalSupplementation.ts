@@ -15,7 +15,8 @@ interface PrenatalSupplementationResult {
   supplements: SupplementItem[];
   overallPercentage: number;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 }
 
 /**
@@ -52,7 +53,7 @@ export function usePrenatalSupplementation(patientUuid: string): PrenatalSupplem
     );
   }, [patientUuid, supplementDefs]);
 
-  const { data, isLoading, error } = useSWR(
+  const { data, isLoading, error, mutate } = useSWR(
     urls,
     async (fetchUrls: string[]) => {
       const responses = await Promise.all(fetchUrls.map((u) => openmrsFetch(u)));
@@ -99,6 +100,7 @@ export function usePrenatalSupplementation(patientUuid: string): PrenatalSupplem
     ...result,
     isLoading,
     error,
+    mutate,
   };
 }
 

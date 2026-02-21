@@ -11,7 +11,8 @@ interface ObstetricRiskResult {
   riskFactors: string[];
   lastEvaluationDate: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 }
 
 /**
@@ -44,7 +45,7 @@ export function useObstetricRisk(patientUuid: string): ObstetricRiskResult {
     return `${restBaseUrl}/obs?patient=${patientUuid}&concept=${riskFactorsConceptUuid}&v=custom:(uuid,value:(uuid,display),obsDatetime)&sort=desc`;
   }, [patientUuid, riskFactorsConceptUuid]);
 
-  const { data: classificationData, isLoading: classLoading, error: classError } = useSWR(
+  const { data: classificationData, isLoading: classLoading, error: classError, mutate: classificationMutate } = useSWR(
     classificationUrl,
     async (fetchUrl: string) => {
       const response = await openmrsFetch(fetchUrl);
@@ -52,7 +53,7 @@ export function useObstetricRisk(patientUuid: string): ObstetricRiskResult {
     },
   );
 
-  const { data: factorsData, isLoading: factorsLoading, error: factorsError } = useSWR(
+  const { data: factorsData, isLoading: factorsLoading, error: factorsError, mutate: factorsMutate } = useSWR(
     riskFactorsUrl,
     async (fetchUrl: string) => {
       const response = await openmrsFetch(fetchUrl);
@@ -91,6 +92,7 @@ export function useObstetricRisk(patientUuid: string): ObstetricRiskResult {
     ...result,
     isLoading: classLoading || factorsLoading,
     error: classError || factorsError,
+    mutate: () => { classificationMutate(); factorsMutate(); },
   };
 }
 

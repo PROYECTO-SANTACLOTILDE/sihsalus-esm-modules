@@ -11,7 +11,8 @@ interface PsychoprophylaxisResult {
   isComplete: boolean;
   lastSessionDate: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 }
 
 /**
@@ -33,7 +34,7 @@ export function usePsychoprophylaxis(patientUuid: string): PsychoprophylaxisResu
     return `${restBaseUrl}/encounter?patient=${patientUuid}&encounterType=${encounterTypeUuid}&v=custom:(uuid,encounterDatetime)`;
   }, [patientUuid, encounterTypeUuid]);
 
-  const { data, isLoading, error } = useSWR(
+  const { data, isLoading, error, mutate } = useSWR(
     url,
     async (fetchUrl: string) => {
       const response = await openmrsFetch(fetchUrl);
@@ -61,6 +62,7 @@ export function usePsychoprophylaxis(patientUuid: string): PsychoprophylaxisResu
     ...result,
     isLoading,
     error,
+    mutate,
   };
 }
 

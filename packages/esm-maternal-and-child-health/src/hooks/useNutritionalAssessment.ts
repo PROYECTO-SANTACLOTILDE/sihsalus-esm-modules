@@ -10,7 +10,7 @@ interface NutritionalAssessmentResult {
   weightForHeight: string | null;
   lastMeasurementDate: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
 }
 
 function buildObsUrl(patientUuid: string, conceptUuid: string | undefined): string | null {

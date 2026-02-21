@@ -10,7 +10,7 @@ interface NutritionFollowupResult {
   counselingCount: number | null;
   lastFollowupDate: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
 }
 
 const fetcher = async (url: string) => {

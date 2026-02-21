@@ -37,7 +37,7 @@ type ObsEncounter = {
 
 export const useInmmediatePostpartumPeriod = (
   patientUuid: string,
-): { prenatalEncounters: ObsEncounter[]; error: any; isValidating: boolean; mutate: () => void } => {
+): { prenatalEncounters: ObsEncounter[]; error: Error | null; isValidating: boolean; mutate: () => void } => {
   const atencionPrenatal = 'Control Postnatal'; //cambiar a postnatal
   const attentionssUrl = useMemo(() => {
     return `${restBaseUrl}/encounter?patient=${patientUuid}&encounterType=${atencionPrenatal}`;

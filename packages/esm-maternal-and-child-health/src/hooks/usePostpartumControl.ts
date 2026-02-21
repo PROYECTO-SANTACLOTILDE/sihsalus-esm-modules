@@ -38,7 +38,7 @@ type ObsEncounter = {
 
 export const usePostpartumControlTable = (
   patientUuid: string,
-): { prenatalEncounters: ObsEncounter[]; error: any; isValidating: boolean; mutate: () => void } => {
+): { prenatalEncounters: ObsEncounter[]; error: Error | null; isValidating: boolean; mutate: () => void } => {
   const config = useConfig() as ConfigObject;
   const formName = config.formsList.postpartumControl;
 

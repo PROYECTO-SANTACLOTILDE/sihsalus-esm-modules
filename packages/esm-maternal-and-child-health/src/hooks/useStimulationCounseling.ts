@@ -9,7 +9,7 @@ interface StimulationCounselingResult {
   lastCounselingDate: string | null;
   lastCounselingResult: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
 }
 
 const fetcher = async (url: string) => {

@@ -26,7 +26,7 @@ export function useFilteredEncounter(
   patientUuid: string,
   encounterType: string,
   formUuid: string,
-): { prenatalEncounter: ObsEncounter | null; error: any; isLoading: boolean; mutate: () => void } {
+): { prenatalEncounter: ObsEncounter | null; error: Error | null; isLoading: boolean; mutate: () => void } {
   const customRepresentation =
     'custom:(uuid,encounterDatetime,form:(uuid,display),obs:(uuid,display,groupMembers:(uuid,display)))';
 

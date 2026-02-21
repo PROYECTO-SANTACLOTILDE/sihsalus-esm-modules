@@ -17,7 +17,8 @@ interface ScreeningIndicatorsResult {
   totalRequired: number;
   percentage: number;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
+  mutate: () => void;
 }
 
 /**
@@ -58,7 +59,7 @@ export function useScreeningIndicators(patientUuid: string): ScreeningIndicators
     );
   }, [patientUuid, screeningConcepts]);
 
-  const { data, isLoading, error } = useSWR(
+  const { data, isLoading, error, mutate } = useSWR(
     urls,
     async (fetchUrls: string[]) => {
       const responses = await Promise.all(fetchUrls.map((u) => openmrsFetch(u)));
@@ -92,6 +93,7 @@ export function useScreeningIndicators(patientUuid: string): ScreeningIndicators
     ...result,
     isLoading,
     error,
+    mutate,
   };
 }
 

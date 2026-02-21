@@ -11,7 +11,7 @@ interface BirthPlanResult {
   referenceHospital: string | null;
   encounterUuid: string | null;
   isLoading: boolean;
-  error: any;
+  error: Error | null;
   mutate: () => void;
 }
 
