@@ -6,7 +6,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
-  ButtonSkeleton,
   ButtonSet,
   Column,
   Form,
@@ -15,17 +14,13 @@ import {
   Select,
   SelectItem,
   Checkbox,
-  NumberInput,
   DatePicker,
   DatePickerInput,
-  RadioButtonGroup,
-  RadioButton,
   Tile,
   Tag,
   TextArea,
 } from '@carbon/react';
 import {
-  createErrorHandler,
   showSnackbar,
   useConfig,
   useLayoutType,
@@ -42,10 +37,12 @@ import styles from './test-peruano-form.scss';
 interface TestPeruanoItem {
   id: string;
   area: 'desarrollo_cognitivo' | 'desarrollo_motor' | 'desarrollo_social_emocional' | 'desarrollo_lenguaje';
-  description: string;
+  descriptionKey: string;
+  descriptionDefault: string;
   ageRange: [number, number]; // [min, max] en meses
   points: number;
-  instruction?: string;
+  instructionKey?: string;
+  instructionDefault?: string;
 }
 
 interface TestPeruanoResults {
@@ -78,7 +75,8 @@ interface TestPeruanoResults {
     total: number;
     percentile: number;
     classification: 'superior' | 'normal_alto' | 'normal' | 'normal_bajo' | 'limite' | 'retraso';
-    recommendation: string;
+    recommendationKey: string;
+    recommendationDefault: string;
   };
 }
 
@@ -88,235 +86,287 @@ const TEST_PERUANO_ITEMS: TestPeruanoItem[] = [
   {
     id: 'cog_1',
     area: 'desarrollo_cognitivo',
-    description: 'Reconoce y nombra frutas típicas del Perú (mango, lúcuma, chirimoya)',
+    descriptionKey: 'tpCog1Desc',
+    descriptionDefault: 'Reconoce y nombra frutas típicas del Perú (mango, lúcuma, chirimoya)',
     ageRange: [24, 36],
     points: 1,
-    instruction: 'Mostrar imágenes de frutas peruanas',
+    instructionKey: 'tpCog1Instr',
+    instructionDefault: 'Mostrar imágenes de frutas peruanas',
   },
   {
     id: 'cog_2',
     area: 'desarrollo_cognitivo',
-    description: 'Identifica animales de la sierra peruana (llama, alpaca, cuy)',
+    descriptionKey: 'tpCog2Desc',
+    descriptionDefault: 'Identifica animales de la sierra peruana (llama, alpaca, cuy)',
     ageRange: [30, 42],
     points: 1,
-    instruction: 'Usar imágenes o juguetes de animales andinos',
+    instructionKey: 'tpCog2Instr',
+    instructionDefault: 'Usar imágenes o juguetes de animales andinos',
   },
   {
     id: 'cog_3',
     area: 'desarrollo_cognitivo',
-    description: 'Clasifica objetos por color usando elementos culturales peruanos',
+    descriptionKey: 'tpCog3Desc',
+    descriptionDefault: 'Clasifica objetos por color usando elementos culturales peruanos',
     ageRange: [36, 48],
     points: 1,
-    instruction: 'Usar textiles andinos de diferentes colores',
+    instructionKey: 'tpCog3Instr',
+    instructionDefault: 'Usar textiles andinos de diferentes colores',
   },
   {
     id: 'cog_4',
     area: 'desarrollo_cognitivo',
-    description: 'Cuenta hasta 10 en quechua o español',
+    descriptionKey: 'tpCog4Desc',
+    descriptionDefault: 'Cuenta hasta 10 en quechua o español',
     ageRange: [42, 54],
     points: 1,
-    instruction: 'Permitir el uso de cualquiera de los dos idiomas',
+    instructionKey: 'tpCog4Instr',
+    instructionDefault: 'Permitir el uso de cualquiera de los dos idiomas',
   },
   {
     id: 'cog_5',
     area: 'desarrollo_cognitivo',
-    description: 'Reconoce símbolos patrios peruanos (bandera, escudo)',
+    descriptionKey: 'tpCog5Desc',
+    descriptionDefault: 'Reconoce símbolos patrios peruanos (bandera, escudo)',
     ageRange: [48, 60],
     points: 1,
-    instruction: 'Mostrar símbolos patrios simplificados',
+    instructionKey: 'tpCog5Instr',
+    instructionDefault: 'Mostrar símbolos patrios simplificados',
   },
   {
     id: 'cog_6',
     area: 'desarrollo_cognitivo',
-    description: 'Resuelve problemas simples usando material concreto andino',
+    descriptionKey: 'tpCog6Desc',
+    descriptionDefault: 'Resuelve problemas simples usando material concreto andino',
     ageRange: [54, 72],
     points: 1,
-    instruction: 'Usar semillas, piedras u otros materiales naturales',
+    instructionKey: 'tpCog6Instr',
+    instructionDefault: 'Usar semillas, piedras u otros materiales naturales',
   },
   {
     id: 'cog_7',
     area: 'desarrollo_cognitivo',
-    description: 'Comprende conceptos de tiempo relacionados con festividades peruanas',
+    descriptionKey: 'tpCog7Desc',
+    descriptionDefault: 'Comprende conceptos de tiempo relacionados con festividades peruanas',
     ageRange: [60, 84],
     points: 1,
-    instruction: 'Preguntar sobre Inti Raymi, Navidad, etc.',
+    instructionKey: 'tpCog7Instr',
+    instructionDefault: 'Preguntar sobre Inti Raymi, Navidad, etc.',
   },
 
   // DESARROLLO MOTOR
   {
     id: 'mot_1',
     area: 'desarrollo_motor',
-    description: 'Realiza movimientos de danzas folklóricas peruanas básicas',
+    descriptionKey: 'tpMot1Desc',
+    descriptionDefault: 'Realiza movimientos de danzas folklóricas peruanas básicas',
     ageRange: [24, 36],
     points: 1,
-    instruction: 'Movimientos simples de marinera o huayno',
+    instructionKey: 'tpMot1Instr',
+    instructionDefault: 'Movimientos simples de marinera o huayno',
   },
   {
     id: 'mot_2',
     area: 'desarrollo_motor',
-    description: 'Manipula instrumentos musicales andinos (maracas, quena de juguete)',
+    descriptionKey: 'tpMot2Desc',
+    descriptionDefault: 'Manipula instrumentos musicales andinos (maracas, quena de juguete)',
     ageRange: [30, 42],
     points: 1,
-    instruction: 'Instrumentos adaptados para niños',
+    instructionKey: 'tpMot2Instr',
+    instructionDefault: 'Instrumentos adaptados para niños',
   },
   {
     id: 'mot_3',
     area: 'desarrollo_motor',
-    description: 'Camina en terreno irregular simulando ambiente andino',
+    descriptionKey: 'tpMot3Desc',
+    descriptionDefault: 'Camina en terreno irregular simulando ambiente andino',
     ageRange: [24, 36],
     points: 1,
-    instruction: 'Usar colchonetas o superficies texturizadas',
+    instructionKey: 'tpMot3Instr',
+    instructionDefault: 'Usar colchonetas o superficies texturizadas',
   },
   {
     id: 'mot_4',
     area: 'desarrollo_motor',
-    description: 'Realiza actividades de la vida diaria andina (cargar en aguayo)',
+    descriptionKey: 'tpMot4Desc',
+    descriptionDefault: 'Realiza actividades de la vida diaria andina (cargar en aguayo)',
     ageRange: [36, 48],
     points: 1,
-    instruction: 'Usar muñecos y telas tradicionales',
+    instructionKey: 'tpMot4Instr',
+    instructionDefault: 'Usar muñecos y telas tradicionales',
   },
   {
     id: 'mot_5',
     area: 'desarrollo_motor',
-    description: 'Coordina movimientos en juegos tradicionales peruanos',
+    descriptionKey: 'tpMot5Desc',
+    descriptionDefault: 'Coordina movimientos en juegos tradicionales peruanos',
     ageRange: [42, 54],
     points: 1,
-    instruction: 'Juegos como "mata gente" o "mundo"',
+    instructionKey: 'tpMot5Instr',
+    instructionDefault: 'Juegos como "mata gente" o "mundo"',
   },
   {
     id: 'mot_6',
     area: 'desarrollo_motor',
-    description: 'Demuestra equilibrio subiendo y bajando escalones',
+    descriptionKey: 'tpMot6Desc',
+    descriptionDefault: 'Demuestra equilibrio subiendo y bajando escalones',
     ageRange: [48, 60],
     points: 1,
-    instruction: 'Simular escalones de andenes incas',
+    instructionKey: 'tpMot6Instr',
+    instructionDefault: 'Simular escalones de andenes incas',
   },
 
   // DESARROLLO SOCIAL-EMOCIONAL
   {
     id: 'soc_1',
     area: 'desarrollo_social_emocional',
-    description: 'Participa en actividades comunitarias familiares',
+    descriptionKey: 'tpSoc1Desc',
+    descriptionDefault: 'Participa en actividades comunitarias familiares',
     ageRange: [24, 36],
     points: 1,
-    instruction: 'Preguntar sobre ayni, minga u otras actividades',
+    instructionKey: 'tpSoc1Instr',
+    instructionDefault: 'Preguntar sobre ayni, minga u otras actividades',
   },
   {
     id: 'soc_2',
     area: 'desarrollo_social_emocional',
-    description: 'Muestra respeto por los mayores según tradición andina',
+    descriptionKey: 'tpSoc2Desc',
+    descriptionDefault: 'Muestra respeto por los mayores según tradición andina',
     ageRange: [30, 42],
     points: 1,
-    instruction: 'Observar comportamiento con adultos',
+    instructionKey: 'tpSoc2Instr',
+    instructionDefault: 'Observar comportamiento con adultos',
   },
   {
     id: 'soc_3',
     area: 'desarrollo_social_emocional',
-    description: 'Demuestra solidaridad y reciprocidad (ayni)',
+    descriptionKey: 'tpSoc3Desc',
+    descriptionDefault: 'Demuestra solidaridad y reciprocidad (ayni)',
     ageRange: [36, 48],
     points: 1,
-    instruction: 'Situaciones de juego cooperativo',
+    instructionKey: 'tpSoc3Instr',
+    instructionDefault: 'Situaciones de juego cooperativo',
   },
   {
     id: 'soc_4',
     area: 'desarrollo_social_emocional',
-    description: 'Expresa emociones de manera culturalmente apropiada',
+    descriptionKey: 'tpSoc4Desc',
+    descriptionDefault: 'Expresa emociones de manera culturalmente apropiada',
     ageRange: [42, 54],
     points: 1,
-    instruction: 'Considerar formas andinas de expresión emocional',
+    instructionKey: 'tpSoc4Instr',
+    instructionDefault: 'Considerar formas andinas de expresión emocional',
   },
   {
     id: 'soc_5',
     area: 'desarrollo_social_emocional',
-    description: 'Comparte alimentos según tradición familiar',
+    descriptionKey: 'tpSoc5Desc',
+    descriptionDefault: 'Comparte alimentos según tradición familiar',
     ageRange: [48, 60],
     points: 1,
-    instruction: 'Observar comportamiento durante snack time',
+    instructionKey: 'tpSoc5Instr',
+    instructionDefault: 'Observar comportamiento durante snack time',
   },
 
   // DESARROLLO DEL LENGUAJE
   {
     id: 'leng_1',
     area: 'desarrollo_lenguaje',
-    description: 'Comprende órdenes simples en español y/o quechua',
+    descriptionKey: 'tpLeng1Desc',
+    descriptionDefault: 'Comprende órdenes simples en español y/o quechua',
     ageRange: [24, 30],
     points: 1,
-    instruction: 'Usar ambos idiomas según contexto familiar',
+    instructionKey: 'tpLeng1Instr',
+    instructionDefault: 'Usar ambos idiomas según contexto familiar',
   },
   {
     id: 'leng_2',
     area: 'desarrollo_lenguaje',
-    description: 'Nombra alimentos tradicionales peruanos',
+    descriptionKey: 'tpLeng2Desc',
+    descriptionDefault: 'Nombra alimentos tradicionales peruanos',
     ageRange: [30, 36],
     points: 1,
-    instruction: 'Papa, quinua, maíz, etc.',
+    instructionKey: 'tpLeng2Instr',
+    instructionDefault: 'Papa, quinua, maíz, etc.',
   },
   {
     id: 'leng_3',
     area: 'desarrollo_lenguaje',
-    description: 'Usa palabras en quechua mezcladas con español',
+    descriptionKey: 'tpLeng3Desc',
+    descriptionDefault: 'Usa palabras en quechua mezcladas con español',
     ageRange: [36, 42],
     points: 1,
-    instruction: 'Aceptar code-switching natural',
+    instructionKey: 'tpLeng3Instr',
+    instructionDefault: 'Aceptar code-switching natural',
   },
   {
     id: 'leng_4',
     area: 'desarrollo_lenguaje',
-    description: 'Relata actividades familiares tradicionales',
+    descriptionKey: 'tpLeng4Desc',
+    descriptionDefault: 'Relata actividades familiares tradicionales',
     ageRange: [42, 48],
     points: 1,
-    instruction: 'Festividades, actividades agrícolas, etc.',
+    instructionKey: 'tpLeng4Instr',
+    instructionDefault: 'Festividades, actividades agrícolas, etc.',
   },
   {
     id: 'leng_5',
     area: 'desarrollo_lenguaje',
-    description: 'Comprende cuentos tradicionales andinos',
+    descriptionKey: 'tpLeng5Desc',
+    descriptionDefault: 'Comprende cuentos tradicionales andinos',
     ageRange: [48, 54],
     points: 1,
-    instruction: 'Usar leyendas adaptadas para la edad',
+    instructionKey: 'tpLeng5Instr',
+    instructionDefault: 'Usar leyendas adaptadas para la edad',
   },
   {
     id: 'leng_6',
     area: 'desarrollo_lenguaje',
-    description: 'Expresa necesidades en contexto bicultural',
+    descriptionKey: 'tpLeng6Desc',
+    descriptionDefault: 'Expresa necesidades en contexto bicultural',
     ageRange: [54, 60],
     points: 1,
-    instruction: 'Situaciones urbanas y rurales',
+    instructionKey: 'tpLeng6Instr',
+    instructionDefault: 'Situaciones urbanas y rurales',
   },
   {
     id: 'leng_7',
     area: 'desarrollo_lenguaje',
-    description: 'Usa vocabulario específico de la región andina',
+    descriptionKey: 'tpLeng7Desc',
+    descriptionDefault: 'Usa vocabulario específico de la región andina',
     ageRange: [60, 72],
     points: 1,
-    instruction: 'Términos geográficos, climáticos, culturales',
+    instructionKey: 'tpLeng7Instr',
+    instructionDefault: 'Términos geográficos, climáticos, culturales',
   },
 ];
 
 // Esquema de validación
-const TestPeruanoSchema = z.object({
-  childAgeMonths: z.number().min(24, 'Edad mínima 24 meses').max(84, 'Edad máxima 84 meses'),
-  evaluationDate: z.string().min(1, 'Fecha requerida'),
-  culturalContext: z.enum(['urbano', 'rural', 'urbano_marginal'], {
-    required_error: 'Contexto cultural requerido',
-  }),
-  primaryLanguage: z.enum(['español', 'quechua', 'bilingue'], {
-    required_error: 'Idioma primario requerido',
-  }),
-  items: z.record(z.boolean()).optional(),
-  observations: z.string().optional(),
-  culturalNotes: z.string().optional(),
-});
+const createTestPeruanoSchema = (t: (key: string, fallback: string) => string) =>
+  z.object({
+    childAgeMonths: z
+      .number()
+      .min(24, t('tpMinAge', 'Edad mínima 24 meses'))
+      .max(84, t('tpMaxAge', 'Edad máxima 84 meses')),
+    evaluationDate: z.string().min(1, t('tpDateRequired', 'Fecha requerida')),
+    culturalContext: z.enum(['urbano', 'rural', 'urbano_marginal'], {
+      required_error: t('tpCulturalContextRequired', 'Contexto cultural requerido'),
+    }),
+    primaryLanguage: z.enum(['español', 'quechua', 'bilingue'], {
+      required_error: t('tpLanguageRequired', 'Idioma primario requerido'),
+    }),
+    items: z.record(z.boolean()).optional(),
+    observations: z.string().optional(),
+    culturalNotes: z.string().optional(),
+  });
 
-export type TestPeruanoFormType = z.infer<typeof TestPeruanoSchema>;
+export type TestPeruanoFormType = z.infer<ReturnType<typeof createTestPeruanoSchema>>;
 
 // Componente principal
-const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
-  closeWorkspace,
-  workspaceProps,
-}) => {
+const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspace, workspaceProps }) => {
   const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
+  const TestPeruanoSchema = useMemo(() => createTestPeruanoSchema(t), [t]);
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
   const session = useSession();
@@ -367,12 +417,8 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
     return TEST_PERUANO_ITEMS.filter((item) => {
       const ageMatch = childAgeMonths >= item.ageRange[0] && childAgeMonths <= item.ageRange[1];
 
-      // Ajustar items según contexto cultural
-      if (culturalContext === 'rural' && item.description.includes('símbolos patrios')) {
-        return false; // Menos relevante en contexto rural
-      }
-      if (culturalContext === 'urbano' && item.description.includes('actividades comunitarias familiares')) {
-        return ageMatch; // Más flexible en contexto urbano
+      if (culturalContext === 'rural' && item.id === 'cog_5') {
+        return false;
       }
 
       return ageMatch;
@@ -386,18 +432,16 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
 
       const percentage = (score / total) * 100;
 
-      // Ajustes culturales para percentiles
       let adjustedPercentage = percentage;
 
       if (primaryLanguage === 'bilingue' && area === 'desarrollo_lenguaje') {
-        adjustedPercentage = Math.min(100, percentage * 1.1); // Bonus por bilingüismo
+        adjustedPercentage = Math.min(100, percentage * 1.1);
       }
 
       if (culturalContext === 'rural' && area === 'desarrollo_social_emocional') {
-        adjustedPercentage = Math.min(100, percentage * 1.05); // Ajuste por valores comunitarios
+        adjustedPercentage = Math.min(100, percentage * 1.05);
       }
 
-      // Convertir a percentil
       if (adjustedPercentage >= 95) return 95;
       if (adjustedPercentage >= 85) return 85;
       if (adjustedPercentage >= 75) return 75;
@@ -459,14 +503,16 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
     const totalPercentile = calculatePercentile(totalScore, totalPossible, 'total');
     const totalClassification = getClassification(totalPercentile);
 
-    // Generar recomendación basada en resultados y contexto cultural
-    let recommendation = '';
+    let recommendationKey = 'tpRecommendationNormal';
+    let recommendationDefault =
+      'Desarrollo apropiado para la edad y contexto cultural. Continuar con actividades regulares.';
     if (totalClassification === 'retraso' || totalClassification === 'limite') {
-      recommendation = 'Se recomienda evaluación especializada y estimulación temprana culturalmente apropiada.';
+      recommendationKey = 'tpRecommendationDelay';
+      recommendationDefault =
+        'Se recomienda evaluación especializada y estimulación temprana culturalmente apropiada.';
     } else if (totalClassification === 'normal_bajo') {
-      recommendation = 'Se sugiere actividades de estimulación usando elementos culturales familiares.';
-    } else {
-      recommendation = 'Desarrollo apropiado para la edad y contexto cultural. Continuar con actividades regulares.';
+      recommendationKey = 'tpRecommendationLowNormal';
+      recommendationDefault = 'Se sugiere actividades de estimulación usando elementos culturales familiares.';
     }
 
     return {
@@ -479,7 +525,8 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
         total: totalPossible,
         percentile: totalPercentile,
         classification: totalClassification,
-        recommendation,
+        recommendationKey,
+        recommendationDefault,
       },
     };
   }, [appropriateItems, selectedItems, calculatePercentile]);
@@ -497,8 +544,6 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
       setShowErrorNotification(false);
 
       try {
-        const abortController = new AbortController();
-
         const testPeruanoData = {
           ...data,
           items: selectedItems,
@@ -509,9 +554,6 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
             language: primaryLanguage,
           },
         };
-
-        // Aquí llamarías a tu función de guardado
-        // await saveTestPeruanoEvaluation(config, patientUuid, testPeruanoData, abortController, session?.sessionLocation?.uuid);
 
         showSnackbar({
           isLowContrast: true,
@@ -596,7 +638,8 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     <strong>{t('name', 'Nombre')}:</strong> {getPatientName(patient.patient)}
                   </p>
                   <p>
-                    <strong>{t('age', 'Edad')}:</strong> {childAgeMonths} meses
+                    <strong>{t('age', 'Edad')}:</strong>{' '}
+                    {t('ageMonths', '{{count}} meses', { count: childAgeMonths })}
                   </p>
                 </div>
                 <div>
@@ -653,7 +696,9 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     <p>
                       {results.desarrollo_cognitivo.score}/{results.desarrollo_cognitivo.total}
                     </p>
-                    <p className={styles.percentile}>Percentil: {results.desarrollo_cognitivo.percentile}</p>
+                    <p className={styles.percentile}>
+                      {t('percentileLabel', 'Percentil')}: {results.desarrollo_cognitivo.percentile}
+                    </p>
                     <Tag type={getClassificationColor(results.desarrollo_cognitivo.classification)}>
                       {getClassificationText(results.desarrollo_cognitivo.classification)}
                     </Tag>
@@ -664,7 +709,9 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     <p>
                       {results.desarrollo_motor.score}/{results.desarrollo_motor.total}
                     </p>
-                    <p className={styles.percentile}>Percentil: {results.desarrollo_motor.percentile}</p>
+                    <p className={styles.percentile}>
+                      {t('percentileLabel', 'Percentil')}: {results.desarrollo_motor.percentile}
+                    </p>
                     <Tag type={getClassificationColor(results.desarrollo_motor.classification)}>
                       {getClassificationText(results.desarrollo_motor.classification)}
                     </Tag>
@@ -675,7 +722,9 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     <p>
                       {results.desarrollo_social_emocional.score}/{results.desarrollo_social_emocional.total}
                     </p>
-                    <p className={styles.percentile}>Percentil: {results.desarrollo_social_emocional.percentile}</p>
+                    <p className={styles.percentile}>
+                      {t('percentileLabel', 'Percentil')}: {results.desarrollo_social_emocional.percentile}
+                    </p>
                     <Tag type={getClassificationColor(results.desarrollo_social_emocional.classification)}>
                       {getClassificationText(results.desarrollo_social_emocional.classification)}
                     </Tag>
@@ -686,7 +735,9 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     <p>
                       {results.desarrollo_lenguaje.score}/{results.desarrollo_lenguaje.total}
                     </p>
-                    <p className={styles.percentile}>Percentil: {results.desarrollo_lenguaje.percentile}</p>
+                    <p className={styles.percentile}>
+                      {t('percentileLabel', 'Percentil')}: {results.desarrollo_lenguaje.percentile}
+                    </p>
                     <Tag type={getClassificationColor(results.desarrollo_lenguaje.classification)}>
                       {getClassificationText(results.desarrollo_lenguaje.classification)}
                     </Tag>
@@ -697,17 +748,19 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     <p>
                       {results.total.score}/{results.total.total}
                     </p>
-                    <p className={styles.percentile}>Percentil: {results.total.percentile}</p>
+                    <p className={styles.percentile}>
+                      {t('percentileLabel', 'Percentil')}: {results.total.percentile}
+                    </p>
                     <Tag type={getClassificationColor(results.total.classification)}>
                       {getClassificationText(results.total.classification)}
                     </Tag>
                   </div>
                 </div>
 
-                {results.total.recommendation && (
+                {results.total.recommendationKey && (
                   <div className={styles.recommendation}>
                     <h5>{t('recommendation', 'Recomendación')}</h5>
-                    <p>{results.total.recommendation}</p>
+                    <p>{t(results.total.recommendationKey, results.total.recommendationDefault)}</p>
                   </div>
                 )}
               </Stack>
@@ -732,13 +785,15 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     .map((item) => (
                       <div key={item.id} className={styles.itemContainer}>
                         <Checkbox
-                          labelText={item.description}
+                          labelText={t(item.descriptionKey, item.descriptionDefault)}
                           id={item.id}
                           checked={selectedItems[item.id] || false}
                           onChange={(_, { checked }) => handleItemChange(item.id, checked)}
                           className={styles.itemCheckbox}
                         />
-                        {item.instruction && <p className={styles.instruction}>{item.instruction}</p>}
+                        {item.instructionKey && (
+                          <p className={styles.instruction}>{t(item.instructionKey, item.instructionDefault)}</p>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -753,13 +808,15 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     .map((item) => (
                       <div key={item.id} className={styles.itemContainer}>
                         <Checkbox
-                          labelText={item.description}
+                          labelText={t(item.descriptionKey, item.descriptionDefault)}
                           id={item.id}
                           checked={selectedItems[item.id] || false}
                           onChange={(_, { checked }) => handleItemChange(item.id, checked)}
                           className={styles.itemCheckbox}
                         />
-                        {item.instruction && <p className={styles.instruction}>{item.instruction}</p>}
+                        {item.instructionKey && (
+                          <p className={styles.instruction}>{t(item.instructionKey, item.instructionDefault)}</p>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -774,13 +831,15 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     .map((item) => (
                       <div key={item.id} className={styles.itemContainer}>
                         <Checkbox
-                          labelText={item.description}
+                          labelText={t(item.descriptionKey, item.descriptionDefault)}
                           id={item.id}
                           checked={selectedItems[item.id] || false}
                           onChange={(_, { checked }) => handleItemChange(item.id, checked)}
                           className={styles.itemCheckbox}
                         />
-                        {item.instruction && <p className={styles.instruction}>{item.instruction}</p>}
+                        {item.instructionKey && (
+                          <p className={styles.instruction}>{t(item.instructionKey, item.instructionDefault)}</p>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -795,13 +854,15 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     .map((item) => (
                       <div key={item.id} className={styles.itemContainer}>
                         <Checkbox
-                          labelText={item.description}
+                          labelText={t(item.descriptionKey, item.descriptionDefault)}
                           id={item.id}
                           checked={selectedItems[item.id] || false}
                           onChange={(_, { checked }) => handleItemChange(item.id, checked)}
                           className={styles.itemCheckbox}
                         />
-                        {item.instruction && <p className={styles.instruction}>{item.instruction}</p>}
+                        {item.instructionKey && (
+                          <p className={styles.instruction}>{t(item.instructionKey, item.instructionDefault)}</p>
+                        )}
                       </div>
                     ))}
                 </div>
