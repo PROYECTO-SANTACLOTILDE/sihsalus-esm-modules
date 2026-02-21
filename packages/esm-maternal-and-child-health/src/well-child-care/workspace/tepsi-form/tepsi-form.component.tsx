@@ -6,25 +6,18 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
-  ButtonSkeleton,
   ButtonSet,
   Column,
   Form,
   InlineNotification,
   Stack,
-  Select,
-  SelectItem,
   Checkbox,
-  NumberInput,
   DatePicker,
   DatePickerInput,
-  RadioButtonGroup,
-  RadioButton,
   Tile,
   Tag,
 } from '@carbon/react';
 import {
-  createErrorHandler,
   showSnackbar,
   useConfig,
   useLayoutType,
@@ -41,7 +34,8 @@ import styles from './tepsi-form.scss';
 interface TEPSIItem {
   id: string;
   area: 'coordinacion' | 'lenguaje' | 'motricidad';
-  description: string;
+  descriptionKey: string;
+  descriptionDefault: string;
   ageRange: [number, number]; // [min, max] en meses
   points: number;
 }
@@ -72,165 +66,83 @@ interface TEPSIResults {
 // Items del TEPSI por área y edad
 const TEPSI_ITEMS: TEPSIItem[] = [
   // COORDINACIÓN
-  {
-    id: 'coord_1',
-    area: 'coordinacion',
-    description: 'Traslada agua de un vaso a otro sin derramar',
-    ageRange: [24, 30],
-    points: 1,
-  },
-  {
-    id: 'coord_2',
-    area: 'coordinacion',
-    description: 'Construye un puente con 3 cubos con modelo presente',
-    ageRange: [24, 30],
-    points: 1,
-  },
-  {
-    id: 'coord_3',
-    area: 'coordinacion',
-    description: 'Construye una torre de 8 o más cubos',
-    ageRange: [24, 36],
-    points: 1,
-  },
-  { id: 'coord_4', area: 'coordinacion', description: 'Desabotona', ageRange: [30, 42], points: 1 },
-  { id: 'coord_5', area: 'coordinacion', description: 'Abotona', ageRange: [36, 48], points: 1 },
-  { id: 'coord_6', area: 'coordinacion', description: 'Enhebra aguja', ageRange: [42, 60], points: 1 },
-  { id: 'coord_7', area: 'coordinacion', description: 'Desata cordones', ageRange: [36, 48], points: 1 },
-  { id: 'coord_8', area: 'coordinacion', description: 'Copia una línea recta', ageRange: [24, 30], points: 1 },
-  { id: 'coord_9', area: 'coordinacion', description: 'Copia un círculo', ageRange: [30, 36], points: 1 },
-  { id: 'coord_10', area: 'coordinacion', description: 'Copia una cruz', ageRange: [42, 48], points: 1 },
-  { id: 'coord_11', area: 'coordinacion', description: 'Copia un triángulo', ageRange: [54, 60], points: 1 },
-  { id: 'coord_12', area: 'coordinacion', description: 'Copia un cuadrado', ageRange: [48, 54], points: 1 },
-  {
-    id: 'coord_13',
-    area: 'coordinacion',
-    description: 'Dibuja 9 o más partes de una figura humana',
-    ageRange: [54, 60],
-    points: 1,
-  },
-  {
-    id: 'coord_14',
-    area: 'coordinacion',
-    description: 'Dibuja 6 o más partes de una figura humana',
-    ageRange: [48, 54],
-    points: 1,
-  },
-  {
-    id: 'coord_15',
-    area: 'coordinacion',
-    description: 'Dibuja 3 o más partes de una figura humana',
-    ageRange: [36, 42],
-    points: 1,
-  },
-  { id: 'coord_16', area: 'coordinacion', description: 'Ordena por tamaño', ageRange: [36, 48], points: 1 },
+  { id: 'coord_1', area: 'coordinacion', descriptionKey: 'tepsiCoord1', descriptionDefault: 'Traslada agua de un vaso a otro sin derramar', ageRange: [24, 30], points: 1 },
+  { id: 'coord_2', area: 'coordinacion', descriptionKey: 'tepsiCoord2', descriptionDefault: 'Construye un puente con 3 cubos con modelo presente', ageRange: [24, 30], points: 1 },
+  { id: 'coord_3', area: 'coordinacion', descriptionKey: 'tepsiCoord3', descriptionDefault: 'Construye una torre de 8 o más cubos', ageRange: [24, 36], points: 1 },
+  { id: 'coord_4', area: 'coordinacion', descriptionKey: 'tepsiCoord4', descriptionDefault: 'Desabotona', ageRange: [30, 42], points: 1 },
+  { id: 'coord_5', area: 'coordinacion', descriptionKey: 'tepsiCoord5', descriptionDefault: 'Abotona', ageRange: [36, 48], points: 1 },
+  { id: 'coord_6', area: 'coordinacion', descriptionKey: 'tepsiCoord6', descriptionDefault: 'Enhebra aguja', ageRange: [42, 60], points: 1 },
+  { id: 'coord_7', area: 'coordinacion', descriptionKey: 'tepsiCoord7', descriptionDefault: 'Desata cordones', ageRange: [36, 48], points: 1 },
+  { id: 'coord_8', area: 'coordinacion', descriptionKey: 'tepsiCoord8', descriptionDefault: 'Copia una línea recta', ageRange: [24, 30], points: 1 },
+  { id: 'coord_9', area: 'coordinacion', descriptionKey: 'tepsiCoord9', descriptionDefault: 'Copia un círculo', ageRange: [30, 36], points: 1 },
+  { id: 'coord_10', area: 'coordinacion', descriptionKey: 'tepsiCoord10', descriptionDefault: 'Copia una cruz', ageRange: [42, 48], points: 1 },
+  { id: 'coord_11', area: 'coordinacion', descriptionKey: 'tepsiCoord11', descriptionDefault: 'Copia un triángulo', ageRange: [54, 60], points: 1 },
+  { id: 'coord_12', area: 'coordinacion', descriptionKey: 'tepsiCoord12', descriptionDefault: 'Copia un cuadrado', ageRange: [48, 54], points: 1 },
+  { id: 'coord_13', area: 'coordinacion', descriptionKey: 'tepsiCoord13', descriptionDefault: 'Dibuja 9 o más partes de una figura humana', ageRange: [54, 60], points: 1 },
+  { id: 'coord_14', area: 'coordinacion', descriptionKey: 'tepsiCoord14', descriptionDefault: 'Dibuja 6 o más partes de una figura humana', ageRange: [48, 54], points: 1 },
+  { id: 'coord_15', area: 'coordinacion', descriptionKey: 'tepsiCoord15', descriptionDefault: 'Dibuja 3 o más partes de una figura humana', ageRange: [36, 42], points: 1 },
+  { id: 'coord_16', area: 'coordinacion', descriptionKey: 'tepsiCoord16', descriptionDefault: 'Ordena por tamaño', ageRange: [36, 48], points: 1 },
 
   // LENGUAJE
-  { id: 'leng_1', area: 'lenguaje', description: 'Reconoce grande y chico', ageRange: [24, 30], points: 1 },
-  { id: 'leng_2', area: 'lenguaje', description: 'Reconoce más y menos', ageRange: [30, 36], points: 1 },
-  { id: 'leng_3', area: 'lenguaje', description: 'Nombra animales', ageRange: [24, 30], points: 1 },
-  { id: 'leng_4', area: 'lenguaje', description: 'Nombra objetos', ageRange: [24, 30], points: 1 },
-  { id: 'leng_5', area: 'lenguaje', description: 'Reconoce largo y corto', ageRange: [36, 42], points: 1 },
-  { id: 'leng_6', area: 'lenguaje', description: 'Verbaliza acciones', ageRange: [30, 36], points: 1 },
-  { id: 'leng_7', area: 'lenguaje', description: 'Conoce la utilidad de objetos', ageRange: [36, 42], points: 1 },
-  { id: 'leng_8', area: 'lenguaje', description: 'Discrimina pesado y liviano', ageRange: [42, 48], points: 1 },
-  { id: 'leng_9', area: 'lenguaje', description: 'Verbaliza su nombre y apellido', ageRange: [30, 36], points: 1 },
-  { id: 'leng_10', area: 'lenguaje', description: 'Identifica su sexo', ageRange: [30, 36], points: 1 },
-  { id: 'leng_11', area: 'lenguaje', description: 'Conoce el nombre de sus padres', ageRange: [36, 42], points: 1 },
-  { id: 'leng_12', area: 'lenguaje', description: 'Da su dirección', ageRange: [48, 60], points: 1 },
-  { id: 'leng_13', area: 'lenguaje', description: 'Comprende preposiciones', ageRange: [36, 42], points: 1 },
-  { id: 'leng_14', area: 'lenguaje', description: 'Razona por analogías', ageRange: [48, 60], points: 1 },
-  { id: 'leng_15', area: 'lenguaje', description: 'Nombra colores', ageRange: [42, 48], points: 1 },
-  { id: 'leng_16', area: 'lenguaje', description: 'Señala colores', ageRange: [36, 42], points: 1 },
-  { id: 'leng_17', area: 'lenguaje', description: 'Nombra figuras geométricas', ageRange: [48, 60], points: 1 },
-  { id: 'leng_18', area: 'lenguaje', description: 'Señala figuras geométricas', ageRange: [42, 48], points: 1 },
-  { id: 'leng_19', area: 'lenguaje', description: 'Describe escenas', ageRange: [48, 60], points: 1 },
-  { id: 'leng_20', area: 'lenguaje', description: 'Reconoce absurdos', ageRange: [54, 60], points: 1 },
-  { id: 'leng_21', area: 'lenguaje', description: 'Usa plurales', ageRange: [36, 42], points: 1 },
-  { id: 'leng_22', area: 'lenguaje', description: 'Reconoce antes y después', ageRange: [48, 60], points: 1 },
-  { id: 'leng_23', area: 'lenguaje', description: 'Define palabras', ageRange: [54, 60], points: 1 },
-  { id: 'leng_24', area: 'lenguaje', description: 'Nombra características de objetos', ageRange: [42, 48], points: 1 },
+  { id: 'leng_1', area: 'lenguaje', descriptionKey: 'tepsiLeng1', descriptionDefault: 'Reconoce grande y chico', ageRange: [24, 30], points: 1 },
+  { id: 'leng_2', area: 'lenguaje', descriptionKey: 'tepsiLeng2', descriptionDefault: 'Reconoce más y menos', ageRange: [30, 36], points: 1 },
+  { id: 'leng_3', area: 'lenguaje', descriptionKey: 'tepsiLeng3', descriptionDefault: 'Nombra animales', ageRange: [24, 30], points: 1 },
+  { id: 'leng_4', area: 'lenguaje', descriptionKey: 'tepsiLeng4', descriptionDefault: 'Nombra objetos', ageRange: [24, 30], points: 1 },
+  { id: 'leng_5', area: 'lenguaje', descriptionKey: 'tepsiLeng5', descriptionDefault: 'Reconoce largo y corto', ageRange: [36, 42], points: 1 },
+  { id: 'leng_6', area: 'lenguaje', descriptionKey: 'tepsiLeng6', descriptionDefault: 'Verbaliza acciones', ageRange: [30, 36], points: 1 },
+  { id: 'leng_7', area: 'lenguaje', descriptionKey: 'tepsiLeng7', descriptionDefault: 'Conoce la utilidad de objetos', ageRange: [36, 42], points: 1 },
+  { id: 'leng_8', area: 'lenguaje', descriptionKey: 'tepsiLeng8', descriptionDefault: 'Discrimina pesado y liviano', ageRange: [42, 48], points: 1 },
+  { id: 'leng_9', area: 'lenguaje', descriptionKey: 'tepsiLeng9', descriptionDefault: 'Verbaliza su nombre y apellido', ageRange: [30, 36], points: 1 },
+  { id: 'leng_10', area: 'lenguaje', descriptionKey: 'tepsiLeng10', descriptionDefault: 'Identifica su sexo', ageRange: [30, 36], points: 1 },
+  { id: 'leng_11', area: 'lenguaje', descriptionKey: 'tepsiLeng11', descriptionDefault: 'Conoce el nombre de sus padres', ageRange: [36, 42], points: 1 },
+  { id: 'leng_12', area: 'lenguaje', descriptionKey: 'tepsiLeng12', descriptionDefault: 'Da su dirección', ageRange: [48, 60], points: 1 },
+  { id: 'leng_13', area: 'lenguaje', descriptionKey: 'tepsiLeng13', descriptionDefault: 'Comprende preposiciones', ageRange: [36, 42], points: 1 },
+  { id: 'leng_14', area: 'lenguaje', descriptionKey: 'tepsiLeng14', descriptionDefault: 'Razona por analogías', ageRange: [48, 60], points: 1 },
+  { id: 'leng_15', area: 'lenguaje', descriptionKey: 'tepsiLeng15', descriptionDefault: 'Nombra colores', ageRange: [42, 48], points: 1 },
+  { id: 'leng_16', area: 'lenguaje', descriptionKey: 'tepsiLeng16', descriptionDefault: 'Señala colores', ageRange: [36, 42], points: 1 },
+  { id: 'leng_17', area: 'lenguaje', descriptionKey: 'tepsiLeng17', descriptionDefault: 'Nombra figuras geométricas', ageRange: [48, 60], points: 1 },
+  { id: 'leng_18', area: 'lenguaje', descriptionKey: 'tepsiLeng18', descriptionDefault: 'Señala figuras geométricas', ageRange: [42, 48], points: 1 },
+  { id: 'leng_19', area: 'lenguaje', descriptionKey: 'tepsiLeng19', descriptionDefault: 'Describe escenas', ageRange: [48, 60], points: 1 },
+  { id: 'leng_20', area: 'lenguaje', descriptionKey: 'tepsiLeng20', descriptionDefault: 'Reconoce absurdos', ageRange: [54, 60], points: 1 },
+  { id: 'leng_21', area: 'lenguaje', descriptionKey: 'tepsiLeng21', descriptionDefault: 'Usa plurales', ageRange: [36, 42], points: 1 },
+  { id: 'leng_22', area: 'lenguaje', descriptionKey: 'tepsiLeng22', descriptionDefault: 'Reconoce antes y después', ageRange: [48, 60], points: 1 },
+  { id: 'leng_23', area: 'lenguaje', descriptionKey: 'tepsiLeng23', descriptionDefault: 'Define palabras', ageRange: [54, 60], points: 1 },
+  { id: 'leng_24', area: 'lenguaje', descriptionKey: 'tepsiLeng24', descriptionDefault: 'Nombra características de objetos', ageRange: [42, 48], points: 1 },
 
   // MOTRICIDAD
-  {
-    id: 'mot_1',
-    area: 'motricidad',
-    description: 'Salta con los dos pies juntos en el mismo lugar',
-    ageRange: [24, 30],
-    points: 1,
-  },
-  {
-    id: 'mot_2',
-    area: 'motricidad',
-    description: 'Camina 10 pasos llevando un vaso lleno de agua',
-    ageRange: [30, 36],
-    points: 1,
-  },
-  {
-    id: 'mot_3',
-    area: 'motricidad',
-    description: 'Lanza una pelota en una dirección determinada',
-    ageRange: [24, 30],
-    points: 1,
-  },
-  {
-    id: 'mot_4',
-    area: 'motricidad',
-    description: 'Se para en un pie sin apoyo 10 segundos o más',
-    ageRange: [48, 54],
-    points: 1,
-  },
-  {
-    id: 'mot_5',
-    area: 'motricidad',
-    description: 'Se para en un pie sin apoyo 5 segundos o más',
-    ageRange: [42, 48],
-    points: 1,
-  },
-  {
-    id: 'mot_6',
-    area: 'motricidad',
-    description: 'Se para en un pie sin apoyo 1 segundo o más',
-    ageRange: [36, 42],
-    points: 1,
-  },
-  {
-    id: 'mot_7',
-    area: 'motricidad',
-    description: 'Camina en punta de pies 6 o más pasos',
-    ageRange: [36, 42],
-    points: 1,
-  },
-  { id: 'mot_8', area: 'motricidad', description: 'Salta 20 cms con los pies juntos', ageRange: [36, 42], points: 1 },
-  {
-    id: 'mot_9',
-    area: 'motricidad',
-    description: 'Salta en un pie 3 o más veces sin apoyo',
-    ageRange: [48, 54],
-    points: 1,
-  },
-  { id: 'mot_10', area: 'motricidad', description: 'Coge una pelota', ageRange: [30, 36], points: 1 },
-  { id: 'mot_11', area: 'motricidad', description: 'Camina hacia atrás', ageRange: [30, 36], points: 1 },
-  { id: 'mot_12', area: 'motricidad', description: 'Camina en línea recta', ageRange: [36, 42], points: 1 },
+  { id: 'mot_1', area: 'motricidad', descriptionKey: 'tepsiMot1', descriptionDefault: 'Salta con los dos pies juntos en el mismo lugar', ageRange: [24, 30], points: 1 },
+  { id: 'mot_2', area: 'motricidad', descriptionKey: 'tepsiMot2', descriptionDefault: 'Camina 10 pasos llevando un vaso lleno de agua', ageRange: [30, 36], points: 1 },
+  { id: 'mot_3', area: 'motricidad', descriptionKey: 'tepsiMot3', descriptionDefault: 'Lanza una pelota en una dirección determinada', ageRange: [24, 30], points: 1 },
+  { id: 'mot_4', area: 'motricidad', descriptionKey: 'tepsiMot4', descriptionDefault: 'Se para en un pie sin apoyo 10 segundos o más', ageRange: [48, 54], points: 1 },
+  { id: 'mot_5', area: 'motricidad', descriptionKey: 'tepsiMot5', descriptionDefault: 'Se para en un pie sin apoyo 5 segundos o más', ageRange: [42, 48], points: 1 },
+  { id: 'mot_6', area: 'motricidad', descriptionKey: 'tepsiMot6', descriptionDefault: 'Se para en un pie sin apoyo 1 segundo o más', ageRange: [36, 42], points: 1 },
+  { id: 'mot_7', area: 'motricidad', descriptionKey: 'tepsiMot7', descriptionDefault: 'Camina en punta de pies 6 o más pasos', ageRange: [36, 42], points: 1 },
+  { id: 'mot_8', area: 'motricidad', descriptionKey: 'tepsiMot8', descriptionDefault: 'Salta 20 cms con los pies juntos', ageRange: [36, 42], points: 1 },
+  { id: 'mot_9', area: 'motricidad', descriptionKey: 'tepsiMot9', descriptionDefault: 'Salta en un pie 3 o más veces sin apoyo', ageRange: [48, 54], points: 1 },
+  { id: 'mot_10', area: 'motricidad', descriptionKey: 'tepsiMot10', descriptionDefault: 'Coge una pelota', ageRange: [30, 36], points: 1 },
+  { id: 'mot_11', area: 'motricidad', descriptionKey: 'tepsiMot11', descriptionDefault: 'Camina hacia atrás', ageRange: [30, 36], points: 1 },
+  { id: 'mot_12', area: 'motricidad', descriptionKey: 'tepsiMot12', descriptionDefault: 'Camina en línea recta', ageRange: [36, 42], points: 1 },
 ];
 
 // Esquema de validación
-const TEPSISchema = z.object({
-  childAgeMonths: z.number().min(24, 'Edad mínima 24 meses').max(60, 'Edad máxima 60 meses'),
-  evaluationDate: z.string().min(1, 'Fecha requerida'),
-  items: z.record(z.boolean()).optional(),
-  observations: z.string().optional(),
-});
+const createTEPSISchema = (t: (key: string, fallback: string) => string) =>
+  z.object({
+    childAgeMonths: z
+      .number()
+      .min(24, t('tepsiMinAge', 'Edad mínima 24 meses'))
+      .max(60, t('tepsiMaxAge', 'Edad máxima 60 meses')),
+    evaluationDate: z.string().min(1, t('tpDateRequired', 'Fecha requerida')),
+    items: z.record(z.boolean()).optional(),
+    observations: z.string().optional(),
+  });
 
-export type TEPSIFormType = z.infer<typeof TEPSISchema>;
+export type TEPSIFormType = z.infer<ReturnType<typeof createTEPSISchema>>;
 
 // Componente principal
-const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
-  closeWorkspace,
-  workspaceProps,
-}) => {
+const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspace, workspaceProps }) => {
   const patientUuid = workspaceProps?.patientUuid ?? '';
   const { t } = useTranslation();
+  const TEPSISchema = useMemo(() => createTEPSISchema(t), [t]);
   const isTablet = useLayoutType() === 'tablet';
   const config = useConfig<ConfigObject>();
   const session = useSession();
@@ -260,7 +172,6 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
 
   const childAgeMonths = watch('childAgeMonths');
 
-  // Calcular edad del niño basado en fecha de nacimiento
   useEffect(() => {
     if (patient?.patient?.birthDate) {
       const birthDate = new Date(patient.patient.birthDate);
@@ -270,13 +181,11 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
     }
   }, [patient, setValue]);
 
-  // Filtrar items apropiados para la edad
   const appropriateItems = useMemo(() => {
     if (!childAgeMonths) return [];
     return TEPSI_ITEMS.filter((item) => childAgeMonths >= item.ageRange[0] && childAgeMonths <= item.ageRange[1]);
   }, [childAgeMonths]);
 
-  // Calcular resultados
   const results: TEPSIResults = useMemo(() => {
     const itemsByArea = {
       coordinacion: appropriateItems.filter((item) => item.area === 'coordinacion'),
@@ -287,10 +196,9 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
     const calculateAreaScore = (items: TEPSIItem[]) => {
       const total = items.length;
       const score = items.reduce((sum, item) => sum + (selectedItems[item.id] ? item.points : 0), 0);
-
-      let classification: 'normal' | 'riesgo' | 'retraso';
       const percentage = total > 0 ? (score / total) * 100 : 0;
 
+      let classification: 'normal' | 'riesgo' | 'retraso';
       if (percentage >= 75) classification = 'normal';
       else if (percentage >= 50) classification = 'riesgo';
       else classification = 'retraso';
@@ -315,19 +223,12 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
       coordinacion,
       lenguaje,
       motricidad,
-      total: {
-        score: totalScore,
-        total: totalPossible,
-        classification: totalClassification,
-      },
+      total: { score: totalScore, total: totalPossible, classification: totalClassification },
     };
   }, [appropriateItems, selectedItems]);
 
   const handleItemChange = (itemId: string, checked: boolean) => {
-    setSelectedItems((prev) => ({
-      ...prev,
-      [itemId]: checked,
-    }));
+    setSelectedItems((prev) => ({ ...prev, [itemId]: checked }));
   };
 
   const saveTEPSIData = useCallback(
@@ -336,8 +237,6 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
       setShowErrorNotification(false);
 
       try {
-        const abortController = new AbortController();
-
         const tepsiData = {
           ...data,
           items: selectedItems,
@@ -345,14 +244,11 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
           appropriateItems: appropriateItems.map((item) => item.id),
         };
 
-        // Aquí llamarías a tu función de guardado
-        // await saveTEPSIEvaluation(config, patientUuid, tepsiData, abortController, session?.sessionLocation?.uuid);
-
         showSnackbar({
           isLowContrast: true,
           kind: 'success',
-          title: t('tepsiSaved', 'TEPSI Evaluation Saved'),
-          subtitle: t('tepsiDataAvailable', 'The evaluation is now available in the patient record'),
+          title: t('tepsiSaved', 'Evaluación TEPSI Guardada'),
+          subtitle: t('tepsiDataAvailable', 'La evaluación está disponible en el registro del paciente'),
         });
 
         closeWorkspace({ discardUnsavedChanges: true });
@@ -360,10 +256,10 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
         console.error('Error saving TEPSI:', error);
         setShowErrorNotification(true);
         showSnackbar({
-          title: t('tepsiSaveError', 'Error saving TEPSI evaluation'),
+          title: t('tepsiSaveError', 'Error al guardar evaluación TEPSI'),
           kind: 'error',
           isLowContrast: false,
-          subtitle: t('checkForErrors', 'Please check the form and try again'),
+          subtitle: t('checkForErrors', 'Por favor revise el formulario e intente nuevamente'),
         });
       } finally {
         setIsSubmitting(false);
@@ -408,7 +304,6 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
           </p>
         </Column>
 
-        {/* Información del paciente */}
         <Column>
           <Tile className={styles.patientInfo}>
             <Stack gap={3}>
@@ -417,7 +312,8 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                 <strong>{t('name', 'Nombre')}:</strong> {getPatientName(patient.patient)}
               </p>
               <p>
-                <strong>{t('age', 'Edad')}:</strong> {childAgeMonths} meses
+                <strong>{t('age', 'Edad')}:</strong>{' '}
+                {t('ageMonths', '{{count}} meses', { count: childAgeMonths })}
               </p>
               <DatePicker
                 datePickerType="single"
@@ -437,49 +333,36 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
           </Tile>
         </Column>
 
-        {/* Resultados en tiempo real */}
         {childAgeMonths && (
           <Column>
             <Tile className={styles.results}>
               <Stack gap={4}>
                 <h4>{t('resultsPreview', 'Vista previa de resultados')}</h4>
-
                 <div className={styles.resultGrid}>
                   <div className={styles.resultCard}>
                     <h5>{t('coordinacion', 'Coordinación')}</h5>
-                    <p>
-                      {results.coordinacion.score}/{results.coordinacion.total}
-                    </p>
+                    <p>{results.coordinacion.score}/{results.coordinacion.total}</p>
                     <Tag type={getClassificationColor(results.coordinacion.classification)}>
                       {getClassificationText(results.coordinacion.classification)}
                     </Tag>
                   </div>
-
                   <div className={styles.resultCard}>
                     <h5>{t('lenguaje', 'Lenguaje')}</h5>
-                    <p>
-                      {results.lenguaje.score}/{results.lenguaje.total}
-                    </p>
+                    <p>{results.lenguaje.score}/{results.lenguaje.total}</p>
                     <Tag type={getClassificationColor(results.lenguaje.classification)}>
                       {getClassificationText(results.lenguaje.classification)}
                     </Tag>
                   </div>
-
                   <div className={styles.resultCard}>
                     <h5>{t('motricidad', 'Motricidad')}</h5>
-                    <p>
-                      {results.motricidad.score}/{results.motricidad.total}
-                    </p>
+                    <p>{results.motricidad.score}/{results.motricidad.total}</p>
                     <Tag type={getClassificationColor(results.motricidad.classification)}>
                       {getClassificationText(results.motricidad.classification)}
                     </Tag>
                   </div>
-
                   <div className={styles.resultCard}>
                     <h5>{t('total', 'Total')}</h5>
-                    <p>
-                      {results.total.score}/{results.total.total}
-                    </p>
+                    <p>{results.total.score}/{results.total.total}</p>
                     <Tag type={getClassificationColor(results.total.classification)}>
                       {getClassificationText(results.total.classification)}
                     </Tag>
@@ -490,7 +373,6 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
           </Column>
         )}
 
-        {/* Items de evaluación */}
         {appropriateItems.length > 0 && (
           <Column>
             <Stack gap={4}>
@@ -498,7 +380,6 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                 {t('evaluationItems', 'Items de Evaluación')} ({appropriateItems.length} items)
               </h4>
 
-              {/* Coordinación */}
               <div className={styles.areaSection}>
                 <h5 className={styles.areaTitle}>{t('coordinacion', 'Coordinación')}</h5>
                 <div className={styles.itemsGrid}>
@@ -507,7 +388,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     .map((item) => (
                       <Checkbox
                         key={item.id}
-                        labelText={item.description}
+                        labelText={t(item.descriptionKey, item.descriptionDefault)}
                         id={item.id}
                         checked={selectedItems[item.id] || false}
                         onChange={(_, { checked }) => handleItemChange(item.id, checked)}
@@ -517,7 +398,6 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                 </div>
               </div>
 
-              {/* Lenguaje */}
               <div className={styles.areaSection}>
                 <h5 className={styles.areaTitle}>{t('lenguaje', 'Lenguaje')}</h5>
                 <div className={styles.itemsGrid}>
@@ -526,7 +406,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     .map((item) => (
                       <Checkbox
                         key={item.id}
-                        labelText={item.description}
+                        labelText={t(item.descriptionKey, item.descriptionDefault)}
                         id={item.id}
                         checked={selectedItems[item.id] || false}
                         onChange={(_, { checked }) => handleItemChange(item.id, checked)}
@@ -536,7 +416,6 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                 </div>
               </div>
 
-              {/* Motricidad */}
               <div className={styles.areaSection}>
                 <h5 className={styles.areaTitle}>{t('motricidad', 'Motricidad')}</h5>
                 <div className={styles.itemsGrid}>
@@ -545,7 +424,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
                     .map((item) => (
                       <Checkbox
                         key={item.id}
-                        labelText={item.description}
+                        labelText={t(item.descriptionKey, item.descriptionDefault)}
                         id={item.id}
                         checked={selectedItems[item.id] || false}
                         onChange={(_, { checked }) => handleItemChange(item.id, checked)}
@@ -563,7 +442,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
             <InlineNotification
               kind="error"
               title={t('error', 'Error')}
-              subtitle={t('tepsiSaveError', 'There was an error saving the TEPSI evaluation')}
+              subtitle={t('tepsiSaveError', 'Error al guardar evaluación TEPSI')}
               onClose={() => setShowErrorNotification(false)}
             />
           </Column>
@@ -571,10 +450,10 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({
 
         <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
           <Button kind="secondary" onClick={closeWorkspace} disabled={isSubmitting}>
-            {t('cancel', 'Cancel')}
+            {t('cancel', 'Cancelar')}
           </Button>
           <Button kind="primary" type="submit" disabled={isSubmitting || !childAgeMonths}>
-            {isSubmitting ? t('saving', 'Saving...') : t('saveAndClose', 'Save and Close')}
+            {isSubmitting ? t('saving', 'Guardando...') : t('saveAndClose', 'Guardar y Cerrar')}
           </Button>
         </ButtonSet>
       </Stack>
