@@ -1,3 +1,4 @@
+@use '@carbon/colors';
 @use '@carbon/layout';
 @use '@openmrs/esm-styleguide/src/vars' as *;
 
@@ -11,4 +12,12 @@
 
 .iconPending {
   fill: $text-03;
+}
+
+.rowCompleted {
+  background-color: colors.$green-10 !important;
+}
+
+.rowPending {
+  background-color: colors.$yellow-10 !important;
 }
