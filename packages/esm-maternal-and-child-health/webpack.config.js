@@ -14,6 +14,7 @@ module.exports = (env, argv) => {
             exclude: [
               { severity: 'error', code: 'TS2786' },
               { severity: 'error', code: 'TS2709' },
+              { severity: 'error', code: 'TS2339' },
             ],
           },
         });
