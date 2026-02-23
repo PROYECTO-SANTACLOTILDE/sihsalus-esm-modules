@@ -55,7 +55,7 @@ const DyakuPatientsSync: React.FC<DyakuPatientsSyncProps> = ({ onSyncComplete })
         success: false,
         synchronized: 0,
         failed: 0,
-        errors: [error.message],
+        errors: [error instanceof Error ? error.message : String(error)],
       });
     } finally {
       setIsSyncing(false);

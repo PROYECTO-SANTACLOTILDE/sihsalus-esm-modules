@@ -44,7 +44,7 @@ const DyakuPatientSyncButton: React.FC<DyakuPatientSyncButtonProps> = ({ patient
         success: false,
         synchronized: 0,
         failed: 1,
-        errors: [error.message],
+        errors: [error instanceof Error ? error.message : String(error)],
       });
       setShowResult(true);
 

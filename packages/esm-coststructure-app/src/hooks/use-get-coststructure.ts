@@ -6,10 +6,10 @@ import { baseUrl } from "../constants";
 const API_URL = `${baseUrl}/list`
 
 interface Response {
-  content: CostStructureResponse[],
-  total: number,
-  page:number,
-  size:number
+  content: CostStructureResponse[];
+  total: number;
+  page: number;
+  size: number;
 }
 
 interface CostStructureResponse extends CostStructure {

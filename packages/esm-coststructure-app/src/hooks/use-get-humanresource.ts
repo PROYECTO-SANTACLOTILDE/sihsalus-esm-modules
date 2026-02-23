@@ -4,13 +4,13 @@ import { baseUrl } from "../constants"
 
 const API_URL = `${baseUrl}/humanresource`
 
-export interface HumanResource{
-    id:number,
-    uuid: string,
-    speciality:string
+export interface HumanResource {
+    id: number;
+    uuid: string;
+    speciality: string;
 }
 
-const useGetHumanResource = () =>{
+const useGetHumanResource = () => {
     const { data, error, isLoading, mutate } = useSWR<{data: HumanResource[]}>(
         API_URL,
         openmrsFetch

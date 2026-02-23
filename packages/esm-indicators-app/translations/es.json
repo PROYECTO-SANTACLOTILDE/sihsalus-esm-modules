@@ -45,5 +45,6 @@
   "startDate": "Fecha Inicio",
   "status": "Estado",
   "success": "Éxito",
+  "id": "ID",
   "testConnection": "Probar Conexión"
 }

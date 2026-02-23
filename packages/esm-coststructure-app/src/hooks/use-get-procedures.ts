@@ -5,9 +5,9 @@ import { baseUrl } from "../constants"
 const API_URL = `${baseUrl}/procedures`
 
 export interface Procedure {
-    conceptId: number,
-    nameFull: string,
-    code: string
+    conceptId: number;
+    nameFull: string;
+    code: string;
 }
 
 const useGetProcedures = (query = "") => {

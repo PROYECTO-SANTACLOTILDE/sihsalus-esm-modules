@@ -5,11 +5,11 @@ import { baseUrl } from "../constants"
 const API_URL = `${baseUrl}/infrastructure`
 
 export interface Infrastructure {
-    id: number,
-    uuid: string,
-    locationName: string,
-    areaM2: number,
-    constructionCost: number
+    id: number;
+    uuid: string;
+    locationName: string;
+    areaM2: number;
+    constructionCost: number;
 }
 
 const useGetInfrastructure = () => {

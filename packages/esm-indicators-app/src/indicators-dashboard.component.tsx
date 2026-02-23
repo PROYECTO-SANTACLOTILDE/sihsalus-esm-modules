@@ -76,7 +76,7 @@ const IndicatorsDashboard: React.FC = () => {
   };
 
   const headers = [
-    { key: 'id', header: 'ID' },
+    { key: 'id', header: t('id', 'ID') },
     { key: 'name', header: t('name', 'Nombre') },
     { key: 'description', header: t('description', 'Descripción') },
     { key: 'conceptIds', header: t('conceptIds', 'Concepts') },
@@ -150,7 +150,7 @@ const IndicatorsDashboard: React.FC = () => {
                     <TableRow key={row.id} {...getRowProps({ row })}>
                       {row.cells.map((cell) => {
                         if (cell.info.header === 'active') {
-                          const isActive = indicators.find((i) => String(i.id) === row.id)?.active;
+                          const isActive = indicator?.active;
                           return (
                             <TableCell key={cell.id}>
                               <Tag type={isActive ? 'green' : 'red'}>{cell.value}</Tag>
@@ -191,7 +191,7 @@ const IndicatorsDashboard: React.FC = () => {
       )}
 
       {/* Evaluation Result */}
-      {evaluatingId != null && <EvaluationPanel id={evaluatingId} onClose={() => setEvaluatingId(null)} />}
+      {evaluatingId !== null && <EvaluationPanel id={evaluatingId} onClose={() => setEvaluatingId(null)} />}
 
       {/* Create Modal */}
       <Modal

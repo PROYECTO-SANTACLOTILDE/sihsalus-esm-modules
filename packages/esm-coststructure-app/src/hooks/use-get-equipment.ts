@@ -4,11 +4,11 @@ import { baseUrl } from "../constants"
 
 const API_URL = `${baseUrl}/equipment`
 
-export interface Equipment{
-    id:number,
-    uuid: string,
-    name: string,
-    usefulLifeYears: number
+export interface Equipment {
+    id: number;
+    uuid: string;
+    name: string;
+    usefulLifeYears: number;
 }
 
 const useGetEquipment = () => {
