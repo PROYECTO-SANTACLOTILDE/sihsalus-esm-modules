@@ -69,7 +69,7 @@ const ClinicalEncounter: React.FC<SurgicalSummaryProps> = ({
     };
   });
   if (isLoading) {
-    return <InlineLoading status="active" iconDescription="Loading" description="Loading data..." />;
+    return <InlineLoading status="active" iconDescription={t('loading', 'Loading...')} description={t('loadingData', 'Loading data')} />;
   }
   if (error) {
     return <ErrorState error={error} headerTitle={t('clinicalEncounter', 'Clinical Encounter')} />;

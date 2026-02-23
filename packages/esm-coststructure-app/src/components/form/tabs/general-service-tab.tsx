@@ -1,5 +1,6 @@
 import React from 'react';
 import { Controller, UseFormReturn } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { CostStructureFormValues } from '../schema/costructure-schema';
 import { NumberInput } from '@carbon/react';
 import { calculateAsignedCostGeneral } from '../../../utils/publicservices';
@@ -10,6 +11,7 @@ interface Props {
 }
 export default function GeneralServiceTab({ form }: Props) {
   const { control, setValue, watch } = form;
+  const { t } = useTranslation();
 
   const annualServices = watch('annualServicesCost');
   const infrastructures = watch('infrastructures');
@@ -19,7 +21,7 @@ export default function GeneralServiceTab({ form }: Props) {
     <section className={styles['tab-container']}>
       <div>
         <div className="cds--col">
-          <h4 className="cds--heading-04">Servicios Generales</h4>
+          <h4 className="cds--heading-04">{t('generalServices', 'General Services')}</h4>
         </div>
       </div>
       <div style={{ display: 'flex', gap: '1rem' }}>
@@ -29,8 +31,8 @@ export default function GeneralServiceTab({ form }: Props) {
           render={({ field }) => (
             <NumberInput
               hideSteppers
-              label="Costo Anual de Administración General"
-              helperText="Ingrese el costo anual de administración general"
+              label={t('annualAdministrativeCost', 'Annual Administrative Cost')}
+              helperText={t('enterAnnualAdministrativeCost', 'Enter the annual administrative cost')}
               id={`annual-administrative-cost`}
               value={field.value}
               onChange={(_, { value }) => field.onChange(Number(value))}
@@ -43,8 +45,8 @@ export default function GeneralServiceTab({ form }: Props) {
           render={({ field }) => (
             <NumberInput
               hideSteppers
-              label="Costo Anual de Servicios Generales"
-              helperText="Ingrese el costo anual de servicios generales"
+              label={t('annualGeneralCost', 'Annual General Services Cost')}
+              helperText={t('enterAnnualGeneralCost', 'Enter the annual general services cost')}
               id={`annual-general-cost`}
               value={field.value}
               onChange={(_, { value }) => field.onChange(Number(value))}
@@ -57,12 +59,12 @@ export default function GeneralServiceTab({ form }: Props) {
         <div className="cds--col cds--spacing-03">
           <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
             <thead>
-              <th>Unidad Productora de Servicios (UPSS)</th>
-              <th>Costo de Administración General</th>
-              <th>Costo de Servicios Generales</th>
-              <th>Producción proyectada de procedimientos</th>
-              <th>Costo Administratio Estandar Unitario Indirecto</th>
-              <th>Costo Servicios Generales Estandar Unitario Indirecto</th>
+              <th>{t('upss', 'Service Production Unit (UPSS)')}</th>
+              <th>{t('adminCost', 'Administrative Cost')}</th>
+              <th>{t('generalServicesCost', 'General Services Cost')}</th>
+              <th>{t('projectedProduction', 'Projected procedure production')}</th>
+              <th>{t('adminUnitCostIndirect', 'Indirect Standard Admin Unit Cost')}</th>
+              <th>{t('generalUnitCostIndirect', 'Indirect Standard General Unit Cost')}</th>
             </thead>
             <tbody>
               {infrastructures.length > 0 ? (
@@ -88,7 +90,7 @@ export default function GeneralServiceTab({ form }: Props) {
                   }
                   return (
                     <tr key={index}>
-                      <td>{infrastructure.infrastructureName || 'Sin seleccionar'}</td>
+                      <td>{infrastructure.infrastructureName || t('notSelected', 'Not selected')}</td>
                       <td>{asignedAdminCost}</td>
                       <td>{asignedGeneralCost}</td>
                       <td>
@@ -117,8 +119,8 @@ export default function GeneralServiceTab({ form }: Props) {
                 <tr>
                   <td colSpan={7} className={styles['empty-state-container']}>
                     <NoContent
-                      title="No seleccionó infrastructuras"
-                      message="Añada algunas infrastructuras previamente"
+                      title={t('noInfrastructuresSelected', 'No infrastructures selected')}
+                      message={t('addSomeInfrastructureFirst', 'Add some infrastructures first')}
                     />
                   </td>
                 </tr>

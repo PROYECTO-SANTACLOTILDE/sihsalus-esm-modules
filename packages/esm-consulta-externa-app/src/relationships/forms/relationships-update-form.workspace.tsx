@@ -61,14 +61,14 @@ const RelationshipUpdateForm: React.FC<RelationshipUpdateFormProps> = ({ closeWo
     try {
       await updateRelationship(relationShipUuid, values);
       closeWorkspace();
-      showSnackbar({ title: 'Success', subtitle: 'Relationship updated succesfully!', kind: 'success' });
+      showSnackbar({ title: t('success', 'Success'), subtitle: t('relationshipUpdatedSuccessfully', 'Relationship updated successfully'), kind: 'success' });
       mutate((key) => {
         return typeof key === 'string' && key.startsWith('/ws/rest/v1/relationship');
       });
     } catch (error) {
       showSnackbar({
-        title: 'Success',
-        subtitle: 'Failure updating relationship!' + JSON.stringify(error),
+        title: t('error', 'Error'),
+        subtitle: t('failedUpdatingRelationship', 'Failed to update relationship'),
         kind: 'error',
       });
     }
@@ -79,8 +79,8 @@ const RelationshipUpdateForm: React.FC<RelationshipUpdateFormProps> = ({ closeWo
       <div className={styles.loading}>
         <InlineLoading
           status="active"
-          iconDescription="Loading"
-          description="Loading form..."
+          iconDescription={t('loading', 'Loading...')}
+          description={t('loadingForm', 'Loading form...')}
           style={{ justifyContent: 'center' }}
         />
       </div>
@@ -167,7 +167,7 @@ const RelationshipUpdateForm: React.FC<RelationshipUpdateFormProps> = ({ closeWo
                   field.onChange(e.selectedItem);
                 }}
                 selectedItem={field.value}
-                label="Choose option"
+                label={t('chooseOption', 'Choose option')}
                 items={relationshipTypes.map((r) => r.uuid)}
                 itemToString={(item) => relationshipTypes.find((r) => r.uuid === item)?.displayBIsToA ?? ''}
               />

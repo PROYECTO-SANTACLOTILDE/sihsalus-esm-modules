@@ -83,7 +83,7 @@ const CaseEncounterHeader = ({ patientUuid, mutate, onFilterChange }: CaseEncoun
             id="select-form"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            placeholder="Select forms"
+            placeholder={t('selectForms', 'Select forms')}
             className={styles.comboBox}
           />
         </div>

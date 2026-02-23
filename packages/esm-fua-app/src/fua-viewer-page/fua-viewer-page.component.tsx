@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useConfig, showSnackbar } from '@openmrs/esm-framework';
 import { InlineLoading } from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 import type { Config } from '../config-schema';
 import styles from './fua-viewer-page.scss';
 
 const FuaViewerPage: React.FC = () => {
   const config = useConfig<Config>();
+  const { t } = useTranslation();
   const endpoint = config.fuaGeneratorEndpoint;
   const [htmlContent, setHtmlContent] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
@@ -20,17 +22,17 @@ const FuaViewerPage: React.FC = () => {
         const response = await fetch(endpoint);
 
         if (!response.ok) {
-          throw new Error(`Error al cargar el contenido: ${response.status} ${response.statusText}`);
+          throw new Error(`${t('errorLoadingContent', 'Error loading content')}: ${response.status} ${response.statusText}`);
         }
 
         const html = await response.text();
         setHtmlContent(html);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Error desconocido al cargar el contenido';
+        const errorMessage = err instanceof Error ? err.message : t('unknownErrorLoadingContent', 'Unknown error loading content');
         setError(errorMessage);
         console.error('Error fetching FUA HTML:', err);
         showSnackbar({
-          title: 'Error al cargar FUA',
+          title: t('errorLoadingFua', 'Error loading FUA'),
           subtitle: errorMessage,
           kind: 'error',
         });
@@ -40,12 +42,12 @@ const FuaViewerPage: React.FC = () => {
     };
 
     fetchHtml();
-  }, [endpoint]);
+  }, [endpoint, t]);
 
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
-        <InlineLoading description="Cargando visor de FUA..." />
+        <InlineLoading description={t('loadingFuaViewer', 'Loading FUA viewer...')} />
       </div>
     );
   }
@@ -53,22 +55,22 @@ const FuaViewerPage: React.FC = () => {
   if (error) {
     return (
       <div className={styles.errorContainer}>
-        <h3>⚠️ Error al cargar el visor de FUA</h3>
+        <h3>{t('errorLoadingFuaViewer', 'Error loading FUA viewer')}</h3>
         <p>{error}</p>
         <details>
-          <summary>Información técnica</summary>
-          <p><strong>Endpoint:</strong> {endpoint}</p>
-          <p><strong>Posibles causas:</strong></p>
+          <summary>{t('technicalInfo', 'Technical information')}</summary>
+          <p><strong>{t('endpoint', 'Endpoint')}:</strong> {endpoint}</p>
+          <p><strong>{t('possibleCauses', 'Possible causes')}:</strong></p>
           <ul>
-            <li>El servidor no está respondiendo</li>
-            <li>Políticas CORS bloqueando la conexión</li>
-            <li>El endpoint configurado es incorrecto</li>
+            <li>{t('serverNotResponding', 'The server is not responding')}</li>
+            <li>{t('corsBlocking', 'CORS policies blocking the connection')}</li>
+            <li>{t('incorrectEndpoint', 'The configured endpoint is incorrect')}</li>
           </ul>
-          <p><strong>Soluciones:</strong></p>
+          <p><strong>{t('solutions', 'Solutions')}:</strong></p>
           <ul>
-            <li>Verifica que el servidor esté funcionando</li>
-            <li>Prueba el endpoint directamente en tu navegador</li>
-            <li>Contacta al administrador del sistema</li>
+            <li>{t('verifyServer', 'Verify that the server is running')}</li>
+            <li>{t('testEndpoint', 'Test the endpoint directly in your browser')}</li>
+            <li>{t('contactAdmin', 'Contact the system administrator')}</li>
           </ul>
         </details>
       </div>
@@ -79,7 +81,7 @@ const FuaViewerPage: React.FC = () => {
     <div className={styles.pageContainer}>
       <iframe
         srcDoc={htmlContent}
-        title="Visor de FUA"
+        title={t('fuaViewer', 'FUA Viewer')}
         className={styles.fullIframe}
         sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms"
       />

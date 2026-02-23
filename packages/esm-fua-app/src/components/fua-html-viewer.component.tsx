@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { InlineLoading } from '@carbon/react';
 import { showSnackbar, useConfig } from '@openmrs/esm-framework';
+import { useTranslation } from 'react-i18next';
 import styles from './fua-html-viewer.scss';
 import type { Config } from '../config-schema';
 
@@ -11,6 +12,7 @@ interface FuaHtmlViewerProps {
 
 const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
   const config = useConfig<Config>();
+  const { t } = useTranslation();
   const fuaEndpoint = endpoint || config.fuaGeneratorEndpoint;
   const [htmlContent, setHtmlContent] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
@@ -22,22 +24,21 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
         setIsLoading(true);
         setError(null);
 
-        // Construir URL con parámetros si es necesario
         const url = fuaId ? `${fuaEndpoint}?fuaId=${fuaId}` : fuaEndpoint;
 
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error(`Error al cargar el FUA: ${response.status}`);
+          throw new Error(`${t('errorLoadingFua', 'Error loading FUA')}: ${response.status}`);
         }
 
         const html = await response.text();
         setHtmlContent(html);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+        const errorMessage = err instanceof Error ? err.message : t('unknownError', 'Unknown error');
         setError(errorMessage);
         showSnackbar({
-          title: 'Error',
+          title: t('error', 'Error'),
           subtitle: errorMessage,
           kind: 'error',
         });
@@ -47,12 +48,12 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
     };
 
     fetchFuaHtml();
-  }, [fuaId, fuaEndpoint]);
+  }, [fuaId, fuaEndpoint, t]);
 
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
-        <InlineLoading description="Cargando documento FUA..." />
+        <InlineLoading description={t('loadingFuaDocument', 'Loading FUA document...')} />
       </div>
     );
   }
@@ -60,7 +61,7 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
   if (error) {
     return (
       <div className={styles.errorContainer}>
-        <p>No se pudo cargar el documento FUA</p>
+        <p>{t('couldNotLoadFuaDocument', 'Could not load FUA document')}</p>
         <p className={styles.errorMessage}>{error}</p>
       </div>
     );
@@ -70,7 +71,7 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
     <div className={styles.container}>
       <iframe
         srcDoc={htmlContent}
-        title="Documento FUA"
+        title={t('fuaDocument', 'FUA Document')}
         className={styles.iframe}
         sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
       />

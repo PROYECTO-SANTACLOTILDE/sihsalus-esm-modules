@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput } from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 import useGetProcedures from '../../../hooks/use-get-procedures';
 import type { Procedure } from '../../../hooks/use-get-procedures';
 import styles from './styles.scss';
@@ -12,18 +13,19 @@ interface Props {
 export const ProcedureAutocomplete: React.FC<Props> = ({ value, onChange, error }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { procedures, isLoading } = useGetProcedures(value.nameFull);
+  const { t } = useTranslation();
 
   return (
     <div className={styles.container}>
       <TextInput
         id="procedureName"
-        labelText="Nombre del procedimiento"
+        labelText={t('procedureName', 'Procedure name')}
         value={value.nameFull}
         onChange={(e) => {
           onChange({ ...value, nameFull: e.target.value });
           setShowSuggestions(true);
         }}
-        placeholder="Ingrese el nombre del procedimiento"
+        placeholder={t('enterProcedureName', 'Enter the procedure name')}
         invalid={!!error}
         invalidText={error}
         autoComplete="off"
@@ -31,7 +33,7 @@ export const ProcedureAutocomplete: React.FC<Props> = ({ value, onChange, error 
 
       {showSuggestions && value.nameFull.length >= 2 && (
         <div className={styles['procedure-list']}>
-          {isLoading && <div className="p-2 text-sm text-muted-foreground">Cargando...</div>}
+          {isLoading && <div className="p-2 text-sm text-muted-foreground">{t('loading', 'Loading')}...</div>}
 
           {!isLoading &&
             procedures.map((p) => (
@@ -44,13 +46,13 @@ export const ProcedureAutocomplete: React.FC<Props> = ({ value, onChange, error 
                 className={styles.procedure}
               >
                 <p>{p.nameFull}</p>
-                {p.code && <p>Código: {p.code}</p>}
+                {p.code && <p>{t('code', 'Code')}: {p.code}</p>}
               </div>
             ))}
         </div>
       )}
 
-      <TextInput id="procedureCode" labelText="Código CPMS" value={value.code || ''} readOnly placeholder="Ej: 00906" />
+      <TextInput id="procedureCode" labelText={t('cpmsCode', 'CPMS Code')} value={value.code || ''} readOnly placeholder={t('cpmsCodeExample', 'E.g.: 00906')} />
     </div>
   );
 };

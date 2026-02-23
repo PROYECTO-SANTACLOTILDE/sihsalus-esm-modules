@@ -52,7 +52,7 @@ const InPatientSummary: React.FC<InPatientSummaryProps> = ({ patientUuid, encoun
     };
   });
   if (isLoading) {
-    return <InlineLoading status="active" iconDescription="Loading" description="Loading data..." />;
+    return <InlineLoading status="active" iconDescription={t('loading', 'Loading...')} description={t('loadingData', 'Loading data')} />;
   }
   if (error) {
     return <ErrorState error={error} headerTitle={t('inPatientSummary', 'In Patient Summary')} />;
@@ -69,7 +69,7 @@ const InPatientSummary: React.FC<InPatientSummaryProps> = ({ patientUuid, encoun
   return (
     <>
       <div className={styles.cardContainer}>
-        <SummaryCard title="Diagnosis on Admission" value={tableRows[0]?.bloodGroup} />
+        <SummaryCard title={t('diagnosisOnAdmission', 'Diagnosis on Admission')} value={tableRows[0]?.bloodGroup} />
         <SummaryCard title={t('therapiesPrescribed', 'Therapies Prescribed')} value={tableRows[0]?.maternalCondition} />
         <SummaryCard
           title={t('recommendedProcedure', 'Recommended Procedure')}

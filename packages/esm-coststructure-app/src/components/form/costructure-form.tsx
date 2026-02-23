@@ -4,6 +4,7 @@ import { costStructureSchema, CostStructureFormValues } from './schema/costructu
 import { Button, Tabs, Tab, TextInput, TabList, TabPanels, TabPanel } from '@carbon/react';
 import { ProcedureAutocomplete } from './autocomplete/procedure-autocomplete';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Procedure } from '../../hooks/use-get-procedures';
 import InfrastructureTab from './tabs/infrastructure-tab';
 import PublicServicesTab from './tabs/public-service-tab';
@@ -19,6 +20,7 @@ import styles from './form.scss';
 
 export default function CostStructureForm() {
   const [selectedTab, setSelectedTab] = useState(0);
+  const { t } = useTranslation();
 
   const form = useForm<CostStructureFormValues>({
     resolver: zodResolver(costStructureSchema),
@@ -58,10 +60,10 @@ export default function CostStructureForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="">
-      <PageHeader icon={<WhitePaper size={48} />} title="Crear Estructura de Costos – CPMS" subtitle="Costeo" />
+      <PageHeader icon={<WhitePaper size={48} />} title={t('createCostStructureCpms', 'Create Cost Structure – CPMS')} subtitle={t('costing', 'Costing')} />
       <div className="">
         <section className={styles['header-form']}>
-          <h3 className={styles.title}>Información del procedimiento</h3>
+          <h3 className={styles.title}>{t('procedureInfo', 'Procedure Information')}</h3>
 
           <Controller
             name="procedure"
@@ -78,16 +80,16 @@ export default function CostStructureForm() {
 
         {/* Tabs de costos */}
         <section className={styles['body-form']}>
-          <h3 className={styles.title}>Estructura de Costos Detallada</h3>
+          <h3 className={styles.title}>{t('detailedCostStructure', 'Detailed Cost Structure')}</h3>
           <Tabs selectedIndex={selectedTab} onChange={handleTanbChange}>
             <TabList>
-              <Tab>Insumos y Medicamentos</Tab>
-              <Tab>Equipamiento</Tab>
-              <Tab>Recursos Humanos</Tab>
-              <Tab>Infraestructura</Tab>
-              <Tab>Servicios Públicos</Tab>
-              <Tab>Servicios Generales</Tab>
-              <Tab>Resumen</Tab>
+              <Tab>{t('suppliesAndMedicines', 'Supplies and Medicines')}</Tab>
+              <Tab>{t('equipmentAndFurniture', 'Equipment and Furniture')}</Tab>
+              <Tab>{t('humanResources', 'Human Resources')}</Tab>
+              <Tab>{t('infrastructure', 'Infrastructure')}</Tab>
+              <Tab>{t('publicServices', 'Public Services')}</Tab>
+              <Tab>{t('generalServices', 'General Services')}</Tab>
+              <Tab>{t('summary', 'Summary')}</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -117,10 +119,10 @@ export default function CostStructureForm() {
 
         <div className="flex gap-2">
           <Button kind="primary" type="submit">
-            Guardar estructura
+            {t('saveStructure', 'Save structure')}
           </Button>
           <Button kind="secondary" type="reset">
-            Limpiar
+            {t('clear', 'Clear')}
           </Button>
         </div>
       </div>

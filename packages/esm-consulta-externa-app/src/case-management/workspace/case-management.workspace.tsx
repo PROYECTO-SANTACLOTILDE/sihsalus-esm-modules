@@ -111,7 +111,7 @@ const CaseManagementForm: React.FC<CaseManagementProp> = ({ closeWorkspace }) =>
                 <ComboBox
                   id="case_manager_name"
                   titleText={t('manager', 'Case Manager')}
-                  placeholder="Select Case Manager"
+                  placeholder={t('selectCaseManager', 'Select Case Manager')}
                   items={caseManagers}
                   itemToString={(item) => uppercaseText(extractNameString(item ? item.text : ''))}
                   onChange={(e) => {
@@ -126,7 +126,7 @@ const CaseManagementForm: React.FC<CaseManagementProp> = ({ closeWorkspace }) =>
           />
         </Column>
 
-        <span className={styles.sectionHeader}>Relationship Info</span>
+        <span className={styles.sectionHeader}>{t('relationshipInfo', 'Relationship Info')}</span>
         {patientSelected && <PatientInfo patientUuid={patientUuid} />}
         {!patientSelected && (
           <Column>
@@ -150,7 +150,7 @@ const CaseManagementForm: React.FC<CaseManagementProp> = ({ closeWorkspace }) =>
               <ComboBox
                 id="relationship_name"
                 titleText={t('relationship', 'Relationship')}
-                placeholder="Select Relationship"
+                placeholder={t('selectRelationship', 'Select Relationship')}
                 items={caseManagerRelationshipTypeMapped}
                 itemToString={(item) => (item ? uppercaseText(item.text) : '')}
                 onChange={(e) => field.onChange(e.selectedItem?.id)}
@@ -172,7 +172,7 @@ const CaseManagementForm: React.FC<CaseManagementProp> = ({ closeWorkspace }) =>
                 className={styles.formDatePicker}>
                 <DatePickerInput
                   placeholder="dd/mm//aaaa"
-                  labelText="Start Date"
+                  labelText={t('startDate', 'Start Date')}
                   id="case-start-date-picker"
                   size="md"
                   className={styles.formDatePicker}

@@ -130,7 +130,7 @@ export const OtherRelationshipsForm: React.FC<OtherRelationshipsFormProps> = ({ 
                 <ComboBox
                   id="relationship_name"
                   titleText={t('relationship', 'Relationship')}
-                  placeholder="Select Relationship"
+                  placeholder={t('selectRelationship', 'Select Relationship')}
                   items={relationshipTypes}
                   itemToString={(item) => (item ? uppercaseText(item.text) : '')}
                   onChange={(e) => field.onChange(e.selectedItem?.id)}

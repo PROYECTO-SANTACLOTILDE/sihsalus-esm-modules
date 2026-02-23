@@ -1,19 +1,21 @@
 import { Tile, InlineLoading } from '@carbon/react';
 import { PatientPhoto, usePatient } from '@openmrs/esm-framework';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './patient-info.scss';
 import { formatPatientName } from '../../utils/expression-helper';
 
 const PatientInfo: React.FC<{ patientUuid: string }> = ({ patientUuid }) => {
   const { isLoading, patient, error } = usePatient(patientUuid);
   const formattedName = formatPatientName(patient);
+  const { t } = useTranslation();
 
   if (isLoading) {
-    return <InlineLoading status="active" iconDescription="Loading" description="Loading patient data ..." />;
+    return <InlineLoading status="active" iconDescription={t('loading', 'Loading...')} description={t('loadingData', 'Loading data')} />;
   }
 
   if (error) {
-    return <span>Error loading patient information</span>;
+    return <span>{t('errorLoadingPatient', 'Error loading patient information')}</span>;
   }
 
   const identifiers =

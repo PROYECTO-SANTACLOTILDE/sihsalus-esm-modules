@@ -1,5 +1,6 @@
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { NumberInput, Button } from '@carbon/react';
+import { useTranslation } from 'react-i18next';
 import { CostStructureFormValues } from '../schema/costructure-schema';
 import React from 'react';
 import { calculateAsignedCost, calculateInductor } from '../../../utils/publicservices';
@@ -11,6 +12,7 @@ interface Props {
 
 export default function PublicServicesTab({ form }: Props) {
   const { control, watch, setValue } = form;
+  const { t } = useTranslation();
 
   const infrastructures = watch('infrastructures');
   const publicServices = watch('publicServices');
@@ -20,7 +22,7 @@ export default function PublicServicesTab({ form }: Props) {
     <section className={styles['tab-container']}>
       <div className="">
         <div className="cds--col">
-          <h4 className="cds--heading-04">Servicios Públicos</h4>
+          <h4 className="cds--heading-04">{t('publicServices', 'Public Services')}</h4>
         </div>
       </div>
       <div style={{ display: 'flex', gap: '1rem' }}>
@@ -30,8 +32,8 @@ export default function PublicServicesTab({ form }: Props) {
           render={({ field }) => (
             <NumberInput
               hideSteppers
-              label="Costo Anual de Energía"
-              helperText="Ingrese el costo anual de energía"
+              label={t('annualEnergyCost', 'Annual Energy Cost')}
+              helperText={t('enterAnnualEnergyCost', 'Enter the annual energy cost')}
               id={`annual-energy-cost`}
               value={field.value}
               onChange={(_, { value }) => field.onChange(Number(value))}
@@ -44,8 +46,8 @@ export default function PublicServicesTab({ form }: Props) {
           render={({ field }) => (
             <NumberInput
               hideSteppers
-              label="Costo Anual de Agua"
-              helperText="Ingrese el costo anual de agua"
+              label={t('annualWaterCost', 'Annual Water Cost')}
+              helperText={t('enterAnnualWaterCost', 'Enter the annual water cost')}
               id={`annual-water-cost`}
               value={field.value}
               onChange={(_, { value }) => field.onChange(Number(value))}
@@ -58,8 +60,8 @@ export default function PublicServicesTab({ form }: Props) {
           render={({ field }) => (
             <NumberInput
               hideSteppers
-              label="Costo Anual de Teléfono"
-              helperText="Ingrese el costo anual de teléfono"
+              label={t('annualPhoneNetCost', 'Annual Phone/Internet Cost')}
+              helperText={t('enterAnnualPhoneNetCost', 'Enter the annual phone/internet cost')}
               id={`annual-phonenet-cost`}
               value={field.value}
               onChange={(_, { value }) => field.onChange(Number(value))}
@@ -72,13 +74,13 @@ export default function PublicServicesTab({ form }: Props) {
           <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
             <thead>
               <tr>
-                <th>Unidad Productora de Servicios (UPSS)</th>
-                <th>Consumo de Energía</th>
-                <th>Consumo de Agua</th>
-                <th>Consumo de Teléfono</th>
-                <th>Inductores de Agua</th>
-                <th>Inductores de Energía</th>
-                <th>Inductores de Teléfono</th>
+                <th>{t('upss', 'Service Production Unit (UPSS)')}</th>
+                <th>{t('energyConsumption', 'Energy Consumption')}</th>
+                <th>{t('waterConsumption', 'Water Consumption')}</th>
+                <th>{t('phoneConsumption', 'Phone Consumption')}</th>
+                <th>{t('waterInductors', 'Water Inductors')}</th>
+                <th>{t('energyInductors', 'Energy Inductors')}</th>
+                <th>{t('phoneInductors', 'Phone Inductors')}</th>
               </tr>
             </thead>
 
@@ -87,7 +89,7 @@ export default function PublicServicesTab({ form }: Props) {
               {infrastructures.length > 0 ? (
                 infrastructures.map((infrastructure, index) => (
                   <tr key={index}>
-                    <td>{infrastructure.infrastructureName || 'Sin seleccionar'}</td>{' '}
+                    <td>{infrastructure.infrastructureName || t('notSelected', 'Not selected')}</td>{' '}
                     {/* Mostrar el nombre de la infraestructura */}
                     {/* Consumo de energía */}
                     <td>
@@ -165,8 +167,8 @@ export default function PublicServicesTab({ form }: Props) {
                 <tr>
                   <td colSpan={7} className={styles['empty-state-container']}>
                     <NoContent
-                      title="No seleccionó infrastructuras"
-                      message="Añada algunas infrastructuras previamente"
+                      title={t('noInfrastructuresSelected', 'No infrastructures selected')}
+                      message={t('addSomeInfrastructureFirst', 'Add some infrastructures first')}
                     />
                   </td>
                 </tr>
@@ -178,20 +180,20 @@ export default function PublicServicesTab({ form }: Props) {
       <hr />
       <div>
         <div className="cds--col">
-          <h4 className="cds--heading-04">Costos anuales de Servicios</h4>
+          <h4 className="cds--heading-04">{t('annualServiceCosts', 'Annual Service Costs')}</h4>
         </div>
         <div className="cds--row">
           <div className="cds--col cds--spacing-03">
             <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
               <thead>
                 <tr>
-                  <th>UPS</th>
-                  <th>Costo de Energía</th>
-                  <th>Costo de Agua</th>
-                  <th>Costo de Teléfono e Internet</th>
-                  <th>Costo Total Asignado</th>
-                  <th>Producción proyectada de procedimientos</th>
-                  <th>Costo unitario</th>
+                  <th>{t('ups', 'UPS')}</th>
+                  <th>{t('energyCost', 'Energy Cost')}</th>
+                  <th>{t('waterCost', 'Water Cost')}</th>
+                  <th>{t('phoneInternetCost', 'Phone/Internet Cost')}</th>
+                  <th>{t('totalAssignedCost', 'Total Assigned Cost')}</th>
+                  <th>{t('projectedProduction', 'Projected procedure production')}</th>
+                  <th>{t('unitCost', 'Unit Cost (S/.)')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -225,7 +227,7 @@ export default function PublicServicesTab({ form }: Props) {
                         : 0;
                     return (
                       <tr key={index}>
-                        <td>{infrastructure.infrastructureName || 'Sin seleccionar'}</td>
+                        <td>{infrastructure.infrastructureName || t('notSelected', 'Not selected')}</td>
                         <td>{totalCostEnergy}</td>
                         <td>{totalCostWater}</td>
                         <td>{totalCostPhone}</td>
@@ -255,8 +257,8 @@ export default function PublicServicesTab({ form }: Props) {
                   <tr>
                     <td colSpan={7} className={styles['empty-state-container']}>
                       <NoContent
-                        title="No seleccionó infrastructuras"
-                        message="Añada algunas infrastructuras previamente"
+                        title={t('noInfrastructuresSelected', 'No infrastructures selected')}
+                        message={t('addSomeInfrastructureFirst', 'Add some infrastructures first')}
                       />
                     </td>
                   </tr>
