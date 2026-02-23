@@ -70,6 +70,9 @@ export function getObsFromEncounter(encounter, obsConcept, isDate?: boolean, isT
       obs.value.names.find((conceptName) => conceptName.conceptNameType === 'SHORT')?.name || obs.value.name?.name
     );
   }
+  if (typeof obs.value === 'object' && obs.value !== null) {
+    return obs.value.display ?? '--';
+  }
   return obs.value;
 }
 

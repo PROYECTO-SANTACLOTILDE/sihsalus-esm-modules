@@ -62,6 +62,9 @@ export function getObsFromEncounter(encounter: Record<string, any>, obsConcept: 
       obs.value?.names?.find((conceptName) => conceptName.conceptNameType === 'SHORT')?.name || obs.value.name.name
     );
   }
+  if (typeof obs.value === 'object' && obs.value !== null) {
+    return obs.value.display ?? '--';
+  }
   return obs.value;
 }
 

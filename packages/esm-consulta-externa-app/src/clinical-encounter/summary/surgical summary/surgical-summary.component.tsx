@@ -54,9 +54,9 @@ const ClinicalEncounter: React.FC<SurgicalSummaryProps> = ({
           ? formatDate(parseDate(encounter.encounterDatetime))
           : formatDate(parseDate(String(getObsFromEncounter(encounter, AdmissionDate_UUID)))),
       primaryDiagnosis: encounter.diagnoses.length > 0 ? encounter.diagnoses[0].diagnosis.coded.display : '--',
-      priorityOfAdmission: getObsFromEncounter(encounter, PriorityOfAdmission_UUID),
+      priorityOfAdmission: String(getObsFromEncounter(encounter, PriorityOfAdmission_UUID)),
       admittingDoctor: encounter.encounterProviders.length > 0 ? encounter.encounterProviders[0].display : '',
-      admissionWard: getObsFromEncounter(encounter, AdmissionWard_UUID),
+      admissionWard: String(getObsFromEncounter(encounter, AdmissionWard_UUID)),
       actions: (
         <OverflowMenu aria-label="overflow-menu" flipped="false">
           <OverflowMenuItem
