@@ -6,11 +6,11 @@ import {
   TableHeader,
   TableBody,
   TableCell,
-  DataTableHeader,
 } from '@carbon/react';
+import type { DataTableHeader } from '@carbon/react';
 import { TrashCan, Edit } from '@carbon/react/icons';
 import React from 'react';
-import { CostStructure, Procedure } from '../../../types';
+import type { CostStructure, Procedure } from '../../../types';
 
 interface IRow {
   code: string;
