@@ -35,54 +35,54 @@ export const configSchema = {
       //
       alojamientoConjunto: '984baa36-ee50-4693-92dd-82145be4847e',
       // Core Encounters
-      externalConsultation: '1a2b3c4d-1234-5678-9101-abcdefghij01',
-      specializedConsultation: '2b3c4d5e-2234-5678-9101-abcdefghij02',
+      externalConsultation: '186c1e78-a99f-4cd0-86de-b8c4ee27a2b5', // Consulta Externa — NTS 029
+      specializedConsultation: 'e137c4de-8dbe-4d32-9a76-35f7d1b17f45', // Consulta Especializada — NTS 040
       triage: '67a71486-1a54-468f-ac3e-7091a9a79584',
-      emergencyCare: '6f7g8h9i-6234-5678-9101-abcdefghij06',
+      emergencyCare: '1b70fe57-92c1-4e35-87f7-13d0e04ff12f', // Atención en Emergencia — NTS 021
 
       // Hospitalization
-      hospitalization: '4d5e6f7g-4234-5678-9101-abcdefghij04',
-      hospitalDischarge: '5e6f7g8h-5234-5678-9101-abcdefghij05',
-      bedAssignment: '7q8r9s0t-7234-5678-9101-abcdefghij17',
-      intraHospitalTransfer: '6p7q8r9s-6234-5678-9101-abcdefghij16',
-      hospitalizationProgressNote: '8r9s0t1u-8234-5678-9101-abcdefghij18',
+      hospitalization: '8993b43c-7878-4e80-9257-1da45e84a904', // Hospitalización — NTS 032
+      hospitalDischarge: '23bcca89-6dad-4a50-bed2-0ca224a9603f', // Alta Hospitalaria — NTS 032
+      bedAssignment: '4c9dc097-a49a-464c-839a-612cc54943dc', // Asignación de Cama — NTS 032
+      intraHospitalTransfer: 'c1c5747b-b705-4390-a9ee-27ba7c4b0794', // Traslado Intra-Hospitalario — NTS 032
+      hospitalizationProgressNote: '3942f612-fea0-4414-b7a6-eaf24413e145', // Nota de Evolución — RM 546-2011
 
       // Maternal Health
       prenatalControl: '58a87b85-cb6c-4a4c-bc5f-0a2d1e0ff8ba',
-      postnatalControl: '2v3w4x5y-2234-5678-9101-abcdefghij22',
-      deliveryRoomCare: '7g8h9i0j-7234-5678-9101-abcdefghij07',
-      obstetricUltrasound: '8b9c0d1e-8234-5678-9101-abcdefghij28',
+      postnatalControl: '1bba4502-5493-4c41-8e29-71b81e137690', // Control Postnatal — NTS 050
+      deliveryRoomCare: 'b212032f-9903-4696-ab31-173d432d1d3d', // Atención en Sala de Partos — NTS 050
+      obstetricUltrasound: 'eb9c0ccb-c8c7-4e92-9346-d0c213d8ba9f', // Ecografía Obstétrica — NTS 050
       antecedentesPerinatales: 'a99e704f-46f6-4461-937d-606481fb0fc3',
       psicoprofilaxis: '3cde4d44-72f8-4aeb-9025-7a8906a56ae8',
 
       // Child Health
-      healthyChildControl: '3w4x5y6z-3234-5678-9101-abcdefghij23',
+      healthyChildControl: 'a990eabc-3405-419f-bfb1-96ca2d8279b8', // Control de Niño Sano — NTS 102
       atencionInmediata: '83c8d2d0-4758-43b5-bba7-04aac5c08a07',
       cefaloCaudal: 'e0a6cba3-fa9c-4bf0-90b7-9d4d48401d1c',
       consejeriaMaterna: 'f90ac51d-bc0b-4551-a6f2-358e1a47751f',
 
       // Specialized Care
-      dentalCare: '4x5y6z7a-4234-5678-9101-abcdefghij24',
-      mentalHealthEvaluation: '9i0j1k2l-9234-5678-9101-abcdefghij09',
-      malnutritionAnemiaCare: '7a8b9c0d-7234-5678-9101-abcdefghij27',
-      chronicDiseaseFollowup: '8h9i0j1k-8234-5678-9101-abcdefghij08',
-      hivTestingServices: '8h9i0j1k-8234-5678-9101-abcdefghij08',
-      tbTreatmentSupervision: '6z7a8b9c-6234-5678-9101-abcdefghij26',
-      covid19Management: '9c0d1e2f-9234-5678-9101-abcdefghij29',
+      dentalCare: '1a58800e-dc0d-49b3-abfa-5da144e08d00', // Atención de Odontología — NTS 040
+      mentalHealthEvaluation: '1b9f21c5-928c-4077-bc95-dcd4b1a5a366', // Evaluación de Salud Mental — RM 856-2019
+      malnutritionAnemiaCare: '91b5f447-e6f6-4ad0-8ec5-75151b46bd82', // Desnutrición y Anemia — NTS 102
+      chronicDiseaseFollowup: '3a542b3a-79a8-4c97-a65b-d6ccc84171a7', // Seguimiento Enfermedades Crónicas — NTS 067
+      hivTestingServices: '5cbb797f-bed5-4301-a3ce-6cc7eb7c687b', // Tamizaje de VIH — NTS 169
+      tbTreatmentSupervision: 'a4133bfb-a43a-42ac-84a5-0367451e4f23', // DOT Tuberculosis — NTS 090
+      covid19Management: '2314baf3-2876-4ff7-b7f2-a73e157eec57', // Manejo COVID-19 — NTS 094-2022
 
       // Medical Services
-      medicationPrescriptionDispensation: '0j1k2l3m-0234-5678-9101-abcdefghij10',
-      labResults: '1k2l3m4n-1234-5678-9101-abcdefghij11',
+      medicationPrescriptionDispensation: '79488027-0292-4807-afe4-9c037052be40', // Prescripción y Dispensación — NTS 042
+      labResults: '328f6f79-4a85-4ff8-9fb8-6b2c839c7649', // Resultados de Laboratorio — NTS 090
       vaccinationAdministration: '29c02aff-9a93-46c9-bf6f-48b552fcb1fa',
-      electiveAmbulatorySurgery: '0d1e2f3g-0234-5678-9101-abcdefghij30',
+      electiveAmbulatorySurgery: 'a0a7d43a-1fd1-4df9-9429-a3e84f1d7c62', // Cirugía Ambulatoria Electiva — NTS 172
 
       // Administrative
-      consultation: '4n5o6p7q-4234-5678-9101-abcdefghij14',
-      referralCounterReferral: '5o6p7q8r-5234-5678-9101-abcdefghij15',
-      transferRequest: '9s0t1u2v-9234-5678-9101-abcdefghij19',
-      encounterCancellation: '0t1u2v3w-0234-5678-9101-abcdefghij20',
-      healthEducationCounseling: '3m4n5o6p-3234-5678-9101-abcdefghij13',
-      clinicalFileUpload: '5y6z7a8b-5234-5678-9101-abcdefghij25',
+      consultation: 'e4834799-7f43-4552-a6f3-2656880ca52f', // Interconsulta — NTS 102
+      referralCounterReferral: '16bec8b6-4a2d-4cf9-8e66-9bb6e1c5d1da', // Referencia y Contrarreferencia — NTS 102
+      transferRequest: '07d73526-c3c4-490e-9b0a-1cd884cc3822', // Solicitud de Traslado — NTS 102
+      encounterCancellation: '46ee60b6-8212-4464-a592-d7371e8b3a48', // Anulación de Encuentro — RM 546-2011
+      healthEducationCounseling: '54e3e45d-b7d7-4259-b64a-334e17b98c40', // Educación y Consejería — NTS 050
+      clinicalFileUpload: '319dcd44-19c5-432c-9733-d1f3798fffd6', // Carga de Archivos Clínicos — RM 546-2011
       order: '39da3525-afe4-45ff-8977-c53b7b359158',
     },
   },
