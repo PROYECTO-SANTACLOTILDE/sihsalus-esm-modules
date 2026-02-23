@@ -461,16 +461,7 @@ export const configSchema = {
     colorDefinitions: {
       _type: Type.Array,
       _description: 'Array of concept UUIDs and their associated colors',
-      _default: [
-        {
-          conceptUuid: 'example-uuid-1',
-          colour: '#FF0000',
-        },
-        {
-          conceptUuid: 'example-uuid-2',
-          colour: '#00FF00',
-        },
-      ],
+      _default: [],
       _elements: {
         _type: Type.Object,
         conceptUuid: {
@@ -486,7 +477,7 @@ export const configSchema = {
     legendConceptSet: {
       _type: Type.ConceptUuid,
       _description: 'UUID of the concept set used for legend items',
-      _default: 'example-concept-set-uuid',
+      _default: '',
     },
   },
 

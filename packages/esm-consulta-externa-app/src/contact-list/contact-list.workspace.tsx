@@ -63,7 +63,7 @@ const ContactListForm: React.FC<ContactListFormProps> = ({
   const pnsRelationshipTypes = data
     ? config.pnsRelationships.map((rel) => ({
         ...rel,
-        display: data!.find((r) => r.uuid === rel.uuid)?.display,
+        display: data?.find((r) => r.uuid === rel.uuid)?.display,
       }))
     : [];
 

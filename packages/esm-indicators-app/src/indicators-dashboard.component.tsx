@@ -18,11 +18,13 @@ import {
 } from '@carbon/react';
 import { Add, TrashCan, Play, Renew } from '@carbon/react/icons';
 import { showSnackbar } from '@openmrs/esm-framework';
+import { useTranslation } from 'react-i18next';
 import { useIndicatorsCRUD, useEvaluateIndicator } from './hooks/useIndicators';
 import type { IndicatorDefinition } from './hooks/useIndicators';
 import styles from './indicators-dashboard.module.scss';
 
 const IndicatorsDashboard: React.FC = () => {
+  const { t } = useTranslation();
   const { indicators, isLoading, error, create, remove, refresh } = useIndicatorsCRUD();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [evaluatingId, setEvaluatingId] = useState<number | null>(null);
@@ -50,35 +52,37 @@ const IndicatorsDashboard: React.FC = () => {
         active: true,
       });
 
-      showSnackbar({ title: 'Indicador creado', kind: 'success', isLowContrast: true });
+      showSnackbar({ title: t('indicatorCreated', 'Indicador creado'), kind: 'success', isLowContrast: true });
       setShowCreateModal(false);
       setNewName('');
       setNewDescription('');
       setNewConceptIds('');
       setNewMinAge(0);
       setNewMaxAge(120);
-    } catch (e: any) {
-      showSnackbar({ title: 'Error al crear', subtitle: e.message, kind: 'error', isLowContrast: true });
+    } catch (e) {
+      const errorMsg = e instanceof Error ? e.message : 'Error desconocido';
+      showSnackbar({ title: t('errorCreating', 'Error al crear'), subtitle: errorMsg, kind: 'error', isLowContrast: true });
     }
   };
 
   const handleDelete = async (id: number) => {
     try {
       await remove(id);
-      showSnackbar({ title: 'Indicador eliminado', kind: 'success', isLowContrast: true });
-    } catch (e: any) {
-      showSnackbar({ title: 'Error al eliminar', subtitle: e.message, kind: 'error', isLowContrast: true });
+      showSnackbar({ title: t('indicatorDeleted', 'Indicador eliminado'), kind: 'success', isLowContrast: true });
+    } catch (e) {
+      const errorMsg = e instanceof Error ? e.message : 'Error desconocido';
+      showSnackbar({ title: t('errorDeleting', 'Error al eliminar'), subtitle: errorMsg, kind: 'error', isLowContrast: true });
     }
   };
 
   const headers = [
     { key: 'id', header: 'ID' },
-    { key: 'name', header: 'Nombre' },
-    { key: 'description', header: 'Descripción' },
-    { key: 'conceptIds', header: 'Concepts' },
-    { key: 'ageRange', header: 'Rango Edad' },
-    { key: 'active', header: 'Estado' },
-    { key: 'actions', header: 'Acciones' },
+    { key: 'name', header: t('name', 'Nombre') },
+    { key: 'description', header: t('description', 'Descripción') },
+    { key: 'conceptIds', header: t('conceptIds', 'Concepts') },
+    { key: 'ageRange', header: t('ageRange', 'Rango Edad') },
+    { key: 'active', header: t('status', 'Estado') },
+    { key: 'actions', header: t('actions', 'Acciones') },
   ];
 
   const rows = indicators.map((ind) => ({
@@ -87,13 +91,13 @@ const IndicatorsDashboard: React.FC = () => {
     description: ind.description || '-',
     conceptIds: (ind.conceptIds ?? []).join(', ') || '-',
     ageRange: `${ind.minAge ?? 0} - ${ind.maxAge ?? 120}`,
-    active: ind.active ? 'Activo' : 'Inactivo',
+    active: ind.active ? t('active', 'Activo') : t('inactive', 'Inactivo'),
   }));
 
   if (isLoading) {
     return (
       <Tile className={styles.container}>
-        <Loading withOverlay={false} description="Cargando indicadores..." />
+        <Loading withOverlay={false} description={t('loadingIndicators', 'Cargando indicadores...')} />
       </Tile>
     );
   }
@@ -101,13 +105,13 @@ const IndicatorsDashboard: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>Indicadores Clínicos - Panel de Prueba</h2>
+        <h2>{t('indicatorsTitle', 'Indicadores Clínicos - Panel de Prueba')}</h2>
         <div className={styles.headerActions}>
           <Button kind="ghost" renderIcon={Renew} onClick={() => refresh()}>
-            Refrescar
+            {t('refresh', 'Refrescar')}
           </Button>
           <Button renderIcon={Add} onClick={() => setShowCreateModal(true)}>
-            Crear Indicador
+            {t('createIndicator', 'Crear Indicador')}
           </Button>
         </div>
       </div>
@@ -115,21 +119,21 @@ const IndicatorsDashboard: React.FC = () => {
       {error && (
         <InlineNotification
           kind="error"
-          title="Error de conexión"
-          subtitle={`No se pudo conectar al OMOD de indicators. ¿Está instalado? Error: ${error.message}`}
+          title={t('connectionError', 'Error de conexión')}
+          subtitle={t('connectionErrorDetail', 'No se pudo conectar al OMOD de indicators. ¿Está instalado? Error: {{errorMessage}}', { errorMessage: error.message })}
         />
       )}
 
       {!error && indicators.length === 0 && (
         <Tile className={styles.empty}>
-          <p>No hay indicadores definidos aún. Crea uno para probar la conexión.</p>
+          <p>{t('noIndicatorsYet', 'No hay indicadores definidos aún. Crea uno para probar la conexión.')}</p>
         </Tile>
       )}
 
       {indicators.length > 0 && (
         <DataTable rows={rows} headers={headers}>
           {({ rows: tableRows, headers: tableHeaders, getTableProps, getHeaderProps, getRowProps }) => (
-            <Table {...getTableProps()} aria-label="Indicadores clínicos">
+            <Table {...getTableProps()} aria-label={t('clinicalIndicators', 'Indicadores clínicos')}>
               <TableHead>
                 <TableRow>
                   {tableHeaders.map((header) => (
@@ -146,9 +150,10 @@ const IndicatorsDashboard: React.FC = () => {
                     <TableRow key={row.id} {...getRowProps({ row })}>
                       {row.cells.map((cell) => {
                         if (cell.info.header === 'active') {
+                          const isActive = indicators.find((i) => String(i.id) === row.id)?.active;
                           return (
                             <TableCell key={cell.id}>
-                              <Tag type={cell.value === 'Activo' ? 'green' : 'red'}>{cell.value}</Tag>
+                              <Tag type={isActive ? 'green' : 'red'}>{cell.value}</Tag>
                             </TableCell>
                           );
                         }
@@ -161,7 +166,7 @@ const IndicatorsDashboard: React.FC = () => {
                                 renderIcon={Play}
                                 onClick={() => setEvaluatingId(indicator?.id ?? null)}
                               >
-                                Evaluar
+                                {t('evaluate', 'Evaluar')}
                               </Button>
                               <Button
                                 kind="danger--ghost"
@@ -169,7 +174,7 @@ const IndicatorsDashboard: React.FC = () => {
                                 renderIcon={TrashCan}
                                 onClick={() => indicator && handleDelete(indicator.id)}
                               >
-                                Eliminar
+                                {t('delete', 'Eliminar')}
                               </Button>
                             </TableCell>
                           );
@@ -191,35 +196,35 @@ const IndicatorsDashboard: React.FC = () => {
       {/* Create Modal */}
       <Modal
         open={showCreateModal}
-        modalHeading="Crear Indicador de Prueba"
-        primaryButtonText="Crear"
-        secondaryButtonText="Cancelar"
+        modalHeading={t('createTestIndicator', 'Crear Indicador de Prueba')}
+        primaryButtonText={t('create', 'Crear')}
+        secondaryButtonText={t('cancel', 'Cancelar')}
         onRequestClose={() => setShowCreateModal(false)}
         onRequestSubmit={handleCreate}
       >
         <div className={styles.form}>
           <TextInput
             id="ind-name"
-            labelText="Nombre"
+            labelText={t('name', 'Nombre')}
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
           />
           <TextInput
             id="ind-desc"
-            labelText="Descripción"
+            labelText={t('description', 'Descripción')}
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
           />
           <TextInput
             id="ind-concepts"
-            labelText="Concept IDs (separados por coma)"
+            labelText={t('conceptIdsSeparated', 'Concept IDs (separados por coma)')}
             placeholder="1234, 5678"
             value={newConceptIds}
             onChange={(e) => setNewConceptIds(e.target.value)}
           />
           <NumberInput
             id="ind-min-age"
-            label="Edad mínima"
+            label={t('minAge', 'Edad mínima')}
             value={newMinAge}
             min={0}
             max={120}
@@ -227,7 +232,7 @@ const IndicatorsDashboard: React.FC = () => {
           />
           <NumberInput
             id="ind-max-age"
-            label="Edad máxima"
+            label={t('maxAge', 'Edad máxima')}
             value={newMaxAge}
             min={0}
             max={120}
@@ -241,14 +246,15 @@ const IndicatorsDashboard: React.FC = () => {
 
 /** Sub-panel para mostrar resultado de evaluación */
 const EvaluationPanel: React.FC<{ id: number; onClose: () => void }> = ({ id, onClose }) => {
+  const { t } = useTranslation();
   const { patientCount, indicatorName, isLoading, error } = useEvaluateIndicator(id);
 
   return (
     <Tile className={styles.evaluation}>
-      <h4>Resultado de Evaluación</h4>
-      {isLoading && <Loading withOverlay={false} small description="Evaluando..." />}
+      <h4>{t('evaluationResult', 'Resultado de Evaluación')}</h4>
+      {isLoading && <Loading withOverlay={false} small description={t('evaluating', 'Evaluando...')} />}
       {error && (
-        <InlineNotification kind="error" title="Error" subtitle={error.message} lowContrast />
+        <InlineNotification kind="error" title={t('error', 'Error')} subtitle={error.message} lowContrast />
       )}
       {!isLoading && !error && (
         <div>
@@ -256,12 +262,12 @@ const EvaluationPanel: React.FC<{ id: number; onClose: () => void }> = ({ id, on
             <strong>{indicatorName}</strong>
           </p>
           <p>
-            Pacientes encontrados: <Tag type="blue">{patientCount}</Tag>
+            {t('patientsFound', 'Pacientes encontrados')}: <Tag type="blue">{patientCount}</Tag>
           </p>
         </div>
       )}
       <Button kind="ghost" size="sm" onClick={onClose}>
-        Cerrar
+        {t('close', 'Cerrar')}
       </Button>
     </Tile>
   );

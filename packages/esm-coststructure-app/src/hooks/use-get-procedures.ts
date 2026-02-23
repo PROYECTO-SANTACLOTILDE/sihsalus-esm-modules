@@ -18,7 +18,7 @@ const useGetProcedures = (query = "") => {
         openmrsFetch
     );
     return {
-        procedures: data?.data,
+        procedures: data?.data ?? [],
         isError: error,
         isLoading,
         mutate,

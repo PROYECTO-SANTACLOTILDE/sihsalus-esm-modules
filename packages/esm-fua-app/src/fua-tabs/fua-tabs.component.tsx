@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { type AssignedExtension, Extension, useAssignedExtensions } from '@openmrs/esm-framework';
-import { ComponentContext } from '@openmrs/esm-framework/src/internal';
+import { type AssignedExtension, useAssignedExtensions, useRenderableExtensions } from '@openmrs/esm-framework';
 import styles from './fua-tabs.scss';
 
 const fuaPanelSlot = 'fua-panels-slot';
@@ -10,8 +9,28 @@ const FuaOrdersTabs: React.FC = () => {
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(0);
   const tabExtensions = useAssignedExtensions(fuaPanelSlot) as AssignedExtension[];
+  const renderableExtensions = useRenderableExtensions(fuaPanelSlot);
 
-  const filteredExtensions = tabExtensions.filter((extension) => Object.keys(extension.meta).length > 0);
+  const filteredIndices = useMemo(
+    () =>
+      tabExtensions.reduce<number[]>((acc, ext, i) => {
+        if (Object.keys(ext.meta).length > 0) {
+          acc.push(i);
+        }
+        return acc;
+      }, []),
+    [tabExtensions],
+  );
+
+  const filteredExtensions = useMemo(
+    () => filteredIndices.map((i) => tabExtensions[i]),
+    [filteredIndices, tabExtensions],
+  );
+
+  const filteredRenderable = useMemo(
+    () => filteredIndices.map((i) => renderableExtensions[i]),
+    [filteredIndices, renderableExtensions],
+  );
 
   if (filteredExtensions.length === 0) {
     return (
@@ -26,7 +45,7 @@ const FuaOrdersTabs: React.FC = () => {
       {/* Tab buttons */}
       <div className={styles.customTabList}>
         {filteredExtensions.map((extension, index) => {
-          const { name, title } = extension.meta;
+          const { title } = extension.meta;
           return (
             <button
               key={index}
@@ -45,24 +64,12 @@ const FuaOrdersTabs: React.FC = () => {
 
       {/* Tab panels */}
       <div className={styles.customTabPanels}>
-        {filteredExtensions.map((extension, index) => {
+        {filteredRenderable.map((Ext, index) => {
           if (selectedTab !== index) return null;
 
           return (
             <div key={index} className={styles.customTabPanel}>
-              <ComponentContext.Provider
-                value={{
-                  moduleName: extension.moduleName,
-                  featureName: 'fua',
-                  extension: {
-                    extensionId: extension.id,
-                    extensionSlotName: fuaPanelSlot,
-                    extensionSlotModuleName: extension.moduleName,
-                  },
-                }}
-              >
-                <Extension />
-              </ComponentContext.Provider>
+              <Ext />
             </div>
           );
         })}

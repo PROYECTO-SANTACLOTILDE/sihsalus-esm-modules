@@ -98,7 +98,7 @@ export const mapFromFHIRImmunizationBundle = (
   return orderBy(groups, [(g) => g.existingDoses?.[0]?.occurrenceDateTime ?? ''], ['desc']);
 };
 
-function toReferenceOfType(type: string, referenceValue: string): Reference {
+function toReferenceOfType(type: string, referenceValue: string): Reference | null {
   if (!referenceValue) {
     return null;
   }

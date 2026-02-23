@@ -18,7 +18,7 @@ const useGetInfrastructure = () => {
         openmrsFetch
     );
     return {
-        infrastructure: data?.data,
+        infrastructure: data?.data ?? [],
         isError: error,
         isLoading,
         mutate,

@@ -17,12 +17,6 @@ const FuaSummaryTile: React.FC<FuaSummaryTileProps> = ({ label, value, headerLab
           <label className={styles.headerLabel}>{headerLabel}</label>
           {children}
         </div>
-        {/* <div className={styles.link}>
-          <ConfigurableLink className={styles.link} to="">
-            {t("view", "View")}
-          </ConfigurableLink>
-          <ArrowRight size={16} />
-        </div> */}
       </div>
       <div>
         <label className={styles.totalsLabel}>{label}</label>

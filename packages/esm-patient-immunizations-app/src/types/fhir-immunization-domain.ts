@@ -21,8 +21,8 @@ export interface FHIRImmunizationResource {
   status: 'completed';
   id?: string;
   vaccineCode: { coding: Array<Code> };
-  patient: Reference;
-  encounter: Reference;
+  patient: Reference | null;
+  encounter: Reference | null;
   occurrenceDateTime: string;
   expirationDate?: string;
   extension?: Array<{
@@ -30,8 +30,8 @@ export interface FHIRImmunizationResource {
     valueDateTime: string;
   }>;
   note?: Array<{ text: string }>;
-  location?: Reference;
-  performer?: Array<{ actor: Reference }>;
+  location?: Reference | null;
+  performer?: Array<{ actor: Reference | null }>;
   manufacturer?: { display: string };
   lotNumber?: string;
   protocolApplied?: Array<{ doseNumberPositiveInt: number; series?: string }>;

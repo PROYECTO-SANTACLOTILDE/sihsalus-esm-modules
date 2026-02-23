@@ -24,8 +24,8 @@ const useGetCostStructure = (page = 0, size = 10, query = "") => {
   );  
 
   return {
-    costStructure: data?.data.content,
-    total:data?.data.total,
+    costStructure: data?.data?.content ?? [],
+    total: data?.data?.total ?? 0,
     isLoading,
     isError: error,
     mutate,

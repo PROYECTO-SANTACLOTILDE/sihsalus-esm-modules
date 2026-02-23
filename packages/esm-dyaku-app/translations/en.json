@@ -12,10 +12,12 @@
   "email": "Email",
   "errorLoadingPatients": "Error loading patients: {{error}}",
   "failed": "Failed",
+  "female": "Female",
   "firstName": "First name",
   "gender": "Gender",
   "lastName": "Last name",
   "loading": "Loading...",
+  "male": "Male",
   "patientAlreadySynced": "Patient synced",
   "patientSyncedSuccessfully": "Patient synced",
   "phone": "Phone",
@@ -39,7 +41,8 @@
   "syncPatient": "Sync patient",
   "syncProgress": "Progress: {{progress}}%",
   "syncSuccess": "Synchronization completed",
-  "syncSuccessMessage_one": "Se sincronizaron {{count}} pacientes exitosamente.",
-  "syncSuccessMessage_other": "Se sincronizaron {{count}} pacientes exitosamente.",
+  "syncSuccessMessage_one": "Successfully synchronized {{count}} patient.",
+  "syncSuccessMessage_many": "Successfully synchronized {{count}} patients.",
+  "syncSuccessMessage_other": "Successfully synchronized {{count}} patients.",
   "syncWarning": "Existing patients will be updated, and new ones will be created automatically."
 }

@@ -54,10 +54,13 @@ const ImmunizationsOverview: React.FC<ImmunizationsOverviewProps> = ({ patient, 
       ...immunization,
       id: `${index}`,
       vaccineName: immunization.vaccineName,
-      vaccinationDate: `${formatDate(parseDate(immunization.existingDoses[0].occurrenceDateTime), {
-        day: false,
-        time: false,
-      })}`,
+      vaccinationDate:
+        immunization.existingDoses.length > 0
+          ? formatDate(parseDate(immunization.existingDoses[0].occurrenceDateTime), {
+              day: false,
+              time: false,
+            })
+          : '--',
     }));
   }, [paginatedImmunizations]);
 
@@ -77,7 +80,7 @@ const ImmunizationsOverview: React.FC<ImmunizationsOverviewProps> = ({ patient, 
           <Button
             kind="ghost"
             renderIcon={(props: ComponentProps<typeof AddIcon>) => <AddIcon size={16} {...props} />}
-            iconDescription="Add immunizations"
+            iconDescription={t('addImmunizations', 'Add immunizations')}
             onClick={launchImmunizationsForm}
           >
             {t('add', 'Add')}

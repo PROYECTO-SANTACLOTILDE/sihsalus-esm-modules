@@ -69,8 +69,8 @@ const HomeTable: React.FC<HomeTableProps> = ({ data }) => {
 };
 interface HomeTableRowProps {
   row: IRow;
-  getRowProps: any;
-  getCellProps: any;
+  getRowProps: (options: Record<string, unknown>) => Record<string, unknown>;
+  getCellProps: (options: Record<string, unknown>) => Record<string, unknown>;
 }
 const HomeTableRow: React.FC<HomeTableRowProps> = ({ row, getRowProps, getCellProps }) => {
   return (

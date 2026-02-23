@@ -139,7 +139,7 @@ const ImmunizationsForm: React.FC<PatientWorkspace2DefinitionProps<{}, {}>> = ({
         const immunization: ImmunizationFormData = {
           patientUuid,
           immunizationId: immunizationToEditMeta?.immunizationObsUuid,
-          vaccineName: immunizationsConceptSet.answers.find((answer) => answer.uuid === vaccineUuid).display,
+          vaccineName: immunizationsConceptSet.answers.find((answer) => answer.uuid === vaccineUuid)?.display ?? '',
           vaccineUuid: vaccineUuid,
           vaccinationDate: dayjs(vaccinationDate).startOf('day').toDate().toISOString(),
           doseNumber,
@@ -220,7 +220,7 @@ const ImmunizationsForm: React.FC<PatientWorkspace2DefinitionProps<{}, {}>> = ({
                     invalid={!!errors?.vaccineUuid}
                     invalidText={errors?.vaccineUuid?.message}
                     itemToString={(item) =>
-                      immunizationsConceptSet?.answers.find((candidate) => candidate.uuid == item)?.display
+                      immunizationsConceptSet?.answers.find((candidate) => candidate.uuid === item)?.display
                     }
                     items={immunizationsConceptSet?.answers?.map((item) => item.uuid) || []}
                     label={t('selectImmunization', 'Select immunization')}

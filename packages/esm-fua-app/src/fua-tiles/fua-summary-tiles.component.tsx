@@ -1,44 +1,31 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { type AssignedExtension, useAssignedExtensions, Extension, useConfig } from '@openmrs/esm-framework';
-import { ComponentContext } from '@openmrs/esm-framework/src/internal';
+import React, { useMemo } from 'react';
+import { type AssignedExtension, useAssignedExtensions, useRenderableExtensions, useConfig } from '@openmrs/esm-framework';
 import styles from './fua-summary-tiles.scss';
 import { type Config } from '../config-schema';
 
 const FuaSummaryTiles: React.FC = () => {
-  const { t } = useTranslation();
   const { enableFuaApprovalWorkflow } = useConfig<Config>();
   const fuaTileSlot = 'fua-tiles-slot';
   const tilesExtensions = useAssignedExtensions(fuaTileSlot) as AssignedExtension[];
+  const renderableExtensions = useRenderableExtensions(fuaTileSlot);
 
-  const filteredExtensions = tilesExtensions
-    .filter((extension) => Object.keys(extension.meta).length > 0)
-    .filter((extension) => {
-      if (extension.name === 'pending-review-list-tile-component') {
-        return enableFuaApprovalWorkflow === true;
+  const filteredRenderable = useMemo(() => {
+    return tilesExtensions.reduce<React.FC[]>((acc, ext, i) => {
+      const hasMeta = Object.keys(ext.meta).length > 0;
+      const isAllowed =
+        ext.name !== 'pending-review-list-tile-component' || enableFuaApprovalWorkflow === true;
+      if (hasMeta && isAllowed) {
+        acc.push(renderableExtensions[i]);
       }
-      return true;
-    });
-return (
+      return acc;
+    }, []);
+  }, [tilesExtensions, renderableExtensions, enableFuaApprovalWorkflow]);
+
+  return (
     <div className={styles.cardContainer}>
-      {filteredExtensions.map((extension, index) => {
-        return (
-          <ComponentContext.Provider
-            key={extension.id}
-            value={{
-              moduleName: extension.moduleName,
-              featureName: 'fua',
-              extension: {
-                extensionId: extension.id,
-                extensionSlotName: fuaTileSlot,
-                extensionSlotModuleName: extension.moduleName,
-              },
-            }}
-          >
-            <Extension />
-          </ComponentContext.Provider>
-        );
-      })}
+      {filteredRenderable.map((Ext, index) => (
+        <Ext key={index} />
+      ))}
     </div>
   );
 };

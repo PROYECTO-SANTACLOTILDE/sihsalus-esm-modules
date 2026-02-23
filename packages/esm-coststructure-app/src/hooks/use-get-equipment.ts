@@ -17,7 +17,7 @@ const useGetEquipment = () => {
         openmrsFetch
     );
     return {
-        equipments: data?.data,
+        equipments: data?.data ?? [],
         isError: error,
         isLoading,
         mutate,

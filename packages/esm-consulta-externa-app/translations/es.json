@@ -224,7 +224,7 @@
   "observationGroup": "Grupo de Observación",
   "onDate": "A la fecha",
   "onsetDate": "Fecha de inicio",
-  "onsetDateCannotBeInTheFuture": "Onset date cannot be in the future",
+  "onsetDateCannotBeInTheFuture": "La fecha de inicio no puede estar en el futuro",
   "operatingDoctor": "Médico cirujano",
   "otherRelationships": "Relaciones No Familiares",
   "othersSpecify": "Otros (especificar)",

@@ -325,21 +325,22 @@ export const configSchema = {
       _default: 'a855816a-8bc2-43c8-9cf7-80090dabc47d',
     },
 
-    //CRED Controls
+    // CRED Controls
+    // TODO: verify distinct concept UUIDs for each field — currently all three share the same UUID (copy-paste error)
     consultationTime: {
       _type: Type.ConceptUuid,
-      _description: 'Datos Vitales Recien Nacido Vivo',
-      _default: 'a855816a-8bc2-43c8-9cf7-80090dabc47d',
+      _description: 'Hora de consulta CRED',
+      _default: 'a855816a-8bc2-43c8-9cf7-80090dabc47d', // TODO: verify distinct concept UUID
     },
     controlNumber: {
       _type: Type.ConceptUuid,
-      _description: 'Datos Vitales Recien Nacido Vivo',
-      _default: 'a855816a-8bc2-43c8-9cf7-80090dabc47d',
+      _description: 'Número de control CRED',
+      _default: 'a855816a-8bc2-43c8-9cf7-80090dabc47d', // TODO: verify distinct concept UUID
     },
     attendedAge: {
       _type: Type.ConceptUuid,
-      _description: 'Datos Vitales Recien Nacido Vivo',
-      _default: 'a855816a-8bc2-43c8-9cf7-80090dabc47d',
+      _description: 'Edad atendida en el control CRED',
+      _default: 'a855816a-8bc2-43c8-9cf7-80090dabc47d', // TODO: verify distinct concept UUID
     },
   },
 
@@ -403,7 +404,7 @@ export const configSchema = {
     perinatalConceptSetUuid: {
       _type: Type.ConceptUuid,
       _description: 'Concept set para el seguimiento del niño sano',
-      _default: 'ninio-sano-concept-set-uuid',
+      _default: '', // TODO: set real concept set UUID from OCL
     },
 
     // Newborn Care Procedures
@@ -1035,16 +1036,7 @@ export const configSchema = {
     colorDefinitions: {
       _type: Type.Array,
       _description: 'Array of concept UUIDs and their associated colors',
-      _default: [
-        {
-          conceptUuid: 'example-uuid-1',
-          colour: '#FF0000',
-        },
-        {
-          conceptUuid: 'example-uuid-2',
-          colour: '#00FF00',
-        },
-      ],
+      _default: [],
       _elements: {
         _type: Type.Object,
         conceptUuid: {
@@ -1060,7 +1052,7 @@ export const configSchema = {
     legendConceptSet: {
       _type: Type.ConceptUuid,
       _description: 'UUID of the concept set used for legend items',
-      _default: 'example-concept-set-uuid',
+      _default: '', // TODO: set real legend concept set UUID
     },
   },
 

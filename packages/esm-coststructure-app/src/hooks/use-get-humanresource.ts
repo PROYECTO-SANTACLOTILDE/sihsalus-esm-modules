@@ -16,7 +16,7 @@ const useGetHumanResource = () =>{
         openmrsFetch
     );
     return {
-        humanresource: data?.data,
+        humanresource: data?.data ?? [],
         isError: error,
         isLoading,
         mutate,

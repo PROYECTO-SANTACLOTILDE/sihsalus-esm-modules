@@ -51,7 +51,7 @@ export const useCaseManagers = () => {
   return { data, error };
 };
 
-export const saveRelationship = (payload) => {
+export const saveRelationship = (payload: Record<string, unknown>) => {
   const url = `/ws/rest/v1/relationship`;
   return openmrsFetch(url, {
     method: 'POST',
