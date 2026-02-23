@@ -1,6 +1,6 @@
 {
   "name": "@pucp-gidis-hiisc/esm-indicators-app",
-  "version": "1.6.0",
+  "version": "1.7.1",
   "license": "MPL-2.0",
   "description": "OpenMRS ESM Clinical Indicators - Test & Management UI for SIHSALUS",
   "browser": "dist/pucp-gidis-hiisc-esm-indicators-app.js",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.openmrs.org/routes.schema.json",
   "backendDependencies": {
-    "indicators": ">=1.0.0"
+    "webservices.rest": ">=2.2.0"
   },
   "pages": [
     {
