@@ -11,7 +11,7 @@ export function useImmunizationsConceptSet(config: ImmunizationWidgetConfigObjec
     openmrsFetch,
   );
   return {
-    immunizationsConceptSet: data && data.data.results[0],
+    immunizationsConceptSet: data?.data?.results?.[0],
     isLoading,
   };
 }

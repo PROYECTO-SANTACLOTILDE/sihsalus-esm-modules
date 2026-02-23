@@ -203,7 +203,7 @@ const ContactListForm: React.FC<ContactListFormProps> = ({
                     field.onChange(e.selectedItem);
                   }}
                   initialSelectedItem={field.value}
-                  label="Select Realtionship"
+                  label={t('selectRelationship', 'Select Relationship')}
                   items={pnsRelationshipTypes.map((r) => r.uuid)}
                   itemToString={(item) => pnsRelationshipTypes.find((r) => r.uuid === item)?.display ?? ''}
                 />
@@ -227,7 +227,7 @@ const ContactListForm: React.FC<ContactListFormProps> = ({
                         field.onChange(e.selectedItem);
                       }}
                       initialSelectedItem={field.value}
-                      label="Select"
+                      label={t('select', 'Select')}
                       items={contactLivingWithPatient.map((r) => r.value)}
                       itemToString={(item) => contactLivingWithPatient.find((r) => r.value === item)?.label ?? ''}
                     />
@@ -313,7 +313,7 @@ const ContactListForm: React.FC<ContactListFormProps> = ({
                             field.onChange(e.selectedItem);
                           }}
                           selectedItem={field.value}
-                          label="Choose option"
+                          label={t('chooseOption', 'Choose option')}
                           items={contactipvOutcomeOptions.map((r) => r.value)}
                           itemToString={(item) => {
                             return contactipvOutcomeOptions.find((r) => r.value === item)?.label ?? '';
@@ -340,7 +340,7 @@ const ContactListForm: React.FC<ContactListFormProps> = ({
                         field.onChange(e.selectedItem);
                       }}
                       initialSelectedItem={field.value}
-                      label="Select HIV Status"
+                      label={t('selectHivStatus', 'Select HIV Status')}
                       items={hivStatus.map((r) => r.value)}
                       itemToString={(item) => hivStatus.find((r) => r.value === item)?.label ?? ''}
                     />
@@ -362,7 +362,7 @@ const ContactListForm: React.FC<ContactListFormProps> = ({
                         field.onChange(e.selectedItem);
                       }}
                       initialSelectedItem={field.value}
-                      label="Select Aproach"
+                      label={t('selectPnsApproach', 'Select PNS Approach')}
                       items={pnsAproach.map((r) => r.value)}
                       itemToString={(item) => pnsAproach.find((r) => r.value === item)?.label ?? ''}
                     />

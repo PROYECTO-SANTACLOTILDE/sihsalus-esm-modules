@@ -88,7 +88,7 @@ async function fetchDyakuPatients(url: string): Promise<{ data: DyakuPatientsRes
     return { data };
   } catch (error) {
     console.error('Error fetching Dyaku patients:', error);
-    throw new Error(`Error al conectar con Dyaku FHIR: ${error.message}`);
+    throw new Error(`Error al conectar con Dyaku FHIR: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 
@@ -112,7 +112,7 @@ export async function getDyakuPatientById(patientId: string, fhirBaseUrl: string
     return await response.json();
   } catch (fetchError) {
     console.error('Error fetching Dyaku patient by ID:', fetchError);
-    throw new Error(`Error al obtener paciente de Dyaku: ${fetchError.message}`);
+    throw new Error(`Error al obtener paciente de Dyaku: ${fetchError instanceof Error ? fetchError.message : String(fetchError)}`);
   }
 }
 
@@ -184,19 +184,19 @@ export async function syncDyakuPatientsToOpenMRS(
         }
       } catch (patientError) {
         result.failed++;
-        result.errors.push(`Error procesando paciente ${dyakuPatient.id}: ${patientError.message}`);
+        result.errors.push(`Error procesando paciente ${dyakuPatient.id}: ${patientError instanceof Error ? patientError.message : String(patientError)}`);
       }
     }
 
     result.success = result.failed === 0;
     return result;
   } catch (error) {
-    result.errors.push(`Error general de sincronización: ${error.message}`);
+    result.errors.push(`Error general de sincronización: ${error instanceof Error ? error.message : String(error)}`);
     return result;
   }
 }
 
-async function findPatientByIdentifier(identifier?: string): Promise<any> {
+async function findPatientByIdentifier(identifier?: string): Promise<{ uuid: string } | null> {
   if (!identifier) return null;
 
   try {
@@ -221,7 +221,7 @@ async function createPatientInOpenMRS(dyakuPatient: DyakuPatient, config: Config
       body: openMRSPatient,
     });
   } catch (error) {
-    throw new Error(`Error creando paciente en OpenMRS: ${error.message}`);
+    throw new Error(`Error creando paciente en OpenMRS: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 
@@ -241,7 +241,7 @@ async function updatePatientInOpenMRS(
       body: openMRSPatient,
     });
   } catch (error) {
-    throw new Error(`Error actualizando paciente en OpenMRS: ${error.message}`);
+    throw new Error(`Error actualizando paciente en OpenMRS: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 
@@ -257,11 +257,11 @@ async function generateAutoIdentifier(identifierSourceUuid: string): Promise<str
     });
     return response.data.identifier;
   } catch (error) {
-    throw new Error(`Error generando identificador automático: ${error.message}`);
+    throw new Error(`Error generando identificador automático: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 
-async function mapDyakuToOpenMRSPatient(dyakuPatient: DyakuPatient, config: ConfigObject): Promise<any> {
+async function mapDyakuToOpenMRSPatient(dyakuPatient: DyakuPatient, config: ConfigObject): Promise<Record<string, unknown>> {
   const name = dyakuPatient.name?.[0];
   const identifier = dyakuPatient.identifier?.[0];
   const email = dyakuPatient.telecom?.find((t) => t.system === 'email')?.value;
@@ -371,7 +371,7 @@ export async function syncSinglePatientToOpenMRS(
     }
   } catch (error) {
     result.failed = 1;
-    result.errors.push(`Error procesando paciente ${dyakuPatient.id}: ${error.message}`);
+    result.errors.push(`Error procesando paciente ${dyakuPatient.id}: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   return result;

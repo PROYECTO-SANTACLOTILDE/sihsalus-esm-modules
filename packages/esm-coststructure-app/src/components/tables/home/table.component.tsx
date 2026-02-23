@@ -40,9 +40,9 @@ const HomeTable: React.FC<HomeTableProps> = ({ data }) => {
     id: cs.uuid ?? String(index),
     code: cs.procedure?.conceptId?.toString() ?? `PROC-${index + 1}`,
     name: cs.procedure?.name ?? 'Sin procedimiento',
-    created_date: new Date(cs.createdDate).toLocaleDateString('es-PE'),
-    end_date: new Date(cs.endDate).toLocaleDateString('es-PE'),
-    start_date: new Date(cs.startDate).toLocaleDateString('es-PE'),
+    created_date: cs.createdDate ? new Date(cs.createdDate).toLocaleDateString('es-PE') : '--',
+    end_date: cs.endDate ? new Date(cs.endDate).toLocaleDateString('es-PE') : '--',
+    start_date: cs.startDate ? new Date(cs.startDate).toLocaleDateString('es-PE') : '--',
   }));
   return (
     <>

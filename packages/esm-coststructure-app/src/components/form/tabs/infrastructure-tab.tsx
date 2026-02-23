@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { CostStructureFormValues } from '../schema/costructure-schema';
 import useGetInfrastructure from '../../../hooks/use-get-infrastructure';
 import { Button, IconButton, NumberInput, Select, SelectItem, Table } from '@carbon/react';
@@ -19,6 +20,7 @@ interface Props {
 }
 export default function InfrastructureTab({ form }: Props) {
   const [calculateFields, setCalculateFields] = useState<CalculateFields[]>([]);
+  const { t } = useTranslation();
 
   const { infrastructure: infrastructures } = useGetInfrastructure();
   const { control, setValue, watch } = form;
@@ -60,12 +62,12 @@ export default function InfrastructureTab({ form }: Props) {
     <section className={styles['tab-container']}>
       <div>
         <div className="cds--col">
-          <h4 className="cds--heading-04">Infraestructura</h4>
+          <h4 className="cds--heading-04">{t('infrastructure', 'Infraestructura')}</h4>
         </div>
         <div className="cds--col" style={{ textAlign: 'right' }}>
           <Button kind="primary" size="md" onClick={handleCreateRow}>
             <Add size={16} />
-            Agregar Infraestructura
+            {t('addInfrastructure', 'Agregar Infraestructura')}
           </Button>
         </div>
       </div>
@@ -75,13 +77,13 @@ export default function InfrastructureTab({ form }: Props) {
           <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
             <thead>
               <tr>
-                <th>UPS</th>
-                <th>Área (m²)</th>
-                <th>Costo Construcción (S/.)</th>
-                <th>Valor Total de Construcción de UPSS(S/.)</th>
-                <th>Valor de depreciación de UPS por Minuto(S/.)</th>
-                <th>Tiempo de Rendimiento de UPSS (min) </th>
-                <th>Costo Estandar (S/.)</th>
+                <th>{t('ups', 'UPS')}</th>
+                <th>{t('areaM2', 'Área (m²)')}</th>
+                <th>{t('constructionCost', 'Costo Construcción (S/.)')}</th>
+                <th>{t('totalConstructionValue', 'Valor Total de Construcción de UPSS(S/.)')}</th>
+                <th>{t('depreciationPerMinuteUps', 'Valor de depreciación de UPS por Minuto(S/.)')}</th>
+                <th>{t('performanceTimeMinutes', 'Tiempo de Rendimiento de UPSS (min)')}</th>
+                <th>{t('standardCost', 'Costo Estandar (S/.)')}</th>
                 <th></th>
               </tr>
             </thead>
@@ -123,7 +125,7 @@ export default function InfrastructureTab({ form }: Props) {
                             }}
                             labelText=""
                           >
-                            <SelectItem text="Seleccione infraestructura" value="" />
+                            <SelectItem text={t('selectInfrastructure', 'Seleccione infraestructura')} value="" />
                             {infrastructures.map((infra) => (
                               <SelectItem key={infra.id} text={infra.locationName} value={infra.id.toString()} />
                             ))}
@@ -191,7 +193,7 @@ export default function InfrastructureTab({ form }: Props) {
               ) : (
                 <tr>
                   <td colSpan={8} className={styles['empty-state-container']}>
-                    <NoContent title="No hay Infraestructuras añadidas" message="Añada alguna Infraestructura" />
+                    <NoContent title={t('noInfrastructures', 'No hay Infraestructuras añadidas')} message={t('addSomeInfrastructure', 'Añada alguna Infraestructura')} />
                   </td>
                 </tr>
               )}

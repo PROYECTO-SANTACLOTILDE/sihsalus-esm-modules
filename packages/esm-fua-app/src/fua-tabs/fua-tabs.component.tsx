@@ -35,7 +35,7 @@ const FuaOrdersTabs: React.FC = () => {
   if (filteredExtensions.length === 0) {
     return (
       <div style={{ padding: '20px' }}>
-        <p>No tab extensions found</p>
+        <p>{t('noTabExtensionsFound', 'No tab extensions found')}</p>
       </div>
     );
   }

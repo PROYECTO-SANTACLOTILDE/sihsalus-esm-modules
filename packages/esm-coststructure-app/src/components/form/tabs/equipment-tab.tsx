@@ -1,4 +1,5 @@
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { CostStructureFormValues } from '../schema/costructure-schema';
 import React from 'react';
 import { Add, TrashCan } from '@carbon/react/icons';
@@ -14,6 +15,7 @@ interface Props {
 
 export default function EquipmentTab({ form }: Props) {
   const { control, watch, setValue } = form;
+  const { t } = useTranslation();
 
   const { equipments } = useGetEquipment();
 
@@ -38,12 +40,12 @@ export default function EquipmentTab({ form }: Props) {
     <section className={styles['tab-container']}>
       <div>
         <div className="cds--col">
-          <h4 className="cds--heading-04">Equipamientos y Mobiliario</h4>
+          <h4 className="cds--heading-04">{t('equipmentAndFurniture', 'Equipamientos y Mobiliario')}</h4>
         </div>
         <div className="cds--col" style={{ textAlign: 'right' }}>
           <Button kind="primary" size="md" onClick={handleCreateRow}>
             <Add size={16} />
-            Agregar Equipamientos
+            {t('addEquipment', 'Agregar Equipamiento')}
           </Button>
         </div>
       </div>
@@ -52,13 +54,13 @@ export default function EquipmentTab({ form }: Props) {
           <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
             <thead>
               <tr>
-                <th>Equipamiento o mobiliario</th>
-                <th>Precio de Adquisión (S/.)</th>
-                <th>Años de utilidad</th>
-                <th>Depreciación por Minuto (S/.)</th>
-                <th>Cantidad</th>
-                <th>Tiempo de uso (minutos)</th>
-                <th>Costo Estandar (S/.)</th>
+                <th>{t('equipmentOrFurniture', 'Equipamiento o mobiliario')}</th>
+                <th>{t('acquisitionPrice', 'Precio de Adquisición (S/.)')}</th>
+                <th>{t('usefulYears', 'Años de utilidad')}</th>
+                <th>{t('depreciationPerMinute', 'Depreciación por Minuto (S/.)')}</th>
+                <th>{t('quantity', 'Cantidad')}</th>
+                <th>{t('usageTimeMinutes', 'Tiempo de uso (minutos)')}</th>
+                <th>{t('standardCost', 'Costo Estandar (S/.)')}</th>
                 <th></th>
               </tr>
             </thead>
@@ -101,7 +103,7 @@ export default function EquipmentTab({ form }: Props) {
                               }}
                               labelText=""
                             >
-                              <SelectItem text="Seleccione Equipamiento" value="" />
+                              <SelectItem text={t('selectEquipment', 'Seleccione Equipamiento')} value="" />
                               {equipments?.map((eq) => (
                                 <SelectItem key={eq.id} text={eq.name} value={eq.id} />
                               ))}
@@ -163,7 +165,7 @@ export default function EquipmentTab({ form }: Props) {
               ) : (
                 <tr>
                   <td colSpan={8} className={styles['empty-state-container']}>
-                    <NoContent title="No hay Equipamientos añadidos" message="Añada algunos Equipamientos" />
+                    <NoContent title={t('noEquipment', 'No hay Equipamientos añadidos')} message={t('addSomeEquipment', 'Añada algunos Equipamientos')} />
                   </td>
                 </tr>
               )}

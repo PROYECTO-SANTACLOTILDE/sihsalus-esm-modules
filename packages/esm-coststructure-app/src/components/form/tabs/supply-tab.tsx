@@ -1,5 +1,6 @@
 import React from 'react';
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { CostStructureFormValues } from '../schema/costructure-schema';
 import { Button, NumberInput, Select, SelectItem, TextInput } from '@carbon/react';
 import { Add, TrashCan } from '@carbon/react/icons';
@@ -13,6 +14,7 @@ interface Props {
 
 export default function SupplyTab({ form }: Props) {
   const { control, setValue, watch } = form;
+  const { t } = useTranslation();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -29,23 +31,23 @@ export default function SupplyTab({ form }: Props) {
       supplyId: 0,
       unitAcquisition: '',
       unitConsumption: '',
-      name: 'Sin seleccionar',
+      name: t('notSelected', 'Sin seleccionar'),
       type: '',
       unitCost: 0,
     });
   };
 
-  if (isLoading) return <div>Cargando insumos...</div>;
+  if (isLoading) return <div>{t('loadingSupplies', 'Cargando insumos...')}</div>;
   return (
     <section className={styles['tab-container']}>
       <div>
         <div className="cds--col">
-          <h4 className="cds--heading-04">Insumos y Medicamentos</h4>
+          <h4 className="cds--heading-04">{t('suppliesAndMedicines', 'Insumos y Medicamentos')}</h4>
         </div>
         <div className="cds--col" style={{ textAlign: 'right' }}>
           <Button kind="primary" size="md" onClick={handleCreateRow}>
             <Add size={16} />
-            Agregar Insumo
+            {t('addSupply', 'Agregar Insumo')}
           </Button>
         </div>
       </div>
@@ -55,12 +57,12 @@ export default function SupplyTab({ form }: Props) {
           <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
             <thead>
               <tr>
-                <th>Insumos y Materiales</th>
-                <th>Unidad de Adquisición</th>
-                <th>Unidad de Consumo</th>
-                <th>Equivalencia de consumo</th>
-                <th>Precio de Adquisición</th>
-                <th>Costo Unitario (S/.)</th>
+                <th>{t('suppliesAndMaterials', 'Insumos y Materiales')}</th>
+                <th>{t('acquisitionUnit', 'Unidad de Adquisición')}</th>
+                <th>{t('consumptionUnit', 'Unidad de Consumo')}</th>
+                <th>{t('consumptionEquivalence', 'Equivalencia de consumo')}</th>
+                <th>{t('acquisitionPrice', 'Precio de Adquisición')}</th>
+                <th>{t('unitCost', 'Costo Unitario (S/.)')}</th>
                 <th></th>
               </tr>
             </thead>
@@ -100,7 +102,7 @@ export default function SupplyTab({ form }: Props) {
                                 }
                               }}
                             >
-                              <SelectItem text="Seleccione Insumo o Medicamento" value="" />
+                              <SelectItem text={t('selectSupplyOrMedicine', 'Seleccione Insumo o Medicamento')} value="" />
                               {supply.map((sup) => (
                                 <SelectItem key={sup.id} text={sup.name} value={sup.id} />
                               ))}
@@ -200,7 +202,7 @@ export default function SupplyTab({ form }: Props) {
               ) : (
                 <tr>
                   <td colSpan={7} className={styles['empty-state-container']}>
-                    <NoContent title="No hay insumos añadidos" message="Añada algunos insumos o medicamentos" />
+                    <NoContent title={t('noSupplies', 'No hay insumos añadidos')} message={t('addSomeSupplies', 'Añada algunos insumos o medicamentos')} />
                   </td>
                 </tr>
               )}
@@ -213,11 +215,11 @@ export default function SupplyTab({ form }: Props) {
           <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
             <thead>
               <tr>
-                <th>Insumos y Materiales</th>
-                <th>Tiempo (minutos)</th>
-                <th>Cantidad</th>
-                <th>Costo Unitario</th>
-                <th>Costo Estandar (S/.)</th>
+                <th>{t('suppliesAndMaterials', 'Insumos y Materiales')}</th>
+                <th>{t('timeMinutes', 'Tiempo (minutos)')}</th>
+                <th>{t('quantity', 'Cantidad')}</th>
+                <th>{t('unitCost', 'Costo Unitario')}</th>
+                <th>{t('standardCost', 'Costo Estandar (S/.)')}</th>
               </tr>
             </thead>
             <tbody>
@@ -252,7 +254,7 @@ export default function SupplyTab({ form }: Props) {
               ) : (
                 <tr>
                   <td colSpan={6} className={styles['empty-state-container']}>
-                    <NoContent title="No hay insumos añadidos" message="Añada algunos insumos o medicamentos" />
+                    <NoContent title={t('noSupplies', 'No hay insumos añadidos')} message={t('addSomeSupplies', 'Añada algunos insumos o medicamentos')} />
                   </td>
                 </tr>
               )}

@@ -1,4 +1,5 @@
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { CostStructureFormValues } from '../schema/costructure-schema';
 import React from 'react';
 import { Button, NumberInput, Select, SelectItem } from '@carbon/react';
@@ -12,6 +13,7 @@ interface Props {
 }
 export default function HumanResourceTab({ form }: Props) {
   const { control, setValue, watch } = form;
+  const { t } = useTranslation();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'humanResourceCost',
@@ -34,12 +36,12 @@ export default function HumanResourceTab({ form }: Props) {
     <section className={styles['tab-container']}>
       <div>
         <div className="cds--col">
-          <h4 className="cds--heading-04">Recursos Humanos</h4>
+          <h4 className="cds--heading-04">{t('humanResources', 'Recursos Humanos')}</h4>
         </div>
         <div className="cds--col" style={{ textAlign: 'right' }}>
           <Button kind="primary" size="md" onClick={handleCreateRow}>
             <Add size={16} />
-            Agregar Recurso Humano
+            {t('addHumanResource', 'Agregar Recurso Humano')}
           </Button>
         </div>
       </div>
@@ -49,12 +51,12 @@ export default function HumanResourceTab({ form }: Props) {
           <table className="cds--data-table cds--data-table--compact cds--data-table--zebra">
             <thead>
               <tr>
-                <th>Especialidad</th>
-                <th>Cantidad</th>
-                <th>Tiempo participacion (minutos)</th>
-                <th>Remuneración mensual (S/.)</th>
-                <th>Costo por Minuto (S/.)</th>
-                <th>Costo Unitario (S/.)</th>
+                <th>{t('specialty', 'Especialidad')}</th>
+                <th>{t('quantity', 'Cantidad')}</th>
+                <th>{t('participationTimeMinutes', 'Tiempo participacion (minutos)')}</th>
+                <th>{t('monthlyRemuneration', 'Remuneración mensual (S/.)')}</th>
+                <th>{t('costPerMinute', 'Costo por Minuto (S/.)')}</th>
+                <th>{t('unitCost', 'Costo Unitario (S/.)')}</th>
                 <th></th>
               </tr>
             </thead>
@@ -75,7 +77,7 @@ export default function HumanResourceTab({ form }: Props) {
                           control={control}
                           render={({ field }) => (
                             <Select id="" key={row.id} {...field} labelText="">
-                              <SelectItem text="Seleccione Recurso Humano" value="" />
+                              <SelectItem text={t('selectHumanResource', 'Seleccione Recurso Humano')} value="" />
                               {humanresource.map((rrh) => (
                                 <SelectItem key={rrh.id} text={rrh.speciality} value={rrh.id.toString()} />
                               ))}
@@ -119,7 +121,7 @@ export default function HumanResourceTab({ form }: Props) {
               ) : (
                 <tr>
                   <td colSpan={7} className={styles['empty-state-container']}>
-                    <NoContent title="No hay Recursos Humanos añadidos" message="Añada algunos Recursos Humanos" />
+                    <NoContent title={t('noHumanResources', 'No hay Recursos Humanos añadidos')} message={t('addSomeHumanResources', 'Añada algunos Recursos Humanos')} />
                   </td>
                 </tr>
               )}
