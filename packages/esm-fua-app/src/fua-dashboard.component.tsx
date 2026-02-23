@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { useDefineAppContext } from '@openmrs/esm-framework';
@@ -11,7 +11,8 @@ import styles from './fua-dashboard.scss';
 const FuaDashboard: React.FC = () => {
   const { t } = useTranslation();
   const [dateRange, setDateRange] = useState<Date[]>([dayjs().startOf('day').toDate(), new Date()]);
-  useDefineAppContext<DateFilterContext>('fua-date-filter', { dateRange, setDateRange });
+  const contextValue = useMemo<DateFilterContext>(() => ({ dateRange, setDateRange }), [dateRange]);
+  useDefineAppContext<DateFilterContext>('fua-date-filter', contextValue);
 
   return (
     <div className={styles.dashboard}>

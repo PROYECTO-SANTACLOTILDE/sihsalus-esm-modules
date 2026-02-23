@@ -14,12 +14,14 @@ const FuaViewerPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const fetchHtml = async () => {
       try {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, { signal: abortController.signal });
 
         if (!response.ok) {
           throw new Error(`${t('errorLoadingContent', 'Error loading content')}: ${response.status} ${response.statusText}`);
@@ -28,6 +30,7 @@ const FuaViewerPage: React.FC = () => {
         const html = await response.text();
         setHtmlContent(html);
       } catch (err) {
+        if (abortController.signal.aborted) return;
         const errorMessage = err instanceof Error ? err.message : t('unknownErrorLoadingContent', 'Unknown error loading content');
         setError(errorMessage);
         console.error('Error fetching FUA HTML:', err);
@@ -37,11 +40,15 @@ const FuaViewerPage: React.FC = () => {
           kind: 'error',
         });
       } finally {
-        setIsLoading(false);
+        if (!abortController.signal.aborted) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchHtml();
+
+    return () => abortController.abort();
   }, [endpoint, t]);
 
   if (isLoading) {

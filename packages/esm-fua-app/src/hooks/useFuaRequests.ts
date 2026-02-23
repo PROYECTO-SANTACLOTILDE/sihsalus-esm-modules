@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { useMemo } from 'react';
 import useSWR from 'swr';
 import { openmrsFetch, useAppContext } from '@openmrs/esm-framework';
 import { ModuleFuaRestURL } from '../constant';
@@ -37,6 +38,16 @@ export interface UseFuaRequestsParams {
 }
 
 /**
+ * Truncate a Date to minute precision so the SWR cache key stays stable
+ * across re-renders within the same minute (avoids millisecond drift).
+ */
+function toStableISOString(date: Date): string {
+  const d = new Date(date);
+  d.setSeconds(0, 0);
+  return d.toISOString();
+}
+
+/**
  * Custom hook for retrieving FUA requests based on the specified status.
  *
  * @param status - The status of the requests to retrieve
@@ -49,25 +60,29 @@ export function useFuaRequests(params: Partial<UseFuaRequestsParams> = useFuaReq
     dateRange: [dayjs().startOf('day').toDate(), new Date()],
   };
 
-  let url = `${ModuleFuaRestURL}/list`;
-  const queryParams: string[] = [];
+  const url = useMemo(() => {
+    let base = `${ModuleFuaRestURL}/list`;
+    const queryParams: string[] = [];
 
-  if (status) {
-    queryParams.push(`status=${status}`);
-  }
+    if (status) {
+      queryParams.push(`status=${status}`);
+    }
 
-  if (excludeCanceled) {
-    queryParams.push('excludeCanceled=true');
-  }
+    if (excludeCanceled) {
+      queryParams.push('excludeCanceled=true');
+    }
 
-  if (dateRange) {
-    queryParams.push(`startDate=${dateRange.at(0).toISOString()}`);
-    queryParams.push(`endDate=${dateRange.at(1).toISOString()}`);
-  }
+    if (dateRange) {
+      queryParams.push(`startDate=${toStableISOString(dateRange.at(0))}`);
+      queryParams.push(`endDate=${toStableISOString(dateRange.at(1))}`);
+    }
 
-  if (queryParams.length > 0) {
-    url = `${url}?${queryParams.join('&')}`;
-  }
+    if (queryParams.length > 0) {
+      base = `${base}?${queryParams.join('&')}`;
+    }
+
+    return base;
+  }, [status, excludeCanceled, dateRange]);
 
   const { data, error, mutate, isLoading, isValidating } = useSWR<{ data: Array<FuaRequest> }>(
     url,

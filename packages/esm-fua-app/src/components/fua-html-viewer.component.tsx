@@ -19,6 +19,8 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const fetchFuaHtml = async () => {
       try {
         setIsLoading(true);
@@ -26,7 +28,7 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
 
         const url = fuaId ? `${fuaEndpoint}?fuaId=${fuaId}` : fuaEndpoint;
 
-        const response = await fetch(url);
+        const response = await fetch(url, { signal: abortController.signal });
 
         if (!response.ok) {
           throw new Error(`${t('errorLoadingFua', 'Error loading FUA')}: ${response.status}`);
@@ -35,6 +37,7 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
         const html = await response.text();
         setHtmlContent(html);
       } catch (err) {
+        if (abortController.signal.aborted) return;
         const errorMessage = err instanceof Error ? err.message : t('unknownError', 'Unknown error');
         setError(errorMessage);
         showSnackbar({
@@ -43,11 +46,15 @@ const FuaHtmlViewer: React.FC<FuaHtmlViewerProps> = ({ fuaId, endpoint }) => {
           kind: 'error',
         });
       } finally {
-        setIsLoading(false);
+        if (!abortController.signal.aborted) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchFuaHtml();
+
+    return () => abortController.abort();
   }, [fuaId, fuaEndpoint, t]);
 
   if (isLoading) {
