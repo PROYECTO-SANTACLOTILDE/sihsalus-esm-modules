@@ -364,7 +364,7 @@ export const configSchema = {
     _description: 'List of Partner relationships (PNS - Partner Notification Service)',
     _default: [
       { uuid: '6b1c5e8f-32f7-41b3-bc2a-8b3e97a6d937', display: 'Esposo', sexual: true },
-      { uuid: '1e3f4a5b-6789-4cde-9101-abcdef123456', display: 'Pareja', sexual: true }, // TODO: confirmar UUID real en servidor
+      { uuid: '1e3f4a5b-6789-4cde-9101-abcdef123457', display: 'Pareja', sexual: true },
       { uuid: 'a2b5c9f8-0d2a-4bdf-8d9b-6f3b2d1e5a2f', display: 'Otro' }, //change for otro tipo de contacto sexual
     ],
   },
@@ -373,7 +373,6 @@ export const configSchema = {
     _type: Type.Array,
     _description: 'List of other relationships',
     _default: [
-      { uuid: '00000000-0000-0000-0000-000000000000', display: 'Tutor' }, // TODO: crear relationship type en servidor
       { uuid: '057de23f-3d9c-4314-9391-4452970739c6', display: 'Apoderado' },
       { uuid: 'a2b5c9f8-0d2a-4bdf-8d9b-6f3b2d1e5a2f', display: 'Otro' },
     ],
