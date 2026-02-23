@@ -1,6 +1,6 @@
 {
   "name": "@pucp-gidis-hiisc/esm-coststructure-app",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "license": "MPL-2.0",
   "description": "OpenMRS ESM Cost Structure Microfrontend Module for SIHSALUS",
   "browser": "dist/pucp-gidis-hiisc-esm-coststructure-app.js",
