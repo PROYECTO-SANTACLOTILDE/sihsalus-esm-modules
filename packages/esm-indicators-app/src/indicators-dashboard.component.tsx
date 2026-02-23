@@ -120,7 +120,7 @@ const IndicatorsDashboard: React.FC = () => {
         <InlineNotification
           kind="error"
           title={t('connectionError', 'Error de conexión')}
-          subtitle={t('connectionErrorDetail', 'No se pudo conectar al OMOD de indicators. ¿Está instalado? Error: {{errorMessage}}', { errorMessage: error.message })}
+          subtitle={t('connectionErrorDetail', 'No se pudo conectar al OMOD de indicators. ¿Está instalado? Error: {{errorMessage}}', { errorMessage: error instanceof Error ? error.message : String(error) })}
         />
       )}
 
@@ -254,7 +254,7 @@ const EvaluationPanel: React.FC<{ id: number; onClose: () => void }> = ({ id, on
       <h4>{t('evaluationResult', 'Resultado de Evaluación')}</h4>
       {isLoading && <Loading withOverlay={false} small description={t('evaluating', 'Evaluando...')} />}
       {error && (
-        <InlineNotification kind="error" title={t('error', 'Error')} subtitle={error.message} lowContrast />
+        <InlineNotification kind="error" title={t('error', 'Error')} subtitle={error instanceof Error ? error.message : String(error)} lowContrast />
       )}
       {!isLoading && !error && (
         <div>

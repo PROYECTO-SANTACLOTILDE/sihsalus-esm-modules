@@ -113,7 +113,7 @@ export function toOpenmrsIsoString(
     }
   } catch (error) {
     console.error('Error formatting date for OpenMRS:', { dateValue, error });
-    throw new Error(`Failed to format date for OpenMRS: ${error.message}`);
+    throw new Error(`Failed to format date for OpenMRS: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 
