@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ModalBody, ModalFooter, ModalHeader } from '@carbon/react';
 import { showSnackbar } from '@openmrs/esm-framework';
@@ -17,7 +17,10 @@ const PatientCancelAppointmentModal: React.FC<PatientCancelAppointmentModalProps
   patientUuid,
 }) => {
   const { t } = useTranslation();
-  const { mutate } = usePatientAppointments(patientUuid, new Date().toUTCString(), new AbortController());
+  const startDate = useMemo(() => new Date().toUTCString(), []);
+  const ac = useMemo(() => new AbortController(), []);
+  useEffect(() => () => ac.abort(), [ac]);
+  const { mutate } = usePatientAppointments(patientUuid, startDate, ac);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCancel = async () => {

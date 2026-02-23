@@ -71,22 +71,22 @@ export const useVaccinationSchema = () => {
   const [shouldRefetch, setShouldRefetch] = useState<boolean>(false);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const fetchVaccinationSchema = async () => {
       setIsLoading(true);
       try {
-        // Simulated API call to OpenMRS (replace with actual endpoint)
         const response = await openmrsFetch('/ws/rest/v1/vaccination-schema', {
           method: 'GET',
+          signal: abortController.signal,
         });
 
-        // Mock response if API isn't available (comment out in production)
         const mockResponse = {
           vaccines: MOCK_VACCINES,
           schema: MOCK_SCHEMA,
         };
         const result = response.data || mockResponse;
 
-        // Validate and set data
         if (result.vaccines && result.schema) {
           setData({
             vaccines: result.vaccines,
@@ -96,18 +96,22 @@ export const useVaccinationSchema = () => {
           throw new Error('Invalid vaccination schema data');
         }
       } catch (err) {
+        if (abortController.signal.aborted) return;
         setError(err instanceof Error ? err : new Error('Failed to fetch vaccination schema'));
-        // Fallback to mock data in case of error (optional)
         setData({
           vaccines: MOCK_VACCINES,
           schema: MOCK_SCHEMA,
         });
       } finally {
-        setIsLoading(false);
+        if (!abortController.signal.aborted) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchVaccinationSchema();
+
+    return () => abortController.abort();
   }, [shouldRefetch]);
 
   // Mutate function to trigger refetch (e.g., after adding a vaccination)

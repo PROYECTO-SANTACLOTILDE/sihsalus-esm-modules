@@ -32,22 +32,22 @@ export function usePatientAppointments(patientUuid: string, startDate: string, a
 
   const appointments = data?.data?.length ? data.data : null;
 
-  const pastAppointments = appointments
-    ?.sort((a, b) => (b.startDateTime > a.startDateTime ? 1 : -1))
-    ?.filter(({ status }) => status !== 'Cancelled')
-    ?.filter(({ startDateTime }) =>
-      dayjs(new Date(startDateTime).toISOString()).isBefore(new Date().setHours(0, 0, 0, 0)),
-    );
+  const notCancelled = appointments
+    ?.filter(({ status }) => status !== 'Cancelled');
 
-  const upcomingAppointments = appointments
-    ?.sort((a, b) => (a.startDateTime > b.startDateTime ? 1 : -1))
-    ?.filter(({ status }) => status !== 'Cancelled')
-    ?.filter(({ startDateTime }) => dayjs(new Date(startDateTime).toISOString()).isAfter(new Date()));
+  const startOfToday = dayjs().startOf('day');
 
-  const todaysAppointments = appointments
-    ?.sort((a, b) => (a.startDateTime > b.startDateTime ? 1 : -1))
-    ?.filter(({ status }) => status !== 'Cancelled')
-    ?.filter(({ startDateTime }) => dayjs(new Date(startDateTime).toISOString()).isToday());
+  const pastAppointments = notCancelled
+    ?.filter(({ startDateTime }) => dayjs(startDateTime).isBefore(startOfToday))
+    ?.sort((a, b) => (b.startDateTime > a.startDateTime ? 1 : -1));
+
+  const upcomingAppointments = notCancelled
+    ?.filter(({ startDateTime }) => dayjs(startDateTime).isAfter(startOfToday.endOf('day')))
+    ?.sort((a, b) => (a.startDateTime > b.startDateTime ? 1 : -1));
+
+  const todaysAppointments = notCancelled
+    ?.filter(({ startDateTime }) => dayjs(startDateTime).isToday())
+    ?.sort((a, b) => (a.startDateTime > b.startDateTime ? 1 : -1));
 
   return {
     data: data ? { pastAppointments, upcomingAppointments, todaysAppointments } : null,

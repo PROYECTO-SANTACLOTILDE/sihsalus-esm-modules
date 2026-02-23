@@ -26,34 +26,38 @@ export const useAgeRanges = () => {
   const [shouldRefetch, setShouldRefetch] = useState<boolean>(false);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const fetchAgeRanges = async () => {
       setIsLoading(true);
       try {
-        // Simulated API call to OpenMRS (replace with actual endpoint)
         const response = await openmrsFetch('/ws/rest/v1/age-ranges', {
           method: 'GET',
+          signal: abortController.signal,
         });
 
-        // Mock response if API isn't available (comment out in production)
         const mockResponse = MOCK_AGE_RANGES;
         const result = response.data?.ageRanges || mockResponse;
 
-        // Validate and set data
         if (Array.isArray(result) && result.every((item: Record<string, unknown>) => 'id' in item && 'name' in item && 'months' in item)) {
           setData(result as AgeRange[]);
         } else {
           throw new Error('Invalid age ranges data');
         }
       } catch (err) {
+        if (abortController.signal.aborted) return;
         setError(err instanceof Error ? err : new Error('Failed to fetch age ranges'));
-        // Fallback to mock data in case of error (optional)
         setData(MOCK_AGE_RANGES);
       } finally {
-        setIsLoading(false);
+        if (!abortController.signal.aborted) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchAgeRanges();
+
+    return () => abortController.abort();
   }, [shouldRefetch]);
 
   // Mutate function to trigger refetch (e.g., if age ranges are updated)

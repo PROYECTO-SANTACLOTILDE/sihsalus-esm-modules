@@ -45,7 +45,7 @@ const PatientUpcomingAppointmentsCard: React.FC<PatientUpcomingAppointmentsProps
   patientChartConfig,
 }) => {
   const { t } = useTranslation();
-  const startDate = dayjs(new Date().toISOString()).subtract(6, 'month').toISOString();
+  const startDate = useMemo(() => dayjs().subtract(6, 'month').toISOString(), []);
   const headerTitle = t('upcomingAppointments', 'Upcoming appointments');
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment>(null);
   const { mutateAppointments } = useMutateAppointments();
