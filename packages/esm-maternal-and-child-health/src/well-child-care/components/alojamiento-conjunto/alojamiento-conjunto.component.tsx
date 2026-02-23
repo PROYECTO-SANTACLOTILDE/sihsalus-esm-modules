@@ -4,6 +4,21 @@ import { useTranslation } from 'react-i18next';
 import type { ConfigObject } from '../../../config-schema';
 import { useLatestValidEncounter } from '../../../hooks/useLatestEncounter';
 import PatientSummaryTable from '../../../ui/patient-summary-table/patient-summary-table.component';
+import {
+  ADMISSION_DATE_TIME_UUID,
+  GESTATIONAL_AGE_UUID,
+  HEMATOCRIT_UUID,
+  MOTHER_AGE_UUID,
+  NUMBER_OF_CHILDREN_UUID,
+  DELIVERY_TYPE_AC_UUID,
+  NIPPLES_AC_UUID,
+  MILK_PRODUCTION_UUID,
+  LATCH_UUID,
+  SUCTION_AC_UUID,
+  SWALLOWING_UUID,
+  NURSING_DIAGNOSIS_AC_UUID,
+  NURSING_INTERVENTION_UUID,
+} from '../../concepts/neonatal-concepts';
 
 interface AlojamientoConjuntoProps {
   patientUuid: string;
@@ -62,71 +77,71 @@ const AlojamientoConjunto: React.FC<AlojamientoConjuntoProps> = ({ patientUuid }
     {
       id: 'fechaYHoraDeIngreso',
       label: t('fechaYHoraDeIngreso', 'Fecha y hora de ingreso'),
-      dataKey: '38d40f48-10cb-4d80-a269-ec00b0be0cd0',
+      dataKey: ADMISSION_DATE_TIME_UUID,
     },
     {
       id: 'edadGestacional',
       label: t('edadGestacional', 'Edad Gestacional (semanas)'),
-      dataKey: '2eb9b2c4-cd08-4e6f-a11f-e1e6dc3cb54f',
+      dataKey: GESTATIONAL_AGE_UUID,
     },
     {
       id: 'hematocrito',
       label: t('hematocrito', 'Hematocrito (%)'),
-      dataKey: '9a9c73d0-76e6-4b84-b20c-dfe8efea9542',
+      dataKey: HEMATOCRIT_UUID,
     },
 
     // Valoración de enfermería al ingreso - En la madre
     {
       id: 'edadDeLaMadre',
       label: t('edadDeLaMadre', 'Edad de la madre'),
-      dataKey: 'dcc62b2c-2fc7-4053-9239-0e79335ecdbc',
+      dataKey: MOTHER_AGE_UUID,
     },
     {
       id: 'numeroDeHijos',
       label: t('numeroDeHijos', 'Número de hijos'),
-      dataKey: '6cce201f-26eb-46d0-a8cb-f17ef045af78',
+      dataKey: NUMBER_OF_CHILDREN_UUID,
     },
     {
       id: 'tipoDeParto',
       label: t('tipoDeParto', 'Tipo de parto'),
-      dataKey: '590f32e5-d78a-47c6-98fc-9e4ddb3e7ede',
+      dataKey: DELIVERY_TYPE_AC_UUID,
     },
     {
       id: 'pezones',
       label: t('pezones', 'Pezones'),
-      dataKey: '84f9275b-5a46-4c5c-96f6-e3752e0652ab',
+      dataKey: NIPPLES_AC_UUID,
     },
     {
       id: 'produccionLactea',
       label: t('produccionLactea', 'Producción Láctea'),
-      dataKey: 'ed328efb-4ca4-475b-a610-05c142738e06',
+      dataKey: MILK_PRODUCTION_UUID,
     },
 
     // Valoración de enfermería al ingreso - En el recién nacido
     {
       id: 'agarre',
       label: t('agarre', 'Agarre'),
-      dataKey: 'df387d42-759e-4968-9f84-731c0fa3a089',
+      dataKey: LATCH_UUID,
     },
     {
       id: 'succion',
       label: t('succion', 'Succión'),
-      dataKey: '8c68ada1-17b0-4c97-a521-6e7d3024b8fd',
+      dataKey: SUCTION_AC_UUID,
     },
     {
       id: 'deglucion',
       label: t('deglucion', 'Deglución'),
-      dataKey: '4f8eb241-0cb9-4c10-825a-61889a73c42f',
+      dataKey: SWALLOWING_UUID,
     },
     {
       id: 'diagnosticoDeEnfermeria',
       label: t('diagnosticoDeEnfermeria', 'Diagnóstico de Enfermería'),
-      dataKey: 'c20d1f4e-d19a-47b6-b545-181a85477187',
+      dataKey: NURSING_DIAGNOSIS_AC_UUID,
     },
     {
       id: 'intervencionDeEnfermeria',
       label: t('intervencionDeEnfermeria', 'Intervención de enfermería'),
-      dataKey: '47a5ae3a-36a8-422c-a0b0-9b18bb44655f',
+      dataKey: NURSING_INTERVENTION_UUID,
     },
   ];
 

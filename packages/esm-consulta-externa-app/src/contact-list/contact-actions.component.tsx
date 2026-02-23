@@ -34,7 +34,7 @@ const ContactActions: React.FC<ContactActionsProps> = ({ relativeUuid, baseLineH
   const handleLauchHTSInitialForm = () => {
     launchWorkspace('patient-form-entry-workspace', {
       workspaceTitle: 'HTS Initial form',
-      formInfo: { encounterUuid: '9c0a7a57-62ff-4f75-babe-5835b0e921b7', formUuid: htsInitialTest },
+      formInfo: { encounterUuid: '', formUuid: htsInitialTest },
     });
   };
 

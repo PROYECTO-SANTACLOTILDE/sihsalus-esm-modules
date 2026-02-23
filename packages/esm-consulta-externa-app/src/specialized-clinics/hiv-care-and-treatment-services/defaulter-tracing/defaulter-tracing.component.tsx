@@ -25,7 +25,7 @@ import {
   OverflowMenuItem,
   DataTableSkeleton,
 } from '@carbon/react';
-import { defaulterTracingEncounterUuid, usePatientTracing } from '../../../hooks/usePatientTracing';
+import { usePatientTracing } from '../../../hooks/usePatientTracing';
 import type { ConfigObject } from '../../../config-schema';
 import { Add } from '@carbon/react/icons';
 import styles from './defaulter-tracing.scss';
@@ -38,10 +38,7 @@ const DefaulterTracing: React.FC<PatientTracingProps> = ({ patientUuid }) => {
   const config = useConfig<ConfigObject>();
   const { formsList } = config ?? {};
   const headerTitle = t('defaulterTracing', 'Defaulter Tracing');
-  const { encounters, isLoading, error, mutate, isValidating } = usePatientTracing(
-    patientUuid,
-    defaulterTracingEncounterUuid,
-  );
+  const { encounters, isLoading, error, mutate, isValidating } = usePatientTracing(patientUuid);
   const handleOpenOrEditDefaulterTracingForm = (encounterUUID = '') => {
     launchWorkspace('patient-form-entry-workspace', {
       workspaceTitle: 'Defaulter Tracing',

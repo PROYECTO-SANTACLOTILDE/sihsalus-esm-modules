@@ -4,6 +4,14 @@ import { useConfig, launchWorkspace2 } from '@openmrs/esm-framework';
 import { useLatestValidEncounter } from '../../../../hooks/useLatestEncounter'; // Ajusta la ruta
 import PatientSummaryTable from '../../../../ui/patient-summary-table/patient-summary-table.component'; // Ajusta la ruta
 import type { ConfigObject } from '../../../../config-schema'; // Ajusta la ruta
+import {
+  PREGNANCY_NUMBER_UUID,
+  PRENATAL_CARE_NUMBER_UUID,
+  PRENATAL_CARE_LOCATION_UUID,
+  DELIVERY_CONDITION_UUID,
+  DELIVERY_LOCATION_UUID,
+  DELIVERY_ATTENDANT_UUID,
+} from '../../../concepts/neonatal-concepts';
 
 interface PregnancyBirthProps {
   patientUuid: string;
@@ -47,36 +55,36 @@ const PregnancyBirthTable: React.FC<PregnancyBirthProps> = ({ patientUuid }) => 
     {
       id: 'pregnancyNumber',
       label: t('pregnancyNumber', 'Nº de Embarazo (Gravida)'),
-      dataKey: 'ae27daee-d2f3-4df3-8e07-eff75c81872e',
+      dataKey: PREGNANCY_NUMBER_UUID,
       sectionTitle: t('pregnancy', 'EMBARAZO'),
     },
     {
       id: 'prenatalCareNumber',
       label: t('prenatalCareNumber', 'Nº de Atenciones Prenatales'),
-      dataKey: '9156b8d5-e5d3-4c2b-b8fc-1faafeda8f6c',
+      dataKey: PRENATAL_CARE_NUMBER_UUID,
     },
     {
       id: 'prenatalCareLocation',
       label: t('prenatalCareLocation', 'Lugar de Atenciones Prenatales'),
-      dataKey: '52a2755e-7510-473e-96d9-4875d7435f8d',
+      dataKey: PRENATAL_CARE_LOCATION_UUID,
     },
 
     // SECCIÓN PARTO
     {
       id: 'deliveryType',
       label: t('deliveryType', 'Condición del Parto'),
-      dataKey: '899e0cc8-5f6a-4334-b51d-c559f71ea550',
+      dataKey: DELIVERY_CONDITION_UUID,
       sectionTitle: t('delivery', 'PARTO'),
     },
     {
       id: 'deliveryLocation',
       label: t('deliveryLocation', 'Lugar del Parto'),
-      dataKey: 'b4c79dec-245b-4d9f-ae52-2db757c4561a',
+      dataKey: DELIVERY_LOCATION_UUID,
     },
     {
       id: 'deliveryAttendant',
       label: t('deliveryAttendant', 'Atendido Por'),
-      dataKey: 'cff0f194-0a8c-4f2c-bbe4-35b356b23d24',
+      dataKey: DELIVERY_ATTENDANT_UUID,
     },
   ];
 

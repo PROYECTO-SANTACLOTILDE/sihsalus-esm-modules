@@ -4,6 +4,29 @@ import { useConfig, launchWorkspace2 } from '@openmrs/esm-framework';
 import { useLatestValidEncounter } from '../../../hooks/useLatestEncounter'; // Ajusta la ruta
 import PatientSummaryTable from '../../../ui/patient-summary-table/patient-summary-table.component'; // Ajusta la ruta
 import type { ConfigObject } from '../../../config-schema';
+import {
+  IMMEDIATE_ASSESSMENT_UUID,
+  BIRTH_QUESTIONNAIRE_UUID,
+  NEWBORN_EVALUATION_UUID,
+  CORD_CLAMPING_UUID,
+  SKIN_TO_SKIN_CONTACT_UUID,
+  OXYGEN_SUPPORT_UUID,
+  VITAMIN_K_ADMIN_UUID,
+  HEART_RATE_UUID,
+  RESPIRATORY_RATE_UUID,
+  OXYGEN_SATURATION_UUID,
+  BODY_TEMPERATURE_UUID,
+  APGAR_1_MIN_UUID,
+  APGAR_5_MIN_UUID,
+  APGAR_10_MIN_UUID,
+  WEIGHT_UUID,
+  HEIGHT_UUID,
+  HEAD_CIRCUMFERENCE_UUID,
+  CHEST_CIRCUMFERENCE_UUID,
+  GASTRIC_LAVAGE_UUID,
+  GASTRIC_LAVAGE_COUNT_UUID,
+  NURSING_DIAGNOSIS_UUID,
+} from '../../concepts/neonatal-concepts';
 
 interface ImmediateNewbornAttentionProps {
   patientUuid: string;
@@ -58,83 +81,83 @@ const NeonatalAttention: React.FC<ImmediateNewbornAttentionProps> = ({ patientUu
     {
       id: 'immediateAssessment',
       label: t('immediateAssessment', 'Valoración Inmediata del Recién Nacido'),
-      dataKey: '7dbb1546-3eef-4983-99ad-4c7f065cf093',
+      dataKey: IMMEDIATE_ASSESSMENT_UUID,
     },
     {
       id: 'birthQuestionnaire',
       label: t('birthQuestionnaire', 'Cuestionario Inmediato para Nacimiento'),
-      dataKey: '517afc20-481d-4cdf-ba88-5641418aa762',
+      dataKey: BIRTH_QUESTIONNAIRE_UUID,
     },
     {
       id: 'newbornEvaluation',
       label: t('newbornEvaluation', 'Evaluación del Recién Nacido'),
-      dataKey: 'ebe4e1c4-7f4f-4779-a8b3-8b2e5a5cc9b6',
+      dataKey: NEWBORN_EVALUATION_UUID,
     },
-    { id: 'cordClamping', label: t('cordClamping', 'Clampado'), dataKey: 'b7f5376f-b025-4da5-80e2-bb20065a1b30' },
+    { id: 'cordClamping', label: t('cordClamping', 'Clampado'), dataKey: CORD_CLAMPING_UUID },
     {
       id: 'skinToSkinContact',
       label: t('skinToSkinContact', 'Contacto Piel a Piel'),
-      dataKey: '3bbebee4-ccc8-4a01-a5e8-14f9222a6827',
+      dataKey: SKIN_TO_SKIN_CONTACT_UUID,
     },
     {
       id: 'oxygenSupport',
       label: t('oxygenSupport', 'Soporte de Oxígeno'),
-      dataKey: '06e7e25f-23c5-4035-800a-d86f598d50cf',
+      dataKey: OXYGEN_SUPPORT_UUID,
     },
     {
       id: 'vitaminKAdmin',
       label: t('vitaminKAdmin', 'Administración de Vitamina K'),
-      dataKey: '5da8b9b1-f566-411f-b50b-f634ed6321c0',
+      dataKey: VITAMIN_K_ADMIN_UUID,
     },
-    { id: 'heartRate', label: t('heartRate', 'Frecuencia Cardíaca'), dataKey: 'c6f1da2a-0163-407c-9fe1-649fc2dca5a4' },
+    { id: 'heartRate', label: t('heartRate', 'Frecuencia Cardíaca'), dataKey: HEART_RATE_UUID },
     {
       id: 'respiratoryRate',
       label: t('respiratoryRate', 'Frecuencia Respiratoria'),
-      dataKey: 'aeecf295-048b-4c40-a6a0-c3a7db169466',
+      dataKey: RESPIRATORY_RATE_UUID,
     },
     {
       id: 'oxygenSaturation',
       label: t('oxygenSaturation', 'Saturación de Oxígeno'),
-      dataKey: '4dc51434-3f62-483c-b4db-441eae51f0a3',
+      dataKey: OXYGEN_SATURATION_UUID,
     },
     {
       id: 'bodyTemperature',
       label: t('bodyTemperature', 'Temperatura Corporal'),
-      dataKey: '89c9c0bf-e746-4f8d-8d04-b2d2ad9826eb',
+      dataKey: BODY_TEMPERATURE_UUID,
     },
-    { id: 'apgar1Min', label: t('apgar1Min', 'Apgar 1 Minuto'), dataKey: 'a2010a1f-d7ca-4d6f-9255-f53da4fa5c3f' },
-    { id: 'apgar5Min', label: t('apgar5Min', 'Apgar 5 Minutos'), dataKey: '0f3be2f6-986f-4928-8761-b531044c1f36' },
+    { id: 'apgar1Min', label: t('apgar1Min', 'Apgar 1 Minuto'), dataKey: APGAR_1_MIN_UUID },
+    { id: 'apgar5Min', label: t('apgar5Min', 'Apgar 5 Minutos'), dataKey: APGAR_5_MIN_UUID },
     {
       id: 'apgar10Min',
       label: t('apgar10Min', 'Apgar 10 Minutos'),
-      dataKey: 'f621e8d3-2c34-48fc-95c1-50ad0606ed68',
+      dataKey: APGAR_10_MIN_UUID,
     },
-    { id: 'weight', label: t('weight', 'Peso (Kg)'), dataKey: '5cacede4-c947-4092-9df4-24287a7f13ae' },
-    { id: 'height', label: t('height', 'Talla (cm)'), dataKey: '3f85a289-bcb4-4d67-8053-7c8415e09aef' },
+    { id: 'weight', label: t('weight', 'Peso (Kg)'), dataKey: WEIGHT_UUID },
+    { id: 'height', label: t('height', 'Talla (cm)'), dataKey: HEIGHT_UUID },
     {
       id: 'headCircumference',
       label: t('headCircumference', 'Perímetro Cefálico (cm)'),
-      dataKey: 'c4d39248-c896-433a-bc69-e24d04b7f0e5',
+      dataKey: HEAD_CIRCUMFERENCE_UUID,
     },
     {
       id: 'chestCircumference',
       label: t('chestCircumference', 'Perímetro Torácico (cm)'),
-      dataKey: '911eb398-e7de-4270-af63-e4c615ec22a9',
+      dataKey: CHEST_CIRCUMFERENCE_UUID,
     },
     {
       id: 'gastricLavage',
       label: t('gastricLavage', 'Lavado Gástrico'),
-      dataKey: '0d17ad63-b1c0-46db-b8e7-c4c2d8343edf',
+      dataKey: GASTRIC_LAVAGE_UUID,
     },
     {
       id: 'gastricLavageCount',
       label: t('gastricLavageCount', 'Cantidad de Lavados Gástricos'),
-      dataKey: '1c2e66e6-1a67-488c-a36b-e2f3536b72fe',
+      dataKey: GASTRIC_LAVAGE_COUNT_UUID,
     },
     {
       id: 'nursingDiagnosis',
       label: t('nursingDiagnosis', 'Diagnóstico de Enfermería'),
-      dataKey: '8e779adc-c463-434a-9113-a74c5e12399d',
+      dataKey: NURSING_DIAGNOSIS_UUID,
     },
   ];
 

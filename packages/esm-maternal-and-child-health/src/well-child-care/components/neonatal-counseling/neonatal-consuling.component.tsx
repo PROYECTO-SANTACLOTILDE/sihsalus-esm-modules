@@ -4,6 +4,17 @@ import { useTranslation } from 'react-i18next';
 import type { ConfigObject } from '../../../config-schema';
 import { useLatestValidEncounter } from '../../../hooks/useLatestEncounter'; // Ajusta la ruta
 import PatientSummaryTable from '../../../ui/patient-summary-table/patient-summary-table.component'; // Ajusta la ruta
+import {
+  EXAM_DATE_UUID,
+  BODY_POSITION_UUID,
+  RESPONSES_UUID,
+  AFFECTIVE_BOND_UUID,
+  ANATOMY_UUID,
+  SUCTION_COUNSEL_UUID,
+  TIME_UUID,
+  FEEDING_TIME_UUID,
+  OBSERVATION_UUID,
+} from '../../concepts/neonatal-concepts';
 
 interface NeonatalCounselingProps {
   patientUuid: string;
@@ -57,28 +68,28 @@ const NeonatalCounseling: React.FC<NeonatalCounselingProps> = ({ patientUuid }) 
     {
       id: 'examDate',
       label: t('examDate', 'Fecha y Hora de Inicio del Examen'),
-      dataKey: '8b88b123-a28f-4d70-a86d-49fd322c46d5',
+      dataKey: EXAM_DATE_UUID,
     },
     {
       id: 'bodyPosition',
       label: t('bodyPosition', 'Posición del Cuerpo'),
-      dataKey: 'a2fa14e7-cf20-494c-ae55-6d1a0d01171c',
+      dataKey: BODY_POSITION_UUID,
     },
-    { id: 'responses', label: t('responses', 'Respuestas'), dataKey: '08aeaea7-6fb4-4346-9834-d137e8a9a503' },
+    { id: 'responses', label: t('responses', 'Respuestas'), dataKey: RESPONSES_UUID },
     {
       id: 'affectiveBond',
       label: t('affectiveBond', 'Vínculo Afectivo'),
-      dataKey: '60c8d705-ed11-43f2-a9fe-85036fead073',
+      dataKey: AFFECTIVE_BOND_UUID,
     },
-    { id: 'anatomy', label: t('anatomy', 'Anatomía'), dataKey: '8be83572-62bc-47cf-8691-f04fdc33a882' },
-    { id: 'suction', label: t('suction', 'Succión'), dataKey: 'a4c047c9-30f8-49f6-8fb9-43e15e91d18c' },
-    { id: 'time', label: t('time', 'Tiempo'), dataKey: 'dfe757a2-b7c6-4081-a151-2d8a58e80115' },
+    { id: 'anatomy', label: t('anatomy', 'Anatomía'), dataKey: ANATOMY_UUID },
+    { id: 'suction', label: t('suction', 'Succión'), dataKey: SUCTION_COUNSEL_UUID },
+    { id: 'time', label: t('time', 'Tiempo'), dataKey: TIME_UUID },
     {
       id: 'feedingTime',
       label: t('feedingTime', 'Tiempo que el Bebé Mamó (min)'),
-      dataKey: '4cb55646-934c-44f5-a986-166654b44996',
+      dataKey: FEEDING_TIME_UUID,
     },
-    { id: 'notes', label: t('notes', 'Notas'), dataKey: 'f947a4ad-3d8d-4516-8e6b-67b3dca4e227' },
+    { id: 'notes', label: t('notes', 'Notas'), dataKey: OBSERVATION_UUID },
   ];
 
   return (

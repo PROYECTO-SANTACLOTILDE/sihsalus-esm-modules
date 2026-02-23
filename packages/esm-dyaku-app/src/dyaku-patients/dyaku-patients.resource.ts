@@ -116,16 +116,16 @@ export async function getDyakuPatientById(patientId: string, fhirBaseUrl: string
   }
 }
 
-async function getDefaultLocation(): Promise<string> {
+async function getDefaultLocation(fallbackLocationUuid: string): Promise<string> {
   try {
     const response = await openmrsFetch('/ws/rest/v1/location?v=default');
     const locations = response.data?.results || [];
     // Usar la primera ubicación disponible o una por defecto
-    return locations.length > 0 ? locations[0].uuid : '8d6c993e-c2cc-11de-8d13-0010c6dffd0f';
+    return locations.length > 0 ? locations[0].uuid : fallbackLocationUuid;
   } catch (error) {
     console.error('Error obteniendo ubicación por defecto:', error);
     // Fallback a una ubicación conocida
-    return '8d6c993e-c2cc-11de-8d13-0010c6dffd0f';
+    return fallbackLocationUuid;
   }
 }
 
@@ -268,10 +268,17 @@ async function mapDyakuToOpenMRSPatient(dyakuPatient: DyakuPatient, config: Conf
   const phone = dyakuPatient.telecom?.find((t) => t.system === 'phone')?.value;
 
   // Obtener configuración de los parámetros
-  const { identifierSourceUuid, dniIdentifierTypeUuid } = config.dyaku;
+  const {
+    identifierSourceUuid,
+    dniIdentifierTypeUuid,
+    hscIdentifierTypeUuid,
+    defaultLocationUuid,
+    emailAttributeTypeUuid,
+    phoneAttributeTypeUuid,
+  } = config.dyaku;
 
   // Obtener ubicación por defecto dinámicamente
-  const defaultLocation = await getDefaultLocation();
+  const defaultLocation = await getDefaultLocation(defaultLocationUuid);
 
   // Generar identificador automático
   const autoIdentifier = await generateAutoIdentifier(identifierSourceUuid);
@@ -290,7 +297,7 @@ async function mapDyakuToOpenMRSPatient(dyakuPatient: DyakuPatient, config: Conf
     // Identificador principal auto-generado
     {
       identifier: autoIdentifier,
-      identifierType: '05a29f94-c0ed-11e2-94be-8c13b969e334', // HSC identifier type
+      identifierType: hscIdentifierTypeUuid,
       location: defaultLocation,
       preferred: true,
     },
@@ -300,7 +307,7 @@ async function mapDyakuToOpenMRSPatient(dyakuPatient: DyakuPatient, config: Conf
   if (validatedDNI) {
     identifiers.push({
       identifier: validatedDNI,
-      identifierType: dniIdentifierTypeUuid, // DNI identifier type
+      identifierType: dniIdentifierTypeUuid,
       location: defaultLocation,
       preferred: false,
     });
@@ -324,7 +331,7 @@ async function mapDyakuToOpenMRSPatient(dyakuPatient: DyakuPatient, config: Conf
         ...(email
           ? [
               {
-                attributeType: 'b2c38640-2603-4629-aebd-3b54f33f1e3a', // Email attribute type
+                attributeType: emailAttributeTypeUuid,
                 value: email,
               },
             ]
@@ -332,7 +339,7 @@ async function mapDyakuToOpenMRSPatient(dyakuPatient: DyakuPatient, config: Conf
         ...(phone
           ? [
               {
-                attributeType: '14d4f066-15f5-102d-96e4-000c29c2a5d7', // Phone attribute type
+                attributeType: phoneAttributeTypeUuid,
                 value: phone,
               },
             ]

@@ -51,7 +51,8 @@ interface ConditionsOverviewProps {
 }
 
 const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) => {
-  const { conditionPageSize } = useConfig<ConfigObject>();
+  const config = useConfig<ConfigObject>();
+  const { conditionPageSize } = config;
   const { t } = useTranslation();
   const displayText = t('conditions', 'Condiciones y Antecedentes');
   const headerTitle = t('conditions', 'Condiciones y Antecedentes');
@@ -61,8 +62,7 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
   const isDesktop = isDesktopLayout(layout);
   const isTablet = !isDesktop;
 
-  const conceptSetUuid = 'c33ef45d-aa69-4d9a-9214-1dbb52609601'; // UUID del ConceptSet de Antecedentes Patológicos
-  //TODO USE CONFIG TO GET CONCEPT SET UUID
+  const conceptSetUuid = config?.conditionConceptSets?.antecedentesPatologicos?.uuid;
   const { conditions, error, isLoading, isValidating } = useConditionsFromConceptSet(patientUuid, conceptSetUuid);
   const [filter, setFilter] = useState<'All' | 'Active' | 'Inactive'>('Active');
 

@@ -20,7 +20,7 @@ export { useInsuranceProvider } from './useInsuranceProvider';
 
 // ── Patient tracing & contacts ──────────────────────────────────────────────
 export { default as useContacts } from './useContacts';
-export { defaulterTracingEncounterUuid, usePatientTracing } from './usePatientTracing';
+export { usePatientTracing } from './usePatientTracing';
 
 // ── Relationships ────────────────────────────────────────────────────────────
 export { default as useRelationship } from './useRelationship';

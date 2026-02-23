@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useConfig } from '@openmrs/esm-framework';
+import type { ConfigObject } from '../../config-schema';
 import { useConditionsSearchFromConceptSet } from './conditions.resource';
 
 /**
  * Componente de prueba final con el UUID correcto del ConceptSet
  */
 const FinalTest: React.FC = () => {
+  const config = useConfig<ConfigObject>();
   const [searchTerm, setSearchTerm] = useState('');
-  const conceptSetUuid = 'c33ef45d-aa69-4d9a-9214-1dbb52609601'; // UUID correcto
+  const conceptSetUuid = config?.conditionConceptSets?.antecedentesPatologicos?.uuid;
 
   const { searchResults, conceptSet, error, isSearching } = useConditionsSearchFromConceptSet(
     searchTerm,

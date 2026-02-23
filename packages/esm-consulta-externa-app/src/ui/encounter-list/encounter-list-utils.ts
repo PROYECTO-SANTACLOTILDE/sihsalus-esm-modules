@@ -1,4 +1,5 @@
 import { formatDate, parseDate } from '@openmrs/esm-framework';
+import { TRUE_CONCEPT_UUID } from '../../utils/constants';
 
 export function getEncounterValues(encounter, param: string, isDate?: boolean) {
   if (isDate) {
@@ -56,7 +57,7 @@ export function getObsFromEncounter(encounter, obsConcept, isDate?: boolean, isT
 
   if (isTrueFalseConcept) {
     const valueUuid = typeof obs.value === 'object' && obs.value !== null ? obs.value.uuid : undefined;
-    if (valueUuid === 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3') {
+    if (valueUuid === TRUE_CONCEPT_UUID) {
       return 'Yes';
     } else {
       return 'No';

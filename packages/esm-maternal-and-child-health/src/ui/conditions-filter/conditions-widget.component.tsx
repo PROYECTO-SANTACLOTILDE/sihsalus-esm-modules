@@ -114,8 +114,7 @@ const ConditionsWidget: React.FC<ConditionsWidgetProps> = ({
   // Get conceptSetUuid from workspace props or use default from config
   const conceptSetUuid =
     workspaceProps?.conceptSetUuid ||
-    config?.conditionConceptSets?.antecedentesPatologicos?.uuid ||
-    'c33ef45d-aa69-4d9a-9214-1dbb52609601';
+    config?.conditionConceptSets?.antecedentesPatologicos?.uuid;
 
   const { searchResults, isSearching } = useConditionsSearchFromConceptSet(debouncedSearchTerm, conceptSetUuid);
 
