@@ -115,10 +115,10 @@ export interface Observation {
       uuid: string;
       display: string;
     };
-    value: any;
+    value: string | number | { uuid: string; display: string };
     display: string;
   }>;
-  value: any;
+  value: string | number | { uuid: string; display: string; names?: Array<{ uuid: string; conceptNameType: string; name: string }> } | null;
   obsDatetime?: string;
 }
 
@@ -372,7 +372,7 @@ export interface Immunization {
   occurrenceDateTime?: string;
   lotNumber?: string;
   doseNumber?: number;
-  formChanged?: any;
+  formChanged?: boolean;
 }
 
 export interface ImmunizationGrouped {
@@ -504,7 +504,7 @@ export interface DefinitionDataRow {
 }
 
 export type PatientAppointment = {
-  [key: string]: any;
+  [key: string]: unknown;
   serviceType: string;
   appointmentDate: string;
   appointmentId: string;
@@ -618,7 +618,7 @@ export interface Appointment {
   appointmentKind: AppointmentKind;
   appointmentNumber: string;
   comments: string;
-  endDateTime: Date | number | any;
+  endDateTime: Date | number | string;
   location: AppointmentLocation;
   patient: {
     identifier: string;
@@ -632,8 +632,8 @@ export interface Appointment {
   providers: Array<OpenmrsResource>;
   recurring: boolean;
   service: AppointmentService;
-  startDateTime: string | any;
-  dateAppointmentScheduled: string | any;
+  startDateTime: string | number;
+  dateAppointmentScheduled: string | number;
   status: AppointmentStatus;
   uuid: string;
   additionalInfo?: string | null;

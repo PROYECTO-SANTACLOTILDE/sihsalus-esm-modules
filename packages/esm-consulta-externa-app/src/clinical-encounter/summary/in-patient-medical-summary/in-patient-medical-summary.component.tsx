@@ -16,7 +16,7 @@ interface InPatientSummaryProps {
   isLoading: boolean;
   error: Error;
   isValidating: boolean;
-  mutate: KeyedMutator<any>;
+  mutate: KeyedMutator<{ data: { results: OpenmrsEncounter[] } }>;
 }
 
 const InPatientSummary: React.FC<InPatientSummaryProps> = ({ patientUuid, encounters, isLoading, error, mutate }) => {

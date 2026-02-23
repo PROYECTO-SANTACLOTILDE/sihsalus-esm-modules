@@ -1,6 +1,6 @@
 import { formatDate, parseDate } from '@openmrs/esm-framework';
 
-export function getEncounterValues(encounter, param: string, isDate?: boolean) {
+export function getEncounterValues(encounter: Record<string, string>, param: string, isDate?: boolean) {
   if (isDate) {
     return formatDate(parseDate(encounter[param]));
   } else {
@@ -8,28 +8,28 @@ export function getEncounterValues(encounter, param: string, isDate?: boolean) {
   }
 }
 
-export function formatDateTime(dateString: string): any {
+export function formatDateTime(dateString: string): string {
   if (dateString.includes('.')) {
     dateString = dateString.split('.')[0];
   }
   return formatDate(parseDate(dateString));
 }
 
-export function obsArrayDateComparator(left, right) {
-  return formatDateTime(right.obsDatetime) - formatDateTime(left.obsDatetime);
+export function obsArrayDateComparator(left: { obsDatetime: string }, right: { obsDatetime: string }) {
+  return new Date(right.obsDatetime).getTime() - new Date(left.obsDatetime).getTime();
 }
 
-export function findObs(encounter, obsConcept): Record<string, any> {
+export function findObs(encounter: Record<string, any>, obsConcept: string): Record<string, any> {
   const allObs = encounter?.obs?.filter((observation) => observation.concept.uuid === obsConcept) || [];
   return allObs?.length == 1 ? allObs[0] : allObs?.sort(obsArrayDateComparator)[0];
 }
 
-export function getObsFromEncounters(encounters, obsConcept) {
+export function getObsFromEncounters(encounters: Array<Record<string, any>>, obsConcept: string) {
   const filteredEnc = encounters?.find((enc) => enc.obs.find((obs) => obs.concept.uuid === obsConcept));
   return getObsFromEncounter(filteredEnc, obsConcept);
 }
 
-export function getMultipleObsFromEncounter(encounter, obsConcepts: Array<string>) {
+export function getMultipleObsFromEncounter(encounter: Record<string, any>, obsConcepts: Array<string>) {
   let observations = [];
   obsConcepts.map((concept) => {
     const obs = getObsFromEncounter(encounter, concept);
@@ -41,7 +41,7 @@ export function getMultipleObsFromEncounter(encounter, obsConcepts: Array<string
   return observations.length ? observations.join(', ') : '--';
 }
 
-export function getObsFromEncounter(encounter, obsConcept, isDate?: boolean, isTrueFalseConcept?: boolean) {
+export function getObsFromEncounter(encounter: Record<string, any>, obsConcept: string, isDate?: boolean, isTrueFalseConcept?: boolean) {
   const obs = findObs(encounter, obsConcept);
 
   if (isTrueFalseConcept) {
@@ -67,14 +67,13 @@ export function getObsFromEncounter(encounter, obsConcept, isDate?: boolean, isT
 
 export function mapObsValueToFormLabel(
   conceptUuid: string,
-  answerConceptUuid: string,
-  formConceptMap: { [key: string]: any },
-  defaultValue: string,
+  answerConceptUuid: string | undefined,
+  formConceptMap: Record<string, { display?: string; answers?: Record<string, string> }>,
+  defaultValue: string | number | Record<string, any> | null,
 ): string {
-  const typeOfVal = typeof defaultValue;
-  if (typeOfVal === 'number') {
+  if (typeof defaultValue === 'number') {
     // check early if value is number and return
-    return defaultValue;
+    return String(defaultValue);
   }
 
   const conceptMapOverride = formConceptMap !== undefined && Object.keys(formConceptMap).length > 0;
@@ -93,37 +92,42 @@ export function mapObsValueToFormLabel(
       return extractDefaultValueBasedOnType(defaultValue);
     }
   } else if (!conceptMapOverride || answerConceptUuid !== undefined) {
-    if (typeOfVal === 'object') {
-      return defaultValue['name']?.['name']; // extract the default name from the object
+    if (typeof defaultValue === 'object' && defaultValue !== null) {
+      return (defaultValue as Record<string, any>)['name']?.['name'] ?? '--'; // extract the default name from the object
     }
   } else {
     return extractDefaultValueBasedOnType(defaultValue);
   }
+  return '--';
 }
 
-function extractDefaultValueBasedOnType(defaultValue: any): string {
+function extractDefaultValueBasedOnType(defaultValue: string | number | Record<string, any> | null): string {
+  if (defaultValue === null || defaultValue === undefined) {
+    return '--';
+  }
   const typeOfVal = typeof defaultValue;
 
-  if (defaultValue !== undefined) {
-    if (typeOfVal === 'string') {
-      const stringParts = defaultValue.split(':');
-      if (stringParts.length === 0 || stringParts.length === 1) {
-        return defaultValue;
-      } else if (stringParts.length === 2) {
-        return stringParts[1];
-      } else {
-        // TODO: identify other cases to support here
-        // check for date
-        return formatDate(parseDate(defaultValue));
-      }
-    } else if (typeOfVal === 'object') {
-      return defaultValue['name']?.['name']; // extract the default name from the object
-    }
-  } else {
-    return defaultValue;
+  if (typeOfVal === 'number') {
+    return String(defaultValue);
   }
+  if (typeOfVal === 'string') {
+    const strValue = defaultValue as string;
+    const stringParts = strValue.split(':');
+    if (stringParts.length === 0 || stringParts.length === 1) {
+      return strValue;
+    } else if (stringParts.length === 2) {
+      return stringParts[1];
+    } else {
+      // TODO: identify other cases to support here
+      // check for date
+      return formatDate(parseDate(strValue));
+    }
+  } else if (typeOfVal === 'object') {
+    return (defaultValue as Record<string, any>)['name']?.['name'] ?? '--'; // extract the default name from the object
+  }
+  return '--';
 }
-export function mapConceptToFormLabel(conceptUuid: string, formConceptMap: object, defaultValue: string): string {
+export function mapConceptToFormLabel(conceptUuid: string, formConceptMap: Record<string, { display?: string; answers?: Record<string, string> }>, defaultValue: string): string {
   if (formConceptMap === undefined) {
     return defaultValue;
   }

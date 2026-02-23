@@ -19,7 +19,7 @@ import type { OpenmrsEncounter } from '../../types';
 
 export interface O3FormSchema {
   name: string;
-  pages: Array<any>;
+  pages: Array<Record<string, unknown>>;
   processor: string;
   uuid: string;
   referencedForms: [];
@@ -29,7 +29,7 @@ export interface O3FormSchema {
   defaultPage?: string;
   readonly?: string | boolean;
   inlineRendering?: 'single-line' | 'multiline' | 'automatic';
-  markdown?: any;
+  markdown?: Record<string, unknown>;
   postSubmissionActions?: Array<{ actionId: string; config?: Record<string, any> }>;
   formOptions?: {
     usePreviousValueDisabled: boolean;
@@ -39,14 +39,17 @@ export interface O3FormSchema {
 export interface EncounterListColumn {
   key: string;
   header: string;
-  getValue: (encounter: any) => string;
-  link?: any;
+  getValue: (encounter: Record<string, any>) => string;
+  link?: {
+    handleNavigate?: (encounter: Record<string, any>) => void;
+    getUrl?: () => string;
+  };
 }
 
 export interface EncounterListProps {
   patientUuid: string;
   encounterType: string;
-  columns: Array<any>;
+  columns: Array<EncounterListColumn>;
   headerTitle: string;
   description: string;
   formList?: Array<{
@@ -61,8 +64,8 @@ export interface EncounterListProps {
     displayText?: string;
     workspaceWindowSize?: 'minimized' | 'maximized';
   };
-  filter?: (encounter: any) => boolean;
-  formConceptMap: object;
+  filter?: (encounter: Record<string, any>) => boolean;
+  formConceptMap: Record<string, { display?: string; answers?: Record<string, string> }>;
   isExpandable?: boolean;
 }
 
@@ -123,7 +126,7 @@ export const EncounterList: React.FC<EncounterListProps> = ({
   const constructTableRows = useCallback(
     (results: OpenmrsEncounter[]) => {
       const rows = results?.map((encounter) => {
-        const tableRow: { id: string; actions: any; obs: any } = {
+        const tableRow: Record<string, any> & { id: string; actions: React.ReactNode | null; obs: Array<Record<string, any>> } = {
           id: encounter.uuid,
           actions: null,
           obs: encounter.obs,
@@ -139,7 +142,7 @@ export const EncounterList: React.FC<EncounterListProps> = ({
         };
         // process columns
         columns.forEach((column) => {
-          let val = column.getValue(encounter);
+          let val: string | React.ReactNode = column.getValue(encounter);
           if (column.link) {
             val = (
               <Link
@@ -158,7 +161,7 @@ export const EncounterList: React.FC<EncounterListProps> = ({
           tableRow[column.key] = val;
         });
         // If custom config is available, generate actions accordingly; otherwise, fallback to the default actions.
-        const actions = tableRow.actions?.length ? tableRow.actions : defaultActions;
+        const actions = (Array.isArray(tableRow.actions) && tableRow.actions.length > 0) ? tableRow.actions : defaultActions;
         tableRow['actions'] = (
           <OverflowMenu flipped className={styles.flippedOverflowMenu}>
             {actions.map((actionItem, index) => (

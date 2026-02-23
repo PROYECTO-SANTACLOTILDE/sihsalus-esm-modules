@@ -37,7 +37,7 @@ interface DataHookResponse<T> {
   data: T[] | null;
   isLoading: boolean;
   error: Error | null;
-  mutate?: () => Promise<any>;
+  mutate?: () => Promise<unknown>;
 }
 
 interface RowConfig {
@@ -104,7 +104,7 @@ const PatientSummaryTable = <T,>({
         const rawValue = item[dataKey as keyof T];
         let value: string;
 
-        const isDateLike = (val: any): boolean => {
+        const isDateLike = (val: unknown): boolean => {
           if (!val || typeof val === 'number') return false;
           const strVal = String(val);
 

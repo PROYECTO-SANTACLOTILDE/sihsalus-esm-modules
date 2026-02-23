@@ -50,7 +50,7 @@ export interface Observation {
     };
     display: string;
   }>;
-  value: any;
+  value: string | number | { uuid: string; display: string } | null;
   obsDatetime?: string;
 }
 

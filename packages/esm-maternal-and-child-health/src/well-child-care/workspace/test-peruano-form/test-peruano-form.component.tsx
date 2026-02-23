@@ -647,7 +647,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspac
                     id="cultural-context"
                     labelText={t('culturalContext', 'Contexto Cultural')}
                     value={culturalContext}
-                    onChange={(e) => setValue('culturalContext', e.target.value as any)}>
+                    onChange={(e) => setValue('culturalContext', e.target.value as 'urbano' | 'rural' | 'urbano_marginal')}>
                     <SelectItem value="urbano" text={t('urban', 'Urbano')} />
                     <SelectItem value="rural" text={t('rural', 'Rural/Andino')} />
                     <SelectItem value="urbano_marginal" text={t('urbanMarginal', 'Urbano Marginal')} />
@@ -658,7 +658,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspac
                     id="primary-language"
                     labelText={t('primaryLanguage', 'Idioma Primario')}
                     value={primaryLanguage}
-                    onChange={(e) => setValue('primaryLanguage', e.target.value as any)}>
+                    onChange={(e) => setValue('primaryLanguage', e.target.value as 'español' | 'quechua' | 'bilingue')}>
                     <SelectItem value="español" text={t('spanish', 'Español')} />
                     <SelectItem value="quechua" text={t('quechua', 'Quechua')} />
                     <SelectItem value="bilingue" text={t('bilingual', 'Bilingüe (Español/Quechua)')} />

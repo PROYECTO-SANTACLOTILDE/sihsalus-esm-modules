@@ -23,7 +23,7 @@ export interface ClinicalField {
   conceptUuid: string;
   label: string;
   isSortable?: boolean;
-  sortFunc?: (a: any, b: any) => number;
+  sortFunc?: (a: Record<string, unknown>, b: Record<string, unknown>) => number;
   showInChart?: boolean;
   relatedField?: string; // Para campos relacionados como presión arterial (systolic/diastolic)
 }
@@ -40,7 +40,7 @@ interface ClinicalDataOverviewProps {
     key: string;
     header: string;
     isSortable?: boolean;
-    sortFunc?: (a: any, b: any) => number;
+    sortFunc?: (a: Record<string, unknown>, b: Record<string, unknown>) => number;
   }>;
   tableRows: Array<{
     id: string;
@@ -49,7 +49,7 @@ interface ClinicalDataOverviewProps {
   formWorkspace: string;
   emptyStateDisplayText: string;
   conceptUnits: Map<string, string>;
-  config: any;
+  config: Record<string, unknown>;
   chartConfig?: {
     vitalSigns: Array<{
       id: string;

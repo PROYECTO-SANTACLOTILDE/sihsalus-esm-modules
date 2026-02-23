@@ -34,7 +34,7 @@ import {
 interface ClinicalEncounterDashboardProps {
   patientUuid: string;
   encounterTypeUuid: string;
-  formEntrySub: any;
+  formEntrySub: { unsubscribe: () => void } | null;
 }
 
 const ClinicalEncounterDashboard: React.FC<ClinicalEncounterDashboardProps> = ({ patientUuid }) => {

@@ -43,7 +43,7 @@ const AdverseReactionFormWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({ 
   });
   const [error, setError] = useState<string | null>(null);
 
-  const handleInputChange = useCallback((field: keyof AdverseReaction, value: any) => {
+  const handleInputChange = useCallback((field: keyof AdverseReaction, value: string | boolean | Date | null) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setError(null);
   }, []);

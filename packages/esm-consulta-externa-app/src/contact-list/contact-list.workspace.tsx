@@ -36,7 +36,7 @@ import {
 } from './contact-list.resource';
 interface ContactListFormProps extends DefaultWorkspaceProps {
   patientUuid: string;
-  props: any;
+  props: Record<string, unknown>;
 }
 
 type ContactListFormType = z.infer<typeof ContactListFormSchema>;

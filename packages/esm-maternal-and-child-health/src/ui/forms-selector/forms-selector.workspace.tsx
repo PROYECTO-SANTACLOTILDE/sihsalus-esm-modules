@@ -1,16 +1,16 @@
 import { Button, ButtonSet, Form } from '@carbon/react';
 import { ArrowLeftIcon, useLayoutType, launchWorkspace2 } from '@openmrs/esm-framework';
-import { type DefaultPatientWorkspaceProps } from '../../types';
+import { type DefaultPatientWorkspaceProps, type CompletedFormInfo } from '../../types';
 import React, { type ComponentProps, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormsList from './forms-list.component';
 import styles from './forms-selector.scss';
 
 // Generic type for form launch function
-export type FormLaunchHandler = (form: any, encounterUuid: string) => void;
+export type FormLaunchHandler = (form: { uuid: string; name?: string; display?: string }, encounterUuid: string) => void;
 
 export interface FormsSelectorWorkspaceAdditionalProps {
-  availableForms: Array<any>;
+  availableForms: Array<CompletedFormInfo>;
   patientAge: string;
   controlNumber: number;
   title?: string;
@@ -42,7 +42,7 @@ export default function FormsSelectorWorkspace({
   }, [backWorkspace]);
 
   const handleFormOpen = useCallback(
-    (form: any, encounterUuid: string) => {
+    (form: { uuid: string; name?: string; display?: string }, encounterUuid: string) => {
       setCompletedForms((prev) => new Set(prev).add(form.uuid));
 
       onFormLaunch(form, encounterUuid);

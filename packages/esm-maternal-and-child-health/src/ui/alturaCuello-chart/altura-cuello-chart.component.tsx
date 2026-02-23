@@ -102,7 +102,7 @@ const AlturaCuelloChart: React.FC<AlturaCuelloChartProps> = ({ measurementData, 
 
   // Preparar datos de líneas de referencia
   const chartLineData = useMemo(() => {
-    const lineData: any[] = [];
+    const lineData: Array<{ group: string; date: number; value: number }> = [];
 
     referenceData.forEach((row) => {
       if (isPercentiles) {

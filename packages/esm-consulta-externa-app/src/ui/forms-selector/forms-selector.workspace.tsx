@@ -4,13 +4,14 @@ import { type DefaultPatientWorkspaceProps } from '@openmrs/esm-patient-common-l
 import React, { type ComponentProps, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormsList from './forms-list.component';
+import type { Form as FormSchema, CompletedFormInfo } from './types';
 import styles from './forms-selector.scss';
 
 // Generic type for form launch function
-export type FormLaunchHandler = (form: any, encounterUuid: string) => void;
+export type FormLaunchHandler = (form: FormSchema, encounterUuid: string) => void;
 
 export interface FormsSelectorWorkspaceAdditionalProps {
-  availableForms: Array<any>;
+  availableForms: Array<CompletedFormInfo>;
   patientAge: string;
   controlNumber: number;
   title?: string;
@@ -47,7 +48,7 @@ export default function FormsSelectorWorkspace({
   }, [closeWorkspace, backWorkspace]);
 
   const handleFormOpen = useCallback(
-    (form: any, encounterUuid: string) => {
+    (form: FormSchema, encounterUuid: string) => {
       setCompletedForms((prev) => new Set(prev).add(form.uuid));
 
       onFormLaunch(form, encounterUuid);

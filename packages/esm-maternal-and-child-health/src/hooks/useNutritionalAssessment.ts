@@ -23,7 +23,7 @@ const fetcher = async (url: string) => {
   return response?.data;
 };
 
-function extractObsValue(data: any): string | null {
+function extractObsValue(data: { results?: Array<{ value?: { display?: string } | string | number }> }): string | null {
   const obs = data?.results?.[0];
   if (!obs) return null;
   if (typeof obs.value === 'object' && obs.value?.display) {
@@ -35,7 +35,7 @@ function extractObsValue(data: any): string | null {
   return null;
 }
 
-function extractObsDate(data: any): string | null {
+function extractObsDate(data: { results?: Array<{ obsDatetime?: string }> }): string | null {
   const obs = data?.results?.[0];
   return obs?.obsDatetime ? dayjs(obs.obsDatetime).format('DD/MM/YYYY') : null;
 }

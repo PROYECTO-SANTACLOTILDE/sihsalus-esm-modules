@@ -18,7 +18,7 @@ import styles from './case-encounter-header.scss';
 import { deleteEncounter, useInfiniteVisits } from './case-encounter-table.resource';
 
 interface CaseEncounterProps {
-  mutate: KeyedMutator<any>;
+  mutate: KeyedMutator<unknown>;
   patientUuid: string;
   onFilterChange: (formUuid: string) => void;
 }

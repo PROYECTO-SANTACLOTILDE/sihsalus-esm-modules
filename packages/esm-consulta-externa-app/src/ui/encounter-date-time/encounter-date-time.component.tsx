@@ -4,12 +4,12 @@ import { type amPm } from '@openmrs/esm-patient-common-lib';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import React from 'react';
-import { type Control, Controller, type FieldPath, useFormContext } from 'react-hook-form';
+import { type Control, Controller, type FieldPath, type FieldValues, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import styles from './encounter-date-time.scss';
 
 interface EncounterDateTimeSectionProps {
-  control: Control<any, any>;
+  control: Control<FieldValues>;
   firstEncounterDateTime?: number;
   lastEncounterDateTime?: number;
   patientUuid?: string;
@@ -24,12 +24,12 @@ interface EncounterDateTimeFieldProps {
   minDate?: dayjs.ConfigType;
   maxDate?: dayjs.ConfigType;
   disabled?: boolean;
-  control?: Control<any, any>;
+  control?: Control<FieldValues>;
   showTimeFields?: boolean;
 }
 
 interface Field {
-  name: FieldPath<any>;
+  name: FieldPath<FieldValues>;
   label: string;
 }
 

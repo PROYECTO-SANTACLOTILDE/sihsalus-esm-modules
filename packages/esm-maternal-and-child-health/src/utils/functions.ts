@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import type { AppointmentSummary, ObsReferenceRanges, ObservationInterpretation } from '../types';
 
-export const getHighestAppointmentServiceLoad = (appointmentSummary: Array<any> = []) => {
+export const getHighestAppointmentServiceLoad = (appointmentSummary: Array<Record<string, any>> = []) => {
   const groupedAppointments = appointmentSummary?.map(({ countMap, serviceName }) => ({
     serviceName: serviceName,
     count: countMap.reduce((cummulator, currentValue) => cummulator + currentValue.allAppointmentsCount, 0),
@@ -10,8 +10,8 @@ export const getHighestAppointmentServiceLoad = (appointmentSummary: Array<any> 
   return groupedAppointments.find((summary) => summary.count === Math.max(...groupedAppointments.map((x) => x.count)));
 };
 
-export const flattenAppointmentSummary = (appointmentToTransfrom: Array<any>) =>
-  appointmentToTransfrom.flatMap((el: any) => ({
+export const flattenAppointmentSummary = (appointmentToTransfrom: Array<Record<string, any>>) =>
+  appointmentToTransfrom.flatMap((el: Record<string, any>) => ({
     serviceName: el.appointmentService.name,
     countMap: Object.entries(el.appointmentCountMap).flatMap((el) => el[1]),
   }));
@@ -26,13 +26,13 @@ export const getServiceCountByAppointmentType = (
     .reduce((count, val) => count + val, 0);
 };
 
-export const formatAMPM = (date) => {
+export const formatAMPM = (date: Date) => {
   let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let ampm = hours >= 12 ? 'PM' : 'AM';
+  const rawMinutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0' + minutes : minutes;
+  const minutes = rawMinutes < 10 ? '0' + rawMinutes : String(rawMinutes);
   const strTime = hours + ':' + minutes + ' ' + ampm;
   return strTime;
 };
@@ -65,7 +65,7 @@ export const monthDays = (currentDate: Dayjs) => {
   return days;
 };
 
-export const getGender = (gender, t) => {
+export const getGender = (gender: string, t: (key: string, fallback: string) => string) => {
   switch (gender) {
     case 'M':
       return t('male', 'Male');

@@ -59,13 +59,13 @@ export function useBirthPlan(patientUuid: string): BirthPlanResult {
 
     // Transport: Coded concept — check if obs exists (any answer means transport is arranged)
     const transportObs = transportConceptUuid
-      ? obs.find((o: any) => o.concept?.uuid === transportConceptUuid)
+      ? obs.find((o: { concept?: { uuid: string }; value?: { display?: string; uuid?: string }; display?: string }) => o.concept?.uuid === transportConceptUuid)
       : undefined;
     const transportArranged = !!transportObs;
 
     // Reference hospital: Text concept — extract display value
     const hospitalObs = referenceHospitalConceptUuid
-      ? obs.find((o: any) => o.concept?.uuid === referenceHospitalConceptUuid)
+      ? obs.find((o: { concept?: { uuid: string }; value?: { display?: string; uuid?: string }; display?: string }) => o.concept?.uuid === referenceHospitalConceptUuid)
       : undefined;
     const referenceHospital = hospitalObs?.value?.display ?? hospitalObs?.display?.split(': ')?.[1] ?? null;
 

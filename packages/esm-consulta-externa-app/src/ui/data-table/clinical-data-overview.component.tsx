@@ -17,7 +17,19 @@ import PaginatedClinicalData from './paginated-clinical-data.component';
 // Interfaz para los datos clínicos
 interface ClinicalData {
   date: string;
-  [key: string]: any; // Permite propiedades dinámicas
+  [key: string]: string | number | null; // Permite propiedades dinámicas
+}
+
+interface ClinicalTableRow {
+  id: string;
+  [key: string]: string | number | React.ReactNode;
+}
+
+interface ClinicalTableHeader {
+  key: string;
+  header: string;
+  isSortable?: boolean;
+  sortFunc?: (a: ClinicalTableRow, b: ClinicalTableRow) => number;
 }
 
 export interface ClinicalField {
@@ -25,7 +37,7 @@ export interface ClinicalField {
   conceptUuid: string;
   label: string;
   isSortable?: boolean;
-  sortFunc?: (a: any, b: any) => number;
+  sortFunc?: (a: ClinicalTableRow, b: ClinicalTableRow) => number;
   showInChart?: boolean;
   relatedField?: string; // Para campos relacionados como presión arterial (systolic/diastolic)
 }
@@ -38,20 +50,12 @@ interface ClinicalDataOverviewProps {
   error: Error | null; // Puede ser null si no hay error
   isLoading: boolean;
   isValidating: boolean;
-  tableHeaders: Array<{
-    key: string;
-    header: string;
-    isSortable?: boolean;
-    sortFunc?: (a: any, b: any) => number;
-  }>;
-  tableRows: Array<{
-    id: string;
-    [key: string]: any;
-  }>;
+  tableHeaders: Array<ClinicalTableHeader>;
+  tableRows: Array<ClinicalTableRow>;
   formWorkspace: string;
   emptyStateDisplayText: string;
   conceptUnits: Map<string, string>;
-  config: any;
+  config: Record<string, string>;
   chartConfig?: {
     vitalSigns: Array<{
       id: string;

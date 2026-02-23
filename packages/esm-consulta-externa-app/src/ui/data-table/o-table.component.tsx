@@ -14,11 +14,12 @@ import {
 } from '@carbon/react';
 import styles from './o-table.scss';
 import EncounterObservations from '../encounter-observation/encounter-observation.component';
+import type { Observation } from '../../types';
 
 interface TableProps {
-  tableHeaders: any;
-  tableRows: any;
-  formConceptMap: object;
+  tableHeaders: Array<{ key: string; header: string }>;
+  tableRows: Array<Record<string, unknown> & { obs?: Array<Observation> }>;
+  formConceptMap: Record<string, Record<string, unknown>>;
   isExpandable?: boolean;
 }
 

@@ -150,7 +150,7 @@ const FamilyRelationshipForm: React.FC<RelationshipFormProps> = ({ closeWorkspac
             <div style={{ color: 'red', fontSize: '0.9em' }}>
               {Object.entries(form.formState.errors).map(([field, error]) => (
                 <div key={field}>
-                  {field}: {(error as any)?.message}
+                  {field}: {(error as { message?: string })?.message}
                 </div>
               ))}
             </div>

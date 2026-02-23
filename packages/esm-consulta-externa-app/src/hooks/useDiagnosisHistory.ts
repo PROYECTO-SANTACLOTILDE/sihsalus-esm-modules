@@ -10,11 +10,15 @@ interface DiagnosisEntry {
   occurrence: 'NEW' | 'REPEAT';
 }
 
+interface ConceptMapping {
+  display?: string;
+}
+
 interface EncounterDiagnosis {
   uuid: string;
   display: string;
   diagnosis: {
-    coded?: { display: string };
+    coded?: { display: string; mappings?: ConceptMapping[] };
     nonCoded?: string;
   };
   certainty: string;
@@ -39,8 +43,8 @@ export function useDiagnosisHistory(patientUuid: string, encounterTypeUuid: stri
 
   const diagnoses: DiagnosisEntry[] = (data?.data?.results ?? []).flatMap((encounter) =>
     (encounter.diagnoses ?? []).map((dx) => {
-      const mappings = (dx.diagnosis?.coded as any)?.mappings ?? [];
-      const cie10Mapping = mappings.find((m: any) => m.display?.startsWith('ICD-10'));
+      const mappings = dx.diagnosis?.coded?.mappings ?? [];
+      const cie10Mapping = mappings.find((m: ConceptMapping) => m.display?.startsWith('ICD-10'));
       const cie10Code = cie10Mapping?.display?.split(': ')?.[1] ?? null;
 
       return {

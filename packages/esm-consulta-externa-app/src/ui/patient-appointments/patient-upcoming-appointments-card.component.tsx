@@ -20,7 +20,7 @@ import type { Appointment } from '../../types';
 import { useMutateAppointments } from '../form/appointments-form.resource';
 
 interface VisitFormCallbacks {
-  onVisitCreatedOrUpdated: (visit: Visit) => Promise<any>;
+  onVisitCreatedOrUpdated: (visit: Visit) => Promise<void>;
 }
 
 // See VisitFormExtensionState in esm-patient-chart-app
@@ -136,7 +136,7 @@ const PatientUpcomingAppointmentsCard: React.FC<PatientUpcomingAppointmentsProps
             {appointments.map((appointment, index) => (
               <StructuredListRow key={index} className={styles.structuredList}>
                 <StructuredListCell>
-                  {formatDate(parseDate(appointment.startDateTime), { mode: 'wide' })}
+                  {formatDate(parseDate(String(appointment.startDateTime)), { mode: 'wide' })}
                 </StructuredListCell>
                 <StructuredListCell>{appointment.service ? appointment.service.name : '——'}</StructuredListCell>
                 <StructuredListCell>

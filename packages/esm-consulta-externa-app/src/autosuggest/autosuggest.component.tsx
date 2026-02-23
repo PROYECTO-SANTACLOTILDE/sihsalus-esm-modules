@@ -7,12 +7,12 @@ import styles from './autosuggest.scss';
 interface AutosuggestProps extends React.ComponentProps<typeof Search> {
   getDisplayValue: Function;
   getFieldValue: Function;
-  getSearchResults: (query: string) => Promise<any>;
+  getSearchResults: (query: string) => Promise<Array<Record<string, unknown>>>;
   onSuggestionSelected: (field: string, value: string) => void;
   invalid?: boolean | undefined;
   invalidText?: string | undefined;
   renderEmptyState?: (searchValue: string) => ReactNode;
-  renderSuggestionItem?: (item: any) => ReactNode;
+  renderSuggestionItem?: (item: Record<string, unknown>) => ReactNode;
 }
 
 export const Autosuggest: React.FC<AutosuggestProps> = ({

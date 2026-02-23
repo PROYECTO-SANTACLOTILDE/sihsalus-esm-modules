@@ -1,34 +1,58 @@
 import { create } from 'zustand';
 import { opciones as initialOpciones } from '../data/optionsData.json';
 
+interface DentalColor {
+  id: number;
+  name: string;
+}
+
+interface DentalSuboption {
+  id: number;
+  nombre: string;
+}
+
+interface DentalDesign {
+  number?: number;
+  [key: string]: unknown;
+}
+
+interface DentalOption {
+  id: number;
+  nombre: string;
+  colores?: DentalColor[];
+  subopciones?: DentalSuboption[];
+  designs?: DentalDesign[];
+  [key: string]: unknown;
+}
+
 type DentalFormState = {
-  opciones: any[];
-  selectedOption: any;
-  selectedColor: any;
-  selectedSuboption: any;
+  opciones: DentalOption[];
+  selectedOption: number | null;
+  selectedColor: DentalColor | null;
+  selectedSuboption: DentalSuboption | null;
   isComplete: boolean;
-  selectedDesign: any;
-  setSelectedOption: (optionId: any) => void;
-  setSelectedColor: (color: any) => void;
-  setSelectedSuboption: (suboption: any) => void;
-  setSelectedDesign: (design: any) => void;
+  selectedDesign: DentalDesign | null;
+  setSelectedOption: (optionId: number) => void;
+  setSelectedColor: (color: DentalColor) => void;
+  setSelectedSuboption: (suboption: DentalSuboption) => void;
+  setSelectedDesign: (design: DentalDesign) => void;
   resetSelection: () => void;
 };
 
 const useDentalFormStore = create<DentalFormState>((set, get) => ({
-  opciones: initialOpciones || [],
+  opciones: (initialOpciones as DentalOption[]) || [],
   selectedOption: null,
   selectedColor: null,
   selectedSuboption: null,
   isComplete: false,
 
-  // Estado para el diseño seleccionado
+  // Estado para el diseno seleccionado
   selectedDesign: null,
 
-  setSelectedOption: (optionId: any) => {
-    const selectedItem = get().opciones.find((op: any) => op.id === optionId);
-    let autoSelectedColor = null;
-    let autoSelectedDesign = null;
+  setSelectedOption: (optionId: number) => {
+    const selectedItem = get().opciones.find((op) => op.id === optionId);
+    let autoSelectedColor: DentalColor | null = null;
+    let autoSelectedDesign: DentalDesign | null = null;
     let autoIsComplete = false;
 
     // Autocompletado de color si solo hay uno disponible y no hay subopciones
@@ -39,17 +63,17 @@ const useDentalFormStore = create<DentalFormState>((set, get) => ({
     ) {
       autoSelectedColor = selectedItem.colores[0];
 
-      // Si también solo hay un diseño disponible, se selecciona automáticamente
+      // Si tambien solo hay un diseno disponible, se selecciona automaticamente
       if (selectedItem.designs?.length === 1) {
         autoSelectedDesign = selectedItem.designs[0];
-        // Solo está completo si hay color y diseño seleccionados (o no se requieren)
-        autoIsComplete = !selectedItem.designs || selectedItem.designs.length === 0 || !!autoSelectedDesign;
+        // Solo esta completo si hay diseno seleccionado
+        autoIsComplete = !!autoSelectedDesign;
       } else {
-        // Si hay varios diseños, no está completo hasta que se seleccione uno
+        // Si hay varios disenos, no esta completo hasta que se seleccione uno
         autoIsComplete = !selectedItem.designs || selectedItem.designs.length === 0;
       }
     } else {
-      // Si no hay colores pero hay un solo diseño
+      // Si no hay colores pero hay un solo diseno
       if (
         selectedItem &&
         (!selectedItem.colores || selectedItem.colores.length === 0) &&
@@ -70,12 +94,12 @@ const useDentalFormStore = create<DentalFormState>((set, get) => ({
     });
   },
 
-  setSelectedColor: (color: any) => {
-    set((state: any) => {
-      const selectedItem = get().opciones.find((op: any) => op.id === state.selectedOption);
+  setSelectedColor: (color: DentalColor) => {
+    set((state) => {
+      const selectedItem = get().opciones.find((op) => op.id === state.selectedOption);
 
-      // Autocompletado de diseño si solo hay uno disponible después de seleccionar color
-      let autoSelectedDesign = null;
+      // Autocompletado de diseno si solo hay uno disponible despues de seleccionar color
+      let autoSelectedDesign: DentalDesign | null = null;
       if (selectedItem && selectedItem.designs?.length === 1 && !state.selectedDesign) {
         autoSelectedDesign = selectedItem.designs[0];
       }
@@ -95,12 +119,12 @@ const useDentalFormStore = create<DentalFormState>((set, get) => ({
     });
   },
 
-  setSelectedSuboption: (suboption: any) => {
-    set((state: any) => {
-      const selectedItem = get().opciones.find((op: any) => op.id === state.selectedOption);
+  setSelectedSuboption: (suboption: DentalSuboption) => {
+    set((state) => {
+      const selectedItem = get().opciones.find((op) => op.id === state.selectedOption);
 
       // Autocompletado de color si hay un solo color disponible
-      let autoSelectedColor = null;
+      let autoSelectedColor: DentalColor | null = null;
       if (
         selectedItem &&
         selectedItem.subopciones?.length > 0 &&
@@ -110,8 +134,8 @@ const useDentalFormStore = create<DentalFormState>((set, get) => ({
         autoSelectedColor = selectedItem.colores[0];
       }
 
-      // Autocompletado de diseño si hay un solo diseño disponible
-      let autoSelectedDesign = null;
+      // Autocompletado de diseno si hay un solo diseno disponible
+      let autoSelectedDesign: DentalDesign | null = null;
       if (selectedItem && selectedItem.designs?.length === 1 && !state.selectedDesign) {
         autoSelectedDesign = selectedItem.designs[0];
       }
@@ -132,10 +156,10 @@ const useDentalFormStore = create<DentalFormState>((set, get) => ({
     });
   },
 
-  // Nueva función para establecer el diseño seleccionado
-  setSelectedDesign: (design: any) => {
-    set((state: any) => {
-      const selectedItem = get().opciones.find((op: any) => op.id === state.selectedOption);
+  // Nueva funcion para establecer el diseno seleccionado
+  setSelectedDesign: (design: DentalDesign) => {
+    set((state) => {
+      const selectedItem = get().opciones.find((op) => op.id === state.selectedOption);
 
       // Verificar que se hayan seleccionado todos los elementos requeridos
       const isCompleteNow =
@@ -151,7 +175,7 @@ const useDentalFormStore = create<DentalFormState>((set, get) => ({
     });
   },
 
-  // Resetear toda la selección
+  // Resetear toda la seleccion
   resetSelection: () =>
     set({
       selectedOption: null,

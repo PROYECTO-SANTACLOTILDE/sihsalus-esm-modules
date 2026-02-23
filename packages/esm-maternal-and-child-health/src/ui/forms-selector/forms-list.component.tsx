@@ -9,7 +9,7 @@ import FormsTable from './forms-table.component';
 
 export type FormsListProps = {
   completedForms?: Array<CompletedFormInfo>;
-  error?: any;
+  error?: Error | null;
   sectionName?: string;
   handleFormOpen: (form: Form, encounterUuid: string) => void;
 };

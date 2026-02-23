@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './encounter-date-time.scss';
 
 interface EncounterDateTimeSectionProps {
-  control: Control<any, any>;
+  control: Control<Record<string, any>, any>;
   firstEncounterDateTime?: number;
   lastEncounterDateTime?: number;
   patientUuid?: string;
@@ -24,12 +24,12 @@ interface EncounterDateTimeFieldProps {
   minDate?: dayjs.ConfigType;
   maxDate?: dayjs.ConfigType;
   disabled?: boolean;
-  control?: Control<any, any>;
+  control?: Control<Record<string, any>, any>;
   showTimeFields?: boolean;
 }
 
 interface Field {
-  name: FieldPath<any>;
+  name: FieldPath<Record<string, any>>;
   label: string;
 }
 

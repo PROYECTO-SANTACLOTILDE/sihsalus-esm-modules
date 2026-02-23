@@ -20,7 +20,7 @@ const DEFAULT_METADATA = {
 };
 
 interface GrowthChartProps {
-  measurementData: any[];
+  measurementData: Array<{ eventDate: Date; dataValues: Record<string, string> }>;
   patientName: string;
   gender: string;
   dateOfBirth: Date;
@@ -94,7 +94,7 @@ const GrowthChart: React.FC<GrowthChartProps> = ({
 
     if (!measurementData) return [];
 
-    const processEntry = (entry: any) => {
+    const processEntry = (entry: { eventDate: Date; dataValues: Record<string, string> }) => {
       let xValue: Date | number | string;
       let yValue: number;
 

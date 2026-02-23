@@ -40,7 +40,7 @@ export function useSupplementationTracker(patientUuid: string): SupplementationR
 
   const result = useMemo(() => {
     const observations = data?.results ?? [];
-    const delivered = observations.reduce((sum: number, obs: any) => {
+    const delivered = observations.reduce((sum: number, obs: { value?: number | string }) => {
       const val = typeof obs.value === 'number' ? obs.value : parseFloat(obs.value);
       return sum + (isNaN(val) ? 0 : val);
     }, 0);

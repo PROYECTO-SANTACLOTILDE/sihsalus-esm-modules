@@ -42,7 +42,7 @@ interface RowDefinition {
 interface RowData {
   id: string;
   rowHeader: string;
-  [key: string]: any;
+  [key: string]: string;
 }
 
 interface CareSummaryTableProps {

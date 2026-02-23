@@ -2,7 +2,12 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import type { AppointmentSummary, ObsReferenceRanges, ObservationInterpretation } from '../types';
 
-export const getHighestAppointmentServiceLoad = (appointmentSummary: Array<any> = []) => {
+interface FlattenedAppointmentSummary {
+  serviceName: string;
+  countMap: Array<{ allAppointmentsCount: number }>;
+}
+
+export const getHighestAppointmentServiceLoad = (appointmentSummary: Array<FlattenedAppointmentSummary> = []) => {
   const groupedAppointments = appointmentSummary?.map(({ countMap, serviceName }) => ({
     serviceName: serviceName,
     count: countMap.reduce((cummulator, currentValue) => cummulator + currentValue.allAppointmentsCount, 0),
@@ -10,10 +15,10 @@ export const getHighestAppointmentServiceLoad = (appointmentSummary: Array<any> 
   return groupedAppointments.find((summary) => summary.count === Math.max(...groupedAppointments.map((x) => x.count)));
 };
 
-export const flattenAppointmentSummary = (appointmentToTransfrom: Array<any>) =>
-  appointmentToTransfrom.flatMap((el: any) => ({
+export const flattenAppointmentSummary = (appointmentToTransfrom: Array<AppointmentSummary>) =>
+  appointmentToTransfrom.flatMap((el) => ({
     serviceName: el.appointmentService.name,
-    countMap: Object.entries(el.appointmentCountMap).flatMap((el) => el[1]),
+    countMap: Object.entries(el.appointmentCountMap).flatMap((entry) => entry[1]),
   }));
 
 export const getServiceCountByAppointmentType = (

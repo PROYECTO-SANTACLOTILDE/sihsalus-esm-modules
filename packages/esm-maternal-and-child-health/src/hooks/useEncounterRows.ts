@@ -15,7 +15,7 @@ export interface OpenmrsResource {
   [anythingElse: string]: any;
 }
 
-export function useEncounterRows(patientUuid: string, encounterType: string, encounterFilter: (encounter) => boolean) {
+export function useEncounterRows(patientUuid: string, encounterType: string, encounterFilter: (encounter: OpenmrsEncounter) => boolean) {
   const url = `/ws/rest/v1/encounter?encounterType=${encounterType}&patient=${patientUuid}&v=${encounterRepresentation}`;
 
   const { data, error, isLoading } = useSWRImmutable<{ data: { results: Array<OpenmrsEncounter> } }, Error>(

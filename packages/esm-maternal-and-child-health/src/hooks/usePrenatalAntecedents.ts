@@ -1,7 +1,7 @@
 import type { FHIRResource, FetchResponse } from '@openmrs/esm-framework';
 import { fhirBaseUrl, openmrsFetch, restBaseUrl, useConfig } from '@openmrs/esm-framework';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import type { KeyedMutator } from 'swr';
+
 import useSWRImmutable from 'swr/immutable';
 import useSWRInfinite from 'swr/infinite';
 import type { ConfigObject } from '../config-schema';
@@ -79,7 +79,7 @@ class PrenatalHookError extends Error {
 // Cache Management
 class PrenatalCacheManager {
   private static instance: PrenatalCacheManager;
-  private mutators = new Map<string, KeyedMutator<any>>();
+  private mutators = new Map<string, () => Promise<unknown>>();
 
   static getInstance(): PrenatalCacheManager {
     if (!PrenatalCacheManager.instance) {
@@ -88,7 +88,7 @@ class PrenatalCacheManager {
     return PrenatalCacheManager.instance;
   }
 
-  register(patientUuid: string, mutator: KeyedMutator<any>): void {
+  register(patientUuid: string, mutator: () => Promise<unknown>): void {
     if (!isValidUuid(patientUuid)) {
       throw new PrenatalHookError('Invalid patient UUID', 'INVALID_UUID');
     }
@@ -443,10 +443,10 @@ export async function savePrenatalAntecedents(
   formUuid: string,
   concepts: ConfigObject['madreGestante'],
   patientUuid: string,
-  antecedents: Record<string, any>,
+  antecedents: Record<string, string | number>,
   abortController: AbortController,
   location: string,
-): Promise<FetchResponse<any>> {
+): Promise<FetchResponse<Record<string, unknown>>> {
   // Validaciones
   if (!isValidUuid(patientUuid)) {
     throw new PrenatalHookError('Invalid patient UUID', 'INVALID_UUID');
@@ -467,7 +467,7 @@ export async function savePrenatalAntecedents(
       throw new PrenatalHookError('No valid observations to save', 'NO_OBSERVATIONS');
     }
 
-    return await openmrsFetch<any>(`${restBaseUrl}/encounter`, {
+    return await openmrsFetch<Record<string, unknown>>(`${restBaseUrl}/encounter`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -493,12 +493,12 @@ export async function savePrenatalAntecedents(
 export async function updatePrenatalAntecedents(
   concepts: ConfigObject['madreGestante'],
   patientUuid: string,
-  antecedents: Record<string, any>,
+  antecedents: Record<string, string | number>,
   encounterDatetime: Date,
   abortController: AbortController,
   encounterUuid: string,
   location: string,
-): Promise<FetchResponse<any>> {
+): Promise<FetchResponse<Record<string, unknown>>> {
   // Validaciones similares a savePrenatalAntecedents
   if (!isValidUuid(patientUuid)) {
     throw new PrenatalHookError('Invalid patient UUID', 'INVALID_UUID');
@@ -534,7 +534,7 @@ export async function updatePrenatalAntecedents(
  * Crear objeto de observaciones con validaciones mejoradas
  */
 function createObsObject(
-  antecedents: Record<string, any>,
+  antecedents: Record<string, string | number>,
   madreGestante: ConfigObject['madreGestante'],
 ): Array<{ concept: string; value: string }> {
   if (!madreGestante) {

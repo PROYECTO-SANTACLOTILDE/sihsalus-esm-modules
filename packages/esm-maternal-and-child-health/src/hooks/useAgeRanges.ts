@@ -39,7 +39,7 @@ export const useAgeRanges = () => {
         const result = response.data?.ageRanges || mockResponse;
 
         // Validate and set data
-        if (Array.isArray(result) && result.every((item: any) => 'id' in item && 'name' in item && 'months' in item)) {
+        if (Array.isArray(result) && result.every((item: Record<string, unknown>) => 'id' in item && 'name' in item && 'months' in item)) {
           setData(result as AgeRange[]);
         } else {
           throw new Error('Invalid age ranges data');

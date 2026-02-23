@@ -18,7 +18,7 @@ interface ClinicalDataChartProps {
     [key: string]: any;
   }>;
   conceptUnits: Map<string, string>;
-  config: any;
+  config: Record<string, unknown>;
   vitalSigns: Array<{
     id: string;
     title: string;

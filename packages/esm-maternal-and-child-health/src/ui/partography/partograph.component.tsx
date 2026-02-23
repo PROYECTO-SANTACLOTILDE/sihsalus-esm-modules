@@ -34,7 +34,7 @@ import PartographChart from './partograph-chart';
 
 interface PartographyProps {
   patientUuid: string;
-  filter?: (encounter: any) => boolean;
+  filter?: (encounter: Record<string, any>) => boolean;
 }
 
 const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {

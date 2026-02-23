@@ -8,7 +8,7 @@ import type { Observation } from '../../types';
 
 interface EncounterObservationsProps {
   observations: Array<Observation>;
-  formConceptMap: object;
+  formConceptMap: Record<string, { display?: string; answers?: Record<string, string> }>;
 }
 
 const EncounterObservations: React.FC<EncounterObservationsProps> = ({ observations, formConceptMap }) => {
@@ -39,7 +39,7 @@ const EncounterObservations: React.FC<EncounterObservationsProps> = ({ observati
                       {mapConceptToFormLabel(member?.concept?.uuid, formConceptMap, member.concept.display)}
                     </span>
                     <span>
-                      {mapObsValueToFormLabel(member?.concept?.uuid, member.value.uuid, formConceptMap, member.display)}
+                      {mapObsValueToFormLabel(member?.concept?.uuid, typeof member.value === 'object' && member.value !== null ? (member.value as Record<string, any>).uuid : undefined, formConceptMap, member.display)}
                     </span>
                   </React.Fragment>
                 ))}
@@ -51,7 +51,7 @@ const EncounterObservations: React.FC<EncounterObservationsProps> = ({ observati
                 <span className={styles.questionText}>
                   {mapConceptToFormLabel(obs?.concept?.uuid, formConceptMap, obs?.concept?.name.name)}
                 </span>
-                <span>{mapObsValueToFormLabel(obs?.concept?.uuid, obs?.value?.uuid, formConceptMap, obs?.value)}</span>
+                <span>{mapObsValueToFormLabel(obs?.concept?.uuid, typeof obs?.value === 'object' && obs?.value !== null ? (obs.value as Record<string, any>).uuid : undefined, formConceptMap, obs?.value)}</span>
               </React.Fragment>
             );
           }

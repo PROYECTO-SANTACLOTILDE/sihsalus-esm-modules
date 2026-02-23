@@ -79,7 +79,16 @@ const TriageSummary: React.FC<TriageSummaryProps> = ({ patientUuid }) => {
   const { triageEntries, latestTriage, isLoading } = useTriageVitals(
     patientUuid,
     config.encounterTypes?.triage,
-    config.concepts as any,
+    config.concepts as {
+      weightUuid: string;
+      heightUuid: string;
+      systolicBloodPressureUuid: string;
+      diastolicBloodPressureUuid: string;
+      pulseUuid: string;
+      respiratoryRateUuid: string;
+      temperatureUuid: string;
+      oxygenSaturationUuid: string;
+    },
   );
 
   const handleLaunchForm = () => {

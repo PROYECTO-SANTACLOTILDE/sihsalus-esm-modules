@@ -82,7 +82,7 @@ export function useObstetricRisk(patientUuid: string): ObstetricRiskResult {
 
     // Parse risk factors from Motivo derivación obs
     const riskFactors: string[] = (factorsData?.results ?? [])
-      .map((factorObs: any) => factorObs.value?.display)
+      .map((factorObs: { value?: { display?: string } }) => factorObs.value?.display)
       .filter(Boolean);
 
     return { riskLevel, riskFactors, lastEvaluationDate };

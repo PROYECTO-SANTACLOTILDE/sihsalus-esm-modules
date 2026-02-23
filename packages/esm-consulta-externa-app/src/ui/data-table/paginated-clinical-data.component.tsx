@@ -13,19 +13,23 @@ import { useLayoutType, usePagination } from '@openmrs/esm-framework';
 import { PatientChartPagination } from '@openmrs/esm-patient-common-lib';
 import styles from './paginated-clinical-data.scss';
 
+interface PaginatedTableRow {
+  id: string;
+  [key: string]: string | number | React.ReactNode;
+}
+
+interface PaginatedTableHeader {
+  key: string;
+  header: string;
+  isSortable?: boolean;
+  sortFunc?: (a: PaginatedTableRow, b: PaginatedTableRow) => number;
+}
+
 interface PaginatedClinicalDataProps {
   isPrinting?: boolean;
   pageSize: number;
-  tableHeaders: Array<{
-    key: string;
-    header: string;
-    isSortable?: boolean;
-    sortFunc?: (a: any, b: any) => number;
-  }>;
-  tableRows: Array<{
-    id: string;
-    [key: string]: any;
-  }>;
+  tableHeaders: Array<PaginatedTableHeader>;
+  tableRows: Array<PaginatedTableRow>;
 }
 
 const PaginatedClinicalData: React.FC<PaginatedClinicalDataProps> = ({

@@ -16,7 +16,7 @@ interface ObsResponse {
       uuid: string;
       display: string;
     };
-    value: any;
+    value: string | number | null;
     obsDatetime: string;
   }>;
 }
@@ -67,7 +67,7 @@ export function useVitalNewBorn(patientUuid: string) {
         concept: obs.concept.display,
         value: obs.value,
         datetime: obs.obsDatetime,
-        interpretation: assessValue(obs.value, referenceRanges),
+        interpretation: assessValue(typeof obs.value === 'number' ? obs.value : undefined, referenceRanges),
       };
     }) ?? [];
 

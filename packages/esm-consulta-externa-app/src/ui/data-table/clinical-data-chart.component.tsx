@@ -15,10 +15,10 @@ enum ScaleTypes {
 interface ClinicalDataChartProps {
   patientData: Array<{
     date: string;
-    [key: string]: any;
+    [key: string]: string | number | null;
   }>;
   conceptUnits: Map<string, string>;
-  config: any;
+  config: Record<string, string>;
   vitalSigns: Array<{
     id: string;
     title: string;

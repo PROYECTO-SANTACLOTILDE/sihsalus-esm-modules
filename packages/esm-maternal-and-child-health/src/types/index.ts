@@ -136,10 +136,10 @@ export interface Observation {
       uuid: string;
       display: string;
     };
-    value: any;
+    value: string | number | Record<string, any> | null;
     display: string;
   }>;
-  value: any;
+  value: string | number | Record<string, any> | null;
   obsDatetime?: string;
 }
 
@@ -393,7 +393,7 @@ export interface Immunization {
   occurrenceDateTime?: string;
   lotNumber?: string;
   doseNumber?: number;
-  formChanged?: any;
+  formChanged?: boolean;
 }
 
 export interface ImmunizationGrouped {

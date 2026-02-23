@@ -21,8 +21,8 @@ const mapToImmunizationDose = (immunizationBundleEntry: FHIRImmunizationBundleEn
   const lotNumber = immunizationResource?.lotNumber;
   const protocolApplied = immunizationResource?.protocolApplied?.length > 0 && immunizationResource?.protocolApplied[0];
   const doseNumber = protocolApplied?.doseNumberPositiveInt;
-  const occurrenceDateTime = immunizationResource?.occurrenceDateTime as any as string;
-  const expirationDate = immunizationResource?.expirationDate as any as string;
+  const occurrenceDateTime = String(immunizationResource?.occurrenceDateTime);
+  const expirationDate = String(immunizationResource?.expirationDate);
   return {
     immunizationObsUuid,
     manufacturer,

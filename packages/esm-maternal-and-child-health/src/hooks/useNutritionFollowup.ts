@@ -23,7 +23,7 @@ function buildObsUrl(patientUuid: string, conceptUuid: string | undefined): stri
   return `${restBaseUrl}/obs?patient=${patientUuid}&concept=${conceptUuid}&v=custom:(uuid,value,obsDatetime,display)&limit=1&sort=desc`;
 }
 
-function extractDisplayValue(data: any): string | null {
+function extractDisplayValue(data: Record<string, unknown> | undefined | null): string | null {
   const obs = data?.results?.[0];
   if (!obs) return null;
   if (typeof obs.value === 'object' && obs.value?.display) {

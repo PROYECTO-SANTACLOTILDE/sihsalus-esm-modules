@@ -11,7 +11,7 @@ import {
   TextInput,
 } from '@carbon/react';
 import { Calculator } from '@carbon/react/icons';
-import { showModal } from '@openmrs/esm-framework';
+import { showModal, type Patient } from '@openmrs/esm-framework';
 import React, { useMemo } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -87,7 +87,7 @@ const PatientSearchCreate: React.FC<PatientSearchCreateProps> = () => {
                 invalid={Boolean(error?.message)}
                 invalidText={error?.message}
                 getDisplayValue={(item) => item.person.display}
-                renderSuggestionItem={(item) => <PatientSearchInfo patient={item} />}
+                renderSuggestionItem={(item) => <PatientSearchInfo patient={item as unknown as Patient} />}
                 getFieldValue={(item) => item.uuid}
                 getSearchResults={searchPatient}
                 renderEmptyState={(value) => (

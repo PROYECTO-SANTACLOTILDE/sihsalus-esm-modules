@@ -89,7 +89,7 @@ const DefaulterTracing: React.FC<PatientTracingProps> = ({ patientUuid }) => {
         getObsFromEncounter(encounter, MissedAppointmentDate_UUID) == '--' ||
         getObsFromEncounter(encounter, MissedAppointmentDate_UUID) == null
           ? formatDate(parseDate(encounter.encounterDatetime))
-          : formatDate(parseDate(getObsFromEncounter(encounter, MissedAppointmentDate_UUID))),
+          : formatDate(parseDate(String(getObsFromEncounter(encounter, MissedAppointmentDate_UUID)))),
       visitDate: formatDate(new Date(encounter.encounterDatetime)),
       tracingType: getObsFromEncounter(encounter, TracingType_UUID),
       tracingNumber: getObsFromEncounter(encounter, TracingNumber_UUID),

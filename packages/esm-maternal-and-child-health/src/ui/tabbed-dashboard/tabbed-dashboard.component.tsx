@@ -7,7 +7,7 @@ import styles from './tabbed-dashboard.scss';
 
 export interface TabConfig {
   labelKey: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<Record<string, unknown>>;
   slotName: string;
 }
 

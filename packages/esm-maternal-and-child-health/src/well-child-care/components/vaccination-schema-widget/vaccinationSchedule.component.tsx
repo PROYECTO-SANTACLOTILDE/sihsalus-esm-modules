@@ -44,7 +44,7 @@ interface VaccinationScheduleProps {
 }
 
 const processVaccinationData = (
-  immunizations: any[] | null,
+  immunizations: Array<Record<string, any>> | null,
   vaccines: Vaccine[],
   ageRanges: AgeRange[],
   patientAgeInMonths: number,

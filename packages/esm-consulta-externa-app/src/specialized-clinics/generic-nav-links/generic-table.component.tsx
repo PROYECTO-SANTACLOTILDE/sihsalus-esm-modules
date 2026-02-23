@@ -18,12 +18,25 @@ import capitalize from 'lodash-es/capitalize';
 import { formatDate } from '@openmrs/esm-framework';
 import { useTranslation } from 'react-i18next';
 
+interface GenericTableEncounter {
+  uuid: string;
+  encounterDatetime: string;
+  visit?: { visitType?: { display?: string } };
+  encounterProviders?: Array<{ provider: { display?: string } }>;
+  obs?: Array<Record<string, unknown>>;
+}
+
+interface GenericTableRow {
+  id: string;
+  [key: string]: string;
+}
+
 type GenericTableProps = {
-  encounters: any[];
+  encounters: GenericTableEncounter[];
   onEdit: (encounterUuid: string) => void;
   onDelete: (encounterUuid: string, encounterTypeName?: string) => void;
   headers: { key: string; header: string }[];
-  rows?: any[];
+  rows?: GenericTableRow[];
 };
 
 const GenericTable: React.FC<GenericTableProps> = ({ encounters, onEdit, onDelete, headers, rows }) => {

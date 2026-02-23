@@ -19,7 +19,7 @@ export function useBiometrics(patientUuid: string | null) {
     return Object.values(concepts).join(',');
   }, [concepts]);
 
-  const { data, isLoading, error } = useSWR<{ data: { entry: Array<{ resource: any }> } }>(
+  const { data, isLoading, error } = useSWR<{ data: { entry: Array<{ resource: Record<string, any> }> } }>(
     patientUuid
       ? `${fhirBaseUrl}/Observation?subject:Patient=${patientUuid}&code=${conceptUuids}&_sort=-date&_count=100`
       : null,

@@ -35,7 +35,7 @@ interface OutPatientSocialHistoryProps {
   isLoading: boolean;
   error: Error;
   isValidating: boolean;
-  mutate: KeyedMutator<any>;
+  mutate: KeyedMutator<{ data: { results: OpenmrsEncounter[] } }>;
 }
 
 const OutPatientSocialHistory: React.FC<OutPatientSocialHistoryProps> = ({

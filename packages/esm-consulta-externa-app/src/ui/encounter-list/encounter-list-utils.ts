@@ -8,18 +8,24 @@ export function getEncounterValues(encounter, param: string, isDate?: boolean) {
   }
 }
 
-export function formatDateTime(dateString: string): any {
+export function formatDateTime(dateString: string): string {
   if (dateString.includes('.')) {
     dateString = dateString.split('.')[0];
   }
   return formatDate(parseDate(dateString));
 }
 
-export function obsArrayDateComparator(left, right) {
-  return formatDateTime(right.obsDatetime) - formatDateTime(left.obsDatetime);
+export function obsArrayDateComparator(left: { obsDatetime: string }, right: { obsDatetime: string }): number {
+  return new Date(right.obsDatetime).getTime() - new Date(left.obsDatetime).getTime();
 }
 
-export function findObs(encounter, obsConcept): Record<string, any> {
+interface FoundObs {
+  value: string | number | { uuid: string; display: string; names?: Array<{ uuid: string; conceptNameType: string; name: string }>; name?: { name: string } } | null;
+  obsDatetime?: string;
+  [key: string]: unknown;
+}
+
+export function findObs(encounter, obsConcept): FoundObs | undefined {
   const allObs = encounter?.obs?.filter((observation) => observation.concept.uuid === obsConcept) || [];
   return allObs?.length == 1 ? allObs[0] : allObs?.sort(obsArrayDateComparator)[0];
 }
@@ -44,22 +50,24 @@ export function getMultipleObsFromEncounter(encounter, obsConcepts: Array<string
 export function getObsFromEncounter(encounter, obsConcept, isDate?: boolean, isTrueFalseConcept?: boolean) {
   const obs = findObs(encounter, obsConcept);
 
+  if (!obs) {
+    return '--';
+  }
+
   if (isTrueFalseConcept) {
-    if (obs.value.uuid == 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3') {
+    const valueUuid = typeof obs.value === 'object' && obs.value !== null ? obs.value.uuid : undefined;
+    if (valueUuid === 'cf82933b-3f3f-45e7-a5ab-5d31aaee3da3') {
       return 'Yes';
     } else {
       return 'No';
     }
   }
-  if (!obs) {
-    return '--';
-  }
   if (isDate) {
-    return formatDate(parseDate(obs.value), { mode: 'wide' });
+    return formatDate(parseDate(String(obs.value)), { mode: 'wide' });
   }
-  if (typeof obs.value === 'object' && obs.value?.names) {
+  if (typeof obs.value === 'object' && obs.value !== null && obs.value?.names) {
     return (
-      obs.value?.names?.find((conceptName) => conceptName.conceptNameType === 'SHORT')?.name || obs.value.name.name
+      obs.value.names.find((conceptName) => conceptName.conceptNameType === 'SHORT')?.name || obs.value.name?.name
     );
   }
   return obs.value;
@@ -67,8 +75,8 @@ export function getObsFromEncounter(encounter, obsConcept, isDate?: boolean, isT
 
 export function mapObsValueToFormLabel(
   conceptUuid: string,
-  answerConceptUuid: string,
-  formConceptMap: { [key: string]: any },
+  answerConceptUuid: string | undefined,
+  formConceptMap: Record<string, Record<string, unknown>>,
   defaultValue: string,
 ): string {
   const typeOfVal = typeof defaultValue;
@@ -85,7 +93,8 @@ export function mapObsValueToFormLabel(
     } else if (answerConceptUuid === '2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') {
       answerConceptUuid = '1';
     }
-    let theDisplay = formConceptMap[conceptUuid]?.answers[answerConceptUuid];
+    const answers = formConceptMap[conceptUuid]?.answers as Record<string, string> | undefined;
+    const theDisplay = answers?.[answerConceptUuid];
 
     if (typeof theDisplay !== 'undefined') {
       return theDisplay;
@@ -93,19 +102,15 @@ export function mapObsValueToFormLabel(
       return extractDefaultValueBasedOnType(defaultValue);
     }
   } else if (!conceptMapOverride || answerConceptUuid !== undefined) {
-    if (typeOfVal === 'object') {
-      return defaultValue['name']?.['name']; // extract the default name from the object
-    }
+    return defaultValue;
   } else {
     return extractDefaultValueBasedOnType(defaultValue);
   }
 }
 
-function extractDefaultValueBasedOnType(defaultValue: any): string {
-  const typeOfVal = typeof defaultValue;
-
+function extractDefaultValueBasedOnType(defaultValue: string | number | Record<string, unknown> | undefined): string {
   if (defaultValue !== undefined) {
-    if (typeOfVal === 'string') {
+    if (typeof defaultValue === 'string') {
       const stringParts = defaultValue.split(':');
       if (stringParts.length === 0 || stringParts.length === 1) {
         return defaultValue;
@@ -116,12 +121,11 @@ function extractDefaultValueBasedOnType(defaultValue: any): string {
         // check for date
         return formatDate(parseDate(defaultValue));
       }
-    } else if (typeOfVal === 'object') {
-      return defaultValue['name']?.['name']; // extract the default name from the object
+    } else if (typeof defaultValue === 'object' && defaultValue !== null) {
+      return (defaultValue as Record<string, Record<string, string>>)['name']?.['name']; // extract the default name from the object
     }
-  } else {
-    return defaultValue;
   }
+  return String(defaultValue ?? '');
 }
 export function mapConceptToFormLabel(conceptUuid: string, formConceptMap: object, defaultValue: string): string {
   if (formConceptMap === undefined) {

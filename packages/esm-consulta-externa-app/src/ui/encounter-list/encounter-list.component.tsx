@@ -1,4 +1,4 @@
-import { ErrorState, isDesktop, navigate, useLayoutType, usePagination } from '@openmrs/esm-framework';
+import { ErrorState, isDesktop, navigate, useLayoutType, usePagination, type OpenmrsResource } from '@openmrs/esm-framework';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './encounter-list.scss';
@@ -19,7 +19,7 @@ import type { OpenmrsEncounter } from '../../types';
 
 export interface O3FormSchema {
   name: string;
-  pages: Array<any>;
+  pages: Array<Record<string, unknown>>;
   processor: string;
   uuid: string;
   referencedForms: [];
@@ -29,8 +29,8 @@ export interface O3FormSchema {
   defaultPage?: string;
   readonly?: string | boolean;
   inlineRendering?: 'single-line' | 'multiline' | 'automatic';
-  markdown?: any;
-  postSubmissionActions?: Array<{ actionId: string; config?: Record<string, any> }>;
+  markdown?: Record<string, unknown>;
+  postSubmissionActions?: Array<{ actionId: string; config?: Record<string, unknown> }>;
   formOptions?: {
     usePreviousValueDisabled: boolean;
   };
@@ -39,14 +39,17 @@ export interface O3FormSchema {
 export interface EncounterListColumn {
   key: string;
   header: string;
-  getValue: (encounter: any) => string;
-  link?: any;
+  getValue: (encounter: OpenmrsEncounter) => string;
+  link?: {
+    handleNavigate?: (encounter: OpenmrsEncounter) => void;
+    getUrl?: () => string;
+  };
 }
 
 export interface EncounterListProps {
   patientUuid: string;
   encounterType: string;
-  columns: Array<any>;
+  columns: Array<EncounterListColumn>;
   headerTitle: string;
   description: string;
   formList?: Array<{
@@ -61,7 +64,7 @@ export interface EncounterListProps {
     displayText?: string;
     workspaceWindowSize?: 'minimized' | 'maximized';
   };
-  filter?: (encounter: any) => boolean;
+  filter?: (encounter: OpenmrsEncounter) => boolean;
   formConceptMap: object;
   isExpandable?: boolean;
 }
@@ -123,7 +126,7 @@ export const EncounterList: React.FC<EncounterListProps> = ({
   const constructTableRows = useCallback(
     (results: OpenmrsEncounter[]) => {
       const rows = results?.map((encounter) => {
-        const tableRow: { id: string; actions: any; obs: any } = {
+        const tableRow: { id: string; actions: React.ReactNode; obs: Array<OpenmrsResource>; [key: string]: unknown } = {
           id: encounter.uuid,
           actions: null,
           obs: encounter.obs,

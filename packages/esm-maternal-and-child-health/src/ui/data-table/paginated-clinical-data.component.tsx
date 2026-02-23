@@ -20,7 +20,7 @@ interface PaginatedClinicalDataProps {
     key: string;
     header: string;
     isSortable?: boolean;
-    sortFunc?: (a: any, b: any) => number;
+    sortFunc?: (a: Record<string, unknown>, b: Record<string, unknown>) => number;
   }>;
   tableRows: Array<{
     id: string;

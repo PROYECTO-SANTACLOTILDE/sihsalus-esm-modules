@@ -13,12 +13,12 @@ import type { KeyedMutator } from 'swr';
 
 interface SurgicalSummaryProps {
   patientUuid: string;
-  formEntrySub?: any;
+  formEntrySub?: { unsubscribe: () => void } | null;
   encounters: OpenmrsEncounter[];
   isLoading: boolean;
   error: Error;
   isValidating: boolean;
-  mutate: KeyedMutator<any>;
+  mutate: KeyedMutator<{ data: { results: OpenmrsEncounter[] } }>;
 }
 const ClinicalEncounter: React.FC<SurgicalSummaryProps> = ({
   patientUuid,
@@ -52,7 +52,7 @@ const ClinicalEncounter: React.FC<SurgicalSummaryProps> = ({
         getObsFromEncounter(encounter, AdmissionDate_UUID) == '--' ||
         getObsFromEncounter(encounter, AdmissionDate_UUID) == null
           ? formatDate(parseDate(encounter.encounterDatetime))
-          : formatDate(parseDate(getObsFromEncounter(encounter, AdmissionDate_UUID))),
+          : formatDate(parseDate(String(getObsFromEncounter(encounter, AdmissionDate_UUID)))),
       primaryDiagnosis: encounter.diagnoses.length > 0 ? encounter.diagnoses[0].diagnosis.coded.display : '--',
       priorityOfAdmission: getObsFromEncounter(encounter, PriorityOfAdmission_UUID),
       admittingDoctor: encounter.encounterProviders.length > 0 ? encounter.encounterProviders[0].display : '',

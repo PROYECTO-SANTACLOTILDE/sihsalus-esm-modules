@@ -16,9 +16,9 @@ import styles from './o-table.scss';
 import EncounterObservations from '../encounter-observation/encounter-observation.component';
 
 interface TableProps {
-  tableHeaders: any;
-  tableRows: any;
-  formConceptMap: object;
+  tableHeaders: Array<{ key: string; header: string; isSortable?: boolean }>;
+  tableRows: Array<Record<string, any>>;
+  formConceptMap: Record<string, { display?: string; answers?: Record<string, string> }>;
   isExpandable?: boolean;
 }
 

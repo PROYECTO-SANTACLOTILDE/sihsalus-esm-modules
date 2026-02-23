@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './summary-card.scss';
 type SummaryCardProps = {
   title: string;
-  value: string | any;
+  value: string | React.ReactNode;
 };
 
 const SummaryCard: React.FC<SummaryCardProps> = ({ title, value }) => {

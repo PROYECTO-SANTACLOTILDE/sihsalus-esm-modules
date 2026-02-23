@@ -71,7 +71,7 @@ async function fetchPrenatalMeasurements(
   const obsData: ObsResponse = await response.json();
 
   // Agrupar observaciones por encounter
-  const encounterGroups = new Map<string, any>();
+  const encounterGroups = new Map<string, { uuid: string; date: string; encounterUuid: string; observations: Map<string, number> }>();
 
   obsData.results.forEach((obs) => {
     const encounterUuid = obs.encounter.uuid;
@@ -120,7 +120,7 @@ async function fetchPrenatalMeasurements(
 }
 
 // Función para invalidar caché
-export async function invalidatePrenatalMeasurements(patientUuid: string, mutate: any) {
+export async function invalidatePrenatalMeasurements(patientUuid: string, mutate: () => Promise<void>) {
   if (mutate) {
     await mutate();
   }

@@ -1,22 +1,53 @@
 import { createGlobalStore, useStore } from '@openmrs/esm-framework';
 import { teeth as initialTeeth } from '../data/teethData.json';
 
+interface DentalFinding {
+  uniqueId: number;
+  optionId: number;
+  subOptionId: number | null;
+  color: string | null;
+  dynamicDesign: number | null;
+}
+
+interface Tooth {
+  id: number;
+  position: string;
+  type: string;
+  zones: Array<{ id: number; findings: DentalFinding[] }>;
+  findings: DentalFinding[];
+}
+
 interface DentalDataState {
-  teeth: any[];
+  teeth: Tooth[];
+}
+
+interface RegisterFindingParams {
+  toothId: number;
+  optionId: number;
+  subOptionId: number | null;
+  color: string | null;
+  design?: { number?: number } | null;
+}
+
+interface RemoveFindingParams {
+  toothId: number;
+  optionId: number;
+  subOptionId: number | null;
+  dynamicDesign?: number;
 }
 
 const dentalDataStore = createGlobalStore<DentalDataState>('dentalDataStore', {
-  teeth: initialTeeth || [],
+  teeth: (initialTeeth as Tooth[]) || [],
 });
 
 export const useDentalDataStore = () => useStore(dentalDataStore, (state) => state.teeth);
 
-export const registerFinding = (params: any) => {
+export const registerFinding = (params: RegisterFindingParams) => {
   dentalDataStore.setState((state) => {
     const { toothId, optionId, subOptionId, color, design } = params;
     const dynamicDesignValue = design?.number || null;
 
-    const newFinding = {
+    const newFinding: DentalFinding = {
       uniqueId: Math.floor(Math.random() * 1000000),
       optionId,
       subOptionId,
@@ -24,7 +55,7 @@ export const registerFinding = (params: any) => {
       dynamicDesign: dynamicDesignValue,
     };
 
-    const updatedTeeth = state.teeth.map((tooth: any) => {
+    const updatedTeeth = state.teeth.map((tooth) => {
       if (tooth.id === toothId) {
         const updatedFindings = [...tooth.findings, newFinding];
         return { ...tooth, findings: updatedFindings };
@@ -36,14 +67,14 @@ export const registerFinding = (params: any) => {
   });
 };
 
-export const removeFinding = (params: any) => {
+export const removeFinding = (params: RemoveFindingParams) => {
   dentalDataStore.setState((state) => {
     const { toothId, optionId, subOptionId, dynamicDesign } = params;
 
-    const updatedTeeth = state.teeth.map((tooth: any) => {
+    const updatedTeeth = state.teeth.map((tooth) => {
       if (tooth.id === toothId) {
         const updatedFindings = tooth.findings.filter(
-          (f: any) =>
+          (f) =>
             !(
               f.optionId === optionId &&
               f.subOptionId === subOptionId &&

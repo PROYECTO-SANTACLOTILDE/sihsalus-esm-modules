@@ -49,7 +49,7 @@ export function usePsychoprophylaxis(patientUuid: string): PsychoprophylaxisResu
     const isComplete = sessionsCompleted >= totalSessions;
 
     const sorted = [...encounters].sort(
-      (a: any, b: any) => new Date(b.encounterDatetime).getTime() - new Date(a.encounterDatetime).getTime(),
+      (a: { encounterDatetime: string }, b: { encounterDatetime: string }) => new Date(b.encounterDatetime).getTime() - new Date(a.encounterDatetime).getTime(),
     );
     const lastSessionDate = sorted[0]?.encounterDatetime
       ? dayjs(sorted[0].encounterDatetime).format('DD/MM/YYYY')

@@ -1,6 +1,6 @@
 import type { OpenmrsResource, Visit } from '@openmrs/esm-framework';
 
-export function mapEncounters(encounters: Array<any>): MappedEncounter[] {
+export function mapEncounters(encounters: Array<Encounter>): MappedEncounter[] {
   return encounters?.map((enc) => ({
     id: enc?.uuid,
     datetime: enc?.encounterDatetime,
@@ -65,6 +65,6 @@ export interface Observation {
     };
     display: string;
   }>;
-  value: any;
+  value: string | number | { uuid: string; display: string } | null;
   obsDatetime?: string;
 }
