@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Tab, TabList, Tabs, TabPanel, TabPanels } from '@carbon/react';
 import { type AssignedExtension, ExtensionSlot, useAssignedExtensions } from '@openmrs/esm-framework';
 import styles from './fua-tabs.scss';
 
@@ -33,32 +34,30 @@ const FuaOrdersTabs: React.FC = () => {
   }
 
   return (
-    <div className={styles.customTabsContainer}>
-      {/* Tab buttons */}
-      <div className={styles.customTabList}>
-        {filteredExtensions.map((extension, index) => {
-          const { title } = extension.meta;
-          return (
-            <button
-              key={extension.id}
-              className={`${styles.customTab} ${selectedTab === index ? styles.customTabActive : ''}`}
-              onClick={() => setSelectedTab(index)}
-              aria-selected={selectedTab === index}
-            >
-              {t(title, {
-                ns: extension.moduleName,
-                defaultValue: title,
-              })}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Tab panel — only the selected extension is rendered */}
-      <div className={styles.customTabPanels}>
-        <div className={styles.customTabPanel}>
-          <ExtensionSlot name={fuaPanelSlot} select={select} />
-        </div>
+    <div className={styles.appointmentList}>
+      <div className={styles.tabs}>
+        <Tabs selectedIndex={selectedTab} onChange={({ selectedIndex }) => setSelectedTab(selectedIndex)}>
+          <TabList style={{ paddingLeft: '1rem' }} aria-label="FUA tabs" contained>
+            {filteredExtensions.map((extension) => {
+              const { title } = extension.meta;
+              return (
+                <Tab key={extension.id} className={styles.tab}>
+                  {t(title, {
+                    ns: extension.moduleName,
+                    defaultValue: title,
+                  })}
+                </Tab>
+              );
+            })}
+          </TabList>
+          <TabPanels>
+            {filteredExtensions.map((extension, index) => (
+              <TabPanel key={extension.id} className={styles.tabPanel}>
+                {index === selectedTab && <ExtensionSlot name={fuaPanelSlot} select={select} />}
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </Tabs>
       </div>
     </div>
   );
