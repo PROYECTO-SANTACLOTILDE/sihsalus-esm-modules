@@ -100,3 +100,6 @@ e2e/storageState.json
 
 # misc
 .angular
+
+# Auto-generated task list
+TASKS.md

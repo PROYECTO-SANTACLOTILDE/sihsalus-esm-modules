@@ -17,6 +17,8 @@
     "release:major": "yarn workspaces foreach --all --topological version major --deferred && yarn workspaces foreach --all --topological version apply --all",
     "verify": "turbo run lint typescript test --concurrency=1",
     "test-e2e": "playwright test",
+    "generate-tasks": "node tools/generate-tasks.js",
+    "test-generate-tasks": "node tools/generate-tasks.test.js",
     "postinstall": "husky install"
   },
   "homepage": "https://github.com/PROYECTO-SANTACLOTILDE/sihsalus-esm-modules#readme",
