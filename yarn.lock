@@ -4357,9 +4357,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pucp-gidis-hiisc/esm-coststructure-app@workspace:packages/esm-coststructure-app":
+"@pucp-gidis-hiisc/esm-coststructure-app@workspace:packages/esm-estructura-costos-app":
   version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-coststructure-app@workspace:packages/esm-coststructure-app"
+  resolution: "@pucp-gidis-hiisc/esm-coststructure-app@workspace:packages/esm-estructura-costos-app"
   dependencies:
     "@carbon/react": "npm:^1.83.0"
     "@hookform/resolvers": "npm:^5.2.2"
@@ -4483,9 +4483,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pucp-gidis-hiisc/esm-indicators-app@workspace:packages/esm-indicators-app":
+"@pucp-gidis-hiisc/esm-indicadores-app@workspace:packages/esm-indicadores-app":
   version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-indicators-app@workspace:packages/esm-indicators-app"
+  resolution: "@pucp-gidis-hiisc/esm-indicadores-app@workspace:packages/esm-indicadores-app"
   dependencies:
     "@carbon/react": "npm:^1.83.0"
     "@openmrs/esm-framework": "npm:^9.0.0"
@@ -4540,28 +4540,6 @@ __metadata:
     react-is: "npm:^19.1.0"
     single-spa: "npm:^6.0.0"
     xlsx: "npm:^0.18.5"
-    zod: "npm:^3.24.1"
-  peerDependencies:
-    "@openmrs/esm-framework": 9.x
-    "@openmrs/esm-patient-common-lib": 12.x
-    dayjs: 1.x
-    react: 18.x
-    react-i18next: 16.x
-    react-router-dom: 6.x
-    rxjs: 6.x
-    swr: 2.x
-  languageName: unknown
-  linkType: soft
-
-"@pucp-gidis-hiisc/esm-patient-immunizations-app@workspace:packages/esm-patient-immunizations-app":
-  version: 0.0.0-use.local
-  resolution: "@pucp-gidis-hiisc/esm-patient-immunizations-app@workspace:packages/esm-patient-immunizations-app"
-  dependencies:
-    "@carbon/react": "npm:^1.83.0"
-    "@hookform/resolvers": "npm:^3.3.1"
-    "@openmrs/esm-patient-common-lib": "npm:next"
-    lodash-es: "npm:^4.17.21"
-    react-hook-form: "npm:^7.56.1"
     zod: "npm:^3.24.1"
   peerDependencies:
     "@openmrs/esm-framework": 9.x
@@ -4668,6 +4646,28 @@ __metadata:
     webpack-cli: "npm:^4.10.0"
     webpack-dev-server: "npm:^4.15.1"
     zod: "npm:^3.23.8"
+  languageName: unknown
+  linkType: soft
+
+"@pucp-gidis-hiisc/esm-vacunacion-app@workspace:packages/esm-vacunacion-app":
+  version: 0.0.0-use.local
+  resolution: "@pucp-gidis-hiisc/esm-vacunacion-app@workspace:packages/esm-vacunacion-app"
+  dependencies:
+    "@carbon/react": "npm:^1.83.0"
+    "@hookform/resolvers": "npm:^3.3.1"
+    "@openmrs/esm-patient-common-lib": "npm:next"
+    lodash-es: "npm:^4.17.21"
+    react-hook-form: "npm:^7.56.1"
+    zod: "npm:^3.24.1"
+  peerDependencies:
+    "@openmrs/esm-framework": 9.x
+    "@openmrs/esm-patient-common-lib": 12.x
+    dayjs: 1.x
+    react: 18.x
+    react-i18next: 16.x
+    react-router-dom: 6.x
+    rxjs: 6.x
+    swr: 2.x
   languageName: unknown
   linkType: soft
 

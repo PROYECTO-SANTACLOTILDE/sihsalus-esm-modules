@@ -80,7 +80,7 @@ const AlturaCuelloChart: React.FC<AlturaCuelloChartProps> = ({ measurementData, 
     () => [
       {
         id: 'altura_uterina',
-        title: t('uterineHeight', 'Altura Uterina'),
+        title: t('uterineHeight', 'Uterine height'),
         value: 'altura_uterina',
       },
       {
@@ -162,7 +162,7 @@ const AlturaCuelloChart: React.FC<AlturaCuelloChartProps> = ({ measurementData, 
 
     const yAxisTitle =
       selectedCategory.value === 'altura_uterina'
-        ? t('uterineHeightCm', 'Altura Uterina (cm)')
+        ? t('uterineHeightCm', 'Uterine height (cm)')
         : t('cervicalLengthMm', 'Longitud Cervical (mm)');
 
     const colorScale = isPercentiles

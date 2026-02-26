@@ -155,7 +155,7 @@ const VaccinationSchedule: React.FC<VaccinationScheduleProps> = ({ patientUuid }
               {vaccineData.date || '--'}
             </Tag>
           ) : (
-            <span aria-label={t('notApplicable', 'No Aplica')}>--</span>
+            <span aria-label={t('notApplicable', 'Not applicable')}>--</span>
           );
         });
 
@@ -190,7 +190,7 @@ const VaccinationSchedule: React.FC<VaccinationScheduleProps> = ({ patientUuid }
     return (
       <DataTableSkeleton
         role="progressbar"
-        aria-label={t('loadingData', 'Cargando datos de vacunación')}
+        aria-label={t('loadingData', 'Loading data...')}
         headers={tableHeaders}
       />
     );
@@ -269,11 +269,11 @@ const getStatusLabel = (
   t: (key: string, defaultValue: string) => string,
 ): string => {
   const statusLabels = {
-    pending: t('pending', 'Programada'),
-    completed: t('completed', 'Administrado'),
+    pending: t('scheduledDose', 'Scheduled'),
+    completed: t('administered', 'Administered'),
     overdue: t('overdue', 'Atrasada'),
     scheduled: t('scheduled', 'Próxima dosis'),
-    'not-applicable': t('notApplicable', 'No aplica'),
+    'not-applicable': t('notApplicable', 'Not applicable'),
   };
   return statusLabels[status] || status;
 };

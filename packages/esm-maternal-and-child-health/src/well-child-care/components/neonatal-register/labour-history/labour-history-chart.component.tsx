@@ -27,11 +27,11 @@ const LabourHistoryChart: React.FC<LabourHistoryChartProps> = ({ patientHistory 
     { title: t('maternalPulse', 'Maternal Pulse (bpm)'), value: 'maternalPulse' },
     { title: t('systolicBP', 'Systolic BP (mmHg)'), value: 'systolicBP' },
     { title: t('diastolicBP', 'Diastolic BP (mmHg)'), value: 'diastolicBP' },
-    { title: t('temperature', 'Temperature (°C)'), value: 'temperature' },
+    { title: t('temperatureCelsius', 'Temperature (°C)'), value: 'temperature' },
     { title: t('maternalWeight', 'Maternal Weight (Kg)'), value: 'maternalWeight' },
     { title: t('gestationalAge', 'Gestational Age (weeks)'), value: 'gestationalAge' },
-    { title: t('fetalHeartRate', 'Fetal Heart Rate (bpm)'), value: 'fetalHeartRate' },
-    { title: t('uterineHeight', 'Uterine Height (cm)'), value: 'uterineHeight' },
+    { title: t('fetalHeartRateBpm', 'Fetal heart rate (bpm)'), value: 'fetalHeartRate' },
+    { title: t('uterineHeightCm', 'Uterine height (cm)'), value: 'uterineHeight' },
     { title: t('dilatation', 'Dilatation (cm)'), value: 'dilatation' },
   ];
 

@@ -184,7 +184,7 @@ const CareSummaryTable: React.FC<CareSummaryTableProps> = ({
           <CardHeader title={title}>
             {isValidating && <InlineLoading />}
             <Button kind="ghost" renderIcon={(props) => <Add size={16} {...props} />} onClick={launchForm}>
-              {t('add', 'Añadir')}
+              {t('add', 'Add')}
             </Button>
           </CardHeader>
           <DataTable rows={tableRows} headers={tableHeaders} isSortable useZebraStyles size="sm">

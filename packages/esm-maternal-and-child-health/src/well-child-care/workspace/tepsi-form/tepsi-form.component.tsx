@@ -337,7 +337,7 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspace, wor
           <Column>
             <Tile className={styles.results}>
               <Stack gap={4}>
-                <h4>{t('resultsPreview', 'Vista previa de resultados')}</h4>
+                <h4>{t('resultsPreview', 'Results preview')}</h4>
                 <div className={styles.resultGrid}>
                   <div className={styles.resultCard}>
                     <h5>{t('coordinacion', 'Coordinación')}</h5>
@@ -450,10 +450,10 @@ const TEPSIForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspace, wor
 
         <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
           <Button kind="secondary" onClick={closeWorkspace} disabled={isSubmitting}>
-            {t('cancel', 'Cancelar')}
+            {t('cancel', 'Cancel')}
           </Button>
           <Button kind="primary" type="submit" disabled={isSubmitting || !childAgeMonths}>
-            {isSubmitting ? t('saving', 'Guardando...') : t('saveAndClose', 'Guardar y Cerrar')}
+            {isSubmitting ? t('saving', 'Saving...') : t('saveAndClose', 'Save and close')}
           </Button>
         </ButtonSet>
       </Stack>

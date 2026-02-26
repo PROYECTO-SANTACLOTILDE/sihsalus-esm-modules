@@ -132,16 +132,16 @@ const NeonatalAttention: React.FC<ImmediateNewbornAttentionProps> = ({ patientUu
       label: t('apgar10Min', 'Apgar 10 Minutos'),
       dataKey: APGAR_10_MIN_UUID,
     },
-    { id: 'weight', label: t('weight', 'Peso (Kg)'), dataKey: WEIGHT_UUID },
-    { id: 'height', label: t('height', 'Talla (cm)'), dataKey: HEIGHT_UUID },
+    { id: 'weight', label: t('weightKg', 'Weight (kg)'), dataKey: WEIGHT_UUID },
+    { id: 'height', label: t('heightCm', 'Height (cm)'), dataKey: HEIGHT_UUID },
     {
       id: 'headCircumference',
-      label: t('headCircumference', 'Perímetro Cefálico (cm)'),
+      label: t('headCircumferenceCm', 'Head circumference (cm)'),
       dataKey: HEAD_CIRCUMFERENCE_UUID,
     },
     {
       id: 'chestCircumference',
-      label: t('chestCircumference', 'Perímetro Torácico (cm)'),
+      label: t('chestCircumferenceCm', 'Chest circumference (cm)'),
       dataKey: CHEST_CIRCUMFERENCE_UUID,
     },
     {

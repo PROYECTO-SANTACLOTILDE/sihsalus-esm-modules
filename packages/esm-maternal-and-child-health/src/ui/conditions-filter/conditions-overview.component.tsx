@@ -70,8 +70,8 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
   const filterOptions = useMemo(
     () => [
       { key: 'All', label: t('all', 'Todos') },
-      { key: 'Active', label: t('active', 'Activo') },
-      { key: 'Inactive', label: t('inactive', 'Inactivo') },
+      { key: 'Active', label: t('active', 'Active') },
+      { key: 'Inactive', label: t('inactive', 'Inactive') },
     ],
     [t],
   );
@@ -135,9 +135,9 @@ const ConditionsOverview: React.FC<ConditionsOverviewProps> = ({ patientUuid }) 
           : '--',
         status:
           condition.clinicalStatus === 'Active'
-            ? t('active', 'Activo')
+            ? t('active', 'Active')
             : condition.clinicalStatus === 'Inactive'
-              ? t('inactive', 'Inactivo')
+              ? t('inactive', 'Inactive')
               : condition.clinicalStatus,
       };
     });

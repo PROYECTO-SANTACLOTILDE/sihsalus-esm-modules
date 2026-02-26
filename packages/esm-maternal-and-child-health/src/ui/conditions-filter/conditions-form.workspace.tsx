@@ -127,9 +127,9 @@ const ConditionsForm: React.FC<ConditionFormProps> = ({
             </Button>
             <Button className={styles.button} disabled={isSubmittingForm} kind="primary" type="submit">
               {isSubmittingForm ? (
-                <InlineLoading className={styles.spinner} description={t('saving', 'Saving') + '...'} />
+                <InlineLoading className={styles.spinner} description={t('saving', 'Saving...')} />
               ) : (
-                <span>{t('saveAndClose', 'Save & close')}</span>
+                <span>{t('saveAndClose', 'Save and close')}</span>
               )}
             </Button>
           </ButtonSet>

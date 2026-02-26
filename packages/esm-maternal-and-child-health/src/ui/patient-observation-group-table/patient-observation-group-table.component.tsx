@@ -136,7 +136,7 @@ const PatientObservationGroupTable: React.FC<PatientObservationGroupTableProps> 
   // Configuración de columnas para la tabla principal
   const columns = [
     { key: 'title', header: t('observationGroup', 'Grupo de Observación'), CellComponent: GroupTitleCell },
-    { key: 'date', header: t('date', 'Fecha'), CellComponent: GroupDateCell },
+    { key: 'date', header: t('date', 'Date'), CellComponent: GroupDateCell },
     { key: 'actions', header: '', CellComponent: GroupActionsCell },
   ];
 
@@ -171,7 +171,7 @@ const PatientObservationGroupTable: React.FC<PatientObservationGroupTableProps> 
             kind="ghost"
             renderIcon={(props) => <AddIcon size={16} {...props} />}
             onClick={launchForm}
-            aria-label={t('add')}>
+            aria-label={t('add', 'Add')}>
             {t('edit', 'Edit')}
           </Button>
         )}

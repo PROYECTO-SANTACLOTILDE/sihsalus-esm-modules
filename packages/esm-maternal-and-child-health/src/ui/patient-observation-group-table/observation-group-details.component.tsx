@@ -42,7 +42,7 @@ const ObservationGroupDetails: React.FC<ObservationGroupDetailsProps> = ({ group
 
   const tableHeaders = [
     { key: 'category', header: t('observation', 'Observación') },
-    { key: 'value', header: t('value', 'Valor') },
+    { key: 'value', header: t('value', 'Value') },
   ];
 
   return (

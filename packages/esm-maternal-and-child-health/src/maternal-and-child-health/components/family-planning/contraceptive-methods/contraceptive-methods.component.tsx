@@ -25,7 +25,7 @@ const ContraceptiveMethods: React.FC<ContraceptiveMethodsProps> = ({ patientUuid
       <div className={styles.header}>
         <h5>{t('fpCurrentMethod', 'Método Actual')}</h5>
         <Tag type={currentMethod ? 'green' : 'gray'} size="sm">
-          {currentMethod ? t('active', 'Activo') : t('fpNoMethod', 'Sin método')}
+          {currentMethod ? t('active', 'Active') : t('fpNoMethod', 'Sin método')}
         </Tag>
       </div>
       <div className={styles.content}>
@@ -38,12 +38,12 @@ const ContraceptiveMethods: React.FC<ContraceptiveMethodsProps> = ({ patientUuid
           <span className={styles.value}>{methodCategory ?? t('noData', 'Sin datos')}</span>
         </div>
         <div className={styles.row}>
-          <span className={styles.label}>{t('startDate', 'Fecha de inicio')}:</span>
+          <span className={styles.label}>{t('startDate', 'Start date')}:</span>
           <span className={styles.value}>{startDate ?? t('noData', 'Sin datos')}</span>
         </div>
         <div className={styles.row}>
           <span className={styles.label}>{t('fpNextFollowUp', 'Próximo control')}:</span>
-          <span className={styles.value}>{nextFollowUp ?? t('pending', 'Pendiente')}</span>
+          <span className={styles.value}>{nextFollowUp ?? t('pending', 'Pending')}</span>
         </div>
       </div>
     </Tile>

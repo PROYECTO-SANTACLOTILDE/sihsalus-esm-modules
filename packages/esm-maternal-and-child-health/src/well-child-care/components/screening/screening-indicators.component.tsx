@@ -84,8 +84,8 @@ const ScreeningIndicators: React.FC<ScreeningIndicatorsProps> = ({ patientUuid }
         <Tag type={completedCount === totalRequired ? 'green' : 'gray'} size="sm">
           {completedCount}/{totalRequired}
         </Tag>
-        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
-          {t('add', 'Agregar')}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Add')}>
+          {t('add', 'Add')}
         </Button>
       </CardHeader>
       <DataTable headers={tableHeaders} rows={tableRows} size="sm" useZebraStyles>

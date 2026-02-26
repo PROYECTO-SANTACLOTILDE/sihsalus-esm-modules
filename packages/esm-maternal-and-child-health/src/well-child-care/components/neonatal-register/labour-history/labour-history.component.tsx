@@ -32,7 +32,7 @@ interface SummaryRow {
 const LabourHistorySummary: React.FC<LabourHistorySummaryProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
 
-  const headerTitle = t('labourHistorySummary', 'Detalles del Embarazo y Parto');
+  const headerTitle = t('labourHistorySummary', 'Labour history summary');
   const config = useConfig();
   const { prenatalEncounter: data, error, isLoading, mutate } = useCurrentPregnancy(patientUuid);
 

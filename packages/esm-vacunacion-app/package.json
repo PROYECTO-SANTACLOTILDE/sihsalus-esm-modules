@@ -1,9 +1,9 @@
 {
-  "name": "@pucp-gidis-hiisc/esm-patient-immunizations-app",
+  "name": "@pucp-gidis-hiisc/esm-vacunacion-app",
   "version": "1.7.0",
   "license": "MPL-2.0",
   "description": "Patient immunizations microfrontend for the SIHSALUS SPA",
-  "browser": "dist/openmrs-esm-patient-immunizations-app.js",
+  "browser": "dist/pucp-gidis-hiisc-esm-vacunacion-app.js",
   "main": "src/index.ts",
   "source": true,
   "scripts": {
@@ -12,12 +12,12 @@
     "debug": "npm run serve",
     "build": "webpack --mode production --color",
     "analyze": "webpack --mode=production --env analyze=true",
-    "lint": "cross-env eslint src --ext tsx,ts --fix --max-warnings=0",
+    "lint": "eslint src --ext tsx,ts --fix --max-warnings=0",
     "test": "cross-env TZ=UTC jest --config jest.config.js --verbose false --passWithNoTests --color",
     "test:watch": "cross-env TZ=UTC jest --watch --config jest.config.js --color",
     "coverage": "yarn test --coverage",
     "typescript": "tsc",
-    "extract-translations": "i18next 'src/**/*.component.tsx' 'src/**/*.modal.tsx' 'src/**/*.extension.tsx' 'src/**/*.workspace.tsx' 'src/**/*.hook.tsx' 'src/index.ts' --config ../../tools/i18next-parser.config.js"
+    "extract-translations": "i18next \"src/**/*.component.tsx\" \"src/**/*.modal.tsx\" \"src/**/*.extension.tsx\" \"src/**/*.workspace.tsx\" \"src/**/*.hook.tsx\" \"src/index.ts\" --config ../../tools/i18next-parser.config.js"
   },
   "browserslist": [
     "extends browserslist-config-openmrs"

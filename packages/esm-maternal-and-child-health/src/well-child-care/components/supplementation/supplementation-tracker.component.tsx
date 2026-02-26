@@ -44,8 +44,8 @@ const SupplementationTracker: React.FC<SupplementationTrackerProps> = ({ patient
         <Tag type={isComplete ? 'green' : 'blue'} size="sm">
           {isComplete ? t('complete', 'Completo') : t('inProgress', 'En curso')}
         </Tag>
-        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
-          {t('add', 'Agregar')}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Add')}>
+          {t('add', 'Add')}
         </Button>
       </CardHeader>
       <div className={styles.container}>

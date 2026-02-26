@@ -25,7 +25,7 @@ const FpFollowup: React.FC<FpFollowupProps> = ({ patientUuid }) => {
       <div className={styles.header}>
         <h5>{t('fpFollowUpTitle', 'Seguimiento PF')}</h5>
         <Tag type="gray" size="sm">
-          {adherenceStatus ?? t('pending', 'Pendiente')}
+          {adherenceStatus ?? t('pending', 'Pending')}
         </Tag>
       </div>
       <div className={styles.content}>
@@ -43,7 +43,7 @@ const FpFollowup: React.FC<FpFollowupProps> = ({ patientUuid }) => {
         </div>
         <div className={styles.row}>
           <span className={styles.label}>{t('fpNextAppointment', 'Próxima cita')}:</span>
-          <span className={styles.value}>{nextAppointment ?? t('pending', 'Pendiente')}</span>
+          <span className={styles.value}>{nextAppointment ?? t('pending', 'Pending')}</span>
         </div>
       </div>
     </Tile>

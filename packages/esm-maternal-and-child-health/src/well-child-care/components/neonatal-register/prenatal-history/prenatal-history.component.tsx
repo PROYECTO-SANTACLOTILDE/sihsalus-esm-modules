@@ -89,8 +89,8 @@ const PrenatalAntecedents: React.FC<NeonatalSummaryProps> = ({ patientUuid }) =>
         <DataTable
           rows={tableRows}
           headers={[
-            { key: 'label', header: t('field', 'Campo') },
-            { key: 'value', header: t('value', 'Valor') },
+            { key: 'label', header: t('field', 'Field') },
+            { key: 'value', header: t('value', 'Value') },
           ]}
           size="sm"
           useZebraStyles>

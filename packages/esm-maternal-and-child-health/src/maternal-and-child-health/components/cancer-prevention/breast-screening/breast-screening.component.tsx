@@ -25,7 +25,7 @@ const BreastScreening: React.FC<BreastScreeningProps> = ({ patientUuid }) => {
       <div className={styles.header}>
         <h5>{t('breastScreeningTitle', 'Detección de Mama')}</h5>
         <Tag type={lastClinicalExamDate ? 'green' : 'gray'} size="sm">
-          {lastClinicalExamDate ? t('completed', 'Completado') : t('pending', 'Pendiente')}
+          {lastClinicalExamDate ? t('completed', 'Completed') : t('pending', 'Pending')}
         </Tag>
       </div>
       <div className={styles.content}>
@@ -39,11 +39,11 @@ const BreastScreening: React.FC<BreastScreeningProps> = ({ patientUuid }) => {
         </div>
         <div className={styles.row}>
           <span className={styles.label}>{t('cpLastMammogram', 'Última mamografía')}:</span>
-          <span className={styles.value}>{lastMammogramDate ?? t('notApplicable', 'No aplica')}</span>
+          <span className={styles.value}>{lastMammogramDate ?? t('notApplicable', 'Not applicable')}</span>
         </div>
         <div className={styles.row}>
           <span className={styles.label}>{t('cpNextScreening', 'Próximo tamizaje')}:</span>
-          <span className={styles.value}>{nextScreeningDate ?? t('pending', 'Pendiente')}</span>
+          <span className={styles.value}>{nextScreeningDate ?? t('pending', 'Pending')}</span>
         </div>
       </div>
     </Tile>

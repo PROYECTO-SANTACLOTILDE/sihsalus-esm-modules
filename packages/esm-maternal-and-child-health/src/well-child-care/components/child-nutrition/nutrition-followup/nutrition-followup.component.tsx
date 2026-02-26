@@ -48,10 +48,10 @@ const NutritionFollowup: React.FC<NutritionFollowupProps> = ({ patientUuid }) =>
     <div className={styles.widgetCard}>
       <CardHeader title={headerTitle}>
         <Tag type={lastFollowupDate ? 'blue' : 'gray'} size="sm">
-          {lastFollowupDate ? t('inProgress', 'En curso') : t('pending', 'Pendiente')}
+          {lastFollowupDate ? t('inProgress', 'En curso') : t('pending', 'Pending')}
         </Tag>
-        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
-          {t('add', 'Agregar')}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Add')}>
+          {t('add', 'Add')}
         </Button>
       </CardHeader>
       <div className={styles.container}>
@@ -86,7 +86,7 @@ const NutritionFollowup: React.FC<NutritionFollowupProps> = ({ patientUuid }) =>
                 {t('cnLastFollowup', 'Último seguimiento')}
               </StructuredListCell>
               <StructuredListCell className={styles.value}>
-                {lastFollowupDate ?? <span className={styles.noData}>{t('pending', 'Pendiente')}</span>}
+                {lastFollowupDate ?? <span className={styles.noData}>{t('pending', 'Pending')}</span>}
               </StructuredListCell>
             </StructuredListRow>
           </StructuredListBody>

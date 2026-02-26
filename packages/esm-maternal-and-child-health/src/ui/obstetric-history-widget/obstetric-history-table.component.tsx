@@ -25,11 +25,11 @@ const ObstetricHistoryTable: React.FC<ObstetricHistoryTableProps> = ({ tableRows
   const tableHeaders = [
     {
       key: 'label',
-      header: t('field', 'Campo'),
+      header: t('field', 'Field'),
     },
     {
       key: 'value',
-      header: t('value', 'Valor'),
+      header: t('value', 'Value'),
     },
   ];
 

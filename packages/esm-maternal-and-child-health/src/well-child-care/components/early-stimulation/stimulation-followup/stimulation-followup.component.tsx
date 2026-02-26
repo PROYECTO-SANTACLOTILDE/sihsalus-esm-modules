@@ -60,8 +60,8 @@ const StimulationFollowup: React.FC<StimulationFollowupProps> = ({ patientUuid }
         <Tag type={riskTagType} size="sm">
           {riskLabel ?? t('noData', 'Sin datos')}
         </Tag>
-        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
-          {t('add', 'Agregar')}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Add')}>
+          {t('add', 'Add')}
         </Button>
       </CardHeader>
       <div className={styles.container}>

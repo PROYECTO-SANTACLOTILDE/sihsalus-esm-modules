@@ -567,7 +567,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspac
         console.error('Error saving Test Peruano:', error);
         setShowErrorNotification(true);
         showSnackbar({
-          title: t('testPeruanoSaveError', 'Error al guardar Test Peruano'),
+          title: t('testPeruanoSaveError', 'Error saving Test Peruano'),
           kind: 'error',
           isLowContrast: false,
           subtitle: t('checkForErrors', 'Por favor revise el formulario e intente nuevamente'),
@@ -688,7 +688,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspac
           <Column>
             <Tile className={styles.results}>
               <Stack gap={4}>
-                <h4>{t('resultsPreview', 'Vista previa de resultados (Ajustados culturalmente)')}</h4>
+                <h4>{t('resultsPreview', 'Results preview')}</h4>
 
                 <div className={styles.resultGrid}>
                   <div className={styles.resultCard}>
@@ -744,7 +744,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspac
                   </div>
 
                   <div className={`${styles.resultCard} ${styles.totalCard}`}>
-                    <h5>{t('total', 'Resultado General')}</h5>
+                    <h5>{t('total', 'Total')}</h5>
                     <p>
                       {results.total.score}/{results.total.total}
                     </p>
@@ -901,7 +901,7 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspac
             <InlineNotification
               kind="error"
               title={t('error', 'Error')}
-              subtitle={t('testPeruanoSaveError', 'Hubo un error al guardar el Test Peruano')}
+              subtitle={t('testPeruanoSaveError', 'Error saving Test Peruano')}
               onClose={() => setShowErrorNotification(false)}
             />
           </Column>
@@ -909,10 +909,10 @@ const TestPeruanoForm: React.FC<DefaultPatientWorkspaceProps> = ({ closeWorkspac
 
         <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
           <Button kind="secondary" onClick={closeWorkspace} disabled={isSubmitting}>
-            {t('cancel', 'Cancelar')}
+            {t('cancel', 'Cancel')}
           </Button>
           <Button kind="primary" type="submit" disabled={isSubmitting || !childAgeMonths}>
-            {isSubmitting ? t('saving', 'Guardando...') : t('saveAndClose', 'Guardar y Cerrar')}
+            {isSubmitting ? t('saving', 'Saving...') : t('saveAndClose', 'Save and close')}
           </Button>
         </ButtonSet>
       </Stack>

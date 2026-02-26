@@ -39,7 +39,7 @@ const CancerFollowup: React.FC<CancerFollowupProps> = ({ patientUuid }) => {
         </div>
         <div className={styles.row}>
           <span className={styles.label}>{t('fpNextAppointment', 'Próxima cita')}:</span>
-          <span className={styles.value}>{nextAppointment ?? t('pending', 'Pendiente')}</span>
+          <span className={styles.value}>{nextAppointment ?? t('pending', 'Pending')}</span>
         </div>
       </div>
     </Tile>

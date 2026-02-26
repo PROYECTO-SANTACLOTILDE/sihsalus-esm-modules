@@ -38,7 +38,7 @@ const FpCounseling: React.FC<FpCounselingProps> = ({ patientUuid }) => {
         </div>
         <div className={styles.row}>
           <span className={styles.label}>{t('fpNextSession', 'Próxima sesión')}:</span>
-          <span className={styles.value}>{nextSession ?? t('pending', 'Pendiente')}</span>
+          <span className={styles.value}>{nextSession ?? t('pending', 'Pending')}</span>
         </div>
       </div>
     </Tile>

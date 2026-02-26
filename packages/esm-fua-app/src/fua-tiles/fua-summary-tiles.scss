@@ -1,28 +1,16 @@
 @use '@carbon/layout';
-@use '@carbon/type';
 @use '@openmrs/esm-styleguide/src/vars' as *;
 
 .cardContainer {
   background-color: $ui-02;
   display: flex;
-  flex-wrap: wrap;
-  padding: layout.$spacing-03;
-  gap: 0 layout.$spacing-01;
+  flex-flow: row wrap;
+  padding: 0 layout.$spacing-05 layout.$spacing-07 layout.$spacing-05;
+  margin-top: -(layout.$spacing-03);
+  gap: layout.$spacing-05;
 }
 
-.cardContainer>div {
-  flex: 1 1 300px;
-  box-sizing: border-box;
-}
-
-@media (max-width: 672px) {
-  .cardContainer {
-    flex-direction: column;
-    gap: layout.$spacing-03;
-    padding: layout.$spacing-02;
-  }
-
-  .cardContainer>div {
-    flex: 1 1 100%;
-  }
+.cardContainer > * {
+  flex: 1 0 0%;
+  min-width: 18.75rem;
 }

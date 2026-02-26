@@ -124,7 +124,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
   if (isPatientLoading || isEncountersLoading) {
     return (
       <ResponsiveWrapper>
-        <div className={styles.loadingContainer}>{t('loading', 'Cargando...')}</div>
+        <div className={styles.loadingContainer}>{t('loading', 'Loading...')}</div>
       </ResponsiveWrapper>
     );
   }
@@ -163,7 +163,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
           <Column lg={4} md={2} sm={2}>
             <TextInput
               id="controlNumber"
-              labelText={t('controlNumber', 'Número de control')}
+              labelText={t('controlNumber', 'Control number')}
               value={credControlNumber.toString()}
               readOnly
               disabled
@@ -220,7 +220,7 @@ const CREDControlsWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({
 
       <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
         <Button className={styles.button} kind="secondary" onClick={closeWorkspace}>
-          {t('discard', 'Cancelar')}
+          {t('discard', 'Discard')}
         </Button>
         <Button
           className={styles.button}

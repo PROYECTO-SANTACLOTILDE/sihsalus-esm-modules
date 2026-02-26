@@ -29,7 +29,7 @@ const RiskClassification: React.FC<RiskClassificationProps> = ({ patientUuid }) 
   const { t } = useTranslation();
   const { riskLevel, riskFactors, lastEvaluationDate, isLoading, error } = useObstetricRisk(patientUuid);
 
-  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Cargando...')}</Tile>;
+  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Loading...')}</Tile>;
 
   return (
     <Tile className={styles.card}>

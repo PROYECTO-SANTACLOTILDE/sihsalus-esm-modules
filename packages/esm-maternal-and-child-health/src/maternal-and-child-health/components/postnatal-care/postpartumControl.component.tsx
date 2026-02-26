@@ -270,7 +270,7 @@ const PostpartumControlTable: React.FC<ProgramsDetailedSummaryProps> = ({ patien
             <CardHeader title={headerTitle}>
               {isValidating && <InlineLoading />}
               <Button onClick={handleAddPrenatalAttention} kind="ghost">
-                {t('add', 'Añadir')}
+                {t('add', 'Add')}
               </Button>
             </CardHeader>
             <DataTable rows={tableRows} headers={tableHeaders} isSortable size={isTablet ? 'lg' : 'sm'} useZebraStyles>

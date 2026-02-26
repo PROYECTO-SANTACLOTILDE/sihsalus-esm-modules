@@ -54,7 +54,7 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
       key: 'timeRecorded',
     },
     {
-      header: t('fetalHeartRate', 'Fetal Heart Rate'),
+      header: t('fetalHeartRate', 'Fetal heart rate'),
       key: 'fetalHeartRate',
     },
     {
@@ -160,7 +160,7 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
                       kind={chartView ? 'ghost' : 'tertiary'}
                       hasIconOnly
                       renderIcon={(props) => <Table {...props} size={16} />}
-                      iconDescription={t('tableView', 'Table View')}
+                      iconDescription={t('tableView', 'Table view')}
                       onClick={() => setChartView(false)}
                     />
                     <Button
@@ -169,7 +169,7 @@ const Partograph: React.FC<PartographyProps> = ({ patientUuid }) => {
                       kind={chartView ? 'tertiary' : 'ghost'}
                       hasIconOnly
                       renderIcon={(props) => <ChartLineSmooth {...props} size={16} />}
-                      iconDescription={t('chartView', 'Chart View')}
+                      iconDescription={t('chartView', 'Chart view')}
                       onClick={() => setChartView(true)}
                     />
                   </div>

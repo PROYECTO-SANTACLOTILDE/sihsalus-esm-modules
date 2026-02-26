@@ -1,65 +1,32 @@
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/type';
+@use '@carbon/layout';
+@use '@openmrs/esm-styleguide/src/vars' as *;
 
-.customTabsContainer {
-  background-color: var(--cds-layer-01);
-  margin: 0;
-}
+.appointmentList {
+  margin: layout.$spacing-05;
 
-.customTabList {
-  display: flex;
-  border-bottom: 1px solid var(--cds-border-subtle-01);
-  padding-left: spacing.$spacing-05;
-  background-color: var(--cds-layer-01);
-}
-
-.customTab {
-  @include type.type-style('body-compact-01');
-
-  padding: spacing.$spacing-04 spacing.$spacing-05;
-  min-width: 8.875rem;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--cds-text-secondary);
-  cursor: pointer;
-  transition: all 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
-
-  &:hover {
-    background-color: var(--cds-layer-hover-01);
-    color: var(--cds-text-primary);
+  & > div {
+    background-color: $ui-02;
   }
+}
 
+.tabs {
+  grid-column: span 2;
+}
+
+.tab {
+  min-width: 12rem;
+
+  &:active,
   &:focus {
-    outline: 2px solid var(--cds-focus);
-    outline-offset: -2px;
+    outline: 2px solid var(--brand-03) !important;
+  }
+
+  &[aria-selected='true'] {
+    box-shadow: inset 0 2px 0 0 var(--brand-03) !important;
   }
 }
 
-.customTabActive {
-  color: var(--cds-text-primary);
-  border-bottom-color: var(--cds-border-interactive);
-  font-weight: 600;
-
-  &:hover {
-    border-bottom-color: var(--cds-border-interactive);
-  }
-}
-
-.customTabPanels {
-  padding: spacing.$spacing-05;
-  background-color: var(--cds-layer-01);
-}
-
-.customTabPanel {
-  animation: fadeIn 0.15s ease-in;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.tabPanel {
+  padding: 0;
+  margin: layout.$spacing-05;
 }
