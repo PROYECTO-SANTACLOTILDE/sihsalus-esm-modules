@@ -21,14 +21,13 @@ Colección de módulos microfrontend para SIH SALUS, una distribución especiali
 
 ## 📦 Módulos
 
-- `esm-maternal-and-child-health` - Atención materno-infantil
-- `esm-patient-search-app` - Búsqueda de pacientes
-- `esm-patient-registration-app` - Registro de pacientes
-- `esm-vacunacion-app` - Inmunizaciones
-- `esm-billing-app` - Facturación
+- `esm-maternal-and-child-health` - Atención materno-infantil (CRED + Madre Gestante)
 - `esm-fua-app` - Formato Único de Atención
-- `esm-dyaku-app` - Integración DYAKU
-- `esm-sihsalus-widgets-app` - Widgets y componentes comunes
+- `esm-consulta-externa-app` - Consulta externa
+- `esm-vacunacion-app` - Inmunizaciones
+- `esm-dyaku-app` - Integración DYAKU (Padrón Nacional FHIR R4)
+- `esm-indicadores-app` - Indicadores clínicos MINSA
+- `esm-estructura-costos-app` - Estructura de costos
 
 ## ⚙️ Inicio Rápido
 
@@ -64,7 +63,7 @@ Edita `spa-build-config.json` con la URL de tu servidor OpenMRS:
 yarn start
 
 # Módulo específico
-yarn start --sources 'packages/esm-maternal-and-child-health'
+yarn start --sources packages/esm-maternal-and-child-health
 
 # Con backend personalizado
 yarn start --backend https://tu-servidor.com/openmrs
@@ -79,10 +78,10 @@ yarn start --backend https://tu-servidor.com/openmrs
 yarn start
 
 # Módulo específico
-yarn start --sources 'packages/esm-dyaku-app'
+yarn start --sources packages/esm-dyaku-app
 
 # Múltiples módulos
-yarn start --sources 'packages/esm-patient-search-app' --sources 'packages/esm-patient-registration-app'
+yarn start --sources packages/esm-fua-app --sources packages/esm-consulta-externa-app
 ```
 
 ### Testing
@@ -92,7 +91,7 @@ yarn start --sources 'packages/esm-patient-search-app' --sources 'packages/esm-p
 yarn turbo test
 
 # Tests de módulo específico
-yarn turbo test --filter=@pucp-gidis-hiisc/esm-maternal-and-child-health
+yarn turbo test --filter=@pucp-gidis-hiisc/esm-maternal-and-child-health-app
 
 # Tests en modo watch
 cd packages/esm-maternal-and-child-health
@@ -189,17 +188,19 @@ Archivo de configuración para el desarrollo local. Define el backend de OpenMRS
 
 ```
 sihsalus-esm-modules/
-├── packages/                    # Módulos del monorepo
-│   ├── esm-maternal-and-child-health/
-│   ├── esm-patient-search-app/
-│   ├── esm-patient-registration-app/
-│   ├── esm-dyaku-app/
-│   └── ...
-├── tools/                       # Herramientas compartidas
-├── spa-build-config.json        # Configuración del backend
-├── turbo.json                   # Configuración Turbo
-├── package.json                 # Dependencias raíz
-└── yarn.lock                    # Lock file
+├── packages/
+│   ├── esm-maternal-and-child-health/  # CRED + Madre Gestante
+│   ├── esm-fua-app/                    # Formato Único de Atención
+│   ├── esm-consulta-externa-app/       # Consulta externa
+│   ├── esm-vacunacion-app/             # Inmunizaciones
+│   ├── esm-dyaku-app/                  # Integración DYAKU
+│   ├── esm-indicadores-app/            # Indicadores MINSA
+│   └── esm-estructura-costos-app/      # Estructura de costos
+├── tools/                              # Test utils, i18n config, scripts
+├── spa-build-config.json               # Configuración del backend
+├── turbo.json                          # Configuración Turbo
+├── package.json                        # Dependencias raíz
+└── yarn.lock                           # Lock file
 ```
 
 ### Tecnologías
