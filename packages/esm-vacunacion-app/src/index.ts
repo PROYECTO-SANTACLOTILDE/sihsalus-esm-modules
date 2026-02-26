@@ -6,7 +6,7 @@ import immunizationsOverviewComponent from './immunizations/immunizations-overvi
 import immunizationsDetailedSummaryComponent from './immunizations/immunizations-detailed-summary.component';
 import immunizationHistorySummaryComponent from './immunizations/immunization-history-dashboard.component';
 
-const moduleName = '@pucp-gidis-hiisc/esm-patient-immunizations-app';
+const moduleName = '@pucp-gidis-hiisc/esm-vacunacion-app';
 
 const options = {
   featureName: 'patient-immunizations',

@@ -24,7 +24,7 @@ Colección de módulos microfrontend para SIH SALUS, una distribución especiali
 - `esm-maternal-and-child-health` - Atención materno-infantil
 - `esm-patient-search-app` - Búsqueda de pacientes
 - `esm-patient-registration-app` - Registro de pacientes
-- `esm-patient-immunizations-app` - Inmunizaciones
+- `esm-vacunacion-app` - Inmunizaciones
 - `esm-billing-app` - Facturación
 - `esm-fua-app` - Formato Único de Atención
 - `esm-dyaku-app` - Integración DYAKU
