@@ -2,7 +2,6 @@
   <h1>SIH SALUS ESM Modules</h1>
   <p><strong>Sistema Integral de Salud - Enterprise Scale Micro Frontends</strong></p>
   
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
   [![Node.js Version](https://img.shields.io/badge/Node.js-18%2B-green?style=flat-square&logo=node.js)](https://nodejs.org/)
   [![Yarn Workspaces](https://img.shields.io/badge/Yarn%20Workspaces-4%2B-2C8EBB?style=flat-square&logo=yarn)](https://classic.yarnpkg.com/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
@@ -29,7 +28,6 @@
 - [Troubleshooting](#troubleshooting)
 - [Recursos](#recursos)
 - [Contribución](#contribución)
-- [Licencia](#licencia)
 
 ---
 
@@ -73,14 +71,14 @@ Reportes automatizados según directrices del Ministerio de Salud Peruano
 <tr>
 <td>
 
-### 👥 Gestión de Pacientes
-Registro, búsqueda avanzada y manejo integral de información de pacientes
+### Consulta Externa
+Gestión de atenciones ambulatorias, triaje y seguimiento de consultas
 
 </td>
 <td>
 
-### 💊 Gestión de Tratamientos
-Administración completa de medicamentos, inmunizaciones y alergias
+### Vacunaciones
+Esquemas de inmunización, calendario de vacunas y registro de dosis
 
 </td>
 </tr>
@@ -568,28 +566,6 @@ Describe cómo se han probado los cambios:
 - [ ] He ejecutado `yarn verify` exitosamente
 - [ ] He agregado/actualizado tests
 - [ ] La documentación está actualizada
-```
-
----
-
-## 📄 Licencia
-
-Este proyecto está licenciado bajo la **MIT License** - ver el archivo [LICENSE](LICENSE) para más detalles.
-
-```
-MIT License
-
-Copyright (c) 2024 PROYECTO-SANTACLOTILDE
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
 ```
 
 ---
