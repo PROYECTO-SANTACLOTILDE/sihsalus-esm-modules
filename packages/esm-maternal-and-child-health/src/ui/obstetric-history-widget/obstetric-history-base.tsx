@@ -101,8 +101,8 @@ const ObstetricHistoryBase: React.FC<ObstetricHistoryBaseProps> = ({ patientUuid
           </div>
           <div className={styles.obstetricHeaderActionItems}>
             <ContentSwitcher onChange={(evt) => setChartView(evt.name === 'chartView')} size={isTablet ? 'md' : 'sm'}>
-              <IconSwitch name="tableView" text={t('tableView', 'Vista de tabla')} />
-              <IconSwitch name="chartView" text={t('chartView', 'Vista gráfica')} />
+              <IconSwitch name="tableView" text={t('tableView', 'Table view')} />
+              <IconSwitch name="chartView" text={t('chartView', 'Chart view')} />
             </ContentSwitcher>
             <>
               <span className={styles.divider}>|</span>

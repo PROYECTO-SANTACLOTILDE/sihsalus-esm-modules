@@ -18,7 +18,7 @@ interface LabourHistoryOverviewProps {
 
 const LabourHistoryOverview: React.FC<LabourHistoryOverviewProps> = ({ patientUuid, pageSize = 10 }) => {
   const { t } = useTranslation();
-  const headerTitle = t('labourHistorySummary', 'Labour History Summary');
+  const headerTitle = t('labourHistorySummary', 'Labour history summary');
   const [chartView, setChartView] = useState(false);
   const isTablet = useLayoutType() === 'tablet';
 
@@ -40,14 +40,14 @@ const LabourHistoryOverview: React.FC<LabourHistoryOverviewProps> = ({ patientUu
       { key: 'maternalPulse', header: t('maternalPulse', 'Maternal Pulse (bpm)'), isSortable: true },
       { key: 'systolicBP', header: t('systolicBP', 'Systolic BP (mmHg)'), isSortable: true },
       { key: 'diastolicBP', header: t('diastolicBP', 'Diastolic BP (mmHg)'), isSortable: true },
-      { key: 'temperature', header: t('temperature', 'Temperature (°C)'), isSortable: true },
+      { key: 'temperature', header: t('temperatureCelsius', 'Temperature (°C)'), isSortable: true },
       { key: 'maternalWeight', header: t('maternalWeight', 'Maternal Weight (Kg)'), isSortable: true },
       { key: 'gestationalAge', header: t('gestationalAge', 'Gestational Age (weeks)'), isSortable: true },
-      { key: 'fetalHeartRate', header: t('fetalHeartRate', 'Fetal Heart Rate (bpm)'), isSortable: true },
-      { key: 'uterineHeight', header: t('uterineHeight', 'Uterine Height (cm)'), isSortable: true },
+      { key: 'fetalHeartRate', header: t('fetalHeartRateBpm', 'Fetal heart rate (bpm)'), isSortable: true },
+      { key: 'uterineHeight', header: t('uterineHeightCm', 'Uterine height (cm)'), isSortable: true },
       { key: 'dilatation', header: t('dilatation', 'Dilatation (cm)'), isSortable: true },
       { key: 'amnioticFluid', header: t('amnioticFluid', 'Amniotic Fluid'), isSortable: true },
-      { key: 'deliveryType', header: t('deliveryType', 'Delivery Type'), isSortable: true },
+      { key: 'deliveryType', header: t('deliveryType', 'Delivery type'), isSortable: true },
     ],
     [t],
   );
@@ -105,7 +105,7 @@ const LabourHistoryOverview: React.FC<LabourHistoryOverviewProps> = ({ patientUu
   }
   return (
     <EmptyState
-      displayText={t('labourHistorySummary', 'Labour History Summary')}
+      displayText={t('labourHistorySummary', 'Labour history summary')}
       headerTitle={headerTitle}
       launchForm={launchLabourForm}
     />

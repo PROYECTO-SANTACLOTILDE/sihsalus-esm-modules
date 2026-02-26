@@ -20,7 +20,7 @@ interface PregnancyBirthProps {
 const PregnancyBirthTable: React.FC<PregnancyBirthProps> = ({ patientUuid }) => {
   const { t } = useTranslation();
   const config = useConfig() as ConfigObject;
-  const headerTitle = t('pregnancyBirth', 'Datos del Embarazo y Parto');
+  const headerTitle = t('pregnancyBirth', 'Pregnancy and birth');
   const { encounter, isLoading, error, mutate } = useLatestValidEncounter(
     patientUuid,
     config.encounterTypes.antecedentesPerinatales, // Asegúrate de tener este tipo de encounter configurado
@@ -72,7 +72,7 @@ const PregnancyBirthTable: React.FC<PregnancyBirthProps> = ({ patientUuid }) => 
     // SECCIÓN PARTO
     {
       id: 'deliveryType',
-      label: t('deliveryType', 'Condición del Parto'),
+      label: t('birthCondition', 'Birth condition'),
       dataKey: DELIVERY_CONDITION_UUID,
       sectionTitle: t('delivery', 'PARTO'),
     },
@@ -92,7 +92,7 @@ const PregnancyBirthTable: React.FC<PregnancyBirthProps> = ({ patientUuid }) => 
     <PatientSummaryTable
       patientUuid={patientUuid}
       headerTitle={headerTitle}
-      displayText={t('pregnancyBirth', 'Embarazo y Parto')}
+      displayText={t('pregnancyBirth', 'Pregnancy and birth')}
       dataHook={dataHook}
       rowConfig={rowConfig}
       onFormLaunch={handleLaunchForm}

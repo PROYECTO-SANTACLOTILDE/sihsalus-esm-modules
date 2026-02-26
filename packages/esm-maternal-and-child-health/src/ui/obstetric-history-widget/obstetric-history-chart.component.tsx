@@ -61,7 +61,7 @@ const ObstetricHistoryChart: React.FC<ObstetricHistoryChartProps> = ({
     },
     {
       id: 'liveBirths',
-      title: t('liveBirths', 'Nacidos Vivos'),
+      title: t('liveBirths', 'Live births'),
       value: 'liveBirths',
     },
   ];
@@ -88,7 +88,7 @@ const ObstetricHistoryChart: React.FC<ObstetricHistoryChartProps> = ({
       title: `${t('evolutionOf', 'Evolución de')} ${selectedMetric.title}`,
       axes: {
         bottom: {
-          title: t('date', 'Fecha'),
+          title: t('date', 'Date'),
           mapsTo: 'date',
           scaleType: ScaleTypes.TIME,
         },
@@ -173,7 +173,7 @@ const ObstetricHistoryChart: React.FC<ObstetricHistoryChartProps> = ({
           <Tile className={styles.summaryCard}>
             <div className={styles.cardContent}>
               <div className={styles.cardValue}>{obstetricData.liveBirths}</div>
-              <div className={styles.cardLabel}>{t('liveBirths', 'Nacidos Vivos')}</div>
+              <div className={styles.cardLabel}>{t('liveBirths', 'Live births')}</div>
             </div>
           </Tile>
         </div>
@@ -247,7 +247,7 @@ const ObstetricHistoryChart: React.FC<ObstetricHistoryChartProps> = ({
             <h6>{t('outcomes', 'Resultados')}</h6>
             <div className={styles.breakdownItems}>
               <div className={styles.breakdownItem}>
-                <span className={styles.itemLabel}>{t('liveBirths', 'Nacidos vivos')}</span>
+                <span className={styles.itemLabel}>{t('liveBirths', 'Live births')}</span>
                 <span className={styles.itemValue}>{obstetricData.liveBirths}</span>
               </div>
               <div className={styles.breakdownItem}>

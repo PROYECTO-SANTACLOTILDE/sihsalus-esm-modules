@@ -147,7 +147,7 @@ const PatientSummaryTable = <T,>({
   const { results: paginatedData, goTo, currentPage } = usePagination(tableRows, pageSize);
 
   if (isLoading && !data) {
-    return <DataTableSkeleton role="progressbar" aria-label={t('loadingData', 'Loading data')} />;
+    return <DataTableSkeleton role="progressbar" aria-label={t('loadingData', 'Loading data...')} />;
   }
 
   if (error) {
@@ -164,16 +164,16 @@ const PatientSummaryTable = <T,>({
               kind="ghost"
               renderIcon={(props) => <Add size={16} {...props} />}
               onClick={launchForm}
-              aria-label={t('add')}>
-              {t('add')}
+              aria-label={t('add', 'Add')}>
+              {t('add', 'Add')}
             </Button>
           )}
         </CardHeader>
         <DataTable
           rows={paginatedData}
           headers={[
-            { key: 'label', header: t('field') },
-            { key: 'value', header: t('value') },
+            { key: 'label', header: t('field', 'Field') },
+            { key: 'value', header: t('value', 'Value') },
           ]}
           size={isTablet ? 'lg' : 'sm'}
           useZebraStyles>

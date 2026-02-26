@@ -47,10 +47,10 @@ const FeedingCounseling: React.FC<FeedingCounselingProps> = ({ patientUuid }) =>
     <div className={styles.widgetCard}>
       <CardHeader title={headerTitle}>
         <Tag type={lastAssessmentDate ? 'green' : 'gray'} size="sm">
-          {lastAssessmentDate ? t('completed', 'Completado') : t('pending', 'Pendiente')}
+          {lastAssessmentDate ? t('completed', 'Completed') : t('pending', 'Pending')}
         </Tag>
-        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
-          {t('add', 'Agregar')}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Add')}>
+          {t('add', 'Add')}
         </Button>
       </CardHeader>
       <div className={styles.container}>

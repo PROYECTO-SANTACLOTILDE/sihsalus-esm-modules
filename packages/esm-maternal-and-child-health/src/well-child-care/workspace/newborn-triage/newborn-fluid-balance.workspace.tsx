@@ -121,7 +121,7 @@ const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
               title: t('fluidBalanceSaveError', 'Error guardando el balance de líquidos'),
               kind: 'error',
               isLowContrast: false,
-              subtitle: t('checkForValidity', 'Algunos valores ingresados son inválidos'),
+              subtitle: t('checkForValidity', 'Some of the values entered may be invalid'),
             });
           })
           .finally(() => abortController.abort());
@@ -235,13 +235,13 @@ const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
             lowContrast={false}
             onClose={() => setShowErrorNotification(false)}
             title={t('error', 'Error')}
-            subtitle={t('pleaseFillField', 'Por favor, complete al menos un campo') + '.'}
+            subtitle={t('pleaseFillField', 'Please fill at least one field') + '.'}
           />
         </Column>
       )}
       <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
         <Button className={styles.button} kind="secondary" onClick={closeWorkspace}>
-          {t('discard', 'Descartar')}
+          {t('discard', 'Discard')}
         </Button>
         <Button
           className={styles.button}
@@ -249,7 +249,7 @@ const NewbornFluidBalanceForm: React.FC<DefaultPatientWorkspaceProps> = ({
           onClick={handleSubmit(saveFluidBalance, onError)}
           disabled={isSubmitting}
           type="submit">
-          {t('submit', 'Guardar y Cerrar')}
+          {t('submit', 'Save and close')}
         </Button>
       </ButtonSet>
     </Form>

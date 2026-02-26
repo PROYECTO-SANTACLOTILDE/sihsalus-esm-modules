@@ -26,7 +26,7 @@ const CervicalScreening: React.FC<CervicalScreeningProps> = ({ patientUuid }) =>
       <div className={styles.header}>
         <h5>{t('cervicalScreeningTitle', 'Tamizaje Cervical')}</h5>
         <Tag type={papResult || viaResult ? 'green' : 'gray'} size="sm">
-          {papResult || viaResult ? t('completed', 'Completado') : t('pending', 'Pendiente')}
+          {papResult || viaResult ? t('completed', 'Completed') : t('pending', 'Pending')}
         </Tag>
       </div>
       <div className={styles.content}>
@@ -48,7 +48,7 @@ const CervicalScreening: React.FC<CervicalScreeningProps> = ({ patientUuid }) =>
         </div>
         <div className={styles.row}>
           <span className={styles.label}>{t('cpNextScreening', 'Próximo tamizaje')}:</span>
-          <span className={styles.value}>{nextScreeningDate ?? t('pending', 'Pendiente')}</span>
+          <span className={styles.value}>{nextScreeningDate ?? t('pending', 'Pending')}</span>
         </div>
       </div>
     </Tile>

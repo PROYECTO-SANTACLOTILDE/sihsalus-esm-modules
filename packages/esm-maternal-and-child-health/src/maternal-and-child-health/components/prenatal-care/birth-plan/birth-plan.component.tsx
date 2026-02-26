@@ -35,7 +35,7 @@ const BirthPlan: React.FC<BirthPlanProps> = ({ patientUuid }) => {
     });
   }, [config, encounterUuid, mutate, t]);
 
-  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Cargando...')}</Tile>;
+  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Loading...')}</Tile>;
 
   return (
     <Tile className={styles.card}>
@@ -43,7 +43,7 @@ const BirthPlan: React.FC<BirthPlanProps> = ({ patientUuid }) => {
         <h5>{t('birthPlan', 'Plan de Parto')}</h5>
         <div className={styles.headerActions}>
           <Tag type={hasBirthPlan ? 'green' : 'red'} size="sm">
-            {hasBirthPlan ? t('elaborated', 'Elaborado') : t('pending', 'Pendiente')}
+            {hasBirthPlan ? t('elaborated', 'Elaborado') : t('pending', 'Pending')}
           </Tag>
           <Button
             kind="ghost"
@@ -51,7 +51,7 @@ const BirthPlan: React.FC<BirthPlanProps> = ({ patientUuid }) => {
             renderIcon={hasBirthPlan ? Edit : Add}
             onClick={handleLaunchBirthPlanForm}
             iconDescription={hasBirthPlan ? t('editBirthPlan', 'Editar plan') : t('createBirthPlan', 'Crear plan')}>
-            {hasBirthPlan ? t('edit', 'Editar') : t('create', 'Crear')}
+            {hasBirthPlan ? t('edit', 'Edit') : t('create', 'Crear')}
           </Button>
         </div>
       </div>

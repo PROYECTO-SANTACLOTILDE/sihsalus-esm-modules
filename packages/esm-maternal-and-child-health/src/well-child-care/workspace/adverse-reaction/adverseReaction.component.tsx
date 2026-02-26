@@ -145,7 +145,7 @@ const AdverseReactionFormWorkspace: React.FC<DefaultPatientWorkspaceProps> = ({ 
 
       <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
         <Button kind="secondary" onClick={closeWorkspace}>
-          {t('cancel', 'Cancelar')}
+          {t('cancel', 'Cancel')}
         </Button>
         <Button kind="primary" type="submit">
           {t('registerReaction', 'Registrar Reacción')}

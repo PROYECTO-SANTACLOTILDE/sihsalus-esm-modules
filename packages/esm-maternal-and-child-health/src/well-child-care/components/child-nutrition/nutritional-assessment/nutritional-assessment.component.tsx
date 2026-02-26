@@ -52,8 +52,8 @@ const NutritionalAssessment: React.FC<NutritionalAssessmentProps> = ({ patientUu
         <Tag type={hasData ? 'green' : 'gray'} size="sm">
           {hasData ? weightForAge ?? t('noData', 'Sin datos') : t('noData', 'Sin datos')}
         </Tag>
-        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
-          {t('add', 'Agregar')}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Add')}>
+          {t('add', 'Add')}
         </Button>
       </CardHeader>
       <div className={styles.container}>

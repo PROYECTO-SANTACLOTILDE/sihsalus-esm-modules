@@ -52,7 +52,7 @@ const LegendTile: React.FC<LegendTileProps> = ({ conceptSetUUID }) => {
       <h3 className={styles.legendTitle}>{t('legend', 'Leyenda')}</h3>
       {isLoading ? (
         <div className={styles.loadingContainer} role="status" aria-live="polite">
-          <InlineLoading description={t('loading', 'Cargando...')} />
+          <InlineLoading description={t('loading', 'Loading...')} />
         </div>
       ) : (
         <div className={styles.legendContainer} role="list" aria-label={t('legendItems', 'Elementos de la leyenda')}>

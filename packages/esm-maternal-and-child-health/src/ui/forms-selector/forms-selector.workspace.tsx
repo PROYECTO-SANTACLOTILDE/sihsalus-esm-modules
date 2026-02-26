@@ -85,7 +85,7 @@ export default function FormsSelectorWorkspace({
               {t('patientAge', 'Edad del paciente')}: {patientAge}
             </span>
             <span>
-              {t('controlNumber', 'Control #')}: {controlNumber}
+              {t('controlNumber', 'Control number')}: {controlNumber}
             </span>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function FormsSelectorWorkspace({
       {/* Action buttons */}
       <ButtonSet className={isTablet ? styles.tablet : styles.desktop}>
         <Button kind="secondary" onClick={backToPreviousWorkspace} className={styles.button}>
-          {t('cancel', 'Cancelar')}
+          {t('cancel', 'Cancel')}
         </Button>
         <Button kind="primary" onClick={handleFinishControl} disabled={!isAnyFormCompleted} className={styles.button}>
           {t('finishAndSign', 'Guardar y Firmar')}

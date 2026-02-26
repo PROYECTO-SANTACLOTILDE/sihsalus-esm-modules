@@ -58,8 +58,8 @@ const AnemiaScreening: React.FC<AnemiaScreeningProps> = ({ patientUuid }) => {
             {isAnemic ? t('anemic', 'Anemia') : t('normal', 'Normal')}
           </Tag>
         )}
-        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Agregar')}>
-          {t('add', 'Agregar')}
+        <Button kind="ghost" size="sm" renderIcon={Add} onClick={handleAdd} iconDescription={t('add', 'Add')}>
+          {t('add', 'Add')}
         </Button>
       </CardHeader>
       <div className={styles.container}>
@@ -90,7 +90,7 @@ const AnemiaScreening: React.FC<AnemiaScreeningProps> = ({ patientUuid }) => {
                 {t('nextScreening', 'Próximo tamizaje')}
               </StructuredListCell>
               <StructuredListCell className={styles.value}>
-                {nextDueDate ?? <span className={styles.noData}>{t('pending', 'Pendiente')}</span>}
+                {nextDueDate ?? <span className={styles.noData}>{t('pending', 'Pending')}</span>}
               </StructuredListCell>
             </StructuredListRow>
           </StructuredListBody>

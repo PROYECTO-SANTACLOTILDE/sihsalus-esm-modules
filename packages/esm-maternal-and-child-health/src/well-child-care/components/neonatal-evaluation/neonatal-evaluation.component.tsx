@@ -39,7 +39,7 @@ const CephaloCaudalNeurologicalEvaluationTable: React.FC<CephaloCaudalNeurologic
   const config = useConfig() as ConfigObject;
   const headerTitle = t(
     'cephaloCaudalNeurologicalEvaluation',
-    'Evaluación Céfalocaudal y Neurológica del Recién Nacido',
+    'Cephalo-caudal and neurological evaluation',
   );
   const { encounter, isLoading, error, mutate } = useLatestValidEncounter(
     patientUuid,
@@ -130,7 +130,7 @@ const CephaloCaudalNeurologicalEvaluationTable: React.FC<CephaloCaudalNeurologic
     <PatientSummaryTable
       patientUuid={patientUuid}
       headerTitle={headerTitle}
-      displayText={t('cephaloCaudalNeurologicalEvaluation', 'Céfalo Caudal y Neurológica')}
+      displayText={t('cephaloCaudalNeurologicalEvaluation', 'Cephalo-caudal and neurological evaluation')}
       dataHook={dataHook}
       rowConfig={rowConfig}
       onFormLaunch={handleLaunchForm}

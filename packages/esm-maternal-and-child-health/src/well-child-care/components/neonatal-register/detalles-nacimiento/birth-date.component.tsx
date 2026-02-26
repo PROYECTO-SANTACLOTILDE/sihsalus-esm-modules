@@ -80,13 +80,13 @@ const BirthDataTable: React.FC<BirthDataProps> = ({ patientUuid }) => {
     },
     {
       id: 'headCircumference',
-      label: t('headCircumference', 'Perímetro Cefálico'),
+      label: t('headCircumference', 'Head circumference'),
       dataKey: HEAD_CIRCUMFERENCE_UUID,
       unit: t('cm', 'cm'),
     },
     {
       id: 'chestCircumference',
-      label: t('chestCircumference', 'Perímetro Torácico'),
+      label: t('chestCircumference', 'Chest circumference'),
       dataKey: CHEST_CIRCUMFERENCE_UUID,
       unit: t('cm', 'cm'),
     },

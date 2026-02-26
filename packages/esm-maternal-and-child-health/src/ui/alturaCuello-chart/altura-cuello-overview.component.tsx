@@ -69,7 +69,7 @@ const AlturaCuelloOverview: React.FC<AlturaCuelloOverviewProps> = ({ patient, pa
   }, [data]);
 
   if (isLoading && !data) {
-    return <DataTableSkeleton role="progressbar" aria-label={t('loadingData', 'Cargando datos')} />;
+    return <DataTableSkeleton role="progressbar" aria-label={t('loadingData', 'Loading data...')} />;
   }
 
   if (error) {
@@ -80,14 +80,14 @@ const AlturaCuelloOverview: React.FC<AlturaCuelloOverviewProps> = ({ patient, pa
     return (
       <div className={styles.widgetCard}>
         <CardHeader title={headerTitle}>
-          {isLoading && <InlineLoading description={t('refreshing', 'Actualizando...')} status="active" />}
+          {isLoading && <InlineLoading description={t('refreshing', 'Refreshing...')} status="active" />}
           {launchForm && (
             <Button
               kind="ghost"
               renderIcon={(props) => <Add size={16} {...props} />}
               onClick={launchForm}
               aria-label={t('addMeasurement', 'Agregar medición')}>
-              {t('add', 'Agregar')}
+              {t('add', 'Add')}
             </Button>
           )}
         </CardHeader>

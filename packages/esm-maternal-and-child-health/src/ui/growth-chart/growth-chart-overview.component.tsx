@@ -49,7 +49,7 @@ const GrowthChartOverview: React.FC<GrowthChartProps> = ({ patient, patientUuid 
   }, []);
 
   if (isLoading && !data) {
-    return <DataTableSkeleton role="progressbar" aria-label={t('loadingData', 'Loading data')} />;
+    return <DataTableSkeleton role="progressbar" aria-label={t('loadingData', 'Loading data...')} />;
   }
 
   if (error) {
@@ -64,7 +64,7 @@ const GrowthChartOverview: React.FC<GrowthChartProps> = ({ patient, patientUuid 
             <ContentSwitcher
               onChange={handleViewChange}
               size={isTablet ? 'md' : 'sm'}
-              aria-label={t('viewSelector', 'Select chart type')}
+              aria-label={t('chartTypeSelector', 'Select chart type')}
               selectedIndex={isPercentiles ? 0 : 1}>
               <IconSwitch name="percentileView" text={t('percentileView', 'Percentiles')}>
                 <Analytics size={16} />

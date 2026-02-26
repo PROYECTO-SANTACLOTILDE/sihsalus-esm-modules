@@ -11,7 +11,7 @@ const ImmediatePostpartumTable: React.FC<{ patientUuid: string }> = ({ patientUu
 
   const rowDefinitions = [
     { id: 'fecha', rowHeader: t('fechaYHoraAtencion', 'Fecha y hora atención'), prefix: 'encounterDatetime' },
-    { id: 'temperature', rowHeader: t('temperature', 'Temperatura (C°)'), prefix: 'Temperatura (C°)' },
+    { id: 'temperature', rowHeader: t('temperatureCelsius', 'Temperature (°C)'), prefix: 'Temperatura (C°)' },
     {
       id: 'frecuenciaCardiaca',
       rowHeader: t('frecuenciaCardiaca', 'Frecuencia Cardíaca'),

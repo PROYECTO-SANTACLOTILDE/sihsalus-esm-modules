@@ -16,7 +16,7 @@ const PrenatalSupplementation: React.FC<PrenatalSupplementationProps> = ({ patie
   const { t } = useTranslation();
   const { supplements, overallPercentage, isLoading, error } = usePrenatalSupplementation(patientUuid);
 
-  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Cargando...')}</Tile>;
+  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Loading...')}</Tile>;
 
   return (
     <Tile className={styles.card}>

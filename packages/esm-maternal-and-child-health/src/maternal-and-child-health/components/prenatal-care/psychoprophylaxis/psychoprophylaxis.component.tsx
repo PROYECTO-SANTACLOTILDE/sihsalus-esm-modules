@@ -17,7 +17,7 @@ const Psychoprophylaxis: React.FC<PsychoprophylaxisProps> = ({ patientUuid }) =>
   const { sessionsCompleted, totalSessions, percentage, isComplete, lastSessionDate, isLoading, error } =
     usePsychoprophylaxis(patientUuid);
 
-  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Cargando...')}</Tile>;
+  if (isLoading) return <Tile className={styles.card}>{t('loading', 'Loading...')}</Tile>;
 
   return (
     <Tile className={styles.card}>
